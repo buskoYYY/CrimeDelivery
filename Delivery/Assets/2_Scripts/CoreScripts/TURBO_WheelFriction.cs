@@ -106,21 +106,21 @@ public class TURBO_WheelFriction : Vehicle
             case Drive.AWD:
                 foreach (Wheel_Friction wheel in allWheels)
                 {
-                    Accel(wheel.wheelTransform);
+                    Accel(wheel);
                 }
                 break;
 
             case Drive.FWD:
                 foreach (Wheel_Friction wheel in steeringWheels)
                 {
-                    Accel(wheel.wheelTransform);
+                    Accel(wheel);
                 }
                 break;
 
             case Drive.RWD:
                 foreach (Wheel_Friction wheel in rearWheels)
                 {
-                    Accel(wheel.wheelTransform);
+                    Accel(wheel);
                 }
                 break;
         }
@@ -141,7 +141,8 @@ public class TURBO_WheelFriction : Vehicle
 
             if (sideVelocity.magnitude > forwardVelocity.magnitude)
             {
-                AddNitro(nitroGainRate * angleDifference);
+                if (nitroSystem!= null)
+                    AddNitro(nitroGainRate * angleDifference);
             }
 
             carRigidbody.AddForceAtPosition(frictionForce, wheel.wheelTransform.position);
@@ -197,20 +198,23 @@ public class TURBO_WheelFriction : Vehicle
         }
     }
 
-    public void Accel(Transform wheel)
+    public void Accel(Wheel_Friction wheel)
     {
-        Vector3 forwardVelocity = (wheel.InverseTransformDirection(carRigidbody.GetPointVelocity(wheel.position)).z) * wheel.forward;
-
-        float acceleration = accel;
-
-        if (nitroSystem != null && nitroSystem.IsUsingNitro)
+        if (wheel.wheel_Suspension.isGrounded)
         {
-            acceleration *= nitroAccelMultiplier;
+            Vector3 forwardVelocity = (wheel.wheelTransform.InverseTransformDirection(carRigidbody.GetPointVelocity(wheel.wheelTransform.position)).z) * wheel.wheelTransform.forward;
+
+            float acceleration = accel;
+
+            if (nitroSystem != null && nitroSystem.IsUsingNitro)
+            {
+                acceleration *= nitroAccelMultiplier;
+            }
+
+            float speedRatio = Mathf.Clamp01(forwardVelocity.magnitude / maxSpeed);
+            float accelMultiplier = accelerationCurve.Evaluate(speedRatio);
+            carRigidbody.AddForceAtPosition(wheel.wheelTransform.forward * accelInput * acceleration * accelMultiplier, wheel.wheelTransform.position, ForceMode.Acceleration);
         }
-       
-        float speedRatio = Mathf.Clamp01(forwardVelocity.magnitude / maxSpeed);
-        float accelMultiplier = accelerationCurve.Evaluate(speedRatio);
-        carRigidbody.AddForceAtPosition(wheel.forward * accelInput * acceleration * accelMultiplier, wheel.position, ForceMode.Acceleration);
     }
 
     public bool selfInput;
@@ -218,8 +222,8 @@ public class TURBO_WheelFriction : Vehicle
     {
         if (selfInput)
         {
-            turnInput = Input.GetAxis("Sideways");
-            accelInput = Input.GetAxis("Throttle");
+            turnInput = Input.GetAxis("Horizontal");
+            accelInput = Input.GetAxis("Vertical");
         }
     }
 

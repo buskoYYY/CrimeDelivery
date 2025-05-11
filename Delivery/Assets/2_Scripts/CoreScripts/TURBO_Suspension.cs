@@ -121,7 +121,7 @@ public class TURBO_Suspension : MonoBehaviour
         var direction = -transform.up;
 
         if (Physics.SphereCast(wheel_Suspension.hardPoint.position + (transform.up * wheel_Suspension.wheelRadius), wheel_Suspension.wheelRadius, direction, 
-            out wheel_Suspension.wheelHit, wheel_Suspension.maxSpringDistance, ~0, QueryTriggerInteraction.Ignore))
+            out wheel_Suspension.wheelHit, wheel_Suspension.maxSpringDistance, 1 << 6, QueryTriggerInteraction.Ignore))
         {
             wheel_Suspension.isGrounded = true;
         }

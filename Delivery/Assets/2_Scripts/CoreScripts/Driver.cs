@@ -61,6 +61,9 @@ public class Driver : CarComponent
     public float boost;
     private void InputPlayer()
     {
+
+        inTurn = Input.GetAxis("Horizontal");
+        throttle = Input.GetAxis("Vertical");
         /*
         inTurn = ControlFreak2.CF2Input.GetAxis("Horizontal");
         if (testPC)
