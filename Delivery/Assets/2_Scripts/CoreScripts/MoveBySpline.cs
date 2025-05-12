@@ -53,7 +53,7 @@ public class MoveBySpline : MonoBehaviour
         car = GetComponent<Driver>();
         //car.isAI = true;
         
-        car.targetObjectTransform = targetObjectPositioner.transform;
+        car.ChangeTarget(targetObjectPositioner.transform);
         targetObjectPositioner.spline = aiPath;
         thisObjectProjector.spline = aiPath;
 

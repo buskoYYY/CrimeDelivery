@@ -9,7 +9,7 @@ public class Driver : CarComponent
     public float targetOffset = 5;
     [SerializeField] private float deltaForTurn; //насколько дельта больше оффсета
     private Transform thisObjectTransform;
-    public Transform targetObjectTransform;
+    [SerializeField] private Transform targetObjectTransform;
     private float inTurn;
     private float throttle;
     [SerializeField] private CarComponentsController vehicle;
@@ -38,9 +38,8 @@ public class Driver : CarComponent
             {
                 InputAI();
                 ActivateBoostDriver();
-                throttle = 1;
             }
-            else
+            else if (testPC)
                 InputPlayer();
         }
 
@@ -59,6 +58,17 @@ public class Driver : CarComponent
         targetObjectTransform = newTarget;
     }
     public float boost;
+
+    public void Turn(int turnDir)
+    {
+        inTurn = turnDir;
+    }
+
+    public void Throttle(int throttleDir)
+    {
+        throttle = throttleDir;
+    }
+
     private void InputPlayer()
     {
 
