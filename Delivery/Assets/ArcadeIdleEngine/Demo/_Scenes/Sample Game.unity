@@ -407,6 +407,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Gatherable Basic Tree (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 8192169306597132878, guid: 58855810de8084dfabf24e586684473f,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -606,12 +611,86 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 242269869}
   m_PrefabAsset: {fileID: 0}
+--- !u!4 &253454646 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1630398392760267526, guid: a2d872ab0871341fcb3770ee094181aa,
+    type: 3}
+  m_PrefabInstance: {fileID: 1308710448}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &289135224 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 3aa0ea6be3e39433196acf28136a056d,
     type: 3}
   m_PrefabInstance: {fileID: 1314499346}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &315987691
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 253454646}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: 787c505673498194f90747ddacf029a7,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 787c505673498194f90747ddacf029a7,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 787c505673498194f90747ddacf029a7,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 787c505673498194f90747ddacf029a7,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 787c505673498194f90747ddacf029a7,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 787c505673498194f90747ddacf029a7,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 787c505673498194f90747ddacf029a7,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 787c505673498194f90747ddacf029a7,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 787c505673498194f90747ddacf029a7,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 787c505673498194f90747ddacf029a7,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 787c505673498194f90747ddacf029a7,
+        type: 3}
+      propertyPath: m_Name
+      value: car
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 787c505673498194f90747ddacf029a7, type: 3}
 --- !u!1001 &324830260
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -836,6 +915,74 @@ MonoBehaviour:
       m_PostInfinity: 2
       m_RotationOrder: 4
   CustomBlends: {fileID: 0}
+--- !u!1001 &340947125
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 589292300}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: 787c505673498194f90747ddacf029a7,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 787c505673498194f90747ddacf029a7,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 787c505673498194f90747ddacf029a7,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 787c505673498194f90747ddacf029a7,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 787c505673498194f90747ddacf029a7,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 787c505673498194f90747ddacf029a7,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 787c505673498194f90747ddacf029a7,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 787c505673498194f90747ddacf029a7,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 787c505673498194f90747ddacf029a7,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 787c505673498194f90747ddacf029a7,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 787c505673498194f90747ddacf029a7,
+        type: 3}
+      propertyPath: m_Name
+      value: car
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 787c505673498194f90747ddacf029a7, type: 3}
 --- !u!1001 &371615321
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -847,12 +994,12 @@ PrefabInstance:
     - target: {fileID: 4546169338435694256, guid: 58855810de8084dfabf24e586684473f,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 15.47
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 4546169338435694256, guid: 58855810de8084dfabf24e586684473f,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.65999985
+      value: 0.65
       objectReference: {fileID: 0}
     - target: {fileID: 4546169338435694256, guid: 58855810de8084dfabf24e586684473f,
         type: 3}
@@ -894,14 +1041,30 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5227944339266360840, guid: 58855810de8084dfabf24e586684473f,
+        type: 3}
+      propertyPath: _destroyAfterGathered
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5227944339266360840, guid: 58855810de8084dfabf24e586684473f,
+        type: 3}
+      propertyPath: <GatherableDefinition>k__BackingField
+      value: 
+      objectReference: {fileID: 11400000, guid: 123d4a5b0a4754007a185af5d8e4c818,
+        type: 2}
     - target: {fileID: 8192169306597132878, guid: 58855810de8084dfabf24e586684473f,
         type: 3}
       propertyPath: m_Name
       value: Gatherable Basic Tree
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 6887369967468688555, guid: 58855810de8084dfabf24e586684473f, type: 3}
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 4017358881467832310, guid: 58855810de8084dfabf24e586684473f,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1029659221}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 58855810de8084dfabf24e586684473f, type: 3}
 --- !u!1 &382498365
@@ -1310,6 +1473,12 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 617450538}
   m_PrefabAsset: {fileID: 0}
+--- !u!4 &589292300 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4017358881467832310, guid: 58855810de8084dfabf24e586684473f,
+    type: 3}
+  m_PrefabInstance: {fileID: 371615321}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &617450538
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1486,6 +1655,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Gatherable Basic Ore (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7320214453167305776, guid: a2d872ab0871341fcb3770ee094181aa,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2119,6 +2293,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2861929787181457198, guid: 82f81d7b3937340359173c97bb7f7d32,
+        type: 3}
+      propertyPath: _inventoryVisible._rowColumnHeight.RowCount
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2861929787181457198, guid: 82f81d7b3937340359173c97bb7f7d32,
+        type: 3}
+      propertyPath: _inventoryVisible._rowColumnHeight.ColumnCount
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 3769149339353166380, guid: 82f81d7b3937340359173c97bb7f7d32,
         type: 3}
       propertyPath: m_AnchorMax.y
@@ -2209,6 +2393,12 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &1029659221 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 787c505673498194f90747ddacf029a7,
+    type: 3}
+  m_PrefabInstance: {fileID: 340947125}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1057219516
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2843,9 +3033,19 @@ PrefabInstance:
       propertyPath: m_Name
       value: Gatherable Basic Ore (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 7320214453167305776, guid: a2d872ab0871341fcb3770ee094181aa,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 4003874135909800123, guid: a2d872ab0871341fcb3770ee094181aa, type: 3}
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 1630398392760267526, guid: a2d872ab0871341fcb3770ee094181aa,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1953331297}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a2d872ab0871341fcb3770ee094181aa, type: 3}
 --- !u!1001 &1314499346
@@ -3108,6 +3308,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Gatherable Basic Tree (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8192169306597132878, guid: 58855810de8084dfabf24e586684473f,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3380,6 +3585,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Gatherable Basic Tree (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8192169306597132878, guid: 58855810de8084dfabf24e586684473f,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -4966,6 +5176,12 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 3.5727882, y: 0.32999998, z: 2.895678}
   m_Center: {x: 0.006394148, y: 0.16499999, z: -0.03216082}
+--- !u!4 &1953331297 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 787c505673498194f90747ddacf029a7,
+    type: 3}
+  m_PrefabInstance: {fileID: 315987691}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2008269623
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5893,6 +6109,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Basic Pickaxe Seller
       objectReference: {fileID: 0}
+    - target: {fileID: 2148556475559375633, guid: 3485c5d0b85e74ac090c473cac393c36,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -6115,6 +6336,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Basic Axe Seller
+      objectReference: {fileID: 0}
+    - target: {fileID: 4152788642312022647, guid: 108d4c1ee64014d5791e12da23b67e05,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7595742900654671809, guid: 108d4c1ee64014d5791e12da23b67e05,
         type: 3}
@@ -6437,6 +6663,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Gatherable Basic Ore
+      objectReference: {fileID: 0}
+    - target: {fileID: 7320214453167305776, guid: a2d872ab0871341fcb3770ee094181aa,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

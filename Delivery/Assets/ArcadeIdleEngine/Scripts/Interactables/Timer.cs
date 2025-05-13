@@ -18,7 +18,7 @@ namespace ArcadeBridge.ArcadeIdleEngine.Interactables
 			}
 		}
 		
-		[SerializeField] float _duration = 0.25f;
+		[SerializeField] float _duration = 0.4f;
 		
 		float _value;
 
