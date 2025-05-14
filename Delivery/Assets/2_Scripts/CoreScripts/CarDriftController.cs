@@ -173,13 +173,16 @@ public class CarDriftController : MonoBehaviour {
         if (isStumbling) {
             //rotate = 0f;
         }
-
+        /*
         // Start turning only if there's velocity
         if (pvel.magnitude < MinRotSpd) {
             rotate = 0f;
         } else {
             rotate = pvel.magnitude / MaxRotSpd * rotate;
         }
+        */
+
+        rotate = pvel.magnitude / MaxRotSpd * rotate;
 
         if (rotate > Rotate) rotate = Rotate;
 
