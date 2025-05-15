@@ -2,6 +2,7 @@ using ArcadeBridge.ArcadeIdleEngine.Helpers;
 using ArcadeBridge.ArcadeIdleEngine.Interactables;
 using ArcadeBridge.ArcadeIdleEngine.Items;
 using ArcadeBridge.ArcadeIdleEngine.Storage;
+using System.Collections;
 using UnityEngine;
 
 namespace ArcadeBridge.ArcadeIdleEngine.Processors.Sellers
@@ -34,14 +35,16 @@ namespace ArcadeBridge.ArcadeIdleEngine.Processors.Sellers
 				{
 					continue;
 				}
-				
-				
+
+
 				if (_timer.IsCompleted)
 				{
 					_inventory.Remove(result);
 					TweenHelper.KillAllTweens(result.transform);
 					TweenHelper.Jump(result.transform, _sellingPoint.position, _definition.JumpHeight, 1, _definition.JumpDuration, () => Sell(result));
 					_timer.SetZero();
+					StartCoroutine(DestroyItemDelay());
+					return;
 				}
 				else
 				{
@@ -58,5 +61,12 @@ namespace ArcadeBridge.ArcadeIdleEngine.Processors.Sellers
 			_definition.IncomeResource.RuntimeValue += itemSellValue;
 			_definition.FloatingTextResourceAnimator.Play(transform, _camera.transform, itemSellValue);
 		}
+
+		IEnumerator DestroyItemDelay ()
+		{
+			yield return new WaitForSeconds(0.2f);
+            gameObject.SetActive(false);
+        }
+
 	}
 }

@@ -26,7 +26,7 @@ namespace ArcadeBridge.ArcadeIdleEngine.Gathering
 		
 		public event Action<List<Item>> GatheredItemInstantiated;
 
-		void OnDestroy()
+		void OnDestroy() // перед начал очищаем наш лист из айтемов
 		{
 			foreach (Item instantiatedItems in _instantiatedItems)
 			{
@@ -82,10 +82,10 @@ namespace ArcadeBridge.ArcadeIdleEngine.Gathering
 
 		void OnDisappeared()
 		{
-			_visualTransform.gameObject.SetActive(false);
+            _visualTransform.gameObject.SetActive(false);
 			if (_destroyAfterGathered)
 			{
-				Destroy(gameObject);
+				gameObject.SetActive(false);
 			}
 			else
 			{
