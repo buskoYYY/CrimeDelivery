@@ -140,7 +140,7 @@ public class CarDriftController : MonoBehaviour {
     void FixedUpdate() {
         #region Situational Checks
         GearBox();
-        accel = carSettings.Accel * gearbox;
+        accel = carSettings.Accel * gearbox * currentAccelDevider;
         
         rotate = Rotate * gearbox;
         gripX = carSettings.GripX;
@@ -218,6 +218,7 @@ public class CarDriftController : MonoBehaviour {
         // Get command from keyboard or simple AI (conditional rulesets)
 
         // Execute the commands
+        
         Controller();   // pvel assigment in here
         #endregion
 
@@ -258,6 +259,17 @@ public class CarDriftController : MonoBehaviour {
     // Get input values from keyboard
 
     // Executing the queued inputs
+
+    [SerializeField] private float currentTurn;
+    [SerializeField] private float targetTurn;
+    [SerializeField] private float turnSpeed = 200;
+    [SerializeField] private float rotateMultiplyer = 1.2f;
+    [SerializeField] private float rotVelMultiplyer = 0.2f;
+    [SerializeField] private float timer = 0f;
+    [SerializeField] private float duration = 1f;
+    [SerializeField] private float accelDeviderAtStart = 0.5f;
+    [SerializeField] private float accelMultiplyer = 2f;
+    [SerializeField] private float currentAccelDevider = 1;
     void Controller() {
 
         if (inThrottle > 0.5f || inThrottle < -0.5f) {
@@ -271,12 +283,47 @@ public class CarDriftController : MonoBehaviour {
         pvel = transform.InverseTransformDirection(rigidBody.linearVelocity);
 
         // Turn statically
-        if (inTurn > 0.1f || inTurn < -0.1f) {
+        if (inTurn > 0.1f || inTurn < -0.1f)
+        {
+
+            timer += Time.deltaTime;
+            float t = Mathf.Clamp01(timer / duration);
+            currentTurn = Mathf.Lerp(0f, 1f, t);
+
+            
+            if (timer >= 0.4f && timer < 0.7f)
+            {
+                Rotate = carSettings.RotateAtStart * rotateMultiplyer;
+                rotVel = rotVelMultiplyer;
+            }
+            else if (timer >= 0.7f && timer < 1.2f)
+            {
+                Rotate = carSettings.RotateAtStart * rotateMultiplyer;
+                rotVel = rotVelMultiplyer;
+                currentAccelDevider = accelDeviderAtStart;
+            }
+            else if (timer >= 1.2f)
+            {
+                Rotate = carSettings.RotateAtStart * rotateMultiplyer;
+                rotVel = rotVelMultiplyer;
+                currentAccelDevider = accelMultiplyer;
+            }
+
+            /*
             if (pvel.z < 0)
                 Rotate = carSettings.RotateAtStart * 1.2f;
             else
                 Rotate = carSettings.RotateAtStart;
-            RotateGradConst(inTurn );
+            */
+            RotateGradConst(inTurn);
+        }
+        else
+        {
+            timer = 0;
+            currentAccelDevider = 1;
+            currentTurn = 0;
+            Rotate = carSettings.RotateAtStart;
+            rotVel = rotVelMultiplyer;
         }
     }
     #endregion
