@@ -72,8 +72,8 @@ public class Driver : CarComponent
     private void InputPlayer()
     {
 
-        inTurn = Input.GetAxis("Horizontal");
-        throttle = Input.GetAxis("Vertical");
+        inTurn = Input.GetAxisRaw("Horizontal");
+        throttle = Input.GetAxisRaw("Vertical");
         /*
         inTurn = ControlFreak2.CF2Input.GetAxis("Horizontal");
         if (testPC)

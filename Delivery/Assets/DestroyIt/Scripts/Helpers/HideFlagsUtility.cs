@@ -5,7 +5,7 @@ namespace DestroyIt
 {
     public static class HideFlagsUtility
     {
-        [MenuItem("Help/Hide Flags/Show All Objects")]
+        //[MenuItem("Help/Hide Flags/Show All Objects")]
         private static void ShowAll()
         {
             var allGameObjects = Object.FindObjectsOfType<GameObject>();
