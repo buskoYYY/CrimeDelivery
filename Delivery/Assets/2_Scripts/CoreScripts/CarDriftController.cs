@@ -137,6 +137,8 @@ public class CarDriftController : MonoBehaviour {
     public float raycastMultiplyer = 0.1f;
 
     public bool isGroundedSelf = true;
+
+    public float slopeMultipyer = 1.5f;
     void FixedUpdate() {
         #region Situational Checks
         GearBox();
@@ -149,10 +151,10 @@ public class CarDriftController : MonoBehaviour {
         rigidBody.angularDamping = AngDragG;
 
         // Adjustment in slope
-        accel = accel * Mathf.Cos(transform.eulerAngles.x * Mathf.Deg2Rad);
-        accel = accel > 0f ? accel : 0f;
-        gripZ = gripZ * Mathf.Cos(transform.eulerAngles.x * Mathf.Deg2Rad);
-        gripZ = gripZ > 0f ? gripZ : 0f;
+        //accel = accel * Mathf.Cos(transform.eulerAngles.x * Mathf.Deg2Rad);
+        //accel = accel > 0f ? accel : 0f;
+        //gripZ = gripZ * Mathf.Cos(transform.eulerAngles.x * Mathf.Deg2Rad);
+        //gripZ = gripZ > 0f ? gripZ : 0f;
         gripX = gripX * Mathf.Cos(transform.eulerAngles.z * Mathf.Deg2Rad);
         gripX = gripX > 0f ? gripX : 0f;
 
