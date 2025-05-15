@@ -162,7 +162,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1460028971}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1111379633
@@ -635,7 +636,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _saveManager: {fileID: 11400000, guid: 33fac3949785b4e6ebd037957127756c, type: 2}
   _progressBarImage: {fileID: 1178921090}
-  LoadingLevelName: Showcase
+  LoadingLevelName: Sample Game
 --- !u!4 &1460028971
 Transform:
   m_ObjectHideFlags: 0
@@ -644,12 +645,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1460028969}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 12.71829, y: 1.3263414, z: -1.594254}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 397677513}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1705980174
 GameObject:
@@ -841,5 +842,4 @@ SceneRoots:
   - {fileID: 1381151269}
   - {fileID: 2011652547}
   - {fileID: 1381658221}
-  - {fileID: 1460028971}
   - {fileID: 397677513}
