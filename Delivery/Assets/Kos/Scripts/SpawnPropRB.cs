@@ -1,42 +1,71 @@
 using UnityEngine;
+using System.Collections;
 
 namespace ArcadeBridge
 {
-    [RequireComponent(typeof(Collider))] // Гарантируем наличие коллайдера
+    [RequireComponent(typeof(Collider))]
     public class SpawnPropRB : MonoBehaviour
     {
-        [SerializeField] private GameObject _rbProp; // Префаб для спавна
-        [SerializeField] private string playerTag = "Player"; // Тег игрока
-        [SerializeField] private bool spawnWithRotation = true; // Сохранять вращение
-        
+        [SerializeField] private GameObject _rbProp;
+        [SerializeField] private string carTag = "Car";
+        [SerializeField] private bool spawnWithRotation = true;
+        [SerializeField] private float delayBeforeSpawn = 5f; // Задержка перед спавном
+
+        private Rigidbody _rb;
+        private bool _isDestroying = false;
+
+        private void Start()
+        {
+            _rb = GetComponent<Rigidbody>();
+            
+            if (_rb != null)
+            {
+                StartCoroutine(DelayedSpawnAndDestroy());
+            }
+        }
+
+        private IEnumerator DelayedSpawnAndDestroy()
+        {
+            yield return new WaitForSeconds(delayBeforeSpawn);
+            
+            if (!_isDestroying)
+            {
+                SpawnAndDestroy();
+            }
+        }
+
         private void OnTriggerEnter(Collider other)
         {
-            // Проверяем тег столкнувшегося объекта
-            if (!other.CompareTag(playerTag)) return;
+            if (!other.CompareTag(carTag)) return;
             
+            // Если есть Rigidbody, прерываем корутину и сразу выполняем
+            if (_rb != null)
+            {
+                StopAllCoroutines();
+            }
             SpawnAndDestroy();
         }
 
         private void SpawnAndDestroy()
         {
+            if (_isDestroying) return;
+            _isDestroying = true;
+            
             if (_rbProp == null)
             {
                 Debug.LogError("RB Prop prefab is not assigned!", this);
                 return;
             }
 
-            // Спавним новый объект
             Instantiate(
                 _rbProp, 
                 transform.position, 
                 spawnWithRotation ? transform.rotation : Quaternion.identity
             );
 
-            // Удаляем текущий объект
             Destroy(gameObject);
         }
 
-        // Для визуализации в редакторе
         private void OnDrawGizmos()
         {
             if (_rbProp != null)
