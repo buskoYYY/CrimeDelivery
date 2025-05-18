@@ -13,7 +13,7 @@ namespace ArcadeBridge.ArcadeIdleEngine.Economy
 		[field: SerializeField, Range(0f, 10f)] public float FloatingDuration { get; private set; }
 
 		
-		public void Play(Transform feedbackStartTransform, Transform cameraTransform, int increaseAmount)
+/*		public void Play(Transform feedbackStartTransform, Transform cameraTransform, int increaseAmount)
 		{
 			TextMeshPro txt = TextPool.Get();
 			txt.text = increaseAmount.ToString();
@@ -23,6 +23,6 @@ namespace ArcadeBridge.ArcadeIdleEngine.Economy
 			txt.transform.DOMove(txt.transform.position + Vector3.up * TextFloatingRandomRange.y + feedbackStartTransform.right * rndX, FloatingDuration)
 				.SetRecyclable()
 				.OnComplete(() => TextPool.Release(txt));
-		}
+		}*/
 	}
 }
