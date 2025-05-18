@@ -28,7 +28,7 @@ namespace ArcadeBridge.ArcadeIdleEngine.Interactables
 		{
 			if (_money.RuntimeValue >= _price)
 			{
-				_floatingTextResourceAnimator.Play(transform, Camera.main.transform, _price);
+				//_floatingTextResourceAnimator.Play(transform, Camera.main.transform, _price);
 				_money.RuntimeValue -= _price;
 				_toolList.AddElement(_gatheringToolDefinition.DatabaseIndex);
 				_buyCompleted.Invoke();
