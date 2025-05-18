@@ -72,9 +72,10 @@ PrefabInstance:
     - target: {fileID: 8192169306597132878, guid: 58855810de8084dfabf24e586684473f,
         type: 3}
       propertyPath: m_Name
-      value: Gatherable Basic Tree Variant
+      value: Car
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 8722062208938623521, guid: 58855810de8084dfabf24e586684473f, type: 3}
     m_RemovedGameObjects:
     - {fileID: 6887369967468688555, guid: 58855810de8084dfabf24e586684473f, type: 3}
     m_AddedGameObjects:
@@ -87,6 +88,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 7622360591791711603}
+    - targetCorrespondingSourceObject: {fileID: 8192169306597132878, guid: 58855810de8084dfabf24e586684473f,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8394443347136428782}
   m_SourcePrefab: {fileID: 100100000, guid: 58855810de8084dfabf24e586684473f, type: 3}
 --- !u!1 &3995282223145164157 stripped
 GameObject:
@@ -106,6 +111,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a6c3cde962eb2dd4c891efd0da2cde36, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!65 &8394443347136428782
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3995282223145164157}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 2, y: 1, z: 2}
+  m_Center: {x: 0, y: 0.6, z: 0}
 --- !u!4 &8143334998266740933 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4017358881467832310, guid: 58855810de8084dfabf24e586684473f,

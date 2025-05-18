@@ -28,7 +28,8 @@ namespace ArcadeBridge.ArcadeIdleEngine.Gathering
 				Stopping?.Invoke();
 				if (_activeGatheringTool)
 				{
-					_activeGatheringTool.enabled = false;
+                    Destroy(_activeGatheringTool.gameObject);
+                    //_activeGatheringTool.enabled = false;
 				}
 				return;
 			}
@@ -95,13 +96,13 @@ namespace ArcadeBridge.ArcadeIdleEngine.Gathering
 				_gatherableSources.Remove(gatherableItemSource);
 				if (!_activeGatheringTool)
 				{
-					return;
+                    return;
 				}
 				
 				_activeGatheringTool.RemoveGatherable(gatherableItemSource);
 				gatherableItemSource.GatheredItemInstantiated -= GatherableSource_GatheredItemInstantiated;
 				if (!_activeGatheringTool.HasInteractableGatherable)
-				{
+				{					
 					Destroy(_activeGatheringTool.gameObject);
 					_activeGatheringTool = null;
 					Stopping?.Invoke();
