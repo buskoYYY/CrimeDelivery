@@ -59,7 +59,7 @@ namespace ArcadeBridge.ArcadeIdleEngine.Processors.Sellers
 			item.ReleaseToPool();
 			int itemSellValue = item.Definition.SellValue;
 			_definition.IncomeResource.RuntimeValue += itemSellValue;
-			_definition.FloatingTextResourceAnimator.Play(transform, _camera.transform, itemSellValue);
+			//_definition.FloatingTextResourceAnimator.Play(transform, _camera.transform, itemSellValue);
 		}
 
 		IEnumerator DestroyItemDelay ()

@@ -15,24 +15,24 @@ namespace ArcadeBridge.ArcadeIdleEngine.Data.Database
 
 		void OnEnable()
 		{
-			_savedIndex.ValueSet += SavedIndex_ValueSet;
-			_availableObjects.Clear();
-			if (_savedIndex.RuntimeValue != null)
+			/*_savedIndex.ValueSet += SavedIndex_ValueSet;*/
+			//_availableObjects.Clear();
+/*			if (_savedIndex.RuntimeValue != null)
 			{
 				_objectDatabase.GetObjects(_savedIndex.RuntimeValue, ref _availableObjects);
-			}
+			}*/
 		}
 
 		void OnDisable()
 		{
-			_savedIndex.ValueSet -= SavedIndex_ValueSet;
-			_availableObjects.Clear();
+			//_savedIndex.ValueSet -= SavedIndex_ValueSet;
+			//_availableObjects.Clear();
 		}
 
-		void SavedIndex_ValueSet(List<int> obj)
+/*		void SavedIndex_ValueSet(List<int> obj)
 		{
-			_availableObjects.Clear();
+			//_availableObjects.Clear();
 			_objectDatabase.GetObjects(_savedIndex.RuntimeValue, ref _availableObjects);
-		}
+		}*/
 	}
 }
