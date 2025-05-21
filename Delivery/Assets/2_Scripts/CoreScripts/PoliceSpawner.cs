@@ -4,7 +4,8 @@ using UnityEngine;
 public class PoliceSpawner : MonoBehaviour
 {
     public Transform[] spawnPoints;
-    public float maxSpawnDistance = 30;
+    public float maxSpawnDistance = 70;
+    public float minSpawnDistance = 10;
 
     public Transform player;
 
@@ -12,6 +13,8 @@ public class PoliceSpawner : MonoBehaviour
     public CarComponentsController[] policePrefabs;
     public int policeToSpawnCount = 5;
     public int maxPoliceCount = 20;
+
+    public Camera playerCamera;
 
     //Ограничение по спавну
 
@@ -32,26 +35,38 @@ public class PoliceSpawner : MonoBehaviour
 
     public void SpawnPolice()
     {
-        List<Transform> nearbyPoints = new List<Transform>();
+        List<(Transform point, float distanceToTarget)> nearbyPoints = new ();
 
         foreach (Transform point in spawnPoints)
         {
+            if (nearbyPoints.Count > 20)
+                break;
+
             float distance = Vector3.Distance(player.position, point.position);
-            if (distance <= maxSpawnDistance)
+            if (distance >= minSpawnDistance && distance <= maxSpawnDistance && !IsVisibleFromCamera(point.position, playerCamera))
             {
-                nearbyPoints.Add(point);
+                nearbyPoints.Add((point, distance));
             }
         }
 
+        nearbyPoints.Sort((a, b) => a.distanceToTarget.CompareTo(b.distanceToTarget));
 
-        Shuffle(nearbyPoints);
         int count = Mathf.Min(policeToSpawnCount, nearbyPoints.Count);
         for (int i = 0; i < count; i++)
         {
             if (policeList.Count >= maxPoliceCount)
                 break;
 
-            CarComponentsController policeInstanse = Instantiate(policePrefabs[0], nearbyPoints[i].position, nearbyPoints[i].rotation);
+            CarComponentsController policeInstanse = Instantiate(policePrefabs[0], new Vector3(nearbyPoints[i].point.position.x, nearbyPoints[i].point.position.y + 2, nearbyPoints[i].point.position.z) , nearbyPoints[i].point.rotation);
+
+            Vector3 bottom = GetLowestPoint(policeInstanse.carGameobject);
+
+            // Считаем смещение от центра до низа
+            float offsetY = bottom.y - policeInstanse.carTrasform.position.y;
+
+            Vector3 directionToTarget = player.position - nearbyPoints[i].point.position;
+            Quaternion lookRotation = Quaternion.LookRotation(directionToTarget);
+            policeInstanse.carTrasform.rotation = lookRotation;
 
             Driver driverPolice;
             foreach (CarComponent driver in policeInstanse.carComponents)
@@ -94,5 +109,39 @@ public class PoliceSpawner : MonoBehaviour
             list[i] = list[k];
             list[k] = temp;
         }
+    }
+
+    // Метод, чтобы найти нижнюю точку по коллайдерам
+    public Vector3 GetLowestPoint(GameObject obj)
+    {
+        Collider[] colliders = obj.GetComponentsInChildren<Collider>();
+
+        if (colliders.Length == 0)
+            return obj.transform.position;
+
+        float minY = float.MaxValue;
+        Vector3 lowestPoint = Vector3.zero;
+
+        foreach (var col in colliders)
+        {
+            Vector3 bottom = col.bounds.center - new Vector3(0, col.bounds.extents.y, 0);
+            if (bottom.y < minY)
+            {
+                minY = bottom.y;
+                lowestPoint = bottom;
+            }
+        }
+
+        return lowestPoint;
+    }
+
+    public bool IsVisibleFromCamera(Vector3 position, Camera cam)
+    {
+        Vector3 viewportPoint = cam.WorldToViewportPoint(position);
+
+        // Объект перед камерой и внутри поля зрения
+        return viewportPoint.z > 0 &&
+               viewportPoint.x > 0 && viewportPoint.x < 1 &&
+               viewportPoint.y > 0 && viewportPoint.y < 1;
     }
 }
