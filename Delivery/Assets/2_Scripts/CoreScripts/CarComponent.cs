@@ -5,6 +5,8 @@ using UnityEngine;
 
 public abstract class CarComponent: MonoBehaviour
 {
+    public bool isActiveComponent = true;
+
     public virtual void SetupComponent()
     { }
 
