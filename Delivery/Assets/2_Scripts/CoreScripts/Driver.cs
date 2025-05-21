@@ -9,7 +9,7 @@ public class Driver : CarComponent
     public float targetOffset = 5;
     [SerializeField] private float deltaForTurn; //насколько дельта больше оффсета
     private Transform thisObjectTransform;
-    [SerializeField] private Transform targetObjectTransform;
+    public Transform TargetObjectTransform { get; private set; }
     private float inTurn;
     private float throttle;
     [SerializeField] private CarComponentsController vehicle;
@@ -21,8 +21,8 @@ public class Driver : CarComponent
         vehicle = gameObject.GetComponent<CarComponentsController>();
         thisObjectTransform = transform;
 
-        if (targetObjectTransform == null)
-            targetObjectTransform = transform;
+        if (TargetObjectTransform == null)
+            TargetObjectTransform = transform;
     }
 
     private void FixedUpdate()
@@ -55,7 +55,7 @@ public class Driver : CarComponent
 
     public void ChangeTarget(Transform newTarget)
     {
-        targetObjectTransform = newTarget;
+        TargetObjectTransform = newTarget;
     }
     public float boost;
 
@@ -92,7 +92,7 @@ public class Driver : CarComponent
     {
         // Turn by facing player
         // Get the angle between the points (absolute goal) = right (target) - left
-        float angle = AngleOffset(Angle2Points(thisObjectTransform.position, targetObjectTransform.position), 0f);
+        float angle = AngleOffset(Angle2Points(thisObjectTransform.position, TargetObjectTransform.position), 0f);
 
         Vector3 rot = transform.eulerAngles;
         float delta = Mathf.DeltaAngle(rot.y, angle);

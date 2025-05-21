@@ -29,7 +29,7 @@ public class CarDamageHandler : MonoBehaviour
     {
         carComponents = GetComponent<CarComponentsController>();
         if (initAtStart)
-            Initialize(false, 3, 100);
+            Initialize(false, lives, 100);
     }
 
     public void Initialize(bool new_unlimitedLives, int new_lives, float new_maxHealth)
@@ -77,9 +77,10 @@ public class CarDamageHandler : MonoBehaviour
         lastHittedCar = null;
     }
 
+    public bool damageble = true;
     public void ApplyDamage(float damage)
     {
-        if (carAlive)
+        if (carAlive && damageble)
             ChangeHealth(-damage);
     }
 
@@ -131,8 +132,10 @@ public class CarDamageHandler : MonoBehaviour
 
     private void EndOfLives()
     {
-        /*
+        
         OnEndLivesEvent?.Invoke(carComponents);
+        Destroy(gameObject, 5);
+        /*
         var wheels = gameObject.GetComponent<VehicleCarDriftController>();
 
         foreach (WheelController wheel in wheels.wheels)

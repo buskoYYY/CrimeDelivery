@@ -31,12 +31,12 @@ namespace DestroyIt
         [SerializeField]
         [FormerlySerializedAs("totalHitPoints")]
         [HideInInspector] 
-        private float _totalHitPoints = 50f;
+        public float _totalHitPoints = 50f;
 
         [SerializeField]
         [FormerlySerializedAs("currentHitPoints")]
         [HideInInspector] 
-        private float _currentHitPoints = 50f;
+        public float _currentHitPoints = 50f;
         
         [HideInInspector] public List<DamageLevel> damageLevels;
 	    [HideInInspector] public GameObject destroyedPrefab;
