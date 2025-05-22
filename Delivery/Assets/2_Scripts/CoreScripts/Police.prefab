@@ -191,7 +191,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 300358908428735360}
   serializedVersion: 4
-  m_Mass: 500
+  m_Mass: 200
   m_Drag: 0.05
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: -0.36, z: 0}
@@ -704,7 +704,7 @@ MonoBehaviour:
   vehicleCarDriftController: {fileID: 0}
   carDriftController: {fileID: 0}
   driver: {fileID: 0}
-  accelChanger: 5
+  accelChanger: 10
   rotVelChanger: 0.2
   newTargetOffcetAtStart: 0
   newTargetOffcet: 10
