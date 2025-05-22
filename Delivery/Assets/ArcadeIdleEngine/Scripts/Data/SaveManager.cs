@@ -5,6 +5,7 @@ using ArcadeBridge.ArcadeIdleEngine.Data.Variables;
 using ArcadeBridge.ArcadeIdleEngine.Helpers;
 using ArcadeBridge.ArcadeIdleEngine.OdinSerializer;
 using ArcadeIdleEngine.ExternalAssets.NaughtyAttributes_2._1._4.Core.DrawerAttributes_SpecialCase;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace ArcadeBridge.ArcadeIdleEngine.Data
