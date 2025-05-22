@@ -156,6 +156,7 @@ GameObject:
   - component: {fileID: 8920980722107646660}
   - component: {fileID: -4104479167185661920}
   - component: {fileID: 6032833423586964769}
+  - component: {fileID: 2794782051727940323}
   m_Layer: 0
   m_Name: Police
   m_TagString: Untagged
@@ -323,6 +324,7 @@ MonoBehaviour:
   maxHealth: 100
   lives: 1
   unlimitedLives: 0
+  damageble: 1
   carAlive: 1
 --- !u!114 &5916431872678737353
 MonoBehaviour:
@@ -724,6 +726,30 @@ MonoBehaviour:
   isActiveComponent: 1
   meshRenderer: {fileID: 3252850756105362895}
   destroyMaterial: {fileID: 2100000, guid: 119ac0d37d79eb045bce1a424c1e9735, type: 2}
+--- !u!114 &2794782051727940323
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 300358908428735360}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c60256c5f012f2240ab9966b2227744d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  id: Police
+  carSettings:
+    driftControllerSettings:
+      Accel: 0
+      TopSpeed: 0
+      GripX: 0
+      GripZ: 0
+      RotateAtStart: 0
+      RotVel: 0
+    carNarrativeName: 
+    isDefault: 0
+    carPrice: 100
 --- !u!1 &315067382418101362
 GameObject:
   m_ObjectHideFlags: 0
