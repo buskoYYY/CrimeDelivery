@@ -88,7 +88,7 @@ public class CarComponentsController : MonoBehaviour
     {
         carComponents = GetComponents<CarComponent>();
         for (int i = 0; i < carComponents.Length; i++)
-            carComponents[i].SetupComponent();
+            carComponents[i].SetupComponent(this);
     }
 
     public  void StartRace()

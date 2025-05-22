@@ -6,7 +6,6 @@ using UnityEngine.UI;
 public class VehicleCarDriftController : Vehicle
 {
     private CarDriftController car;
-    private CarComponentsController carComponents;
 
     public DriftControllerSettings carSettingsAtStart;
 
@@ -59,15 +58,17 @@ public class VehicleCarDriftController : Vehicle
         */
     }
 
+    public override void CarDestroy()
+    {
+        base.CarDestroy();
+        car.isGroundedSelf = false;
+        car.isGrounded = false;
+    }
+
     public void UpdateCarStats(DriftControllerSettings newSettings)
     {
         carSettingsAtStart = newSettings.Clone();
 
-    }
-
-    public override void SetupComponent()
-    {
- 
     }
 
     public override void StartRace()

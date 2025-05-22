@@ -78,6 +78,13 @@ public class PoliceSpawner : MonoBehaviour
                     driverPolice.Throttle(1);
                 }
 
+                AIDriftController ai = driver as AIDriftController;
+
+                if (ai != null)
+                {
+                    ai.autoDestroy = true;
+                }
+
                 
             }
             policeInstanse.carDamageHandler.OnEndLivesEvent += OnEndOfLivesCar;

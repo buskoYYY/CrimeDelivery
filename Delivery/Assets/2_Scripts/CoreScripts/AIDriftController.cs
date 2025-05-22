@@ -3,28 +3,39 @@ using UnityEngine;
 public class AIDriftController : CarComponent
 {
     [SerializeField] private float distanceToTarget;
-    [SerializeField] private CarComponentsController carComponents;
     [SerializeField] private VehicleCarDriftController vehicleCarDriftController;
     [SerializeField] private CarDriftController carDriftController;
     [SerializeField] private Driver driver;
 
+    [SerializeField] private float accelChangerMin = 1f;
+    [SerializeField] private float accelChangerMax = 20f;
     [SerializeField] private float accelChanger;
     [SerializeField] private float rotVelChanger = 0.3f;
     [SerializeField] private float newTargetOffcetAtStart;
+
+    [SerializeField] private float newTargetOffcetMin = 1;
+    [SerializeField] private float newTargetOffcetMax = 10;
     [SerializeField] private float newTargetOffcet;
 
     [SerializeField] private float maxDistance = 5;
 
+    public bool autoDestroy = false;
 
 
-    public override void SetupComponent()
+    public override void CarDestroy()
     {
+        base.CarDestroy();
+    }
+
+    public override void SetupComponent(CarComponentsController carComponents)
+    {
+        base.SetupComponent(carComponents);
         vehicleCarDriftController = GetComponent<VehicleCarDriftController>();
         carDriftController = GetComponent<CarDriftController>();
-        carComponents = GetComponent<CarComponentsController>();
         driver = GetComponent<Driver>();
-
+        accelChanger = Random.Range(accelChangerMin, accelChangerMax);
         newTargetOffcetAtStart = driver.targetOffset;
+        newTargetOffcet = Random.Range(newTargetOffcetMin, newTargetOffcetMax);
     }
 
     private void FixedUpdate()
@@ -43,8 +54,11 @@ public class AIDriftController : CarComponent
             carDriftController.carSettings.RotVel = vehicleCarDriftController.carSettingsAtStart.RotVel + rotVelChanger;
         }
 
-        DestroyByDistance(distanceToTarget);
-        DestroyByStuck();
+        if (autoDestroy)
+        {
+            DestroyByDistance(distanceToTarget);
+            DestroyByStuck();
+        }
     }
 
     [SerializeField] private float distanceToDestroy = 30;

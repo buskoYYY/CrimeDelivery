@@ -20,8 +20,8 @@ public class CarDamageHandler : MonoBehaviour
     public delegate void OnEndLives(CarComponentsController carComponents);
     public event OnEndLives OnEndLivesEvent;
 
-    [SerializeField] private float currentHealth = 100;
-    [SerializeField] private float maxHealth = 100;
+    public float CurrentHealth { get; private set; } = 100f;
+    public float MaxHealth { get; private set; } = 100f;
     public int lives = 5;
     public bool unlimitedLives = false;
 
@@ -36,8 +36,8 @@ public class CarDamageHandler : MonoBehaviour
     {
         lives = new_lives;
         unlimitedLives = new_unlimitedLives;
-        maxHealth = new_maxHealth;
-        currentHealth = maxHealth;
+        MaxHealth = new_maxHealth;
+        CurrentHealth = MaxHealth;
         ChangeHealth(0);//Нужно для инициализации UI
     }
 
@@ -87,9 +87,9 @@ public class CarDamageHandler : MonoBehaviour
     public bool carAlive = true;
     private void ChangeHealth(float currentHealth)
     {
-        this.currentHealth += currentHealth;
-        OnUpdateHealthEvent?.Invoke(this.currentHealth, maxHealth);
-        if (this.currentHealth <= 0)
+        this.CurrentHealth += currentHealth;
+        OnUpdateHealthEvent?.Invoke(this.CurrentHealth, MaxHealth);
+        if (this.CurrentHealth <= 0)
         {
             DestroyCar();
         }
@@ -125,7 +125,7 @@ public class CarDamageHandler : MonoBehaviour
         if (!carAlive)
         {
             OnCarReturnToLiveEvent?.Invoke(carComponents);
-            currentHealth = maxHealth;
+            CurrentHealth = MaxHealth;
             carAlive = true;
         }
     }

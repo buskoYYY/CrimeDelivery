@@ -41,7 +41,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1578790013300168394}
   serializedVersion: 4
-  m_Mass: 100
+  m_Mass: 150
   m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -209,7 +209,6 @@ GameObject:
   - component: {fileID: 1874079396250580239}
   - component: {fileID: 2756269698575007757}
   - component: {fileID: 774154058515810774}
-  - component: {fileID: 2035916971796156639}
   - component: {fileID: 6606545063894259}
   - component: {fileID: 4022052708893327916}
   - component: {fileID: 4509327626932274416}
@@ -219,7 +218,7 @@ GameObject:
   - component: {fileID: 5932741171546839282}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Car
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -381,9 +380,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   initAtStart: 0
   carComponents: {fileID: 0}
-  currentHealth: 100
-  maxHealth: 100
-  lives: 5
+  lives: 1
   unlimitedLives: 0
   damageble: 1
   carAlive: 1
@@ -446,6 +443,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isActiveComponent: 1
+  carComponents: {fileID: 0}
   isAI: 0
   targetOffset: 5
   deltaForTurn: 0
@@ -455,109 +453,6 @@ MonoBehaviour:
     m_Bits: 0
   testPC: 1
   boost: 0
---- !u!114 &2035916971796156639
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2137761545840530748}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 325965e114cf6f74d8e96979480061a7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  accel: 0
-  maxSpeed: 50
-  counterForceSpeedInDirection: 0
-  accelerationCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 1
-      value: 0.1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  speedInDirection: 0
-  forwardSpeed: 0
-  torqueForce: 50
-  maxAngularVelocity: 3
-  counterTorqueFactor: 50
-  selfInput: 1
-  nitroGainRate: 1
-  slipCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0.008270264
-      value: 0
-      inSlope: 2.3900318
-      outSlope: 2.3900318
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 0.20965073
-      value: 0.4813057
-      inSlope: 6.3911257
-      outSlope: 6.3911257
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 0.25925183
-      value: 0.9967713
-      inSlope: -0.27990294
-      outSlope: -0.27990294
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 1
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 0.8188066
-      value: 0.8245697
-      inSlope: -1.4225042
-      outSlope: -1.4225042
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 1.046812
-      value: 0.00708884
-      inSlope: -3.5853565
-      outSlope: -3.5853565
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  angularVelosity: 0
-  force: 0
-  isGrounded: 0
-  distToGround: 2
-  angle: 0
-  angleDifference: 0
 --- !u!114 &6606545063894259
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -571,6 +466,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isActiveComponent: 1
+  carComponents: {fileID: 0}
   isGrounded: 0
   carSettingsAtStart:
     Accel: 0
@@ -597,7 +493,7 @@ MonoBehaviour:
   carSettings:
     Accel: 30
     TopSpeed: 50
-    GripX: 35
+    GripX: 30
     GripZ: 3
     RotateAtStart: 120
     RotVel: 0.5
@@ -772,8 +668,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isActiveComponent: 1
+  carComponents: {fileID: 0}
   meshRenderer: {fileID: 4276910586934323555}
   destroyMaterial: {fileID: 2100000, guid: 119ac0d37d79eb045bce1a424c1e9735, type: 2}
+  expliosion: {fileID: 1000012903210382, guid: f81733bc13be6074ebebbc5227283ef0, type: 3}
+  explosionForce: {x: 0, y: 0, z: 0}
+  explosionTorque: {x: 0, y: 0, z: 0}
+  smokeParticles: {fileID: 0}
+  fireParticles: {fileID: 0}
 --- !u!114 &5932741171546839282
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -925,7 +827,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2443320566363380168}
   serializedVersion: 4
-  m_Mass: 100
+  m_Mass: 150
   m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -1213,7 +1115,7 @@ GameObject:
   - component: {fileID: 2120415551084580484}
   m_Layer: 0
   m_Name: Body
-  m_TagString: Untagged
+  m_TagString: Car
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1294,7 +1196,7 @@ CapsuleCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4118980338217808111}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 8670505fb20b89a4cbdb240ef3e9dd93, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -1306,10 +1208,10 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.9
-  m_Height: 5.1
+  m_Radius: 0.76
+  m_Height: 4.76
   m_Direction: 2
-  m_Center: {x: 0, y: 1.23, z: 0.02}
+  m_Center: {x: 0, y: 1.39, z: 0.02}
 --- !u!114 &2120415551084580484
 MonoBehaviour:
   m_ObjectHideFlags: 0
