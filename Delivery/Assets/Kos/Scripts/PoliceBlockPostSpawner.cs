@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace ArcadeBridge
 {
-    public class LevelConfig : MonoBehaviour
+    public class PoliceBlockPostSpawner: MonoBehaviour
     {
         [SerializeField] private List<GameObject> policeComponents;
         [SerializeField] private List<Transform> spawnPoints;
