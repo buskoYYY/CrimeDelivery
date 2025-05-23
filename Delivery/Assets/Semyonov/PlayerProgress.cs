@@ -8,6 +8,8 @@ namespace ArcadeBridge
     {
         public List<ItemData> itemDatasInInventory = new List<ItemData>();
 
+        public int money = 100;
+
         public bool isCarForPartsCreated;
 
         public bool isCarForPartsBrokenAbsolutly;

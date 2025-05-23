@@ -5343,7 +5343,7 @@ PrefabInstance:
         type: 3}
       propertyPath: _onUnlocked.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1546062354}
+      objectReference: {fileID: 1546062358}
     - target: {fileID: 6782614657570378942, guid: 10548fdeaffe64d72901424935ed5f94,
         type: 3}
       propertyPath: _onUnlocked.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
@@ -5352,12 +5352,12 @@ PrefabInstance:
     - target: {fileID: 6782614657570378942, guid: 10548fdeaffe64d72901424935ed5f94,
         type: 3}
       propertyPath: _onUnlocked.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: CreateCar
+      value: CreateObject
       objectReference: {fileID: 0}
     - target: {fileID: 6782614657570378942, guid: 10548fdeaffe64d72901424935ed5f94,
         type: 3}
       propertyPath: _onUnlocked.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: ArcadeBridge.CarSpawner, Assembly-CSharp
+      value: ArcadeBridge.Spawner, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 6782614657570378942, guid: 10548fdeaffe64d72901424935ed5f94,
         type: 3}
@@ -5371,7 +5371,7 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 6782614657570378931, guid: 10548fdeaffe64d72901424935ed5f94,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1546062354}
+      addedObject: {fileID: 1546062358}
   m_SourcePrefab: {fileID: 100100000, guid: 10548fdeaffe64d72901424935ed5f94, type: 3}
 --- !u!1001 &1528711547
 PrefabInstance:
@@ -5694,7 +5694,7 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 1504592503}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1546062354
+--- !u!114 &1546062358
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -5703,10 +5703,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1546062353}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 939cb914e192e0340b7799e8e94aee9a, type: 3}
+  m_Script: {fileID: 11500000, guid: 966f6289dafa8dd4e90acc6ebd4918fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _objectForInteraction: {fileID: 0}
+  _objectForInteraction: {fileID: 4792569040275198244, guid: 9690446565cd41c49bc1675240f3ffd6,
+    type: 3}
 --- !u!4 &1549139939 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 36658a6d4df104bdc8e6e9f322bb82db,
