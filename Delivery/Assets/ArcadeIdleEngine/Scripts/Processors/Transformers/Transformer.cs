@@ -85,6 +85,8 @@ namespace ArcadeBridge.ArcadeIdleEngine.Processors.Transformers
                 {
                     if (_collectingForTransformationTimer.IsCompleted)
                     {
+                        SaveLoadService.instance.RemoveFromData(item);
+
                         _inputInventory.Remove(item);
                         AddToTransformationQueue(item);
                         _collectingForTransformationTimer.SetZero();
@@ -157,6 +159,8 @@ namespace ArcadeBridge.ArcadeIdleEngine.Processors.Transformers
                     Item p = output.ItemDefinition.Pool.Get();
                     p.transform.position = transform.position;
                     _outputInventory.AddVisible(p);
+
+                    SaveLoadService.instance.AddItemToData(p);
                 }    
             }
 

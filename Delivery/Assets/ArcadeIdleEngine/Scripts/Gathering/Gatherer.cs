@@ -21,7 +21,20 @@ namespace ArcadeBridge.ArcadeIdleEngine.Gathering
 		public event Action<GatheringTool> Starting;
 		public event Action Stopping;
 
-		void Update()
+        private void Start()
+        {
+			List<Item> items = new List<Item>();
+
+            foreach(ItemData itemData in SaveLoadService.instance.PlayerProgress.itemDatasInInventory)
+            {
+				Item item = StaticDataService.instance.GetItem(itemData.name);
+
+				items.Add(Instantiate<Item>(item));
+            }
+
+			StartCoroutine(DelayedAddItem(items, false));
+        }
+        void Update()
 		{
 			if (!_inventory.Interactable)
 			{
@@ -141,13 +154,20 @@ namespace ArcadeBridge.ArcadeIdleEngine.Gathering
 			StartCoroutine(DelayedAddItem(items));
 		}
 
-		IEnumerator DelayedAddItem(List<Item> items)
+		IEnumerator DelayedAddItem(List<Item> items, bool withSave = true)
 		{
 			yield return _delayedCollectWait;
+
 			foreach (Item item in items)
 			{
 				_inventory.Add(item);
+
+                if (withSave)
+				{
+					SaveLoadService.instance.AddItemToData(item);
+				}
 			}
+
 			items.Clear();
 		}
 	}

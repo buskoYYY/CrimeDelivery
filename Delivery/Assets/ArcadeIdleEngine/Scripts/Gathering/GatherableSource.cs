@@ -86,6 +86,12 @@ namespace ArcadeBridge.ArcadeIdleEngine.Gathering
 			if (_destroyAfterGathered)
 			{
 				gameObject.SetActive(false);
+
+                if (GetComponent<CarForParts>())
+                {
+					SaveLoadService.instance.PlayerProgress.isCarForPartsBrokenAbsolutly = true;
+					SaveLoadService.instance.DelayedSaveProgress();
+                }
 			}
 			else
 			{

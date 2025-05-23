@@ -70,6 +70,10 @@ namespace ArcadeBridge.ArcadeIdleEngine.Interactables
 		public event Action<Unlocker> Stopped;
 		public event Action<Unlocker> Completed;
 
+		public void OnUnlockedInvoke()
+        {
+			_onUnlocked?.Invoke();
+		}
 		void Awake() 
 		{
 			_waitForSeconds = new WaitForSeconds(0.1f);
@@ -129,33 +133,39 @@ namespace ArcadeBridge.ArcadeIdleEngine.Interactables
 			int decreasingAmountDelta = x - _previousResourceSpentAmount;
 			if (decreasingAmountDelta == 0)
 			{
+				//Debug.Log(_previousResourceSpentAmount + " " + x);
 				return;
 			}
 			
 			// First search the inventory, if we can't find, use variable and pools
 			if (_inventory.TryRemove(_requiredResource, out Item item))
-			{
-				int amount = 0;
-				TweenHelper.KillAllTweens(item.transform);
-				TweenHelper.Jump(item.transform, _jumpPoint.position, _jumpHeight, 1, _jumpDuration, item.ReleaseToPool);
-				amount++;
-				while (amount < decreasingAmountDelta)
-				{
-					if (_inventory.TryRemove(_requiredResource, out Item it))
-					{
-						TweenHelper.KillAllTweens(it.transform);
-						TweenHelper.Jump(it.transform, _jumpPoint.position, _jumpHeight, 1, _jumpDuration, it.ReleaseToPool);
-						amount++;	
-					}
-				}
-			}
-			else
+            {
+                SaveLoadService.instance.RemoveFromData(item);
+
+                int amount = 0;
+                TweenHelper.KillAllTweens(item.transform);
+                TweenHelper.Jump(item.transform, _jumpPoint.position, _jumpHeight, 1, _jumpDuration, item.ReleaseToPool);
+                amount++;
+                while (amount < decreasingAmountDelta)
+                {
+                    if (_inventory.TryRemove(_requiredResource, out Item it))
+                    {
+                        TweenHelper.KillAllTweens(it.transform);
+                        TweenHelper.Jump(it.transform, _jumpPoint.position, _jumpHeight, 1, _jumpDuration, it.ReleaseToPool);
+                        amount++;
+                    }
+                }
+            }
+            else
 			{
 				_requiredResource.Variable.RuntimeValue -= decreasingAmountDelta;
 				_spawnCount++;
 				if (_spawnCount >= VISUAL_FEEDBACK_SPAWN_RATE_MAX + 1 - _visualFeedbackSpawnRate)
 				{
 					Item poolInstance = _requiredResource.Pool.Get();
+
+					SaveLoadService.instance.RemoveFromData(poolInstance);
+
 					Transform trans = poolInstance.transform;
 					trans.position = _inventory.transform.position;
 					TweenHelper.Jump(trans, _jumpPoint.position, _jumpHeight, 1, _jumpDuration, poolInstance.ReleaseToPool);
@@ -170,6 +180,18 @@ namespace ArcadeBridge.ArcadeIdleEngine.Interactables
 			if (_collectedResource == _requiredResourceAmount)
 			{
 				_onUnlocked?.Invoke();
+
+                if (GetComponent<CarSpawner>())
+                {
+					SaveLoadService.instance.PlayerProgress.isCarForPartsCreated = true;
+					SaveLoadService.instance.DelayedSaveProgress();
+                }
+				else if (GetComponent<WorkBenchSpawner>())
+                {
+					SaveLoadService.instance.PlayerProgress.isWorkBenchCreated = true;
+					SaveLoadService.instance.DelayedSaveProgress();
+				}
+
 				Completed?.Invoke(this);
 				StopSpending();
 
@@ -191,8 +213,9 @@ namespace ArcadeBridge.ArcadeIdleEngine.Interactables
 				}
 			}
 		}
-		
-		void StopSpending()
+
+
+        void StopSpending()
 		{
 			_spendingTween?.Kill();
 			if (_cor != null)
