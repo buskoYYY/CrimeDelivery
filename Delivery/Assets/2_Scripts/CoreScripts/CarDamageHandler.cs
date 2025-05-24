@@ -25,6 +25,8 @@ public class CarDamageHandler : MonoBehaviour
     public int lives = 5;
     public bool unlimitedLives = false;
 
+    public DerbyDirectorConfig derbyDirectorConfig;
+
     private void Start()
     {
         carComponents = GetComponent<CarComponentsController>();
@@ -41,12 +43,29 @@ public class CarDamageHandler : MonoBehaviour
         ChangeHealth(0);//Нужно для инициализации UI
     }
 
+    private float hitDelay = 0.2f;
+    private float currentHitDelay = 0;
+
+    private void FixedUpdate()
+    {
+        if (currentHitDelay <= 0.2f)
+            currentHitDelay += Time.deltaTime;
+    }
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (currentHitDelay >= hitDelay)
+        {
+            //ApplyDamage(DerbyDirector.CalculateHitStaticDamage(collision, derbyDirectorConfig, carComponents.isPlayer));
+            currentHitDelay = 0;
+        }
+    }
+
     private CarComponentsController lastHittedCar;
     public void HitCar(HitInfo hitInfo)
     {
         if (hitInfo.pushCarComponents.carDamageHandler.carAlive && hitInfo.carToHitcarComponents.carDamageHandler.carAlive)
         {
-            
+            hitInfo.derbyDirectorConfig = this.derbyDirectorConfig;   
             CalculatedHitInfo calculatedHitInfo = DerbyDirector.CalculatePushForce(hitInfo);
             carComponents.carRigidbody.AddForceAtPosition(calculatedHitInfo.pushForce, hitInfo.collision.GetContact(0).point, ForceMode.Impulse);
 
@@ -65,7 +84,9 @@ public class CarDamageHandler : MonoBehaviour
             if (calculatedHitInfo.strongHit)
                 carComponents.vehicle.StrongHit();
 
-            ApplyDamage(calculatedHitInfo.damage);
+            CalculatedDamage calculatedDamage = DerbyDirector.CalculateDamage(hitInfo);
+
+            ApplyDamage(calculatedDamage.damage);
         }
 
     }

@@ -1,27 +1,32 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 [System.Serializable]
 public class DerbyDirectorConfig
 {
-    public float maxSpeed = 50;
+    public float maxSpeed = 30;
+    public float minHit = 5;
+
+
     public float pushCoefFront = 600;
     public float pushCoefUP = 5000;
     public float stunSpeed = 25;
 
-    public float frontDamage = 50;
+    public float frontDamage = 20;
     public float sideDamage = 0;
     public float backDamage = 0;
     public float roofDamage = 0;
 
-    public float frontDefence = 25;
+    public float frontDefence = 10;
     public float sideDefence = 0;
     public float backDefence = 0;
     public float roofDefence = 0;
 
     public float maxAirPushDevider = 5;
+
+    public float impulseDevider = 1000;
+    public float staticDamage = 10;
 }
 
 public static class DerbyDirector
@@ -38,6 +43,17 @@ public static class DerbyDirector
         {
             this.pushForce = pushForce;
             damage = newDamage;
+        }
+    }
+
+    public class CalculatedDamage
+    {
+
+        public float damage;
+
+        public CalculatedDamage(float damage)
+        {
+            this.damage = damage;
         }
     }
 
@@ -70,13 +86,75 @@ public static class DerbyDirector
 
     //Reduce nitro force
 
+    public static float CalculateHitStaticDamage(Collision collision, DerbyDirectorConfig derbyDirectorConfig, bool isPlayer)
+    {
+        float hitVelosityProcent = (collision.impulse.magnitude / derbyDirectorConfig.impulseDevider) / derbyDirectorConfig.maxSpeed;
+        float damage = 0;
+        if (isPlayer)
+            Debug.Log(hitVelosityProcent);
+
+        if (hitVelosityProcent > 0.3f)
+            damage = Mathf.Clamp(derbyDirectorConfig.staticDamage * hitVelosityProcent, 0 , derbyDirectorConfig.staticDamage);
+        return damage;
+    }
+
+    public static CalculatedDamage CalculateDamage(HitInfo hitInfo)
+    {
+        DerbyDirectorConfig derbyDirectorConfig = hitInfo.derbyDirectorConfig;
+
+
+
+        float hitVelosityProcent = (hitInfo.collision.impulse.magnitude / derbyDirectorConfig.impulseDevider) / derbyDirectorConfig.maxSpeed;
+        float damage = 0;
+        float defence = 0;
+        switch (hitInfo.pushCollider.colliderType)
+        {
+            case ColliderType.Front:
+                damage = derbyDirectorConfig.frontDamage;
+                break;
+            case ColliderType.Side:
+                damage = derbyDirectorConfig.sideDamage;
+                break;
+            case ColliderType.Roof:
+                damage = derbyDirectorConfig.roofDamage;
+                break;
+            case ColliderType.Back:
+                damage = derbyDirectorConfig.backDamage;
+                break;
+        }
+
+        switch (hitInfo.colliderToHit.colliderType)
+        {
+            case ColliderType.Front:
+                defence = derbyDirectorConfig.frontDefence;
+                break;
+            case ColliderType.Side:
+                defence = derbyDirectorConfig.sideDefence;
+                break;
+            case ColliderType.Roof:
+                defence = derbyDirectorConfig.roofDefence;
+                break;
+            case ColliderType.Back:
+                defence = derbyDirectorConfig.backDefence;
+                break;
+        }
+        float resultDamage;
+        if (hitVelosityProcent > 0.15f)
+            resultDamage = Mathf.Clamp((damage - defence) * hitVelosityProcent, 0, 100);
+        else
+            resultDamage = 0;
+        return new CalculatedDamage(resultDamage);
+    }
+
     public static CalculatedHitInfo CalculatePushForce(HitInfo hitInfo)
     {
         Vector3 carPushVelosity = ComputeIncidentVelocity(hitInfo.pushCarComponents.carRigidbody, hitInfo.collision, out Vector3 carToHitVelosity);
         Vector3 carPushSpeed = hitInfo.pushCarComponents.carTrasform.InverseTransformDirection(carPushVelosity);
         Vector3 carToHitSpeed = hitInfo.pushCarComponents.carTrasform.InverseTransformDirection(carToHitVelosity);
         DerbyDirectorConfig derbyDirectorConfig = hitInfo.derbyDirectorConfig;
-        float hitVelosityProcent;
+        float hitVelosityProcent = hitInfo.collision.impulse.magnitude / 1000;
+
+        /*
         if (hitInfo.colliderToHit.colliderType == ColliderType.Back)
         {
             hitVelosityProcent = (Mathf.Clamp(Mathf.Abs(carPushSpeed.z / derbyDirectorConfig.maxSpeed) - Mathf.Abs(carToHitSpeed.z / derbyDirectorConfig.maxSpeed), 0, 1)) / 2;
@@ -84,6 +162,7 @@ public static class DerbyDirector
         }
         else
             hitVelosityProcent = Mathf.Abs(carPushSpeed.magnitude / hitInfo.derbyDirectorConfig.maxSpeed);
+        */
 
         float damage = 0;
         float defence = 0;
