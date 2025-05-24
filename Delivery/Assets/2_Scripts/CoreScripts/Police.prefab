@@ -322,6 +322,23 @@ MonoBehaviour:
   carComponents: {fileID: 0}
   lives: 1
   unlimitedLives: 0
+  derbyDirectorConfig:
+    maxSpeed: 30
+    minHit: 5
+    pushCoefFront: 600
+    pushCoefUP: 5000
+    stunSpeed: 25
+    frontDamage: 20
+    sideDamage: 0
+    backDamage: 0
+    roofDamage: 0
+    frontDefence: 10
+    sideDefence: 0
+    backDefence: 0
+    roofDefence: 0
+    maxAirPushDevider: 5
+    impulseDevider: 1000
+    staticDamage: 20
   damageble: 1
   carAlive: 1
 --- !u!114 &5916431872678737353
@@ -356,21 +373,8 @@ MonoBehaviour:
       backDefence: 0
       roofDefence: 0
       maxAirPushDevider: 5
-  derbyDirectorConfig:
-    maxSpeed: 50
-    minHit: 5
-    pushCoefFront: 600
-    pushCoefUP: 5000
-    stunSpeed: 25
-    frontDamage: 50
-    sideDamage: 0
-    backDamage: 0
-    roofDamage: 0
-    frontDefence: 25
-    sideDefence: 0
-    backDefence: 0
-    roofDefence: 0
-    maxAirPushDevider: 5
+      impulseDevider: 1000
+      staticDamage: 20
   pushDelayCurrent: 0
 --- !u!114 &5550913400548733965
 MonoBehaviour:
@@ -540,8 +544,8 @@ MonoBehaviour:
     TopSpeed: 50
     GripX: 35
     GripZ: 3
-    RotateAtStart: 90
-    RotVel: 0.5
+    RotateAtStart: 100
+    RotVel: 0.6
   groundCheck: {fileID: 6377780039650303950}
   CoM: {x: 0, y: 0.3, z: 0}
   Target: {fileID: 0}
@@ -706,18 +710,18 @@ MonoBehaviour:
   vehicleCarDriftController: {fileID: 0}
   carDriftController: {fileID: 0}
   driver: {fileID: 0}
-  accelChangerMin: 5
+  accelChangerMin: 10
   accelChangerMax: 20
   accelChanger: 10
-  rotVelChanger: 0.2
+  rotVelChanger: 0.5
   newTargetOffcetAtStart: 0
   newTargetOffcetMin: 1
-  newTargetOffcetMax: 10
+  newTargetOffcetMax: 5
   newTargetOffcet: 10
-  maxDistance: 5
+  maxDistance: 2
   autoDestroy: 0
-  distanceToDestroy: 100
-  stuckDestroyTime: 5
+  distanceToDestroy: 50
+  stuckDestroyTime: 3
 --- !u!114 &6032833423586964769
 MonoBehaviour:
   m_ObjectHideFlags: 0

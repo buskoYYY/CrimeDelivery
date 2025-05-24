@@ -55,7 +55,8 @@ public class CarDamageHandler : MonoBehaviour
     {
         if (currentHitDelay >= hitDelay)
         {
-            //ApplyDamage(DerbyDirector.CalculateHitStaticDamage(collision, derbyDirectorConfig, carComponents.isPlayer));
+            if (!carComponents.isPlayer)
+                ApplyDamage(DerbyDirector.CalculateHitStaticDamage(collision, derbyDirectorConfig, carComponents.isPlayer));
             currentHitDelay = 0;
         }
     }

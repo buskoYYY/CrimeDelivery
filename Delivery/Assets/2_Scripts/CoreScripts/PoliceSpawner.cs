@@ -27,8 +27,8 @@ public class PoliceSpawner : MonoBehaviour
     {
         while (gameObject.activeSelf == true)
         {
-            SpawnPolice();
             yield return new WaitForSeconds(3);
+            SpawnPolice();
         }
 
     }
