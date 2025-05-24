@@ -8,29 +8,83 @@ public class PoliceSpawner : MonoBehaviour
     public float minSpawnDistance = 10;
 
     public Transform player;
+    public SpawnerOnPlayer spawnPointsOnPlayer;
+         
 
     public List<CarComponentsController> policeList = new List<CarComponentsController>();
     public CarComponentsController[] policePrefabs;
     public int policeToSpawnCount = 5;
+    public float spawnSpeed = 20;
     public int maxPoliceCount = 20;
+    public int spawnDelay = 3;
 
     public Camera playerCamera;
 
+
+
+    public Vector3 spawnSize = new Vector3(1, 1, 1); // Размер области проверки
+    public LayerMask collisionMask;
     //Ограничение по спавну
 
     private void Start()
     {
-        StartCoroutine(SpawnPoliceCoorutine());
+        //StartCoroutine(SpawnPoliceCoorutine());
+        StartCoroutine(SpawnCoorutine());
     }
 
     private IEnumerator SpawnPoliceCoorutine()
     {
         while (gameObject.activeSelf == true)
         {
-            yield return new WaitForSeconds(3);
+            yield return new WaitForSeconds(spawnDelay);
             SpawnPolice();
         }
 
+    }
+
+    private IEnumerator SpawnCoorutine()
+    {
+        while (gameObject.activeSelf)
+        {
+            yield return new WaitForSeconds(spawnDelay);
+            if (policeList.Count < maxPoliceCount)
+            {
+                int spawnCount = Mathf.Min(spawnPointsOnPlayer.spawnPositions.Length, policeToSpawnCount);
+                for (int i = 0; i < spawnCount; i++)
+                {
+                    TrySpawn(spawnPointsOnPlayer.startPositions[i], spawnPointsOnPlayer.spawnPositions[i]);
+                }
+            }
+        }
+
+    }
+
+    public void TrySpawn(Transform startPosition, Transform spawnPosition)
+    {
+        // 1. Проверка наличия поверхности под точкой спавна
+        if (!Physics.Raycast(spawnPosition.position, Vector3.down, out RaycastHit groundHit, 10f, collisionMask))
+        {
+            Debug.Log("Не удалось заспавнить: нет поверхности под точкой.");
+            return;
+        }
+
+        Vector3 finalSpawnPosition = groundHit.point;
+
+        // 2. Проверка препятствий по пути BoxCast
+        Vector3 direction = (spawnPosition.position - startPosition.position).normalized;
+        float distance = Vector3.Distance(startPosition.position, finalSpawnPosition);
+        bool hit = Physics.BoxCast(startPosition.position, spawnSize * 0.5f, direction, out RaycastHit hitInfo, spawnPosition.rotation, distance, collisionMask);
+
+        if (!hit)
+        {
+            Quaternion rotation = Quaternion.Euler(0, spawnPosition.eulerAngles.y, 0);
+            CarComponentsController policeInstanse = Instantiate(policePrefabs[0], finalSpawnPosition, rotation);
+            SetupPolice(policeInstanse);
+        }
+        else
+        {
+            Debug.Log("Не удалось заспавнить: путь к точке занят.");
+        }
     }
 
     public void SpawnPolice()
@@ -90,9 +144,46 @@ public class PoliceSpawner : MonoBehaviour
             policeInstanse.carDamageHandler.OnEndLivesEvent += OnEndOfLivesCar;
             policeList.Add(policeInstanse);
         }
+    }
+
+    private void SetupPolice(CarComponentsController policeInstanse)
+    {
+        Driver driverPolice;
+        foreach (CarComponent driver in policeInstanse.carComponents)
+        {
+            driverPolice = driver as Driver;
+            if (driverPolice != null)
+            {
+                driverPolice.ChangeTarget(player);
+                driverPolice.Throttle(1);
+            }
+
+            AIDriftController ai = driver as AIDriftController;
+
+            if (ai != null)
+            {
+                ai.autoDestroy = true;
+            }
 
 
+        }
 
+
+        StartCoroutine(AddForceToPolice(policeInstanse));
+        policeInstanse.carDamageHandler.OnEndLivesEvent += OnEndOfLivesCar;
+        policeList.Add(policeInstanse);
+    }
+
+    public float forceTime = 1;
+    private IEnumerator AddForceToPolice(CarComponentsController policeInstanse)
+    {
+        float time = 0;
+        while (time < forceTime)
+        {
+            yield return new WaitForSeconds(0.01f);
+            time += Time.deltaTime;
+            policeInstanse.carRigidbody.AddForce(policeInstanse.carTrasform.forward * spawnSpeed, ForceMode.Acceleration);
+        }
     }
 
     private void OnDisable()
