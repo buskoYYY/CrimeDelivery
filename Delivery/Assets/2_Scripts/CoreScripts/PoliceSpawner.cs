@@ -17,6 +17,9 @@ public class PoliceSpawner : MonoBehaviour
     public float spawnSpeed = 20;
     public int maxPoliceCount = 20;
     public int spawnDelay = 3;
+    public float destroyDistance = 70;
+
+    public float maxPoliceHealth = 100;
 
     public Camera playerCamera;
 
@@ -78,7 +81,7 @@ public class PoliceSpawner : MonoBehaviour
         if (!hit)
         {
             Quaternion rotation = Quaternion.Euler(0, spawnPosition.eulerAngles.y, 0);
-            CarComponentsController policeInstanse = Instantiate(policePrefabs[0], finalSpawnPosition, rotation);
+            CarComponentsController policeInstanse = Instantiate(policePrefabs[0], new Vector3(finalSpawnPosition.x, finalSpawnPosition.y + 2, finalSpawnPosition.z), rotation);
             SetupPolice(policeInstanse);
         }
         else
@@ -160,8 +163,11 @@ public class PoliceSpawner : MonoBehaviour
 
             AIDriftController ai = driver as AIDriftController;
 
+            policeInstanse.carDamageHandler.Initialize(false, 1, maxPoliceHealth);
+
             if (ai != null)
             {
+                ai.distanceToDestroy = destroyDistance;
                 ai.autoDestroy = true;
             }
 

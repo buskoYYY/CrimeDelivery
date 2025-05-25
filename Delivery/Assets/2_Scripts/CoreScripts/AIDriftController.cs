@@ -61,7 +61,7 @@ public class AIDriftController : CarComponent
         }
     }
 
-    [SerializeField] private float distanceToDestroy = 30;
+    public float distanceToDestroy = 30;
     private void DestroyByDistance(float distanceToPlayer)
     {
         if (distanceToPlayer > distanceToDestroy)

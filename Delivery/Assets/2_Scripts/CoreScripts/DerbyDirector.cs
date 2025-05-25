@@ -26,7 +26,7 @@ public class DerbyDirectorConfig
     public float maxAirPushDevider = 5;
 
     public float impulseDevider = 1000;
-    public float staticDamage = 10;
+    public float staticDamage = 50;
 }
 
 public static class DerbyDirector

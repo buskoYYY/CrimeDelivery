@@ -31,6 +31,7 @@ public class VehicleCarDriftController : Vehicle
     private bool onTwoWeels = false;
     private void FixedUpdate()
     {
+        isGrounded = car.isGrounded;
         /*
         wheelsIsGrounded = 0;
 
