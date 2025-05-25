@@ -202,6 +202,7 @@ namespace ArcadeBridge.ArcadeIdleEngine.Interactables
 				if (SaveLoadService.instance != null)
 				{
 					SaveLoadService.instance.PlayerProgress.needCoinsForUnloakedCar = _requiredResourceAmount - _collectedResource;
+					SaveLoadService.instance.DelayedSaveProgress();
 				}
 			}
 			else if (_spawner is WorkBenchSpawner)
@@ -209,6 +210,7 @@ namespace ArcadeBridge.ArcadeIdleEngine.Interactables
 				if (SaveLoadService.instance != null)
 				{
 					SaveLoadService.instance.PlayerProgress.needCoinsForWorkBench = _requiredResourceAmount - _collectedResource;
+					SaveLoadService.instance.DelayedSaveProgress();
 				}
 			}
 
