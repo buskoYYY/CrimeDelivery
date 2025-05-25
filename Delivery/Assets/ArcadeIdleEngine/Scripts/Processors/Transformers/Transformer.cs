@@ -42,6 +42,10 @@ namespace ArcadeBridge.ArcadeIdleEngine.Processors.Transformers
 
         public TransformerRuleset Ruleset => _definition.Ruleset;
 
+        private int _alreadySpawnedOutputValue;
+
+        private CarData _carData = null;
+
         void Awake()
         {
             foreach (ItemDefinitionCountPair rulesetTypeCountPair in _definition.Ruleset.Inputs)
@@ -54,7 +58,15 @@ namespace ArcadeBridge.ArcadeIdleEngine.Processors.Transformers
                 _itemsOnTransformationQueue = new List<Item>(6);
             }
         }
+        private void Start()
+        {
+            if (SaveLoadService.instance != null)
+            {
+                _carData = SaveLoadService.instance.CheckCarDataOrInstantiate(_definition.carIndex);
 
+                _alreadySpawnedOutputValue = _carData.workBenchAlreadySpawned;
+            }
+        }
         void Update()
         {
             if (_transforming)
@@ -85,7 +97,8 @@ namespace ArcadeBridge.ArcadeIdleEngine.Processors.Transformers
                 {
                     if (_collectingForTransformationTimer.IsCompleted)
                     {
-                        SaveLoadService.instance.RemoveFromData(item);
+                        if(SaveLoadService.instance != null)
+                            SaveLoadService.instance.RemoveFromData(item);
 
                         _inputInventory.Remove(item);
                         AddToTransformationQueue(item);
@@ -152,17 +165,31 @@ namespace ArcadeBridge.ArcadeIdleEngine.Processors.Transformers
                 }
             }
 
+            int j = 0;
             foreach (ItemDefinitionCountPair output in _definition.Ruleset.Outputs)
             {
+                if (j++ != _alreadySpawnedOutputValue)
+                {
+                    continue;
+                }
+
                 for (int i = 0; i < output.Count; i++)
                 {
                     Item p = output.ItemDefinition.Pool.Get();
                     p.transform.position = transform.position;
                     _outputInventory.AddVisible(p);
 
-                    SaveLoadService.instance.AddItemToData(p);
+                    if (SaveLoadService.instance != null)
+                    {
+                        SaveLoadService.instance.AddItemToData(p);
+                    }
                 }    
             }
+
+            if(_carData != null)
+                 _carData.workBenchAlreadySpawned = ++_alreadySpawnedOutputValue;
+
+            //if (_countOutputValue >= _definition.Ruleset.Outputs.Length) _countOutputValue = 0;
 
             foreach (ItemDefinitionCountPair rulesetTypeCountPair in _definition.Ruleset.Inputs)
             {

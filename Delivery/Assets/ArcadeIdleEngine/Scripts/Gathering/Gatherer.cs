@@ -23,6 +23,8 @@ namespace ArcadeBridge.ArcadeIdleEngine.Gathering
 
         private void Start()
         {
+			if (SaveLoadService.instance == null) return;
+
 			List<Item> items = new List<Item>();
 
             foreach(ItemData itemData in SaveLoadService.instance.PlayerProgress.itemDatasInInventory)

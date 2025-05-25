@@ -1,10 +1,10 @@
-using System;
-using System.Collections;
 using ArcadeBridge.ArcadeIdleEngine.Helpers;
 using ArcadeBridge.ArcadeIdleEngine.Items;
 using ArcadeBridge.ArcadeIdleEngine.Storage;
 using ArcadeIdleEngine.ExternalAssets.NaughtyAttributes_2._1._4.Core.MetaAttributes;
 using DG.Tweening;
+using System;
+using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
@@ -13,7 +13,7 @@ using UnityEngine.UI;
 
 namespace ArcadeBridge.ArcadeIdleEngine.Interactables
 {
-	public class Unlocker : MonoBehaviour
+    public class Unlocker : MonoBehaviour
 	{
 		[Serializable]
 		enum CompletionBehaviour
@@ -70,6 +70,8 @@ namespace ArcadeBridge.ArcadeIdleEngine.Interactables
 		public event Action<Unlocker> Stopped;
 		public event Action<Unlocker> Completed;
 
+		private Spawner _spawner;
+
 		public void OnUnlockedInvoke()
         {
 			_onUnlocked?.Invoke();
@@ -78,8 +80,26 @@ namespace ArcadeBridge.ArcadeIdleEngine.Interactables
 		{
 			_waitForSeconds = new WaitForSeconds(0.1f);
 		}
-		
-		void OnTriggerEnter(Collider other)
+        private void Start()
+        {
+			if (TryGetComponent<CarSpawner>(out CarSpawner carSpawner))
+			{
+				_spawner = carSpawner;
+				if (SaveLoadService.instance.PlayerProgress.needCoinsForUnloakedCar > 0)
+                {
+					SetRequiredResource(SaveLoadService.instance.PlayerProgress.needCoinsForUnloakedCar);
+				}
+			}
+			else if(TryGetComponent<WorkBenchSpawner>(out WorkBenchSpawner workBenchSpawner))
+			{
+				_spawner = workBenchSpawner;
+				if (SaveLoadService.instance.PlayerProgress.needCoinsForWorkBench > 0)
+				{
+					SetRequiredResource(SaveLoadService.instance.PlayerProgress.needCoinsForWorkBench);
+				}
+			}
+		}
+        void OnTriggerEnter(Collider other)
 		{
 			if (other.TryGetComponent(out Inventory inventory))
 			{
@@ -177,19 +197,40 @@ namespace ArcadeBridge.ArcadeIdleEngine.Interactables
 			_previousResourceSpentAmount = x;
 			_progressBar.fillAmount = (float)_collectedResource / _requiredResourceAmount;
 			
+			if(_spawner is CarSpawner)
+            {
+				if (SaveLoadService.instance != null)
+				{
+					SaveLoadService.instance.PlayerProgress.needCoinsForUnloakedCar = _requiredResourceAmount - _collectedResource;
+				}
+			}
+			else if (_spawner is WorkBenchSpawner)
+            {
+				if (SaveLoadService.instance != null)
+				{
+					SaveLoadService.instance.PlayerProgress.needCoinsForWorkBench = _requiredResourceAmount - _collectedResource;
+				}
+			}
+
 			if (_collectedResource == _requiredResourceAmount)
 			{
 				_onUnlocked?.Invoke();
 
-                if (GetComponent<CarSpawner>())
-                {
-					SaveLoadService.instance.PlayerProgress.isCarForPartsCreated = true;
-					SaveLoadService.instance.DelayedSaveProgress();
+				if (_spawner is CarSpawner)
+				{
+					if (SaveLoadService.instance != null)
+					{
+						SaveLoadService.instance.PlayerProgress.isCarForPartsCreated = true;
+						SaveLoadService.instance.DelayedSaveProgress();
+					}
                 }
-				else if (GetComponent<WorkBenchSpawner>())
-                {
-					SaveLoadService.instance.PlayerProgress.isWorkBenchCreated = true;
-					SaveLoadService.instance.DelayedSaveProgress();
+				else if (_spawner is WorkBenchSpawner)
+				{
+					if (SaveLoadService.instance != null)
+					{
+						SaveLoadService.instance.PlayerProgress.isWorkBenchCreated = true;
+						SaveLoadService.instance.DelayedSaveProgress();
+					}
 				}
 
 				Completed?.Invoke(this);

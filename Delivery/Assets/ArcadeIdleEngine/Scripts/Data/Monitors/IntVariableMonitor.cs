@@ -21,17 +21,20 @@ namespace ArcadeBridge.ArcadeIdleEngine.Data.Monitors
 
 		void Start()
 		{
-			//SetText(_monitorVariable.RuntimeValue);
-
-			_monitorVariable.RuntimeValue = SaveLoadService.instance.PlayerProgress.money;
+			if(SaveLoadService.instance != null)
+				_monitorVariable.RuntimeValue = SaveLoadService.instance.PlayerProgress.money;
+            else
+				SetText(_monitorVariable.RuntimeValue);
 		}
 
 		void SetText(int obj)
 		{
 			_monitorText.text = obj.ToString();
-
-			SaveLoadService.instance.PlayerProgress.money = obj;
-			SaveLoadService.instance.DelayedSaveProgress();
+			if (SaveLoadService.instance != null)
+			{
+				SaveLoadService.instance.PlayerProgress.money = obj;
+				SaveLoadService.instance.DelayedSaveProgress();
+			}
 		}
 	}
 }

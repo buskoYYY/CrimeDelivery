@@ -1,5 +1,7 @@
 using ArcadeBridge.ArcadeIdleEngine.Items;
 using System.Collections;
+using System.IO;
+using System.Text;
 using UnityEngine;
 
 namespace ArcadeBridge
@@ -8,8 +10,10 @@ namespace ArcadeBridge
     {
         public static SaveLoadService instance { get; private set; }
 
-        private const string ProgressKey = "PlayerData";
+        //private const string ProgressKey = "PlayerData";
         private const string SettingsKey = "SettingsData";
+
+        private string PlayerProgressPathFile = "Assets/Resources/playerProgress.txt";
 
         public PlayerProgress PlayerProgress { get; private set; }
 
@@ -26,24 +30,54 @@ namespace ArcadeBridge
             instance = this;
 
             PlayerProgress = LoadProgress() ?? new PlayerProgress();
+
+            //PlayerProgress
         }
         public void AddItemToData(Item item)
         {
-            if (item.name.Contains("(Clone)"))
-            {
-                item.name = item.name.Replace("(Clone)", "");
-            }
+            ClearCloneFromName.Clear(item);
+
             PlayerProgress.itemDatasInInventory.Add(new ItemData(item.name));
             DelayedSaveProgress();
 
         }
+        public void AddDetailToCarData(int carIndex, Item item)
+        {
+            ClearCloneFromName.Clear(item);
+
+            CarData carData = CheckCarDataOrInstantiate(carIndex);
+
+            carData.carDetails.Add(new CarDetail(item.name));
+
+            DelayedSaveProgress();
+        }
+
+        public CarData CheckCarDataOrInstantiate(int carIndex)
+        {
+            CarData carData = null;
+
+            foreach (CarData carData1 in PlayerProgress.cunstructedCars)
+            {
+                if (carIndex == carData1.index)
+                {
+                    carData = carData1;
+                    break;
+                }
+            }
+
+            if (carData == null)
+            {
+                carData = new CarData(carIndex);
+
+                PlayerProgress.cunstructedCars.Add(carData);
+            }
+
+            return carData;
+        }
 
         public void RemoveFromData(Item item)
         {
-            if (item.name.Contains("(Clone)"))
-            {
-                item.name = item.name.Replace("(Clone)", "");
-            }
+            ClearCloneFromName.Clear(item);
 
             ItemData itemDataForRemove = null;
 
@@ -62,7 +96,8 @@ namespace ArcadeBridge
             }
         }
         public PlayerProgress LoadProgress() =>
-             JsonUtility.FromJson<PlayerProgress>(PlayerPrefs.GetString(ProgressKey));
+            JsonUtility.FromJson<PlayerProgress>(File.ReadAllText(PlayerProgressPathFile));
+        //JsonUtility.FromJson<PlayerProgress>(PlayerPrefs.GetString(ProgressKey));
         public void DelayedSaveProgress()
         {
             if (_saveCoroutine != null)
@@ -83,7 +118,15 @@ namespace ArcadeBridge
         _webMediatorService.SavePlayerData(_progressService.ProgressData);
 #endif
         }
-        private void SaveProgressOnDevice() =>
-            PlayerPrefs.SetString(ProgressKey, JsonUtility.ToJson(PlayerProgress));
+        private void SaveProgressOnDevice()
+        {
+            string dataString = JsonUtility.ToJson(PlayerProgress);
+
+            byte[] bytes = Encoding.ASCII.GetBytes(dataString);
+
+            File.WriteAllBytes(PlayerProgressPathFile, bytes);
+        }
+
+        //PlayerPrefs.SetString(ProgressKey, JsonUtility.ToJson(PlayerProgress));
     }
 }
