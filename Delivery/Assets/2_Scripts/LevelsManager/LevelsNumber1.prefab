@@ -1,0 +1,158 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1452387884375840
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7375646143438903967}
+  - component: {fileID: 6470598252069306197}
+  m_Layer: 0
+  m_Name: LevelsNumber1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7375646143438903967
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1452387884375840}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 18.304714, y: 27.07125, z: 36.904255}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6470598252069306197
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1452387884375840}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5747cc33d3369948bdc2c17d28095b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  csvFileName: Test
+  loadedLevels:
+  - levelName: Police_1
+    levelType: Turbo
+    fields:
+    - key: levelHardness
+      value: 5
+    - key: sceneTechName
+      value: 2_FirstScene 1
+    - key: Speed
+      value: 10
+    - key: EnemiesCount
+      value: 30
+  - levelName: Police_2
+    levelType: Turbo
+    fields:
+    - key: levelHardness
+      value: 6
+    - key: sceneTechName
+      value: 2_FirstScene 2
+    - key: Speed
+      value: 20
+    - key: EnemiesCount
+      value: 31
+  - levelName: Police_3
+    levelType: Turbo
+    fields:
+    - key: levelHardness
+      value: 7
+    - key: sceneTechName
+      value: 1_Desert race
+    - key: Speed
+      value: 30
+    - key: EnemiesCount
+      value: 32
+  - levelName: Police_4
+    levelType: Turbo
+    fields:
+    - key: levelHardness
+      value: 8
+    - key: sceneTechName
+      value: 5_FirstDesert
+    - key: Speed
+      value: 40
+    - key: EnemiesCount
+      value: 33
+  - levelName: Police_5
+    levelType: Turbo
+    fields:
+    - key: levelHardness
+      value: 9
+    - key: sceneTechName
+      value: 16_Snow hills
+    - key: Speed
+      value: 50
+    - key: EnemiesCount
+      value: 34
+  - levelName: Police_6
+    levelType: Batya
+    fields:
+    - key: levelHardness
+      value: 10
+    - key: sceneTechName
+      value: 3_FIrstWinter_3
+    - key: Speed
+      value: 60
+    - key: EnemiesCount
+      value: 35
+  - levelName: Police_7
+    levelType: Batya
+    fields:
+    - key: levelHardness
+      value: 11
+    - key: sceneTechName
+      value: 12_Green mountains race
+    - key: Speed
+      value: 70
+    - key: EnemiesCount
+      value: 36
+  - levelName: Police_8
+    levelType: Batya
+    fields:
+    - key: levelHardness
+      value: 12
+    - key: sceneTechName
+      value: 8_Green mountains race 2
+    - key: Speed
+      value: 80
+    - key: EnemiesCount
+      value: 37
+  - levelName: Police_9
+    levelType: Batya
+    fields:
+    - key: levelHardness
+      value: 13
+    - key: sceneTechName
+      value: 4_Snow mountains 2
+    - key: Speed
+      value: 90
+    - key: EnemiesCount
+      value: 38
+  - levelName: Police_10
+    levelType: Batya
+    fields:
+    - key: levelHardness
+      value: 14
+    - key: sceneTechName
+      value: 6_Port Race  1
+    - key: Speed
+      value: 100
+    - key: EnemiesCount
+      value: 39

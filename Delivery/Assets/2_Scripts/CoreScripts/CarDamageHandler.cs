@@ -38,7 +38,7 @@ public class CarDamageHandler : MonoBehaviour
         unlimitedLives = new_unlimitedLives;
         maxHealth = new_maxHealth;
         currentHealth = maxHealth;
-        ChangeHealth(0);//Нужно для инициализации UI
+        ChangeHealth(0);//пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ UI
     }
 
     private CarComponentsController lastHittedCar;

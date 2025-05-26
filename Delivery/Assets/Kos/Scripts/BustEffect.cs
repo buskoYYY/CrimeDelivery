@@ -9,7 +9,7 @@ namespace ArcadeBridge
         [SerializeField] private string carTag = "Car";
         [SerializeField] private bool destroyAfterEffect = true;
         [SerializeField] private ParticleSystem healEffect;
-        [SerializeField] private float healAmount = 50f; // Количество восстанавливаемого HP
+        //[SerializeField] private float healAmount = 50f; // Количество восстанавливаемого HP
         
         private bool _isProcessing;
 
@@ -19,34 +19,31 @@ namespace ArcadeBridge
             if (_isProcessing) return;
             
             _isProcessing = true;
-            
+
             // Получаем Destructible у объекта, который вошел в триггер
-            Destructible targetDestructible = other.GetComponentInParent<Destructible>();
-            if (targetDestructible != null)
+            CarDamageHandler carDamageHandler = other.GetComponentInParent<CarDamageHandler>();
+            if (carDamageHandler != null)
             {
-                FullHeal(targetDestructible);
+                FullHeal(carDamageHandler);
             }
             
             if (destroyAfterEffect)
                 Destroy(gameObject, 0.1f);
         }
 
-        private void FullHeal(Destructible destructible)
+        private void FullHeal(CarDamageHandler carDamageHandler)
         {
             // Прямое восстановление через поля
-            destructible._currentHitPoints = destructible._totalHitPoints;
+            //carDamageHandler.currentHealth = carDamageHandler.maxHealth;
 
             // Визуальный эффект
             if (healEffect != null)
             {
-                ParticleSystem effect = Instantiate(healEffect, 
-                                                  destructible.transform.position, 
+                ParticleSystem effect = Instantiate(healEffect,
+                                                  carDamageHandler.transform.position, 
                                                   Quaternion.identity);
-                effect.transform.SetParent(destructible.transform);
+                effect.transform.SetParent(carDamageHandler.transform);
             }
-            
-            Debug.Log($"{destructible.gameObject.name} fully healed! " +
-                     $"HP: {destructible._currentHitPoints}/{destructible._totalHitPoints}");
         }
 
         private void OnDrawGizmos()
