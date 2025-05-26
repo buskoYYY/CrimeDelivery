@@ -20,13 +20,16 @@ public class CarDamageHandler : MonoBehaviour
     public delegate void OnEndLives(CarComponentsController carComponents);
     public event OnEndLives OnEndLivesEvent;
 
-    [SerializeField] private float currentHealth = 100;
-    [SerializeField] private float maxHealth = 100;
+    public float CurrentHealth { get; private set; } = 100f;
+    public float MaxHealth { get; private set; } = 100f;
     public int lives = 5;
     public bool unlimitedLives = false;
 
+    private DerbyDirectorConfig derbyDirectorConfig;
+
     private void Start()
     {
+        derbyDirectorConfig = new DerbyDirectorConfig();
         carComponents = GetComponent<CarComponentsController>();
         if (initAtStart)
             Initialize(false, lives, 100);
@@ -36,9 +39,36 @@ public class CarDamageHandler : MonoBehaviour
     {
         lives = new_lives;
         unlimitedLives = new_unlimitedLives;
-        maxHealth = new_maxHealth;
-        currentHealth = maxHealth;
+        ChangeMaxHealth(new_maxHealth);
         ChangeHealth(0);//Нужно для инициализации UI
+    }
+
+    public void ChangeMaxHealth(float maxHealth)
+    {
+        MaxHealth = maxHealth;
+        CurrentHealth = MaxHealth;
+    }
+
+    private float hitDelay = 0.2f;
+    private float currentHitDelay = 0;
+
+    private void FixedUpdate()
+    {
+        if (currentHitDelay <= 0.2f)
+            currentHitDelay += Time.deltaTime;
+    }
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (currentHitDelay >= hitDelay)
+        {
+            if (!carComponents.isPlayer)
+            {
+                CarColliderType hittedCarCollider = collision.GetContact(0).otherCollider.GetComponent<CarColliderType>();
+                if (hittedCarCollider == null)
+                    ApplyDamage(DerbyDirector.CalculateHitStaticDamage(collision, derbyDirectorConfig, carComponents.isPlayer));
+            }
+            currentHitDelay = 0;
+        }
     }
 
     private CarComponentsController lastHittedCar;
@@ -46,7 +76,7 @@ public class CarDamageHandler : MonoBehaviour
     {
         if (hitInfo.pushCarComponents.carDamageHandler.carAlive && hitInfo.carToHitcarComponents.carDamageHandler.carAlive)
         {
-            
+            hitInfo.derbyDirectorConfig = this.derbyDirectorConfig;   
             CalculatedHitInfo calculatedHitInfo = DerbyDirector.CalculatePushForce(hitInfo);
             carComponents.carRigidbody.AddForceAtPosition(calculatedHitInfo.pushForce, hitInfo.collision.GetContact(0).point, ForceMode.Impulse);
 
@@ -65,7 +95,9 @@ public class CarDamageHandler : MonoBehaviour
             if (calculatedHitInfo.strongHit)
                 carComponents.vehicle.StrongHit();
 
-            ApplyDamage(calculatedHitInfo.damage);
+            CalculatedDamage calculatedDamage = DerbyDirector.CalculateDamage(hitInfo);
+
+            ApplyDamage(calculatedDamage.damage);
         }
 
     }
@@ -87,9 +119,9 @@ public class CarDamageHandler : MonoBehaviour
     public bool carAlive = true;
     private void ChangeHealth(float currentHealth)
     {
-        this.currentHealth += currentHealth;
-        OnUpdateHealthEvent?.Invoke(this.currentHealth, maxHealth);
-        if (this.currentHealth <= 0)
+        this.CurrentHealth += currentHealth;
+        OnUpdateHealthEvent?.Invoke(this.CurrentHealth, MaxHealth);
+        if (this.CurrentHealth <= 0)
         {
             DestroyCar();
         }
@@ -125,7 +157,7 @@ public class CarDamageHandler : MonoBehaviour
         if (!carAlive)
         {
             OnCarReturnToLiveEvent?.Invoke(carComponents);
-            currentHealth = maxHealth;
+            CurrentHealth = MaxHealth;
             carAlive = true;
         }
     }
