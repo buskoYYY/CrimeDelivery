@@ -21,6 +21,7 @@ namespace ArcadeBridge.ArcadeIdleEngine.Gathering
 		public event Action<GatheringTool> Starting;
 		public event Action Stopping;
 
+		private int _gatheredTriggerIn;
         private void Start()
         {
 			if (SaveLoadService.instance == null) return;
@@ -38,7 +39,7 @@ namespace ArcadeBridge.ArcadeIdleEngine.Gathering
         }
         void Update()
 		{
-			if (!_inventory.Interactable)
+			if (!_inventory.Interactable && _gatheredTriggerIn == 0)
 			{
 				Stopping?.Invoke();
 				if (_activeGatheringTool)
@@ -101,6 +102,9 @@ namespace ArcadeBridge.ArcadeIdleEngine.Gathering
 			if (other.TryGetComponent(out GatherableSource gatherableSource))
 			{
 				_gatherableSources.Add(gatherableSource);
+				_gatheredTriggerIn++;
+
+				gatherableSource.OnSetActiveFalse += OnGatherableSourceExit;
 			}
 		}
 
@@ -108,23 +112,30 @@ namespace ArcadeBridge.ArcadeIdleEngine.Gathering
 		{
 			if (other.TryGetComponent(out GatherableSource gatherableItemSource))
 			{
-				_gatherableSources.Remove(gatherableItemSource);
-				if (!_activeGatheringTool)
-				{
-                    return;
-				}
-				
-				_activeGatheringTool.RemoveGatherable(gatherableItemSource);
-				gatherableItemSource.GatheredItemInstantiated -= GatherableSource_GatheredItemInstantiated;
-				if (!_activeGatheringTool.HasInteractableGatherable)
-				{					
-					Destroy(_activeGatheringTool.gameObject);
-					_activeGatheringTool = null;
-					Stopping?.Invoke();
-				}
+				OnGatherableSourceExit(gatherableItemSource);
 			}
 		}
+		private void OnGatherableSourceExit(GatherableSource gatherableItemSource)
+		{
+			gatherableItemSource.OnSetActiveFalse -= OnGatherableSourceExit;
 
+			_gatheredTriggerIn--;
+			_gatherableSources.Remove(gatherableItemSource);
+
+			if (!_activeGatheringTool)
+			{
+				return;
+			}
+
+			_activeGatheringTool.RemoveGatherable(gatherableItemSource);
+			gatherableItemSource.GatheredItemInstantiated -= GatherableSource_GatheredItemInstantiated;
+			if (!_activeGatheringTool.HasInteractableGatherable)
+			{
+				Destroy(_activeGatheringTool.gameObject);
+				_activeGatheringTool = null;
+				Stopping?.Invoke();
+			}
+		}
 		bool TryInstantiateTool(GatherableSource gatherableSource)
 		{
 			int highestTierIndex = -99999;
