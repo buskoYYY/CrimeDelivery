@@ -40,7 +40,11 @@ public class Driver : CarComponent
                 ActivateBoostDriver();
             }
             else if (testPC)
+            {
+#if UNITY_EDITOR
                 InputPlayer();
+#endif
+            }
         }
 
 
@@ -73,7 +77,7 @@ public class Driver : CarComponent
     {
 
         inTurn = Input.GetAxisRaw("Horizontal");
-        throttle = Input.GetAxisRaw("Vertical");
+        throttle = 1;// Input.GetAxisRaw("Vertical");
         /*
         inTurn = ControlFreak2.CF2Input.GetAxis("Horizontal");
         if (testPC)
