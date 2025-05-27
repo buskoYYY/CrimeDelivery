@@ -51,7 +51,6 @@ public class TURBO_Suspension : MonoBehaviour
 
     [Header("Other Things")]
     //private RaycastHit[] wheelHits = new RaycastHit[4];
-    public bool vehicleIsGrounded;
     private Rigidbody carRigidbody;
     //private float[] offset_Prev = new float[4];
 
@@ -74,11 +73,13 @@ public class TURBO_Suspension : MonoBehaviour
         {
             SetupWheelsConfigs(wheel_suspension);
         }
-        GameObject newHardPoint = new GameObject();
-        newHardPoint.name = $"HardPoint({wheelNumber})";
-        wheel_suspension.hardPoint = Instantiate(newHardPoint.transform, wheelsMainObject.position, wheelsMainObject.rotation, wheelsMainObject);
+
+        wheel_suspension.hardPoint = Instantiate(new GameObject().transform, wheelsMainObject.position, wheelsMainObject.rotation, wheelsMainObject);
         wheel_suspension.hardPoint.localPosition =  new Vector3(wheel_suspension.wheel.localPosition.x, 0, wheel_suspension.wheel.localPosition.z);
+        wheel_suspension.hardPoint.name = $"HardPoint({wheelNumber})";
+        
         wheel_suspension.maxSpringDistance = Mathf.Abs(wheel_suspension.wheel.localPosition.y - wheel_suspension.hardPoint.localPosition.y) + 0.1f + wheel_suspension.wheelRadius;
+
     }
 
     private void OnValidate()
@@ -97,6 +98,19 @@ public class TURBO_Suspension : MonoBehaviour
         wheel_suspension.maxWheelTravel = setup_maxWheelTravel;
     }
 
+    public bool IsGroundedForAllCar(int wheelsToBeGrounded)
+    {
+        int groundedWheelsCount = 0;
+        for (int i = 0; i < allWheels.Count; i++)
+        {
+            if (allWheels[i].isGrounded)
+                groundedWheelsCount++;
+        }
+        if (groundedWheelsCount >= wheelsToBeGrounded)
+            return true;
+        else
+            return false;
+    }
 
     private void FixedUpdate()
     {
@@ -105,7 +119,7 @@ public class TURBO_Suspension : MonoBehaviour
             allWheels[i].suspensionForce = 0;
             AddSuspensionForce_2(allWheels[i], i);
 
-            TireVisual(allWheels[i], i);
+            TireVisual(allWheels[i]);
         }
 
         float suspensionForce_hackSum = (allWheels[0].suspensionForce + allWheels[1].suspensionForce + allWheels[2].suspensionForce + allWheels[3].suspensionForce) / 4;
@@ -184,7 +198,7 @@ public class TURBO_Suspension : MonoBehaviour
 
     }
 
-    private void TireVisual(Wheel_Suspension wheel_Suspension, int tireNum)
+    private void TireVisual(Wheel_Suspension wheel_Suspension)
     {
         if (wheel_Suspension.isGrounded)
         {
