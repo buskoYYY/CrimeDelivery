@@ -31,8 +31,8 @@ namespace ArcadeBridge
         {
             _constructedDetailsCount++;
 
-            Vector3 localPosition = StaticDataService.instance.GetLocalDetailPositionForFirstCar(obj);
-            Vector3 localRotation = StaticDataService.instance.GetLocalDetailRotationForFirstCar(obj);
+            Vector3 localPosition = StaticDataService.instance.GetLocalDetailPositionForCar(_carIndex, obj);
+            Vector3 localRotation = StaticDataService.instance.GetLocalDetailRotationForFirstCar(_carIndex, obj);
 
             Item detail = Instantiate<Item>(obj, transform);
 

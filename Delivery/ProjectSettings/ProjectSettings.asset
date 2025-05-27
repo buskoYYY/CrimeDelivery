@@ -141,7 +141,8 @@ PlayerSettings:
   visionOSBundleVersion: 1.0
   tvOSBundleVersion: 1.0
   bundleVersion: 0.1.0
-  preloadedAssets: []
+  preloadedAssets:
+  - {fileID: 11400000, guid: c2a6f2f27325dc945b632d9086d233e7, type: 2}
   metroInputSource: 0
   wsaTransparentSwapchain: 0
   m_HolographicPauseOnTrackingLoss: 1
@@ -815,13 +816,14 @@ PlayerSettings:
     EmbeddedLinux: DOTWEEN;dUI_MANAGER
     GameCoreScarlett: DOTWEEN;dUI_MANAGER
     GameCoreXboxOne: DOTWEEN;dUI_MANAGER
+    Kepler: dUI_MANAGER
     LinuxHeadlessSimulation: DOTWEEN;dUI_MANAGER
     Nintendo Switch: DOTWEEN;dUI_MANAGER
     PS4: DOTWEEN;dUI_MANAGER
     PS5: DOTWEEN;dUI_MANAGER
     QNX: DOTWEEN;dUI_MANAGER
     ReservedCFE: DOTWEEN;dUI_MANAGER
-    Standalone: DOTWEEN;DREAMTECK_SPLINES;dUI_MANAGER
+    Standalone: DOTWEEN;DREAMTECK_SPLINES;dUI_MANAGER;PWB_URP
     VisionOS: DOTWEEN;dUI_MANAGER
     WebGL: DOTWEEN;dUI_MANAGER
     Windows Store Apps: DOTWEEN;dUI_MANAGER

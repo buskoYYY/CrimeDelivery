@@ -29,6 +29,12 @@ namespace ArcadeBridge
             {
                 _hoseNozzle.transform.parent = transform;
                 Destroy(gameObject);
+
+                if(SaveLoadService.instance != null)
+                {
+                    SaveLoadService.instance.PlayerProgress.isWheelsPumped = true;
+                    SaveLoadService.instance.DelayedSaveProgress();
+                }
             }
         }
     }

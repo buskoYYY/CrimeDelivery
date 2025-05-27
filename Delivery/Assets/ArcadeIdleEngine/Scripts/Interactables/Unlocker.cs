@@ -98,6 +98,14 @@ namespace ArcadeBridge.ArcadeIdleEngine.Interactables
 					SetRequiredResource(SaveLoadService.instance.PlayerProgress.needCoinsForWorkBench);
 				}
 			}
+			else if(TryGetComponent<PumpSpawner>(out PumpSpawner pumpSpawner))
+			{
+				_spawner = pumpSpawner;
+				if (SaveLoadService.instance.PlayerProgress.needCoinsForUnloakedPump > 0)
+				{
+					SetRequiredResource(SaveLoadService.instance.PlayerProgress.needCoinsForUnloakedPump);
+				}
+			}
 		}
         void OnTriggerEnter(Collider other)
 		{
@@ -213,6 +221,14 @@ namespace ArcadeBridge.ArcadeIdleEngine.Interactables
 					SaveLoadService.instance.DelayedSaveProgress();
 				}
 			}
+			else if (_spawner is PumpSpawner)
+            {
+				if (SaveLoadService.instance != null)
+				{
+					SaveLoadService.instance.PlayerProgress.needCoinsForUnloakedPump = _requiredResourceAmount - _collectedResource;
+					SaveLoadService.instance.DelayedSaveProgress();
+				}
+			}
 
 			if (_collectedResource == _requiredResourceAmount)
 			{
@@ -231,6 +247,14 @@ namespace ArcadeBridge.ArcadeIdleEngine.Interactables
 					if (SaveLoadService.instance != null)
 					{
 						SaveLoadService.instance.PlayerProgress.isWorkBenchCreated = true;
+						SaveLoadService.instance.DelayedSaveProgress();
+					}
+				}
+				else if(_spawner is PumpSpawner)
+                {
+					if(SaveLoadService.instance != null)
+                    {
+						SaveLoadService.instance.PlayerProgress.isPumpCreated = true;
 						SaveLoadService.instance.DelayedSaveProgress();
 					}
 				}

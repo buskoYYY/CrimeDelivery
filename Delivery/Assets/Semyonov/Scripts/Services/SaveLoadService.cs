@@ -9,6 +9,7 @@ namespace ArcadeBridge
     public class SaveLoadService : MonoBehaviour
     {
         public static SaveLoadService instance { get; private set; }
+        public CarsDatabase database;
 
         //private const string ProgressKey = "PlayerData";
         private const string SettingsKey = "SettingsData";
@@ -45,6 +46,8 @@ namespace ArcadeBridge
         {
             ClearCloneFromName.Clear(item);
 
+            //string carName = database.carsConfigs[carIndex].carSettings.carNarrativeName;
+
             CarData carData = CheckCarDataOrInstantiate(carIndex);
 
             carData.carDetails.Add(new CarDetail(item.name));
@@ -52,7 +55,7 @@ namespace ArcadeBridge
             DelayedSaveProgress();
         }
 
-        public CarData CheckCarDataOrInstantiate(int carIndex)
+        public CarData CheckCarDataOrInstantiate(int carIndex, string carName = "")
         {
             CarData carData = null;
 
@@ -68,6 +71,36 @@ namespace ArcadeBridge
             if (carData == null)
             {
                 carData = new CarData(carIndex);
+
+                carData.isCompleted = false;
+
+                carData.isDefault = false;
+
+                PlayerProgress.cunstructedCars.Add(carData);
+            }
+
+            return carData;
+        }
+        public CarData CheckCarDataOrInstantiate(int carIndex, bool isDefault, string carName)
+        {
+            CarData carData = null;
+
+            foreach (CarData carData1 in PlayerProgress.cunstructedCars)
+            {
+                if (carIndex == carData1.index)
+                {
+                    carData = carData1;
+                    break;
+                }
+            }
+
+            if (carData == null)
+            {
+                carData = new CarData(carIndex);
+
+                carData.isCompleted = false;
+
+                carData.isDefault = isDefault;
 
                 PlayerProgress.cunstructedCars.Add(carData);
             }
