@@ -1,3 +1,4 @@
+using Io.AppMetrica;
 using UnityEngine;
 
 namespace ArcadeBridge
@@ -6,8 +7,14 @@ namespace ArcadeBridge
     {
         private void Start()
         {
-            AppMetricaActivator.Activate();
-            AnalyticsEvents.SendEvent("AppMetrica SDK is not initialized.");
+            if (AppMetrica.IsActivated())
+            {
+                AnalyticsEvents.SendEvent("AppMetrica SDK is initialized.");
+            }
+            else
+            {
+                Debug.LogError("AppMetrica SDK is not activated. Event will not be sent.");
+            }
         }
     }
 }

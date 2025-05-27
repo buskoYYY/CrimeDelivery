@@ -4,7 +4,7 @@ using UnityEngine;
 public static class AppMetricaActivator
 {
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
-    public static void Activate()
+    private static void Activate()
     {
         AppMetrica.Activate(new AppMetricaConfig("00db187c-fc03-4304-8ccc-91399d411db6")
         {
