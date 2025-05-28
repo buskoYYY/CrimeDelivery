@@ -57,18 +57,21 @@ namespace ArcadeBridge
             }
             DelayedSaveProgress();
         }
-        public int GetStage()
+        public int StageForNewCar => GetLastOpenedIndexCar() + 1;
+
+        private int GetLastOpenedIndexCar()
         {
-            CarData data = PlayerProgress.cunstructedCars.Find(x => x.isCompleted);
-            int stage;
+            int index = 0; 
+            foreach (CarData carData in PlayerProgress.cunstructedCars)
+            {
+                if (carData.isCompleted
+                    && index <= carData.index)
+                    index = carData.index;
+            }
 
-            if (data == null)
-                stage = 0;
-            else
-                stage = data.index + 1;
-
-            return stage;
+            return index;
         }
+
         public void AddItemToData(Item item)
         {
             ClearCloneFromName.Clear(item);
@@ -139,9 +142,14 @@ namespace ArcadeBridge
             {
                 carData = new CarData(carIndex);
 
-                carData.isCompleted = false;
+                if (database != null)
+                {
+                    carData.carNarrativeName = database.carsConfigs[carIndex].carSettings.carNarrativeName;
 
-                carData.isDefault = isDefault;
+                    carData.isDefault = database.carsConfigs[carIndex].carSettings.isDefault;
+                }
+                
+                carData.isCompleted = false;
 
                 PlayerProgress.cunstructedCars.Add(carData);
             }

@@ -9,7 +9,7 @@ namespace ArcadeBridge
         {
             base.CreateObject();
 
-            int stage = SaveLoadService.instance.GetStage();
+            int stage = SaveLoadService.instance.StageForNewCar;
 
             TransformerDefinition def = StaticDataService.instance.GetTransformDefinitionForCar(stage);
 
