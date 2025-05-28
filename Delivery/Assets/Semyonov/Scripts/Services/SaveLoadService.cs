@@ -1,5 +1,6 @@
 using ArcadeBridge.ArcadeIdleEngine.Items;
 using System.Collections;
+using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using UnityEngine;
@@ -32,7 +33,41 @@ namespace ArcadeBridge
 
             PlayerProgress = LoadProgress() ?? new PlayerProgress();
 
-            //PlayerProgress
+            if (database != null)
+                ValidateData();
+        }
+        private void ValidateData()
+        {
+            List<CarData> forRemove = new List<CarData>();
+            foreach(CarData carData in PlayerProgress.cunstructedCars)
+            {
+                foreach(CarConfig config in database.carsConfigs)
+                {
+                    if(int.Parse(config.id) == carData.index
+                        && !config.carSettings.carNarrativeName.Equals(carData.carNarrativeName))
+                    {
+                        forRemove.Add(carData);
+                    }
+                }
+            }
+
+            foreach(CarData carData in forRemove)
+            {
+                PlayerProgress.cunstructedCars.Remove(carData);
+            }
+            DelayedSaveProgress();
+        }
+        public int GetStage()
+        {
+            CarData data = PlayerProgress.cunstructedCars.Find(x => x.isCompleted);
+            int stage;
+
+            if (data == null)
+                stage = 0;
+            else
+                stage = data.index + 1;
+
+            return stage;
         }
         public void AddItemToData(Item item)
         {
@@ -71,10 +106,16 @@ namespace ArcadeBridge
             if (carData == null)
             {
                 carData = new CarData(carIndex);
+                if (database != null)
+                {
+                    carData.carNarrativeName = database.carsConfigs[carIndex].carSettings.carNarrativeName;
+
+                    carData.isDefault = database.carsConfigs[carIndex].carSettings.isDefault;
+                }
+                else
+                    Debug.LogWarning("Cardatabase is null");
 
                 carData.isCompleted = false;
-
-                carData.isDefault = false;
 
                 PlayerProgress.cunstructedCars.Add(carData);
             }

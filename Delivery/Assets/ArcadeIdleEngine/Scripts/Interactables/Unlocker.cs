@@ -1,3 +1,4 @@
+using ArcadeBridge.ArcadeIdleEngine.Gathering;
 using ArcadeBridge.ArcadeIdleEngine.Helpers;
 using ArcadeBridge.ArcadeIdleEngine.Items;
 using ArcadeBridge.ArcadeIdleEngine.Storage;
@@ -130,8 +131,11 @@ namespace ArcadeBridge.ArcadeIdleEngine.Interactables
 		{
 			_resourceCountText.text = _requiredResourceAmount.ToString();
 		}
-		
-		public void SetRequiredResource(int requiredResource)
+        private void OnEnable()
+        {
+			SetRequiredResource(_requiredResourceAmount);
+        }
+        public void SetRequiredResource(int requiredResource)
 		{
 			_collectedResource = 0;
 			_previousResourceSpentAmount = 0;

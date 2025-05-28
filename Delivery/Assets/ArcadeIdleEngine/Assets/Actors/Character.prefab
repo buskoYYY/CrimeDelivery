@@ -59,7 +59,7 @@ SphereCollider:
   m_Enabled: 1
   serializedVersion: 3
   m_Radius: 0.4
-  m_Center: {x: 0, y: 0.38, z: 0}
+  m_Center: {x: 0, y: 0.4, z: 0}
 --- !u!54 &6790882568947784227
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -68,7 +68,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6790882568947784225}
   serializedVersion: 4
-  m_Mass: 1
+  m_Mass: 80
   m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -124,10 +124,11 @@ MonoBehaviour:
     _rowColumnHeight:
       RowCount: 1
       ColumnCount: 1
-      HeightCount: 16
+      HeightCount: 32
       RowOffset: 0
       ColumnOffset: 0
       HeightOffset: 0.5
+    _ignoreHeightOnTheSames: 0
 --- !u!114 &350834541674006492
 MonoBehaviour:
   m_ObjectHideFlags: 0

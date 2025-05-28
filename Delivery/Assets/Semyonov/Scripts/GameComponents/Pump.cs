@@ -27,14 +27,14 @@ namespace ArcadeBridge
 
             if (_wheelsPumped == 4)
             {
-                _hoseNozzle.transform.parent = transform;
-                Destroy(gameObject);
-
-                if(SaveLoadService.instance != null)
+                if (SaveLoadService.instance != null)
                 {
                     SaveLoadService.instance.PlayerProgress.isWheelsPumped = true;
                     SaveLoadService.instance.DelayedSaveProgress();
+                    Debug.Log("W P ");
                 }
+                _hoseNozzle.transform.parent = transform;
+                Destroy(gameObject);
             }
         }
     }

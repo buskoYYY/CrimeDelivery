@@ -199,6 +199,7 @@ MonoBehaviour:
       RowOffset: 0.8
       ColumnOffset: 1
       HeightOffset: 0.5
+    _ignoreHeightOnTheSames: 0
 --- !u!1 &631677129168534763
 GameObject:
   m_ObjectHideFlags: 0
@@ -416,7 +417,7 @@ GameObject:
   - component: {fileID: 6441632578038986383}
   - component: {fileID: 9155346398461545940}
   m_Layer: 0
-  m_Name: Pickable Transformer Multiple Condition
+  m_Name: WorkBenchUnlocker
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -455,7 +456,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6196d84ab9374f1f845bc8898423de1d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _definition: {fileID: 11400000, guid: bff74f4b7fd7741dd86737e03be5d75e, type: 2}
+  _definition: {fileID: 11400000, guid: 2b3358d111cbf374c9a985056f3aefb3, type: 2}
   _inputInventory: {fileID: 7385978184871816442}
   _outputInventory: {fileID: 7237225273704544241}
   _transformationPoint: {fileID: 7983460010880607789}
@@ -716,7 +717,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _itemsToCollect:
-  - ItemDefinition: {fileID: 11400000, guid: ca8479a4a6cef4914b5df99bfe10bd71, type: 2}
+  - ItemDefinition: {fileID: 11400000, guid: d6d97bfb4819a014399148c82bf48f74, type: 2}
     Count: 0
   _collectingIntervalTimer: {fileID: 8106564151047792796}
   _outputInventory: {fileID: 7385978184871816442}
@@ -746,6 +747,7 @@ MonoBehaviour:
       RowOffset: 1
       ColumnOffset: 1
       HeightOffset: 1
+    _ignoreHeightOnTheSames: 0
 --- !u!114 &8106564151047792796
 MonoBehaviour:
   m_ObjectHideFlags: 0

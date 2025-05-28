@@ -90,9 +90,15 @@ namespace ArcadeBridge.ArcadeIdleEngine.Processors.Transformers
                 return;
             }
 
+            if(SequenceOfActivities.Instance != null 
+                && SequenceOfActivities.Instance.GameFactory.ConstructedCar.ConstructedDetailsCount < _alreadySpawnedOutputValue)
+            {
+                return;
+            }
+
             // If we still need to pick something and we can pick something, start the timer.
             foreach (ItemDefinitionCountPair itemDefinitionCountPair in _definition.Ruleset.Inputs)
-            {
+            {                
                 if (_neededResources[itemDefinitionCountPair.ItemDefinition] <= 0)
                 {
                     continue;

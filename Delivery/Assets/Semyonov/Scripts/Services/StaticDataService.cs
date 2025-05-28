@@ -19,10 +19,19 @@ namespace ArcadeBridge
 
         private const string PositionsAndRotationsForCarPath = "StaticData/ConstructingData";
 
+        private const string ConstructedCarsPath = "ConstructedCars";
+
+        private const string CarForPartsSpawnerPath = "Spawners/CarForPartsUnlocker";
+
+        private const string WorkBenchSpawnerPath = "Spawners/WorkBenchUnlocker";
+
+        private const string PumpSpawnerPath = "Spawners/PumpUnlocker";
+
         private Dictionary<string, Item> _namesItems = new Dictionary<string, Item>();
 
         //private Dictionary<string, Vector3> _itemsPositions = new Dictionary<string, Vector3>();
         //private Dictionary<string, Vector3> _itemsRotations = new Dictionary<string, Vector3>();
+        private List<CarConstruction> _cunstructedCars = new List<CarConstruction>();
 
         private List<Dictionary<string, Vector3>> _itemsPositionsForIndex = new List<Dictionary<string, Vector3>>();
         private List<Dictionary<string, Vector3>> _itemsRotationsForIndex = new List<Dictionary<string, Vector3>>();
@@ -49,12 +58,10 @@ namespace ArcadeBridge
 
             AddDataForCars();
 
-            TransformerDefinition[] transformerDefinition = _assetProvider.LoadAll<TransformerDefinition>(TransformerDefinitionsForCarsPath);
+            AddTransformerDefinitions();
 
-            _transformDefinitions = new List<TransformerDefinition>(transformerDefinition).OrderBy(x => x.carIndex).ToList();
+            AddConstructingCar();
 
-            Debug.Log(_transformDefinitions[0].carIndex);
-            Debug.Log(_transformDefinitions[1].carIndex);
             //transformDefinitionsList.OrderBy(x => x.car).ToList();
 
             /*
@@ -68,6 +75,32 @@ namespace ArcadeBridge
             {
                 Debug.Log(i);
             }*/
+        }
+
+        public CarSpawner GetCarForPartsSpawner()
+        {
+            return _assetProvider.Load<CarSpawner>(CarForPartsSpawnerPath);
+        } 
+        public WorkBenchSpawner GetWorkBenchSpawner()
+        {
+            return _assetProvider.Load<WorkBenchSpawner>(WorkBenchSpawnerPath);
+        } 
+        public PumpSpawner GetPumpSpawner()
+        {
+            return _assetProvider.Load<PumpSpawner>(PumpSpawnerPath);
+        } 
+        private void AddConstructingCar()
+        {
+            CarConstruction[] carConstructions = _assetProvider.LoadAll<CarConstruction>(ConstructedCarsPath);
+
+            _cunstructedCars = new List<CarConstruction>(carConstructions).OrderBy(x => x.CarIndex).ToList();
+        }
+
+        private void AddTransformerDefinitions()
+        {
+            TransformerDefinition[] transformerDefinition = _assetProvider.LoadAll<TransformerDefinition>(TransformerDefinitionsForCarsPath);
+
+            _transformDefinitions = new List<TransformerDefinition>(transformerDefinition).OrderBy(x => x.carIndex).ToList();
         }
 
         private void AddDataForCars()
@@ -133,6 +166,12 @@ namespace ArcadeBridge
         {
             return index < _transformDefinitions.Count
                 ? _transformDefinitions[index]
+                : null;
+        }
+        public CarConstruction GetConstructingCar(int index)
+        {
+            return index < _cunstructedCars.Count
+                ? _cunstructedCars[index]
                 : null;
         }
     }

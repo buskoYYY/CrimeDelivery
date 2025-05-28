@@ -15,6 +15,13 @@ namespace ArcadeBridge
         [SerializeField] private Collider _collider;
         [SerializeField] private float _targetScale = .2f;
 
+        private void Start()
+        {
+            if (SaveLoadService.instance != null && SaveLoadService.instance.PlayerProgress.isWheelsPumped)
+            {
+                transform.localScale = new Vector3(.2f, .2f, .2f);
+            }
+        }
         public void Activate()
         {
             _collider.enabled = true;
