@@ -381,6 +381,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   initAtStart: 0
   carComponents: {fileID: 0}
+  currentHealth: 100
+  maxHealth: 100
   lives: 5
   unlimitedLives: 0
   damageble: 1
@@ -404,7 +406,6 @@ MonoBehaviour:
     carToHitcarComponents: {fileID: 0}
     derbyDirectorConfig:
       maxSpeed: 50
-      minHit: 5
       pushCoefFront: 600
       pushCoefUP: 5000
       stunSpeed: 25
@@ -417,8 +418,20 @@ MonoBehaviour:
       backDefence: 0
       roofDefence: 0
       maxAirPushDevider: 5
-      impulseDevider: 1000
-      staticDamage: 50
+  derbyDirectorConfig:
+    maxSpeed: 50
+    pushCoefFront: 600
+    pushCoefUP: 5000
+    stunSpeed: 25
+    frontDamage: 50
+    sideDamage: 0
+    backDamage: 0
+    roofDamage: 0
+    frontDefence: 25
+    sideDefence: 0
+    backDefence: 0
+    roofDefence: 0
+    maxAirPushDevider: 5
   pushDelayCurrent: 0
 --- !u!114 &774154058515810774
 MonoBehaviour:
@@ -433,7 +446,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isActiveComponent: 1
-  carComponents: {fileID: 0}
   isAI: 0
   targetOffset: 5
   deltaForTurn: 0
@@ -559,7 +571,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isActiveComponent: 1
-  carComponents: {fileID: 0}
   isGrounded: 0
   carSettingsAtStart:
     Accel: 0
@@ -761,14 +772,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isActiveComponent: 1
-  carComponents: {fileID: 0}
   meshRenderer: {fileID: 4276910586934323555}
   destroyMaterial: {fileID: 2100000, guid: 119ac0d37d79eb045bce1a424c1e9735, type: 2}
-  expliosion: {fileID: 0}
-  explosionForce: {x: 0, y: 0, z: 0}
-  explosionTorque: {x: 0, y: 0, z: 0}
-  smokeParticles: {fileID: 0}
-  fireParticles: {fileID: 0}
 --- !u!114 &5932741171546839282
 MonoBehaviour:
   m_ObjectHideFlags: 0
