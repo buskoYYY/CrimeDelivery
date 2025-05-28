@@ -10,6 +10,7 @@ namespace ArcadeBridge.ArcadeIdleEngine.Gathering
 	[SelectionBase, RequireComponent(typeof(Collider))]
 	public class GatherableSource : MonoBehaviour
 	{
+		public event Action<GatherableSource> OnSetActiveFalse;
 		[field: SerializeField, Tooltip("Defines a lot of essential properties.")] 
 		public GatherableDefinition GatherableDefinition { get; private set; }
 
@@ -85,7 +86,14 @@ namespace ArcadeBridge.ArcadeIdleEngine.Gathering
             _visualTransform.gameObject.SetActive(false);
 			if (_destroyAfterGathered)
 			{
+				OnSetActiveFalse?.Invoke(this);
 				gameObject.SetActive(false);
+
+                if (GetComponent<CarForParts>())
+                {
+					SaveLoadService.instance.PlayerProgress.isCarForPartsBrokenAbsolutly = true;
+					SaveLoadService.instance.DelayedSaveProgress();
+                }
 			}
 			else
 			{

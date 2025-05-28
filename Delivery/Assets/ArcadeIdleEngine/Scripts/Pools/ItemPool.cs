@@ -7,5 +7,6 @@ namespace ArcadeBridge.ArcadeIdleEngine.Pools
     public class ItemPool : ObjectPool<Item>
     {
         public ItemDefinition ItemDefinition => Behaviour.Definition;
+        public Item Item => (Item) Behaviour;
     }
 }

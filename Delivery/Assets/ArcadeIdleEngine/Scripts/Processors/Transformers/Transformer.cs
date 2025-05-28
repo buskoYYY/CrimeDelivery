@@ -42,6 +42,10 @@ namespace ArcadeBridge.ArcadeIdleEngine.Processors.Transformers
 
         public TransformerRuleset Ruleset => _definition.Ruleset;
 
+        private int _alreadySpawnedOutputValue;
+
+        private CarData _carData = null;
+
         void Awake()
         {
             foreach (ItemDefinitionCountPair rulesetTypeCountPair in _definition.Ruleset.Inputs)
@@ -55,6 +59,19 @@ namespace ArcadeBridge.ArcadeIdleEngine.Processors.Transformers
             }
         }
 
+        public void SetDefinition(TransformerDefinition definition)
+        {
+            _definition = definition;
+        }
+        private void Start()
+        {
+            if (SaveLoadService.instance != null)
+            {
+                _carData = SaveLoadService.instance.CheckCarDataOrInstantiate(_definition.carIndex);
+
+                _alreadySpawnedOutputValue = _carData.workBenchAlreadySpawnedCount;
+            }
+        }
         void Update()
         {
             if (_transforming)
@@ -73,9 +90,15 @@ namespace ArcadeBridge.ArcadeIdleEngine.Processors.Transformers
                 return;
             }
 
+            if(SequenceOfActivities.Instance != null 
+                && SequenceOfActivities.Instance.GameFactory.ConstructedCar.ConstructedDetailsCount < _alreadySpawnedOutputValue)
+            {
+                return;
+            }
+
             // If we still need to pick something and we can pick something, start the timer.
             foreach (ItemDefinitionCountPair itemDefinitionCountPair in _definition.Ruleset.Inputs)
-            {
+            {                
                 if (_neededResources[itemDefinitionCountPair.ItemDefinition] <= 0)
                 {
                     continue;
@@ -85,6 +108,9 @@ namespace ArcadeBridge.ArcadeIdleEngine.Processors.Transformers
                 {
                     if (_collectingForTransformationTimer.IsCompleted)
                     {
+                        if(SaveLoadService.instance != null)
+                            SaveLoadService.instance.RemoveFromData(item);
+
                         _inputInventory.Remove(item);
                         AddToTransformationQueue(item);
                         _collectingForTransformationTimer.SetZero();
@@ -150,15 +176,31 @@ namespace ArcadeBridge.ArcadeIdleEngine.Processors.Transformers
                 }
             }
 
+            int j = 0;
             foreach (ItemDefinitionCountPair output in _definition.Ruleset.Outputs)
             {
+                if (j++ != _alreadySpawnedOutputValue)
+                {
+                    continue;
+                }
+
                 for (int i = 0; i < output.Count; i++)
                 {
                     Item p = output.ItemDefinition.Pool.Get();
                     p.transform.position = transform.position;
                     _outputInventory.AddVisible(p);
+
+                    if (SaveLoadService.instance != null)
+                    {
+                        SaveLoadService.instance.AddItemToData(p);
+                    }
                 }    
             }
+
+            if(_carData != null)
+                 _carData.workBenchAlreadySpawnedCount = ++_alreadySpawnedOutputValue;
+
+            //if (_countOutputValue >= _definition.Ruleset.Outputs.Length) _countOutputValue = 0;
 
             foreach (ItemDefinitionCountPair rulesetTypeCountPair in _definition.Ruleset.Inputs)
             {

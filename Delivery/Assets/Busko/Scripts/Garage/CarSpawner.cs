@@ -1,13 +1,33 @@
+using ArcadeBridge.ArcadeIdleEngine.Gathering;
+using System;
 using UnityEngine;
 
 namespace ArcadeBridge
 {
-    public class CarSpawner : MonoBehaviour
+    public class CarSpawner : Spawner
     {
-        [SerializeField] private Car _car;
-        public void CreateCar()
+        public event Action<GatherableSource> CarSpawned;
+
+        public override void CreateObject()
         {
-            Instantiate(_car);
+            base.CreateObject();
+            CarSpawned?.Invoke(ObjectForInteraction.GetComponent<GatherableSource>());
+            SubscrabeForReturn();
+        }
+        private void SubscrabeForReturn()
+        {
+            ObjectForInteraction.GetComponent<GatherableSource>().OnSetActiveFalse += SetActiveTrue;
+        }
+
+        private void SetActiveTrue(GatherableSource obj)
+        {
+            gameObject.SetActive(true);
+        }
+
+        private void OnDestroy()
+        {
+            if(ObjectForInteraction && ObjectForInteraction.GetComponent<GatherableSource>())
+              ObjectForInteraction.GetComponent<GatherableSource>().OnSetActiveFalse -= SetActiveTrue;
         }
     }
 }
