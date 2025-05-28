@@ -35,7 +35,7 @@ namespace ArcadeBridge
         private void Start()
         {
             InitializeCarList();
-            SetupGridLayout();
+            //SetupGridLayout();
             StartCoroutine(RenderAllCarButtons());
         }
 
@@ -45,22 +45,22 @@ namespace ArcadeBridge
             prefabCar = new List<GameObject>(availableCars.defaultCars);
         }
 
-        private void SetupGridLayout()
-        {
-            GridLayoutGroup grid = contentParent.GetComponent<GridLayoutGroup>();
-            if (grid == null)
-            {
-                grid = contentParent.gameObject.AddComponent<GridLayoutGroup>();
-            }
+        //private void SetupGridLayout()
+        //{
+        //    GridLayoutGroup grid = contentParent.GetComponent<GridLayoutGroup>();
+        //    if (grid == null)
+        //    {
+        //        grid = contentParent.gameObject.AddComponent<GridLayoutGroup>();
+        //    }
 
-            grid.constraint = GridLayoutGroup.Constraint.FixedColumnCount;
-            grid.constraintCount = columns;
-            grid.cellSize = cellSize;
-            grid.spacing = spacing;
-            grid.padding = padding;
-            grid.startAxis = GridLayoutGroup.Axis.Horizontal;
-            grid.childAlignment = TextAnchor.UpperLeft;
-        }
+        //    grid.constraint = GridLayoutGroup.Constraint.FixedColumnCount;
+        //    grid.constraintCount = columns;
+        //    grid.cellSize = cellSize;
+        //    grid.spacing = spacing;
+        //    grid.padding = padding;
+        //    grid.startAxis = GridLayoutGroup.Axis.Horizontal;
+        //    grid.childAlignment = TextAnchor.UpperLeft;
+        //}
 
         private IEnumerator RenderAllCarButtons()
         {

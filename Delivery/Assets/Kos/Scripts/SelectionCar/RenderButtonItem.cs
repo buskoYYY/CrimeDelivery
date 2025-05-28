@@ -6,7 +6,6 @@ namespace ArcadeBridge
 {
     public class RenderButtonItem : MonoBehaviour
     {
-        [SerializeField] private Image highlightBackground;
         [SerializeField] private GameObject selectedIcon; // например, галочка
 
         private GameObject carPrefab;
@@ -31,12 +30,6 @@ namespace ArcadeBridge
 
         public void SetSelected(bool isSelected)
         {
-            if (highlightBackground != null)
-            {
-                Color color = isSelected ? new Color(1f, 1f, 0f, highlightBackground.color.a) : new Color(0f, 0f, 0f, highlightBackground.color.a);
-                highlightBackground.color = color;
-            }
-
             if (selectedIcon != null)
             {
                 selectedIcon.SetActive(isSelected);
