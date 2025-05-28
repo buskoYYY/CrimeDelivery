@@ -93,7 +93,10 @@ public class CarComponentsController : MonoBehaviour
     }
 
     public  void StartRace()
-    { }
+    {
+        for (int i = 0; i < carComponents.Length; i++)
+            carComponents[i].StartRace();
+    }
     public void FinishRace()
     { }
 

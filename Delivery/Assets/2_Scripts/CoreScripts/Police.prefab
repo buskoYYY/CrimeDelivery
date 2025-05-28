@@ -273,7 +273,6 @@ MonoBehaviour:
   setup_maxWheelTravel: 0.2
   vehicleBody: {fileID: 8839084548164496808}
   wheelsMainObject: {fileID: 3358501017266765396}
-  vehicleIsGrounded: 0
 --- !u!114 &5962437647528675618
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -373,6 +372,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isActiveComponent: 1
+  initialized: 0
   carComponents: {fileID: 0}
   isAI: 1
   targetOffset: 1
@@ -382,6 +382,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 0
   testPC: 0
+  startRace: 0
   boost: 0
 --- !u!114 &7178811208803802498
 MonoBehaviour:
@@ -499,6 +500,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isActiveComponent: 1
+  initialized: 0
   carComponents: {fileID: 0}
   isGrounded: 0
   carSettingsAtStart:
@@ -689,6 +691,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isActiveComponent: 1
+  initialized: 0
   carComponents: {fileID: 0}
   distanceToTarget: 0
   vehicleCarDriftController: {fileID: 0}
@@ -719,6 +722,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isActiveComponent: 1
+  initialized: 0
   carComponents: {fileID: 0}
   meshRenderer: {fileID: 3252850756105362895}
   destroyMaterial: {fileID: 2100000, guid: 119ac0d37d79eb045bce1a424c1e9735, type: 2}

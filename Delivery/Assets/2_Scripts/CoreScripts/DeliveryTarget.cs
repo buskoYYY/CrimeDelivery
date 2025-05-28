@@ -4,6 +4,7 @@ public class DeliveryTarget : MonoBehaviour
 {
     public DeliveryController deliveryController;
     public int deliveryTargetIndex = 0;
+    public int deliveryReward = 100;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -12,7 +13,7 @@ public class DeliveryTarget : MonoBehaviour
         {
             if (car.isPlayer)
             {
-                deliveryController.Delivered(deliveryTargetIndex);
+                deliveryController.Delivered(deliveryTargetIndex, deliveryReward);
             }
         }    
     }

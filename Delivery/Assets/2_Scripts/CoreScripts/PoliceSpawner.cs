@@ -29,7 +29,15 @@ public class PoliceSpawner : MonoBehaviour
     public LayerMask collisionMask;
     //Ограничение по спавну
 
+    [SerializeField] private bool initAtStart;
+
     private void Start()
+    {
+        if (initAtStart)
+            Initialize();
+    }
+
+    public void Initialize()
     {
         //StartCoroutine(SpawnPoliceCoorutine());
         StartCoroutine(SpawnCoorutine());
@@ -131,8 +139,9 @@ public class PoliceSpawner : MonoBehaviour
                 driverPolice = driver as Driver;
                 if (driverPolice != null)
                 {
-                    driverPolice.ChangeTarget(player);
+
                     driverPolice.Throttle(1);
+                    driverPolice.ChangeTarget(player);
                 }
 
                 AIDriftController ai = driver as AIDriftController;
@@ -144,6 +153,7 @@ public class PoliceSpawner : MonoBehaviour
 
                 
             }
+            policeInstanse.StartRace();
             policeInstanse.carDamageHandler.OnEndLivesEvent += OnEndOfLivesCar;
             policeList.Add(policeInstanse);
         }
@@ -164,6 +174,7 @@ public class PoliceSpawner : MonoBehaviour
             AIDriftController ai = driver as AIDriftController;
 
             policeInstanse.carDamageHandler.Initialize(false, 1, maxPoliceHealth);
+            policeInstanse.StartRace();
 
             if (ai != null)
             {
