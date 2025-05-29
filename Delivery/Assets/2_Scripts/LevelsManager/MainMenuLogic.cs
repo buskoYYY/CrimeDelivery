@@ -1,4 +1,5 @@
 using Doozy.Engine.UI;
+using SickscoreGames.HUDNavigationSystem;
 using System.Collections.Generic;
 using UnityEngine;
 public class MainMenuLogic : MonoBehaviour
@@ -35,7 +36,7 @@ public class MainMenuLogic : MonoBehaviour
     {
         policeSpawner = FindFirstObjectByType<PoliceSpawner>();
         policeSpawner.player = playerCar.carTrasform;
-        policeSpawner.spawnPointsOnPlayer = playerCar.GetComponent<SpawnerOnPlayer>();
+        policeSpawner.spawnPointsOnPlayer = playerCar.GetComponent<PoliceSpawnPointsObject>();
         policeSpawner.Initialize();
         mainMenuUI.Hide();
         playerCar.StartRace();
@@ -45,6 +46,7 @@ public class MainMenuLogic : MonoBehaviour
     {
         Quaternion rotation = Quaternion.Euler(0, spawnPoint.eulerAngles.y, 0);
         playerCar = Instantiate(playerCarPrefab, new Vector3(spawnPoint.position.x, spawnPoint.position.y + 2, spawnPoint.position.z), rotation);
+        playerCar.carGameobject.AddComponent<HNSPlayerController>();
         playerCamera.Initialize(playerCar);
     }
 

@@ -8,7 +8,7 @@ public class PoliceSpawner : MonoBehaviour
     public float minSpawnDistance = 10;
 
     public Transform player;
-    public SpawnerOnPlayer spawnPointsOnPlayer;
+    public PoliceSpawnPointsObject spawnPointsOnPlayer;
          
 
     public List<CarComponentsController> policeList = new List<CarComponentsController>();
