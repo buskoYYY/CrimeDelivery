@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class DeliveryTarget : MonoBehaviour
@@ -6,18 +7,39 @@ public class DeliveryTarget : MonoBehaviour
     public int deliveryTargetIndex = 0;
     public int deliveryReward = 100;
     public GameObject deliveryTargetVisual;
-    [SerializeField] private bool delivered;
+
+    [Header("Объекты для погрузки")]
+    public List<GameObject> objectsToLoad = new List<GameObject>();
+    public Transform unLoadPosition;
+
+    public bool load;
+    private bool unLoaded;
 
     private void OnTriggerEnter(Collider other)
     {
         CarComponentsController car = other.GetComponentInParent<CarComponentsController>();
         if (car != null)
         {
-            if (car.isPlayer && !delivered)
+            if (car.isPlayer && deliveryController.CanDeliver(deliveryTargetIndex))
             {
-                delivered = true;
                 deliveryController.Delivered(deliveryTargetIndex, deliveryReward);
                 deliveryTargetVisual.SetActive(false);
+
+                TruckLoader loader = other.GetComponentInParent<TruckLoader>();
+                if (loader != null)
+                {
+                    if (load)
+                        loader.LoadObjects(objectsToLoad);
+                    else
+                    {
+                        if (!unLoaded)
+                        {
+                            unLoaded = true;
+                            loader.UnloadObjects(unLoadPosition);
+                        }
+
+                    }
+                }
             }
         }    
     }

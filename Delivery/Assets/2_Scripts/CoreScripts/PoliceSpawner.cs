@@ -6,6 +6,7 @@ public class PoliceSpawner : MonoBehaviour
     public Transform[] spawnPoints;
     public float maxSpawnDistance = 70;
     public float minSpawnDistance = 10;
+    public float policeHealth = 50;
 
     public Transform player;
     public PoliceSpawnPointsObject spawnPointsOnPlayer;
@@ -155,6 +156,7 @@ public class PoliceSpawner : MonoBehaviour
             }
             policeInstanse.StartRace();
             policeInstanse.carDamageHandler.OnEndLivesEvent += OnEndOfLivesCar;
+            policeInstanse.carDamageHandler.ChangeMaxHealth(policeHealth); 
             policeList.Add(policeInstanse);
         }
     }

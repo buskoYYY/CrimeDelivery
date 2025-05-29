@@ -12,13 +12,17 @@ public class MainMenuLogic : MonoBehaviour
     public Transform currentSpawnPoint;
 
     public UIView mainMenuUI;
+    public UIView raceUI;
 
     public UIButton startRaceButton;
 
-
+    public CarUIInfo carUIInfo;
+    public PlayerUIController playerUIController;
     private void Awake()
     {
         startRaceButton.OnClick.OnTrigger.Event.AddListener(StartRace);
+        carUIInfo = GetComponent<CarUIInfo>();
+        playerUIController = GetComponent<PlayerUIController>();
     }
 
     private void Start()
@@ -30,6 +34,9 @@ public class MainMenuLogic : MonoBehaviour
     {
         currentSpawnPoint = spawnPointsList[Random.Range(0, spawnPointsList.Count)];
         SpawnPlayer(playerCarPrefab, currentSpawnPoint);
+        
+        carUIInfo.Initialize(playerCar);
+        playerUIController.Initialize(playerCar);
     }
 
     public void StartRace()
@@ -39,6 +46,7 @@ public class MainMenuLogic : MonoBehaviour
         policeSpawner.spawnPointsOnPlayer = playerCar.GetComponent<PoliceSpawnPointsObject>();
         policeSpawner.Initialize();
         mainMenuUI.Hide();
+        raceUI.Show();
         playerCar.StartRace();
     }
 

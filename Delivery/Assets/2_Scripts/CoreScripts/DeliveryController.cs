@@ -7,6 +7,7 @@ public class DeliveryController : MonoBehaviour
     public List<DeliveryTarget> deliveryTargets = new List<DeliveryTarget>();
     
     public int summReward = 0;
+    private int activeTarget = -1;
 
     public delegate void OnDelivered(int reward);
     public event OnDelivered OnDeliveredEvent;
@@ -27,45 +28,40 @@ public class DeliveryController : MonoBehaviour
         }
     }
 
-    [SerializeField] private int activeTarget = -1;
-
-    private float deliverDelay = 1;
-    private float timeBetweenDeliver;
-    private void FixedUpdate()
+    public bool CanDeliver(int deliviriedIndex)
     {
-        if (timeBetweenDeliver < deliverDelay)
-            timeBetweenDeliver += Time.deltaTime;
+        if (deliviriedIndex == activeTarget + 1)
+            return true;
+        else
+            return false;
     }
 
     public void Delivered(int deliviriedIndex, int reward)
     {
-        if (timeBetweenDeliver >= deliverDelay)
+        if (CanDeliver(deliviriedIndex))
         {
-            if (deliviriedIndex == activeTarget + 1)
+            activeTarget = deliviriedIndex;
+
+            OnDeliveredEvent?.Invoke(reward);
+
+            for (int i = 0; i < deliveryTargets.Count; i++)
             {
-                activeTarget = deliviriedIndex;
-
-                OnDeliveredEvent?.Invoke(reward);
-
-                for (int i = 0; i < deliveryTargets.Count; i++)
+                if (i == deliviriedIndex + 1)
                 {
-                    if (i == deliviriedIndex + 1)
-                    {
-                        deliveryTargets[i].deliveryTargetVisual.SetActive(true);
-                        summReward += reward;
-                    }
-                    else
-                    {
-                        deliveryTargets[i].deliveryTargetVisual.SetActive(false);
-                    }
+                    deliveryTargets[i].deliveryTargetVisual.SetActive(true);
+                    summReward += reward;
                 }
-
-                if (deliviriedIndex == deliveryTargets.Count - 1)
+                else
                 {
-                    SceneManager.LoadScene(0);
+                    deliveryTargets[i].deliveryTargetVisual.SetActive(false);
                 }
             }
-        }
 
+            if (deliviriedIndex == deliveryTargets.Count - 1)
+            {
+                OnDeliveredAllEvent?.Invoke();
+                SceneManager.LoadScene(0);
+            }
+        }
     }
 }
