@@ -58,13 +58,18 @@ namespace ArcadeBridge.ArcadeIdleEngine.Processors.Transformers
                 _itemsOnTransformationQueue = new List<Item>(6);
             }
         }
+
+        public void SetDefinition(TransformerDefinition definition)
+        {
+            _definition = definition;
+        }
         private void Start()
         {
             if (SaveLoadService.instance != null)
             {
                 _carData = SaveLoadService.instance.CheckCarDataOrInstantiate(_definition.carIndex);
 
-                _alreadySpawnedOutputValue = _carData.workBenchAlreadySpawned;
+                _alreadySpawnedOutputValue = _carData.workBenchAlreadySpawnedCount;
             }
         }
         void Update()
@@ -85,9 +90,15 @@ namespace ArcadeBridge.ArcadeIdleEngine.Processors.Transformers
                 return;
             }
 
+            if(SequenceOfActivities.Instance != null 
+                && SequenceOfActivities.Instance.GameFactory.ConstructedCar.ConstructedDetailsCount < _alreadySpawnedOutputValue)
+            {
+                return;
+            }
+
             // If we still need to pick something and we can pick something, start the timer.
             foreach (ItemDefinitionCountPair itemDefinitionCountPair in _definition.Ruleset.Inputs)
-            {
+            {                
                 if (_neededResources[itemDefinitionCountPair.ItemDefinition] <= 0)
                 {
                     continue;
@@ -187,7 +198,7 @@ namespace ArcadeBridge.ArcadeIdleEngine.Processors.Transformers
             }
 
             if(_carData != null)
-                 _carData.workBenchAlreadySpawned = ++_alreadySpawnedOutputValue;
+                 _carData.workBenchAlreadySpawnedCount = ++_alreadySpawnedOutputValue;
 
             //if (_countOutputValue >= _definition.Ruleset.Outputs.Length) _countOutputValue = 0;
 

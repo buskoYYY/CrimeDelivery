@@ -10,7 +10,12 @@ public class GameLoader : MonoBehaviour
     private void Awake()
     {
         SavesManager.LoadGame();
-        InitCars();
+
+        foreach(CarConfig config in carsDatabase.carsConfigs)
+        {
+            Debug.Log(JsonUtility.ToJson(config.carSettings));
+
+        }
     }
 
     private void InitCars()

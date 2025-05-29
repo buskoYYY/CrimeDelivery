@@ -11,7 +11,7 @@ namespace ArcadeBridge.ArcadeIdleEngine.Helpers
 		/// <param name="currentIndex"></param>
 		/// <param name="rowColumnHeight"></param>
 		/// <returns></returns>
-		public static Vector3 GetPoint(int currentIndex, RowColumnHeight rowColumnHeight)
+		public static Vector3 GetPoint(int currentIndex, RowColumnHeight rowColumnHeight, bool ignoreHeight = false)
 		{
 			float maxRowWidth = (rowColumnHeight.RowCount - 1) * rowColumnHeight.RowOffset;
 			float maxColumnWidth = (rowColumnHeight.ColumnCount - 1) * rowColumnHeight.ColumnOffset;
@@ -19,6 +19,10 @@ namespace ArcadeBridge.ArcadeIdleEngine.Helpers
 			int rowIndex = currentIndex / rowColumnHeight.ColumnCount % rowColumnHeight.RowCount;
 			int heightIndex = currentIndex / (rowColumnHeight.RowCount * rowColumnHeight.ColumnCount);
 			Vector3 up = Vector3.up * (rowColumnHeight.HeightOffset * heightIndex);
+
+			if (ignoreHeight)
+				up = Vector3.zero;
+
 			Vector3 right = Vector3.right * (columnIndex * rowColumnHeight.ColumnOffset - maxColumnWidth / 2f);
 			Vector3 forward = Vector3.forward * (rowIndex * rowColumnHeight.RowOffset - maxRowWidth / 2f);
 			Vector3 targetPos = up + right + forward;

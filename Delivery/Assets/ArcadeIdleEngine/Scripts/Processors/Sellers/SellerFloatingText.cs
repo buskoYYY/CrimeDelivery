@@ -52,8 +52,8 @@ namespace ArcadeBridge.ArcadeIdleEngine.Processors.Sellers
 				Item item = definition.Pool.Item;
 
 				foreach(CarDetail detail in carData.carDetails)
-                {
-                    if (item.name.Equals(detail.name))
+				{
+					if (item.name.Equals(detail.name))
                     {
 						RemovingObjectFromInventoryWithSave?.Invoke(item, false);
 						StartCoroutine(DestroyItemDelay());

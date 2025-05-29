@@ -33,8 +33,10 @@ namespace ArcadeBridge.ArcadeIdleEngine.Data.Monitors
 			if (SaveLoadService.instance != null)
 			{
 				SaveLoadService.instance.PlayerProgress.money = obj;
+				//SaveLoadService.instance.PlayerProgress.money += 150;
 				SaveLoadService.instance.DelayedSaveProgress();
 			}
+			//_monitorText.text = obj.ToString();
 		}
 	}
 }

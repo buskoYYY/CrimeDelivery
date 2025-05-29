@@ -32,6 +32,8 @@ namespace ArcadeBridge.ArcadeIdleEngine.Gathering
             {
 				Item item = StaticDataService.instance.GetItem(itemData.name);
 
+				ClearCloneFromName.Clear(item);
+
 				items.Add(Instantiate<Item>(item));
             }
 
