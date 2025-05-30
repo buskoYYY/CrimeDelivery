@@ -5,11 +5,13 @@ using UnityEngine;
 public class MainMenuLogic : MonoBehaviour
 {
     public CarComponentsController playerCarPrefab;
-    public CarComponentsController playerCar;
+    private CarComponentsController playerCar;
     public NewCameraController playerCamera;
-    public PoliceSpawner policeSpawner;
+
+    public RaceLogic raceLogic;
+    
     public List<Transform> spawnPointsList = new List<Transform>();
-    public Transform currentSpawnPoint;
+    private Transform currentSpawnPoint;
 
     public UIView mainMenuUI;
     public UIView raceUI;
@@ -21,8 +23,6 @@ public class MainMenuLogic : MonoBehaviour
     private void Awake()
     {
         startRaceButton.OnClick.OnTrigger.Event.AddListener(StartRace);
-        carUIInfo = GetComponent<CarUIInfo>();
-        playerUIController = GetComponent<PlayerUIController>();
     }
 
     private void Start()
@@ -34,17 +34,15 @@ public class MainMenuLogic : MonoBehaviour
     {
         currentSpawnPoint = spawnPointsList[Random.Range(0, spawnPointsList.Count)];
         SpawnPlayer(playerCarPrefab, currentSpawnPoint);
-        
-        carUIInfo.Initialize(playerCar);
-        playerUIController.Initialize(playerCar);
+
     }
 
     public void StartRace()
     {
-        policeSpawner = FindFirstObjectByType<PoliceSpawner>();
-        policeSpawner.player = playerCar.carTrasform;
-        policeSpawner.spawnPointsOnPlayer = playerCar.GetComponent<PoliceSpawnPointsObject>();
-        policeSpawner.Initialize();
+        raceLogic.Initialize(playerCar);
+        carUIInfo.Initialize(playerCar);
+        playerUIController.Initialize(playerCar);
+
         mainMenuUI.Hide();
         raceUI.Show();
         playerCar.StartRace();

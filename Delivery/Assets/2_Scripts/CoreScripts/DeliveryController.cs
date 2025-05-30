@@ -12,8 +12,14 @@ public class DeliveryController : MonoBehaviour
     public delegate void OnDelivered(int reward);
     public event OnDelivered OnDeliveredEvent;
 
-    public delegate void OnDeliveredAll();
+    public delegate void OnDeliveredAll(CarComponentsController playerCar);
     public event OnDeliveredAll OnDeliveredAllEvent;
+
+    private CarComponentsController playerCar;
+    public void Initialize(CarComponentsController playerCar)
+    {
+        this.playerCar = playerCar;
+    }
 
     private void Start()
     {
@@ -59,8 +65,7 @@ public class DeliveryController : MonoBehaviour
 
             if (deliviriedIndex == deliveryTargets.Count - 1)
             {
-                OnDeliveredAllEvent?.Invoke();
-                SceneManager.LoadScene(0);
+                OnDeliveredAllEvent?.Invoke(playerCar);
             }
         }
     }
