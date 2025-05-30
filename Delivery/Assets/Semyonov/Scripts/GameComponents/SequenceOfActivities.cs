@@ -31,19 +31,24 @@ namespace ArcadeBridge
         {
             _saveLoadService = SaveLoadService.instance;
 
+            if (_saveLoadService.database != null
+                && _saveLoadService.StageForNewCar >= _saveLoadService.database.carsConfigs.Count)
+                return;
+
+            if (_saveLoadService.StageForNewCar >= 3) 
+                return;
+
             _gameFactory.CreateConstructingCar();
 
-            _gameFactory.CreateCarForPartsUnlocker();
+            _gameFactory.CreateCarForPartsSpawner();
 
-            if (_saveLoadService.PlayerProgress.isWorkBenchCreated)
+            _gameFactory.CarForPartsSpawner.CarSpawned += AfterFistCarSpawned;
+
+            if (_saveLoadService.PlayerProgress.isWorkBenchSpawnerCreated)
             {
                 _gameFactory.CreateWorkBenchSpawner();
-                //int countDetail = _gameFactory.WorkBenchSpawner.ObjectForInteraction.GetComponent<>
             }
-            else
-            {
-                _gameFactory.CarForParts.CarSpawned += AfterFistCarSpawned;//ObjectForInteraction.GetComponent<GatherableSource>().OnSetActiveFalse += CreateWorkBanchSpawner;
-            }
+
             if(!_saveLoadService.PlayerProgress.isWheelsPumped
                 && _saveLoadService.PlayerProgress.isPumpCreated)
             {
@@ -65,16 +70,30 @@ namespace ArcadeBridge
 
         private void AfterFistCarSpawned(GatherableSource obj)
         {
-            _gameFactory.CarForParts.CarSpawned -= AfterFistCarSpawned;//ObjectForInteraction.GetComponent<GatherableSource>().OnSetActiveFalse += CreateWorkBanchSpawner;
+            _gameFactory.CarForPartsSpawner.CarSpawned -= AfterFistCarSpawned;//ObjectForInteraction.GetComponent<GatherableSource>().OnSetActiveFalse += CreateWorkBanchSpawner;
 
             _gatherableSource = obj;
 
-            _gatherableSource.OnSetActiveFalse += CreateWorkBenchSpawner;
+            _gatherableSource.OnSetActiveFalse += OnSatActiveFalseCarForParts;
+
+            if (!_saveLoadService.PlayerProgress.isWorkBenchSpawnerCreated)
+            {
+                _gatherableSource.OnSetActiveFalse += CreateWorkBenchSpawner;
+            }
+        }
+
+        private void OnSatActiveFalseCarForParts(GatherableSource obj)
+        {
+            //_gatherableSource.OnSetActiveFalse -= OnSatActiveFalseCarForParts;
+
+            _saveLoadService.PlayerProgress.isCarForPartsCreated = false;
+
         }
 
         private void CreateWorkBenchSpawner(GatherableSource obj)
         {
             _gameFactory.CreateWorkBenchSpawner();
+            _saveLoadService.PlayerProgress.isWorkBenchSpawnerCreated = true;
         }
         private void OnDestroy()
         {

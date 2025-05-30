@@ -35,8 +35,8 @@ namespace ArcadeBridge.ArcadeIdleEngine.Processors.Sellers
         {
 			_carIndex = carIndex;
 
-			CarData carData = null;
-
+			CarData carData = SaveLoadService.instance.CheckCarDataOrInstantiate(carIndex);
+/*
 			foreach (CarData data in SaveLoadService.instance.PlayerProgress.cunstructedCars)
             {
 				if(data.index == carIndex)
@@ -44,8 +44,8 @@ namespace ArcadeBridge.ArcadeIdleEngine.Processors.Sellers
 					carData = data;
                 }
             }
-
-			if(carData == null) return;
+			
+			if (carData == null) return;*/
 
 			foreach (ItemDefinition definition in _definition.SellableItemDefinitions)
             {

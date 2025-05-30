@@ -11,8 +11,8 @@ namespace ArcadeBridge
         public override void CreateObject()
         {
             base.CreateObject();
-            CarSpawned?.Invoke(ObjectForInteraction.GetComponent<GatherableSource>());
             SubscrabeForReturn();
+            CarSpawned?.Invoke(ObjectForInteraction.GetComponent<GatherableSource>());
         }
         private void SubscrabeForReturn()
         {
