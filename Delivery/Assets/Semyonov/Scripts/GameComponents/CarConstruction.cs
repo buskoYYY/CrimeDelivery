@@ -24,7 +24,7 @@ namespace ArcadeBridge
         {
             foreach(SellerFloatingText objectGetter in _objectGetters)
             {
-                _needCountForComplete = objectGetter.Definition.SellableItemDefinitions.Length;
+                _needCountForComplete += objectGetter.Definition.SellableItemDefinitions.Length;
 
                 objectGetter.RemovingObjectFromInventoryWithSave += ConstructNewDetail;
 
@@ -75,6 +75,7 @@ namespace ArcadeBridge
                             SaveLoadService.instance.PlayerProgress.isPumpCreated = false;
                             SaveLoadService.instance.PlayerProgress.isWheelsPumped = false;
                             SaveLoadService.instance.PlayerProgress.isWorkBenchCreated = false;
+                            SaveLoadService.instance.PlayerProgress.isWorkBenchSpawnerCreated = false;
                             SaveLoadService.instance.PlayerProgress.needCoinsForUnloakedCar = -1;
                             SaveLoadService.instance.PlayerProgress.needCoinsForUnloakedPump = -1;
                             SaveLoadService.instance.PlayerProgress.needCoinsForWorkBench = -1;
