@@ -24,11 +24,16 @@ public class CarEffects : CarComponent
             meshRenderer.materials = materials; // Присваиваем массив обратно!
         }
 
-        GameObject explosionInstance = Instantiate(expliosion, transform.position, transform.rotation);
+        if (expliosion != null)
+        {
+            GameObject explosionInstance = Instantiate(expliosion, transform.position, transform.rotation);
+            Destroy(explosionInstance, 2);
+        }
+
         carComponents.carRigidbody.AddForceAtPosition(transform.position, explosionForce, ForceMode.Acceleration);
         carComponents.carRigidbody.AddTorque(explosionTorque, ForceMode.Acceleration);
 
-        Destroy(explosionInstance, 2);
+
     }
 
     public override void UpdateHealth(float carHeath, float maxHealth)

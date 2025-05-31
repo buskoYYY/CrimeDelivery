@@ -7,14 +7,16 @@ namespace ArcadeBridge
     {
         private void Start()
         {
-            if (SaveLoadService.instance.PlayerProgress.isCarForPartsBrokenAbsolutly)
+            /*if (SaveLoadService.instance.PlayerProgress.isCarForPartsBrokenAbsolutly)
             {
                 Destroy(gameObject);
             }
-            else if (SaveLoadService.instance.PlayerProgress.isCarForPartsCreated)
+            else */
+            if (SaveLoadService.instance.PlayerProgress.isCarForPartsCreated)
             {
                 GetComponent<Unlocker>().OnUnlockedInvoke();
-                Destroy(gameObject);
+                gameObject.SetActive(false);
+                //Destroy(gameObject);
             }
         }
 

@@ -6,11 +6,22 @@ namespace ArcadeBridge
 {
     public class Pump: ObjectForInteraction
     {
+        public event Action OnWheelsPumped;
         [SerializeField] private HoseNozzle _hoseNozzle;
+        [SerializeField] private Collider _collider;
+
         public Vector3 localPosHoseOnPlayer;
+
+        private Vector3 _localPosHozeNozzleBase;
+        private Transform _hoseNozzleParent;
 
         private int _wheelsPumped;
 
+        private void Start()
+        {
+            _localPosHozeNozzleBase = _hoseNozzle.transform.localPosition;
+            _hoseNozzleParent = _hoseNozzle.transform.parent;
+        }
         private void OnTriggerEnter(Collider other)
         {
             if(other.TryGetComponent<ArcadeIdleMover>(out ArcadeIdleMover mover))
@@ -18,6 +29,7 @@ namespace ArcadeBridge
                 _hoseNozzle.transform.parent = mover.transform;
                 _hoseNozzle.transform.localPosition = localPosHoseOnPlayer;
                 _hoseNozzle.transform.forward = mover.transform.forward;
+                _collider.enabled = false;
             }
         }
 
@@ -31,10 +43,12 @@ namespace ArcadeBridge
                 {
                     SaveLoadService.instance.PlayerProgress.isWheelsPumped = true;
                     SaveLoadService.instance.DelayedSaveProgress();
-                    Debug.Log("W P ");
                 }
-                _hoseNozzle.transform.parent = transform;
-                Destroy(gameObject);
+                _hoseNozzle.transform.parent = _hoseNozzleParent;
+                _hoseNozzle.transform.localPosition = _localPosHozeNozzleBase;
+
+                OnWheelsPumped?.Invoke();
+                //Destroy(gameObject);
             }
         }
     }

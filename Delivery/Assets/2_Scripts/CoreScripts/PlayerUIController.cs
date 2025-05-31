@@ -4,21 +4,34 @@ using UnityEngine.EventSystems;
 
 public class PlayerUIController: MonoBehaviour
 {
-    public Driver player;
+    public CarComponentsController player;
+    private Driver playerDriver;
 
     public EventTrigger turnLeft;
     public EventTrigger turnRight;
 
-    public void Start()
+    public bool initAtStart;
+    public void Initialize(CarComponentsController player)
     {
-        player.Throttle(1);
+        foreach (CarComponent carComponent in player.carComponents)
+        {
+            if (carComponent is Driver)
+                playerDriver = carComponent as Driver;
+        }
+
         AddPointerEnterEvent(turnLeft, -1);
         AddPointerEnterEvent(turnRight, 1);
     }
 
+    public void Start()
+    {
+        if (initAtStart)
+            Initialize(player);
+    }
+
     public void Turn(int dir)
     {
-        player.Turn(dir);
+        playerDriver.Turn(dir);
     }
 
     private void AddPointerEnterEvent(EventTrigger trigger, int dir)

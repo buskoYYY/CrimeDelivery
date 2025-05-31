@@ -9,7 +9,7 @@ namespace ArcadeBridge
         public List<ItemData> itemDatasInInventory = new List<ItemData>();
         public List<CarData> cunstructedCars = new List<CarData>();
 
-        public int money = 250;
+        public int money = 500;
 
         public bool isWheelsPumped;
 
@@ -26,6 +26,8 @@ namespace ArcadeBridge
         public int needCoinsForWorkBench;
 
         public bool isWorkBenchCreated;
+
+        public bool isWorkBenchSpawnerCreated;
     }
     [Serializable]
     public class ItemData

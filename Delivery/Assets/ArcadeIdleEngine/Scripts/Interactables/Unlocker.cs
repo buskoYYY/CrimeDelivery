@@ -186,9 +186,9 @@ namespace ArcadeBridge.ArcadeIdleEngine.Interactables
                         TweenHelper.Jump(it.transform, _jumpPoint.position, _jumpHeight, 1, _jumpDuration, it.ReleaseToPool);
                         amount++;
                     }
-                }
-            }
-            else
+				}
+			}
+			else
 			{
 				_requiredResource.Variable.RuntimeValue -= decreasingAmountDelta;
 				_spawnCount++;
@@ -284,7 +284,6 @@ namespace ArcadeBridge.ArcadeIdleEngine.Interactables
 				}
 			}
 		}
-
 
         void StopSpending()
 		{

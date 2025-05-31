@@ -6,7 +6,8 @@ using UnityEngine;
 public class Wheel_Suspension
 {
     public Transform wheel;
-    public Transform hardPoint;
+    public Transform hardPointTransform;
+    public GameObject hardPointGameobject;
     public RaycastHit wheelHit;
     public float springForce = 30000f;
     public float springDamper = 200f;
@@ -74,11 +75,12 @@ public class TURBO_Suspension : MonoBehaviour
             SetupWheelsConfigs(wheel_suspension);
         }
 
-        wheel_suspension.hardPoint = Instantiate(new GameObject().transform, wheelsMainObject.position, wheelsMainObject.rotation, wheelsMainObject);
-        wheel_suspension.hardPoint.localPosition =  new Vector3(wheel_suspension.wheel.localPosition.x, 0, wheel_suspension.wheel.localPosition.z);
-        wheel_suspension.hardPoint.name = $"HardPoint({wheelNumber})";
+        wheel_suspension.hardPointGameobject = Instantiate(new GameObject(), wheelsMainObject.position, wheelsMainObject.rotation, wheelsMainObject);
+        wheel_suspension.hardPointGameobject.name = $"HardPoint({wheelNumber})";
+        wheel_suspension.hardPointTransform = wheel_suspension.hardPointGameobject.transform;
+        wheel_suspension.hardPointTransform.localPosition =  new Vector3(wheel_suspension.wheel.localPosition.x, 0, wheel_suspension.wheel.localPosition.z);
         
-        wheel_suspension.maxSpringDistance = Mathf.Abs(wheel_suspension.wheel.localPosition.y - wheel_suspension.hardPoint.localPosition.y) + 0.1f + wheel_suspension.wheelRadius;
+        wheel_suspension.maxSpringDistance = Mathf.Abs(wheel_suspension.wheel.localPosition.y - wheel_suspension.hardPointTransform.localPosition.y) + 0.1f + wheel_suspension.wheelRadius;
 
     }
 
@@ -134,7 +136,7 @@ public class TURBO_Suspension : MonoBehaviour
     {
         var direction = -transform.up;
 
-        if (Physics.SphereCast(wheel_Suspension.hardPoint.position + (transform.up * wheel_Suspension.wheelRadius), wheel_Suspension.wheelRadius, direction, 
+        if (Physics.SphereCast(wheel_Suspension.hardPointTransform.position + (transform.up * wheel_Suspension.wheelRadius), wheel_Suspension.wheelRadius, direction, 
             out wheel_Suspension.wheelHit, wheel_Suspension.maxSpringDistance, 1 << 6, QueryTriggerInteraction.Ignore))
         {
             wheel_Suspension.isGrounded = true;
@@ -154,7 +156,7 @@ public class TURBO_Suspension : MonoBehaviour
 
             float vel = -((offset - wheel_Suspension.offset_Prev) / Time.fixedDeltaTime);
 
-            Vector3 wheelWorldVel = carRigidbody.GetPointVelocity(wheel_Suspension.hardPoint.position);
+            Vector3 wheelWorldVel = carRigidbody.GetPointVelocity(wheel_Suspension.hardPointTransform.position);
             float WheelVel = Vector3.Dot(transform.up, wheelWorldVel);
 
 
@@ -183,7 +185,7 @@ public class TURBO_Suspension : MonoBehaviour
 
             Vector3 suspensionForce_vector = Vector3.Project(springDir, transform.up) * force;
 
-            carRigidbody.AddForceAtPosition(suspensionForce_vector, wheel_Suspension.hardPoint.position);
+            carRigidbody.AddForceAtPosition(suspensionForce_vector, wheel_Suspension.hardPointTransform.position);
 
             //if (offset > 0.5f && WheelVel > 5)
             //{
@@ -205,17 +207,17 @@ public class TURBO_Suspension : MonoBehaviour
             Vector3 wheelPos = wheel_Suspension.wheel.localPosition;
             if (wheel_Suspension.offset_Prev > 0.3f)
             {
-                wheelPos = wheel_Suspension.hardPoint.localPosition + (Vector3.up * wheel_Suspension.wheelRadius) - Vector3.up * (wheel_Suspension.wheelHit.distance);
+                wheelPos = wheel_Suspension.hardPointTransform.localPosition + (Vector3.up * wheel_Suspension.wheelRadius) - Vector3.up * (wheel_Suspension.wheelHit.distance);
             }
             else
             {
-                wheelPos = Vector3.Lerp(new Vector3(wheel_Suspension.hardPoint.localPosition.x, wheel_Suspension.wheel.localPosition.y, wheel_Suspension.hardPoint.localPosition.z), 
-                    wheel_Suspension.hardPoint.localPosition + (Vector3.up * wheel_Suspension.wheelRadius) - Vector3.up * (wheel_Suspension.wheelHit.distance), 0.1f);
+                wheelPos = Vector3.Lerp(new Vector3(wheel_Suspension.hardPointTransform.localPosition.x, wheel_Suspension.wheel.localPosition.y, wheel_Suspension.hardPointTransform.localPosition.z), 
+                    wheel_Suspension.hardPointTransform.localPosition + (Vector3.up * wheel_Suspension.wheelRadius) - Vector3.up * (wheel_Suspension.wheelHit.distance), 0.1f);
             }
 
-            if (wheelPos.y > wheel_Suspension.hardPoint.localPosition.y + wheel_Suspension.wheelRadius + wheel_Suspension.maxWheelTravel - wheel_Suspension.maxSpringDistance)
+            if (wheelPos.y > wheel_Suspension.hardPointTransform.localPosition.y + wheel_Suspension.wheelRadius + wheel_Suspension.maxWheelTravel - wheel_Suspension.maxSpringDistance)
             {
-                wheelPos.y = wheel_Suspension.hardPoint.localPosition.y + wheel_Suspension.wheelRadius + wheel_Suspension.maxWheelTravel - wheel_Suspension.maxSpringDistance;
+                wheelPos.y = wheel_Suspension.hardPointTransform.localPosition.y + wheel_Suspension.wheelRadius + wheel_Suspension.maxWheelTravel - wheel_Suspension.maxSpringDistance;
             }
 
 
@@ -224,8 +226,8 @@ public class TURBO_Suspension : MonoBehaviour
         }
         else
         {
-            wheel_Suspension.wheel.localPosition = Vector3.Lerp(new Vector3(wheel_Suspension.hardPoint.localPosition.x, wheel_Suspension.wheel.localPosition.y, wheel_Suspension.hardPoint.localPosition.z),
-                wheel_Suspension.hardPoint.localPosition + (Vector3.up * wheel_Suspension.wheelRadius) - Vector3.up * wheel_Suspension.maxSpringDistance, 0.05f);
+            wheel_Suspension.wheel.localPosition = Vector3.Lerp(new Vector3(wheel_Suspension.hardPointTransform.localPosition.x, wheel_Suspension.wheel.localPosition.y, wheel_Suspension.hardPointTransform.localPosition.z),
+                wheel_Suspension.hardPointTransform.localPosition + (Vector3.up * wheel_Suspension.wheelRadius) - Vector3.up * wheel_Suspension.maxSpringDistance, 0.05f);
         }
     }
 
@@ -236,9 +238,9 @@ public class TURBO_Suspension : MonoBehaviour
 
         for (int i = 0; i < allWheels.Count; i++)
         {
-            Gizmos.DrawLine(allWheels[i].hardPoint.position + (transform.up * allWheels[i].wheelRadius), allWheels[i].wheel.position);
+            Gizmos.DrawLine(allWheels[i].hardPointTransform.position + (transform.up * allWheels[i].wheelRadius), allWheels[i].wheel.position);
             Gizmos.DrawWireSphere(allWheels[i].wheel.position, allWheels[i].wheelRadius);
-            Gizmos.DrawSphere(allWheels[i].hardPoint.position + (transform.up * allWheels[i].wheelRadius), 0.05f);
+            Gizmos.DrawSphere(allWheels[i].hardPointTransform.position + (transform.up * allWheels[i].wheelRadius), 0.05f);
 
             UnityEditor.Handles.color = Color.red;
             UnityEditor.Handles.ArrowHandleCap(0, allWheels[i].wheel.position + transform.up * allWheels[i].wheelRadius, allWheels[i].wheel.rotation * Quaternion.LookRotation(Vector3.up),

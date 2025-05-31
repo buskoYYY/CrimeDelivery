@@ -57,14 +57,29 @@ namespace ArcadeBridge
             }
             DelayedSaveProgress();
         }
-        public int StageForNewCar => GetLastOpenedIndexCar() + 1;
+        public int StageForNewCar
+        {
+            get
+            {
+                int index = -1;
+                foreach (CarData carData in PlayerProgress.cunstructedCars)
+                {
+                    if ((carData.isCompleted || carData.isDefault)
+                        && index <= carData.index)
+                        index = carData.index;
+                }
+
+                return index == -1 ? 0 : index + 1;
+                //return GetLastOpenedIndexCar() == 0 ? 0 : GetLastOpenedIndexCar() + 1;
+            }
+        }
 
         private int GetLastOpenedIndexCar()
         {
             int index = 0; 
             foreach (CarData carData in PlayerProgress.cunstructedCars)
             {
-                if (carData.isCompleted
+                if ((carData.isCompleted || carData.isDefault)
                     && index <= carData.index)
                     index = carData.index;
             }
@@ -105,7 +120,11 @@ namespace ArcadeBridge
                     break;
                 }
             }
-
+            if (database != null)
+            {
+                if (carIndex >= database.carsConfigs.Count)
+                    return null;
+            }
             if (carData == null)
             {
                 carData = new CarData(carIndex);

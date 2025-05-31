@@ -42,6 +42,9 @@ namespace ArcadeBridge.ArcadeIdleEngine.Processors.Transformers
 
         public TransformerRuleset Ruleset => _definition.Ruleset;
 
+        //public InventoryCollectorTriggerArea InputArea => _inputArea;
+
+        //private InventoryCollectorTriggerArea _inputArea;
         private int _alreadySpawnedOutputValue;
 
         private CarData _carData = null;
@@ -57,6 +60,7 @@ namespace ArcadeBridge.ArcadeIdleEngine.Processors.Transformers
             {
                 _itemsOnTransformationQueue = new List<Item>(6);
             }
+            //_inputArea = _inputInventory.GetComponent<InventoryCollectorTriggerArea>();
         }
 
         public void SetDefinition(TransformerDefinition definition)
@@ -70,6 +74,8 @@ namespace ArcadeBridge.ArcadeIdleEngine.Processors.Transformers
                 _carData = SaveLoadService.instance.CheckCarDataOrInstantiate(_definition.carIndex);
 
                 _alreadySpawnedOutputValue = _carData.workBenchAlreadySpawnedCount;
+
+                //_inputArea.SetAlreadySpawnedCount(_alreadySpawnedOutputValue);
             }
         }
         void Update()
@@ -83,18 +89,22 @@ namespace ArcadeBridge.ArcadeIdleEngine.Processors.Transformers
                     _transformationTimer.SetZero();
                     _transforming = false;
                 }
+                //_inputArea.SetAlreadySpawnedCount(_alreadySpawnedOutputValue + 1);
             }
-            
+
             if (_inputInventory.IsEmpty)
             {
                 return;
             }
 
-            if(SequenceOfActivities.Instance != null 
+            if (_alreadySpawnedOutputValue >= _definition.Ruleset.Outputs.Length)
+                return;
+
+            /*if(SequenceOfActivities.Instance != null 
                 && SequenceOfActivities.Instance.GameFactory.ConstructedCar.ConstructedDetailsCount < _alreadySpawnedOutputValue)
             {
                 return;
-            }
+            }*/
 
             // If we still need to pick something and we can pick something, start the timer.
             foreach (ItemDefinitionCountPair itemDefinitionCountPair in _definition.Ruleset.Inputs)
@@ -197,8 +207,11 @@ namespace ArcadeBridge.ArcadeIdleEngine.Processors.Transformers
                 }    
             }
 
-            if(_carData != null)
-                 _carData.workBenchAlreadySpawnedCount = ++_alreadySpawnedOutputValue;
+            if (_carData != null)
+            {
+                _carData.workBenchAlreadySpawnedCount = ++_alreadySpawnedOutputValue;
+                //_inputArea.SetAlreadySpawnedOutputValue(_alreadySpawnedOutputValue);
+            }
 
             //if (_countOutputValue >= _definition.Ruleset.Outputs.Length) _countOutputValue = 0;
 

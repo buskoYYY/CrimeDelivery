@@ -11,13 +11,13 @@ public class CarDamageHandler : MonoBehaviour
     public delegate void OnUpdateHealth(float health, float maxHealth);
     public event OnUpdateHealth OnUpdateHealthEvent;
 
-    public delegate void OnDestroyCar(CarComponentsController carComponents);
+    public delegate void OnDestroyCar(CarComponentsController carComponents, RaceData.CompleteType completeType);
     public event OnDestroyCar OnDestroyCarEvent;
 
     public delegate void OnCarReturnToLive(CarComponentsController carComponents);
     public event OnCarReturnToLive OnCarReturnToLiveEvent;
 
-    public delegate void OnEndLives(CarComponentsController carComponents);
+    public delegate void OnEndLives(CarComponentsController carComponents, RaceData.CompleteType completeType);
     public event OnEndLives OnEndLivesEvent;
 
     public float CurrentHealth { get; private set; } = 100f;
@@ -137,7 +137,7 @@ public class CarDamageHandler : MonoBehaviour
                 Invoke(nameof(RetunToLive), 2);
             else
                 EndOfLives();
-            OnDestroyCarEvent?.Invoke(carComponents);
+            OnDestroyCarEvent?.Invoke(carComponents, RaceData.CompleteType.DESTROYED);
 
             if (lastHittedCar!= null)
                 lastHittedCar.carPusher.OtherCarDestroyed();
@@ -165,8 +165,9 @@ public class CarDamageHandler : MonoBehaviour
     private void EndOfLives()
     {
         
-        OnEndLivesEvent?.Invoke(carComponents);
-        Destroy(gameObject, 5);
+        OnEndLivesEvent?.Invoke(carComponents, RaceData.CompleteType.DESTROYED);
+        if (!carComponents.isPlayer)
+            Destroy(gameObject, 5);
         /*
         var wheels = gameObject.GetComponent<VehicleCarDriftController>();
 
