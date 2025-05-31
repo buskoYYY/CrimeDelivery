@@ -33,6 +33,12 @@ public class Driver : CarComponent
         startRace = true;
     }
 
+    public override void FinishRace()
+    {
+        base.FinishRace();
+        startRace = false;
+    }
+
     private void FixedUpdate()
     {
         if (!vehicle.carDamageHandler.carAlive)
@@ -53,6 +59,11 @@ public class Driver : CarComponent
                 InputPlayer();
 #endif
             }
+        }
+        else
+        {
+            inTurn = 0;
+            throttle = 0;
         }
 
 
