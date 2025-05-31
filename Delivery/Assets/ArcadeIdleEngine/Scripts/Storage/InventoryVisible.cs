@@ -35,7 +35,8 @@ namespace ArcadeBridge.ArcadeIdleEngine.Storage
 					}
 				}
 			}
-			Vector3 targetPos = ArcadeIdleHelper.GetPoint(CountWithoutSames, _rowColumnHeight, isFindedSames);
+			Vector3 targetPos = ArcadeIdleHelper.GetPoint(Count, _rowColumnHeight);
+			//Vector3 targetPos = ArcadeIdleHelper.GetPoint(CountWithoutSames, _rowColumnHeight);
 			Transform trans = item.transform;
 			TweenHelper.KillAllTweens(trans);
 			trans.SetParent(StackingPoint);
@@ -50,7 +51,8 @@ namespace ArcadeBridge.ArcadeIdleEngine.Storage
 			{
 				for (int i = indexOf + 1; i < Items.Count; i++)
 				{
-					Vector3 targetPoint = ArcadeIdleHelper.GetPoint(0, _rowColumnHeight);
+					//Vector3 targetPoint = ArcadeIdleHelper.GetPoint(0, _rowColumnHeight);
+					Vector3 targetPoint = ArcadeIdleHelper.GetPoint(i, _rowColumnHeight);
 					TweenHelper.KillAllTweens(Items[i].transform);
 					TweenHelper.LocalMove(Items[i].transform, targetPoint, 0.1f);
 				}

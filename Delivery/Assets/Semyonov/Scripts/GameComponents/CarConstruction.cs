@@ -1,5 +1,7 @@
+using ArcadeBridge.ArcadeIdleEngine.Interactables;
 using ArcadeBridge.ArcadeIdleEngine.Items;
 using ArcadeBridge.ArcadeIdleEngine.Processors.Sellers;
+using ArcadeBridge.ArcadeIdleEngine.Processors.Transformers;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
@@ -13,6 +15,7 @@ namespace ArcadeBridge
         public int NeedCountForComplete => _needCountForComplete;
         public int ConstructedDetailsCount => _constructedDetailsCount;
 
+        //[SerializeField] private InventoryCollectorTriggerArea _inventoryCollectorTriggerArea;
         [SerializeField] private int _carIndex;
         [SerializeField] private List<SellerFloatingText> _objectGetters = new List<SellerFloatingText>();
 
@@ -30,15 +33,21 @@ namespace ArcadeBridge
 
                 objectGetter.InitState(_carIndex);
             }
+            _objectGetters[_objectGetters.Count - 1].gameObject.SetActive(false);
         }
-
+        
         private void ConstructNewDetail(Item obj, bool withSave = true)
         {
+            //_inventoryCollectorTriggerArea.ItemPlaced();
+            //SequenceOfActivities.Instance.GameFactory.WorkBenchSpawner.ObjectForInteraction.GetComponent<Transformer>().InputArea.ItemPlaced();
+
             _constructedDetailsCount++;
 
             if(_constructedDetailsCount == 4)
             {
                 WheelsPlaced?.Invoke();
+
+                SequenceOfActivities.Instance.GameFactory.PumpSpawner.OnWheelsPumped += ContinueConstructionCar;
             }
 
             Vector3 localPosition = StaticDataService.instance.GetLocalDetailPositionForCar(_carIndex, obj);
@@ -62,7 +71,7 @@ namespace ArcadeBridge
             {
                 SaveLoadService.instance.AddDetailToCarData(_carIndex, detail);
 
-                if (_constructedDetailsCount == _needCountForComplete)
+                if (_constructedDetailsCount == _needCountForComplete && SaveLoadService.instance.PlayerProgress.isWheelsPumped)
                 {
                     foreach(CarData carData in SaveLoadService.instance.PlayerProgress.cunstructedCars)
                     {
@@ -80,10 +89,19 @@ namespace ArcadeBridge
                             SaveLoadService.instance.PlayerProgress.needCoinsForUnloakedPump = -1;
                             SaveLoadService.instance.PlayerProgress.needCoinsForWorkBench = -1;
                             SaveLoadService.instance.DelayedSaveProgress();
+
+                            ConstructionCanvas.Instance.ShowFinishWindow();
                         }
                     }
                 }
             }
+        }
+
+        private void ContinueConstructionCar()
+        {
+            _objectGetters[_objectGetters.Count - 1].gameObject.SetActive(true);
+
+            SequenceOfActivities.Instance.GameFactory.PumpSpawner.OnWheelsPumped -= ContinueConstructionCar;
         }
 
         private void OnDestroy()
@@ -92,6 +110,9 @@ namespace ArcadeBridge
             {
                 objectGetter.RemovingObjectFromInventoryWithSave -= ConstructNewDetail;
             }
+
+            if(SequenceOfActivities.Instance.GameFactory.PumpSpawner)
+                SequenceOfActivities.Instance.GameFactory.PumpSpawner.OnWheelsPumped -= ContinueConstructionCar;
         }
     }
 }

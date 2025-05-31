@@ -1825,6 +1825,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 5780860573540269779, guid: 0ff20c44c2f1e5f42ab56ba9e2192fc6,
         type: 2}
+    - target: {fileID: 8437745987034537973, guid: 22b3cea5fe6933646a8201c7f3855121,
+        type: 3}
+      propertyPath: 'm_ActiveFontFeatures.Array.data[0]'
+      value: 1801810542
+      objectReference: {fileID: 0}
     - target: {fileID: 8437745987424659660, guid: 22b3cea5fe6933646a8201c7f3855121,
         type: 3}
       propertyPath: _monitorVariable
@@ -4527,6 +4532,8 @@ GameObject:
   - component: {fileID: 1320003948}
   - component: {fileID: 1320003947}
   - component: {fileID: 1320003946}
+  - component: {fileID: 1320003949}
+  - component: {fileID: 1320003950}
   m_Layer: 5
   m_Name: Monitor Canvas
   m_TagString: Untagged
@@ -4600,6 +4607,38 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &1320003949
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1320003944}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10e3d76f96360624297ec53fff81738b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _finishConstructionWindowPrefab: {fileID: 1404759679585208805, guid: 92034da1265e82140a50fe14755c508a,
+    type: 3}
+  _uIJoystick: {fileID: 1381041859}
+--- !u!114 &1320003950
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1320003944}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_IgnoreReversedGraphics: 1
+  m_BlockingObjects: 0
+  m_BlockingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
 --- !u!1 &1332247072 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1798095461238296, guid: a28cf181d0f07b245b0a52fb2c524c84,
@@ -4940,6 +4979,18 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 3.2626026, y: 1.108057, z: 0.7901855}
   m_Center: {x: -0.0000038146973, y: 0.563015, z: 0.0000019073486}
+--- !u!114 &1381041859 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3638816541701984104, guid: c3eb0bf5736e74fd881da53aeca37edf,
+    type: 3}
+  m_PrefabInstance: {fileID: 3638816543370889235}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cbdba76de93e42adbd4fe173267aa82b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1393094984
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8509,6 +8560,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3638816541701984110, guid: c3eb0bf5736e74fd881da53aeca37edf,
+        type: 3}
+      propertyPath: m_ScreenMatchMode
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -8533,6 +8589,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 5780860573540269779, guid: 0ff20c44c2f1e5f42ab56ba9e2192fc6,
         type: 2}
+    - target: {fileID: 8437745987034537973, guid: 22b3cea5fe6933646a8201c7f3855121,
+        type: 3}
+      propertyPath: 'm_ActiveFontFeatures.Array.data[0]'
+      value: 1801810542
+      objectReference: {fileID: 0}
     - target: {fileID: 8437745987424659660, guid: 22b3cea5fe6933646a8201c7f3855121,
         type: 3}
       propertyPath: _monitorVariable
@@ -9239,7 +9300,12 @@ PrefabInstance:
     - target: {fileID: 6790882568947784280, guid: 5f99486e7cd8b4bab9962635825fc22c,
         type: 3}
       propertyPath: _inventoryVisible._ignoreHeightOnTheSames
-      value: 1
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6790882568947784280, guid: 5f99486e7cd8b4bab9962635825fc22c,
+        type: 3}
+      propertyPath: _inventoryVisible._rowColumnHeight.RowOffset
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6790882568947784280, guid: 5f99486e7cd8b4bab9962635825fc22c,
         type: 3}

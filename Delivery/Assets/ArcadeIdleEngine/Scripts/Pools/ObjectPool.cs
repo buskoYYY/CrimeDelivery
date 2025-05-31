@@ -36,7 +36,8 @@ namespace ArcadeBridge.ArcadeIdleEngine.Pools
 
         public void Release(T t)
         {
-            if (_pooledObjectQueue.Count > MaxSize)
+            if (_pooledObjectQueue.Count > MaxSize
+                || _pooledObjectQueue.Count > 8)
             {
                 Destroy(t.gameObject);
             }

@@ -24,13 +24,45 @@ namespace ArcadeBridge
             Instance = this;
 
             _gameFactory = GetComponent<GameFactory>();
+            _saveLoadService = GetComponent<SaveLoadService>();
 
         }
-
         private void Start()
         {
-            _saveLoadService = SaveLoadService.instance;
+            StartGame();
+        }
+        public void ClearGame()
+        {
+            OnDestroy();
 
+            if (_gatherableSource)
+                Destroy(_gatherableSource.gameObject);
+            if (_gameFactory.CarForPartsSpawner)
+            {
+                if(_gameFactory.CarForPartsSpawner.ObjectForInteraction)
+                    Destroy(_gameFactory.CarForPartsSpawner.ObjectForInteraction.gameObject);
+                Destroy(_gameFactory.CarForPartsSpawner.gameObject);
+            }
+            if (_gameFactory.ConstructedCar)
+            {
+                Destroy(_gameFactory.ConstructedCar.gameObject);
+            }
+            if (_gameFactory.WorkBenchSpawner)
+            {
+                if (_gameFactory.WorkBenchSpawner.ObjectForInteraction)
+                    Destroy(_gameFactory.WorkBenchSpawner.ObjectForInteraction.gameObject);
+
+                Destroy(_gameFactory.WorkBenchSpawner.gameObject);
+            }
+            if (_gameFactory.PumpSpawner)
+            {
+                if (_gameFactory.PumpSpawner.ObjectForInteraction)
+                    Destroy(_gameFactory.PumpSpawner.ObjectForInteraction.gameObject);
+                Destroy(_gameFactory.PumpSpawner.gameObject);
+            }
+        }
+        public void StartGame()
+        {
             if (_saveLoadService.database != null
                 && _saveLoadService.StageForNewCar >= _saveLoadService.database.carsConfigs.Count)
                 return;
@@ -97,8 +129,19 @@ namespace ArcadeBridge
         }
         private void OnDestroy()
         {
-            if(_gatherableSource)
+            if (_gatherableSource)
+            {
+                _gatherableSource.OnSetActiveFalse -= OnSatActiveFalseCarForParts;
+
                 _gatherableSource.OnSetActiveFalse -= CreateWorkBenchSpawner;
+            }
+
+            if (_gameFactory.CarForPartsSpawner)
+                _gameFactory.CarForPartsSpawner.CarSpawned -= AfterFistCarSpawned;
+            
+            if(_gameFactory.ConstructedCar)
+                 _gameFactory.ConstructedCar.WheelsPlaced -= SpawnPump;
+
         }
     }
 }
