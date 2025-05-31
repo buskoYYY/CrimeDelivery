@@ -6,9 +6,10 @@ public class CarUIInfo : MonoBehaviour
     public CarComponentsController player;
     public Image carSlider;
 
-    private void Start()
+    public void Initialize(CarComponentsController player)
     {
-        player.carDamageHandler.OnUpdateHealthEvent += UpdateHelath;
+        this.player = player;
+        this.player.carDamageHandler.OnUpdateHealthEvent += UpdateHelath;
     }
     public void UpdateHelath(float health, float maxHealth)
     {

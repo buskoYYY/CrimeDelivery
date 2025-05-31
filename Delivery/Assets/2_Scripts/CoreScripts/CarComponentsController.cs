@@ -64,7 +64,7 @@ public class CarComponentsController : MonoBehaviour
             carComponents[i].UpdateHealth(health, maxHealth);
     }
 
-    public void OnCarDestroy(CarComponentsController destroyedCar)
+    public void OnCarDestroy(CarComponentsController destroyedCar, RaceData.CompleteType completeType)
     {
         for (int i = 0; i < carComponents.Length; i++)
             carComponents[i].CarDestroy();
@@ -93,7 +93,10 @@ public class CarComponentsController : MonoBehaviour
     }
 
     public  void StartRace()
-    { }
+    {
+        for (int i = 0; i < carComponents.Length; i++)
+            carComponents[i].StartRace();
+    }
     public void FinishRace()
     { }
 

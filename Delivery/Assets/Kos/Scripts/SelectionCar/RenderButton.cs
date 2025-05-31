@@ -8,7 +8,7 @@ namespace ArcadeBridge
     public class RenderButton : MonoBehaviour
     {
         [Header("Car Prefabs")]
-        [SerializeField] private List<GameObject> testCar;
+        //[SerializeField] private List<GameObject> testCar;
         [SerializeField] private AvailableCars availableCars;
 
         [Header("UI")]
@@ -35,31 +35,14 @@ namespace ArcadeBridge
         private void Start()
         {
             InitializeCarList();
-            SetupGridLayout();
+            //SetupGridLayout();
             StartCoroutine(RenderAllCarButtons());
         }
 
         private void InitializeCarList()
         {
             //prefabCar = new List<GameObject>(testCar);
-            prefabCar = new List<GameObject>(availableCars.defaultCars);
-        }
-
-        private void SetupGridLayout()
-        {
-            GridLayoutGroup grid = contentParent.GetComponent<GridLayoutGroup>();
-            if (grid == null)
-            {
-                grid = contentParent.gameObject.AddComponent<GridLayoutGroup>();
-            }
-
-            grid.constraint = GridLayoutGroup.Constraint.FixedColumnCount;
-            grid.constraintCount = columns;
-            grid.cellSize = cellSize;
-            grid.spacing = spacing;
-            grid.padding = padding;
-            grid.startAxis = GridLayoutGroup.Axis.Horizontal;
-            grid.childAlignment = TextAnchor.UpperLeft;
+            prefabCar = new List<GameObject>(availableCars.completedCars);
         }
 
         private IEnumerator RenderAllCarButtons()
@@ -133,7 +116,7 @@ namespace ArcadeBridge
 
                 yield return null;
             }
-
+            
             renderCamera.gameObject.SetActive(false);
         }
 

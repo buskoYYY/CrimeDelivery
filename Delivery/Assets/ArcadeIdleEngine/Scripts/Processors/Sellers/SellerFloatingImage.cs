@@ -35,10 +35,13 @@ namespace ArcadeBridge.ArcadeIdleEngine.Processors.Sellers
 					continue;
 				}
 				
-				
 				if (_timer.IsCompleted)
 				{
 					_inventory.Remove(result);
+
+					if (SaveLoadService.instance != null)
+						SaveLoadService.instance.RemoveFromData(result);
+
 					TweenHelper.KillAllTweens(result.transform);
 					TweenHelper.Jump(result.transform, _sellingPoint.position, _definition.JumpHeight, 1, _definition.JumpDuration, () => Sell(result));
 					_timer.SetZero();
