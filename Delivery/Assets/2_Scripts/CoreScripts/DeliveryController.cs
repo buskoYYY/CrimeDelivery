@@ -12,7 +12,7 @@ public class DeliveryController : MonoBehaviour
     public delegate void OnDelivered(int reward);
     public event OnDelivered OnDeliveredEvent;
 
-    public delegate void OnDeliveredAll(CarComponentsController playerCar);
+    public delegate void OnDeliveredAll(CarComponentsController playerCar, RaceData.CompleteType completeType);
     public event OnDeliveredAll OnDeliveredAllEvent;
 
     private CarComponentsController playerCar;
@@ -65,7 +65,7 @@ public class DeliveryController : MonoBehaviour
 
             if (deliviriedIndex == deliveryTargets.Count - 1)
             {
-                OnDeliveredAllEvent?.Invoke(playerCar);
+                OnDeliveredAllEvent?.Invoke(playerCar, RaceData.CompleteType.FINISHED);
             }
         }
     }
