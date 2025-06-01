@@ -9,7 +9,7 @@ namespace ArcadeBridge
         [SerializeField] private string carTag = "Car";
         [SerializeField] private bool destroyAfterEffect = true;
         [SerializeField] private ParticleSystem healEffect;
-        //[SerializeField] private float healAmount = 50f; // Количество восстанавливаемого HP
+        [SerializeField] private float healAmount = 100f; // Количество восстанавливаемого HP
         
         private bool _isProcessing;
 
@@ -33,8 +33,8 @@ namespace ArcadeBridge
 
         private void FullHeal(CarDamageHandler carDamageHandler)
         {
-            // Прямое восстановление через поля
-            //carDamageHandler.currentHealth = carDamageHandler.maxHealth;
+            healAmount = carDamageHandler.MaxHealth - carDamageHandler.CurrentHealth;
+            //carDamageHandler.ApplyHeals(healAmount);
 
             // Визуальный эффект
             if (healEffect != null)
@@ -55,4 +55,9 @@ namespace ArcadeBridge
             }
         }
     }
+    /*public void ApplyHeals(float heals)
+    {
+        if (carAlive && CurrentHealth < MaxHealth)
+            ChangeHealth(heals);
+    }*/
 }
