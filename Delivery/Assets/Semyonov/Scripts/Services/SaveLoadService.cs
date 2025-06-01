@@ -1,9 +1,11 @@
 using ArcadeBridge.ArcadeIdleEngine.Items;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace ArcadeBridge
 {
@@ -15,7 +17,8 @@ namespace ArcadeBridge
         //private const string ProgressKey = "PlayerData";
         private const string SettingsKey = "SettingsData";
 
-        private string PlayerProgressPathFile = "Assets/Resources/playerProgress.txt";
+        //private string PlayerProgressPathFile;
+        private string PlayerProgressPathFile = "Assets/Resources/playerProgress.json";
 
         public PlayerProgress PlayerProgress { get; private set; }
 
@@ -23,6 +26,10 @@ namespace ArcadeBridge
 
         private void Awake()
         {
+            //Debug.Log(Application.persistentDataPath);
+
+            PlayerProgressPathFile = Application.persistentDataPath + "/playerProgress.json";
+            
             if(instance != null)
             {
                 Debug.LogWarning("SaveLoadService already has");
@@ -30,6 +37,23 @@ namespace ArcadeBridge
                 return;
             }
             instance = this;
+
+            if (!File.Exists(PlayerProgressPathFile))
+            {
+                try
+                {
+                    File.Create(PlayerProgressPathFile);
+
+                    PlayerProgress = LoadProgress() ?? new PlayerProgress();
+                }
+                catch (Exception e)
+                {
+                    Debug.LogError(e.Message);
+                    Debug.LogError("Scene reload");
+                    SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+                    return;
+                }
+            }
 
             PlayerProgress = LoadProgress() ?? new PlayerProgress();
 

@@ -25,7 +25,9 @@ namespace ArcadeBridge
         private int _constructedDetailsCount;
         private void Start()
         {
-            foreach(SellerFloatingText objectGetter in _objectGetters)
+            _objectGetters[_objectGetters.Count - 1].gameObject.SetActive(false);
+
+            foreach (SellerFloatingText objectGetter in _objectGetters)
             {
                 _needCountForComplete += objectGetter.Definition.SellableItemDefinitions.Length;
 
@@ -33,7 +35,6 @@ namespace ArcadeBridge
 
                 objectGetter.InitState(_carIndex);
             }
-            _objectGetters[_objectGetters.Count - 1].gameObject.SetActive(false);
         }
         
         private void ConstructNewDetail(Item obj, bool withSave = true)
@@ -43,11 +44,19 @@ namespace ArcadeBridge
 
             _constructedDetailsCount++;
 
-            if(_constructedDetailsCount == 4)
+            Debug.Log(_constructedDetailsCount + " new Detail");
+
+            if (_constructedDetailsCount == 4)
             {
                 WheelsPlaced?.Invoke();
 
-                SequenceOfActivities.Instance.GameFactory.PumpSpawner.OnWheelsPumped += ContinueConstructionCar;
+                if (!SaveLoadService.instance.PlayerProgress.isWheelsPumped)
+                {
+                    Debug.Log("1");
+                    SequenceOfActivities.Instance.GameFactory.PumpSpawner.OnWheelsPumped += ContinueConstructionCar;
+                }
+                else
+                    ContinueConstructionCar();
             }
 
             Vector3 localPosition = StaticDataService.instance.GetLocalDetailPositionForCar(_carIndex, obj);

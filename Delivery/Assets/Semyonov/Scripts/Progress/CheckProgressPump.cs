@@ -9,12 +9,14 @@ namespace ArcadeBridge
         {
             if (SaveLoadService.instance.PlayerProgress.isWheelsPumped)
             {
-                Destroy(gameObject);
+                gameObject.SetActive(false);
+                //Destroy(gameObject);
             }
             else if (SaveLoadService.instance.PlayerProgress.isPumpCreated)
             {
                 GetComponent<Unlocker>().OnUnlockedInvoke();
-                Destroy(gameObject);
+                gameObject.SetActive(false);
+                //Destroy(gameObject);
             }
         }
 

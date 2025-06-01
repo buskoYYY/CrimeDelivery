@@ -10,7 +10,8 @@ namespace ArcadeBridge
             if (SaveLoadService.instance.PlayerProgress.isWorkBenchCreated)
             {
                 GetComponent<Unlocker>().OnUnlockedInvoke();
-                Destroy(gameObject);
+                gameObject.SetActive(false);
+                //Destroy(gameObject);
             }
         }
     }

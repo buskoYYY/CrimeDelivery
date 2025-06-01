@@ -39,8 +39,10 @@ namespace ArcadeBridge
                 Destroy(_gatherableSource.gameObject);
             if (_gameFactory.CarForPartsSpawner)
             {
-                if(_gameFactory.CarForPartsSpawner.ObjectForInteraction)
-                    Destroy(_gameFactory.CarForPartsSpawner.ObjectForInteraction.gameObject);
+                _gameFactory.CarForPartsSpawner.DestroyObjectForInteraction();
+
+                //if(_gameFactory.CarForPartsSpawner.ObjectForInteraction)
+                 //   Destroy(_gameFactory.CarForPartsSpawner.ObjectForInteraction.gameObject);
                 Destroy(_gameFactory.CarForPartsSpawner.gameObject);
             }
             if (_gameFactory.ConstructedCar)
@@ -49,15 +51,17 @@ namespace ArcadeBridge
             }
             if (_gameFactory.WorkBenchSpawner)
             {
-                if (_gameFactory.WorkBenchSpawner.ObjectForInteraction)
-                    Destroy(_gameFactory.WorkBenchSpawner.ObjectForInteraction.gameObject);
+                _gameFactory.WorkBenchSpawner.DestroyObjectForInteraction();
+                //if (_gameFactory.WorkBenchSpawner.ObjectForInteraction)
+                //    Destroy(_gameFactory.WorkBenchSpawner.ObjectForInteraction.gameObject);
 
                 Destroy(_gameFactory.WorkBenchSpawner.gameObject);
             }
             if (_gameFactory.PumpSpawner)
             {
-                if (_gameFactory.PumpSpawner.ObjectForInteraction)
-                    Destroy(_gameFactory.PumpSpawner.ObjectForInteraction.gameObject);
+                _gameFactory.PumpSpawner.DestroyObjectForInteraction();
+                //if (_gameFactory.PumpSpawner.ObjectForInteraction)
+                //    Destroy(_gameFactory.PumpSpawner.ObjectForInteraction.gameObject);
                 Destroy(_gameFactory.PumpSpawner.gameObject);
             }
         }
@@ -88,14 +92,14 @@ namespace ArcadeBridge
             }
             else
             {
-                _gameFactory.ConstructedCar.WheelsPlaced += SpawnPump;
+                _gameFactory.ConstructedCar.WheelsPlaced += SpawnPumpSpawner;
             }
 
         }
 
-        private void SpawnPump()
+        private void SpawnPumpSpawner()
         {
-            _gameFactory.ConstructedCar.WheelsPlaced -= SpawnPump;
+            _gameFactory.ConstructedCar.WheelsPlaced -= SpawnPumpSpawner;
 
             _gameFactory.CreatePumpSpawner();
         }
@@ -140,7 +144,7 @@ namespace ArcadeBridge
                 _gameFactory.CarForPartsSpawner.CarSpawned -= AfterFistCarSpawned;
             
             if(_gameFactory.ConstructedCar)
-                 _gameFactory.ConstructedCar.WheelsPlaced -= SpawnPump;
+                 _gameFactory.ConstructedCar.WheelsPlaced -= SpawnPumpSpawner;
 
         }
     }

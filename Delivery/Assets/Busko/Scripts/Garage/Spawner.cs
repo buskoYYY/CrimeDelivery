@@ -12,5 +12,11 @@ namespace ArcadeBridge
         {
             _objectForInteractionCurrent = Instantiate(_objectForInteraction);
         }
+
+        public void DestroyObjectForInteraction()
+        {
+            if (_objectForInteractionCurrent)
+                Destroy(_objectForInteractionCurrent.gameObject);
+        }
     }
 }
