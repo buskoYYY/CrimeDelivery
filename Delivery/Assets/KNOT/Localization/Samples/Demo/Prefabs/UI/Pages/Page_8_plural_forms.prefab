@@ -31,7 +31,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1077716758923702922}
-  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -114,7 +113,6 @@ RectTransform:
   - {fileID: 6620585058316151674}
   - {fileID: 2582790355962691667}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -224,7 +222,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3592494712043981450}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -299,7 +296,6 @@ RectTransform:
   m_Children:
   - {fileID: 2656689824542998131}
   m_Father: {fileID: 2582790355962691667}
-  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -337,7 +333,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2362356350627564573}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -415,7 +410,6 @@ RectTransform:
   - {fileID: 3592494712043981450}
   - {fileID: 2362356350627564573}
   m_Father: {fileID: 1077716758923702922}
-  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -504,7 +498,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2582790355962691667}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -579,7 +572,6 @@ RectTransform:
   m_Children:
   - {fileID: 7515904610157908341}
   m_Father: {fileID: 2582790355962691667}
-  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.1}
   m_AnchorMax: {x: 1, y: 0.9}
@@ -591,6 +583,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 1077716758923702922}
     m_Modifications:
     - target: {fileID: 1706965147231051570, guid: 902b08378e21c574dadbdec7140e2fa2,
@@ -714,6 +707,9 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 902b08378e21c574dadbdec7140e2fa2, type: 3}
 --- !u!224 &1077716758341426279 stripped
 RectTransform:
@@ -726,6 +722,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 1077716758923702922}
     m_Modifications:
     - target: {fileID: 1706965147231051570, guid: 82787e8fc7d914d4582a0524eb19d7be,
@@ -854,6 +851,13 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1706965147231051570, guid: 82787e8fc7d914d4582a0524eb19d7be,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1043498645785585855}
   m_SourcePrefab: {fileID: 100100000, guid: 82787e8fc7d914d4582a0524eb19d7be, type: 3}
 --- !u!224 &4215666469730500016 stripped
 RectTransform:
@@ -886,6 +890,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 1077716758923702922}
     m_Modifications:
     - target: {fileID: 1706965147231051570, guid: 82787e8fc7d914d4582a0524eb19d7be,
@@ -1015,6 +1020,9 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 1706965147231051577, guid: 82787e8fc7d914d4582a0524eb19d7be, type: 3}
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 82787e8fc7d914d4582a0524eb19d7be, type: 3}
 --- !u!224 &6620585058316151674 stripped
 RectTransform:
