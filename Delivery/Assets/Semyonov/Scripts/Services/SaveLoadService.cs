@@ -33,8 +33,8 @@ namespace ArcadeBridge
 
             PlayerProgress = LoadProgress() ?? new PlayerProgress();
 
-            if (database != null)
-                ValidateData();
+            //if (database != null)
+               // ValidateData();
         }
         private void ValidateData()
         {
