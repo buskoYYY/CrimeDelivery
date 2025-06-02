@@ -1,58 +1,102 @@
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 namespace ArcadeBridge
 {
     public class DriveTutorial : MonoBehaviour
     {
-        [SerializeField] private CollisionHandler _collisionHandler;
+        //[SerializeField] private CollisionHandler _collisionHandler;
         [SerializeField] private Button _leftButton;
         [SerializeField] private Button _rightButton;
-        [SerializeField] private Image _rigthtSteeringTutorial;
-        [SerializeField] private Image _leftSteeringTutorial;
 
+        private RaceLogic raceLogic;
+        private PlayerUIController playerUIController;
+
+        private int currentTutorialTrigger = -1;
 
         private void OnEnable()
         {
-            _collisionHandler.LeftTutorialOpend += OpenLeftButton;
-            _collisionHandler.RightTutorialOpend += OpenRightButton;
-
+            //_collisionHandler.LeftTutorialOpend += OpenLeftButton;
+            //_collisionHandler.RightTutorialOpend += OpenRightButton;
         }
 
         private void OnDisable()
         {
-            _collisionHandler.LeftTutorialOpend -= OpenLeftButton;
+            raceLogic.OnRaceStartedEvent -= StartRace;
+        }
+
+
+        private void Start()
+        {
+            raceLogic = FindFirstObjectByType<RaceLogic>();
+            playerUIController = FindFirstObjectByType<PlayerUIController>();
+            raceLogic.OnRaceStartedEvent += StartRace;
+        }
+
+
+        private void StartRace(RaceData raceData)
+        {
+            playerUIController.turnLeft.gameObject.SetActive(false);
+            playerUIController.turnRight.gameObject.SetActive(false);
+        }
+
+        public void SetTutorialStep(int stepIndex)
+        {
+            switch (stepIndex)
+            {
+                case 0: OpenLeftButton(); break;
+                case 1: OpenRightButton(); break;
+            }    
         }
 
         public void LeaveLeftTutorial()
         {
             TimeManager.Run();
-            _leftSteeringTutorial.gameObject.SetActive(false);
+            playerUIController.turnLeft.gameObject.SetActive(true);
+            playerUIController.turnRight.gameObject.SetActive(true);
+
+            _leftButton.gameObject.SetActive(false);
+            _rightButton.gameObject.SetActive(false);
         }
 
         public void LeaveRightTutorial()
         {
             TimeManager.Run();
-            _rigthtSteeringTutorial.gameObject.SetActive(false);
-            _leftButton.interactable = true;
+            playerUIController.turnLeft.gameObject.SetActive(true);
+            playerUIController.turnRight.gameObject.SetActive(true);
+
+            _leftButton.gameObject.SetActive(false);
+            _rightButton.gameObject.SetActive(false);
         }
 
         private void OpenLeftButton()
         {
-            TimeManager.Pause();
-            _leftButton.gameObject.SetActive(true);
-            _rightButton.gameObject.SetActive(true);
-            _rightButton.interactable = false;
-            _leftSteeringTutorial.gameObject.SetActive(true);
+            if (currentTutorialTrigger < 0)
+            {
+                currentTutorialTrigger = 0;
+                TimeManager.Pause();
+                playerUIController.turnLeft.gameObject.SetActive(false);
+                playerUIController.turnRight.gameObject.SetActive(false);
 
+                _leftButton.gameObject.SetActive(true);
+                _rightButton.gameObject.SetActive(false);
+            }
         }
 
         private void OpenRightButton()
         {
-            TimeManager.Pause();
-            _rightButton.interactable = true;
-            _leftButton.interactable = false;
-            _rigthtSteeringTutorial.gameObject.SetActive(true);
+            if (currentTutorialTrigger < 1)
+            {
+                currentTutorialTrigger = 1;
+                TimeManager.Pause();
+                playerUIController.turnLeft.gameObject.SetActive(false);
+                playerUIController.turnRight.gameObject.SetActive(false);
+
+                _leftButton.gameObject.SetActive(false);
+                _rightButton.gameObject.SetActive(true);
+            }
+
         }
     }
 }

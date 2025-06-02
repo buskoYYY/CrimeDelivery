@@ -23,13 +23,18 @@ public class RaceLogic : MonoBehaviour
     public delegate void OnRaceCompleted(RaceData raceData);
     public event OnRaceCompleted OnRaceCompletedEvent;
 
+    public delegate void OnRaceStarted(RaceData raceData);
+    public event OnRaceStarted OnRaceStartedEvent;
+
     public GameoverController gameoverController;
 
     public PoliceSpawner policeSpawner;
     private CarComponentsController playerCar;
 
-    public void Initialize(CarComponentsController playerCar)
+    public void StartRace(CarComponentsController playerCar)
     {
+        OnRaceStartedEvent?.Invoke(raceData);
+
         this.playerCar = playerCar;
         deliveryController.Initialize(playerCar);
         deliveryController.OnDeliveredEvent += AddReward;
@@ -41,6 +46,8 @@ public class RaceLogic : MonoBehaviour
         policeSpawner.player = playerCar.carTrasform;
         policeSpawner.spawnPointsOnPlayer = playerCar.GetComponent<PoliceSpawnPointsObject>();
         policeSpawner.Initialize(this);
+
+        
     }
 
     private void OnDisable()

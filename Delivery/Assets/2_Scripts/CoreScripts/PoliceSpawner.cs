@@ -2,9 +2,23 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using UnityEngine;
+
+[System.Serializable]
+public class SpawnerConfig
+{
+    public float accelChangerMin = 5;
+    public float accelChangerMax = 10;
+    public float rotVelChanger = 0.5f;
+    public float targetOffcetMin = 5;
+    public float targetOffcetMax = 15;
+    public float targetOffcetFarFromPlayer = 1;
+}
+     
+
 public class PoliceSpawner : MonoBehaviour
 {
     public Transform[] spawnPoints;
+    public SpawnerConfig spawnerConfig;
     public float maxSpawnDistance = 70;
     public float minSpawnDistance = 10;
     public float policeHealth = 50;
@@ -183,13 +197,6 @@ public void SpawnPolice()
             Debug.Log("Ќе удалось заспавнить: путь к точке зан€т.");
         }
     }
-
-    public float accelChangerMin = 5;
-    public float accelChangerMax = 10;
-    public float rotVelChanger = 0.5f;
-    public float targetOffcetMin = 5;
-    public float targetOffcetMax = 15;
-    public float targetOffcetFarFromPlayer = 1;
     private void SetupPolice(CarComponentsController policeInstanse)
     {
         Driver driverPolice;
@@ -210,7 +217,7 @@ public void SpawnPolice()
             {
                 ai.distanceToDestroy = destroyDistance;
                 ai.autoDestroy = true;
-                ai.SetupCarAIConfig(accelChangerMin, accelChangerMax, rotVelChanger, targetOffcetMin, targetOffcetMax, targetOffcetFarFromPlayer);
+                ai.SetupCarAIConfig(spawnerConfig);
             }
 
             policeInstanse.StartRace();

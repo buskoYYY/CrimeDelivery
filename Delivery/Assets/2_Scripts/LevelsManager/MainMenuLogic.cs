@@ -39,7 +39,7 @@ public class MainMenuLogic : MonoBehaviour
 
     public void StartRace()
     {
-        raceLogic.Initialize(playerCar);
+        raceLogic.StartRace(playerCar);
         carUIInfo.Initialize(playerCar);
         playerUIController.Initialize(playerCar);
 
