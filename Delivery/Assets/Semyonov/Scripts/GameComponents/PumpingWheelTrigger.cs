@@ -19,7 +19,7 @@ namespace ArcadeBridge
         {
             if (SaveLoadService.instance != null && SaveLoadService.instance.PlayerProgress.isWheelsPumped)
             {
-                transform.localScale = new Vector3(.2f, .2f, .2f);
+                transform.localScale = new Vector3(_targetScale, _targetScale, _targetScale);
             }
         }
         public void Activate()
@@ -48,7 +48,7 @@ namespace ArcadeBridge
                 _sequence.Kill();
                 _sequence = DOTween.Sequence().SetUpdate(true);
 
-                _sequence.Append(transform.DOScale(.2f, 3f));
+                _sequence.Append(transform.DOScale(_targetScale, 3f));
 
                 _sequence.onComplete += OnFinishPumping;
 

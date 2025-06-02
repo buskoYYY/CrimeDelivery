@@ -37,12 +37,11 @@ namespace ArcadeBridge
 
             if (_gatherableSource)
                 Destroy(_gatherableSource.gameObject);
+
             if (_gameFactory.CarForPartsSpawner)
             {
                 _gameFactory.CarForPartsSpawner.DestroyObjectForInteraction();
 
-                //if(_gameFactory.CarForPartsSpawner.ObjectForInteraction)
-                 //   Destroy(_gameFactory.CarForPartsSpawner.ObjectForInteraction.gameObject);
                 Destroy(_gameFactory.CarForPartsSpawner.gameObject);
             }
             if (_gameFactory.ConstructedCar)
@@ -52,16 +51,13 @@ namespace ArcadeBridge
             if (_gameFactory.WorkBenchSpawner)
             {
                 _gameFactory.WorkBenchSpawner.DestroyObjectForInteraction();
-                //if (_gameFactory.WorkBenchSpawner.ObjectForInteraction)
-                //    Destroy(_gameFactory.WorkBenchSpawner.ObjectForInteraction.gameObject);
 
                 Destroy(_gameFactory.WorkBenchSpawner.gameObject);
             }
             if (_gameFactory.PumpSpawner)
             {
                 _gameFactory.PumpSpawner.DestroyObjectForInteraction();
-                //if (_gameFactory.PumpSpawner.ObjectForInteraction)
-                //    Destroy(_gameFactory.PumpSpawner.ObjectForInteraction.gameObject);
+
                 Destroy(_gameFactory.PumpSpawner.gameObject);
             }
         }

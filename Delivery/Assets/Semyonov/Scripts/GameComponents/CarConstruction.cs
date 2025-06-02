@@ -44,15 +44,12 @@ namespace ArcadeBridge
 
             _constructedDetailsCount++;
 
-            Debug.Log(_constructedDetailsCount + " new Detail");
-
             if (_constructedDetailsCount == 4)
             {
                 WheelsPlaced?.Invoke();
 
                 if (!SaveLoadService.instance.PlayerProgress.isWheelsPumped)
                 {
-                    Debug.Log("1");
                     SequenceOfActivities.Instance.GameFactory.PumpSpawner.OnWheelsPumped += ContinueConstructionCar;
                 }
                 else
