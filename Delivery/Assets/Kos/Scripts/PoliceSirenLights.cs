@@ -46,7 +46,7 @@ public class PoliceSirenLights : MonoBehaviour
     }
 
     // Методы для управления из других скриптов
-    public void ActivateSiren(bool activate)
+   /* public void ActivateSiren(bool activate)
     {
         _isActive = activate;
         
@@ -56,7 +56,7 @@ public class PoliceSirenLights : MonoBehaviour
             if (blueLight != null) blueLight.enabled = false;
             if (redLight != null) redLight.enabled = false;
         }
-    }
+    }*/
 
     public void SetFlashSpeed(float newSpeed)
     {
