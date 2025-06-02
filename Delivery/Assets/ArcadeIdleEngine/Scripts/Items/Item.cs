@@ -8,6 +8,8 @@ namespace ArcadeBridge.ArcadeIdleEngine.Items
         [SerializeField] ItemDefinition _definition;
         
         Vector3 _defaultLocalScale;
+
+        [SerializeField] private bool _onlyDestroyWithoutPool;
         
         public ItemDefinition Definition => _definition;
 
@@ -20,7 +22,12 @@ namespace ArcadeBridge.ArcadeIdleEngine.Items
         {
             transform.localScale = _defaultLocalScale;
             TweenHelper.KillAllTweens(transform);
-            _definition.Pool.Release(this);
+
+            if (_onlyDestroyWithoutPool)
+                Destroy(gameObject);
+            else
+                _definition.Pool.Release(this);
+
         }
     }
 }

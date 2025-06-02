@@ -126,5 +126,9 @@ namespace ArcadeBridge.ArcadeIdleEngine.Actors
         {
             return Mathf.InverseLerp(0, _maxRange, Mathf.Abs(vectorPosition)) * Mathf.Sign(vectorPosition);
         }
+        private void OnDisable()
+        {
+            inputChannel.OnJoystickUpdated(Vector2.zero);
+        }
     }
 }

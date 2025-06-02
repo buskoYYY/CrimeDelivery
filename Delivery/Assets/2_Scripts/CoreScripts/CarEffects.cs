@@ -4,6 +4,14 @@ public class CarEffects : CarComponent
 {
     public MeshRenderer meshRenderer;
     public Material destroyMaterial;
+
+    public GameObject expliosion;
+
+    public Vector3 explosionForce;
+    public Vector3 explosionTorque;
+
+    [SerializeField] private ParticleSystem smokeParticles;
+    [SerializeField] private ParticleSystem fireParticles;
     public override void CarDestroy()
     {
         // Получаем текущий массив материалов
@@ -15,5 +23,40 @@ public class CarEffects : CarComponent
             materials[0] = destroyMaterial;
             meshRenderer.materials = materials; // Присваиваем массив обратно!
         }
+
+        if (expliosion != null)
+        {
+            GameObject explosionInstance = Instantiate(expliosion, transform.position, transform.rotation);
+            Destroy(explosionInstance, 2);
+        }
+
+        carComponents.carRigidbody.AddForceAtPosition(transform.position, explosionForce, ForceMode.Acceleration);
+        carComponents.carRigidbody.AddTorque(explosionTorque, ForceMode.Acceleration);
+
+
+    }
+
+    public override void UpdateHealth(float carHeath, float maxHealth)
+    {
+        base.UpdateHealth(carHeath, maxHealth);
+        if (smokeParticles != null && fireParticles != null)
+        {
+            if (carComponents.carDamageHandler.CurrentHealth <= carComponents.carDamageHandler.MaxHealth / 2)
+            {
+                smokeParticles.Play();
+                fireParticles.Stop();
+            }
+            else if (carComponents.carDamageHandler.CurrentHealth <= carComponents.carDamageHandler.MaxHealth / 4)
+            {
+                smokeParticles.Stop();
+                fireParticles.Play();
+            }
+            else
+            {
+                smokeParticles.Stop();
+                fireParticles.Stop();
+            }
+        }
+
     }
 }

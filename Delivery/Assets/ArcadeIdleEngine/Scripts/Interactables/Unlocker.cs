@@ -1,10 +1,11 @@
-using System;
-using System.Collections;
+using ArcadeBridge.ArcadeIdleEngine.Gathering;
 using ArcadeBridge.ArcadeIdleEngine.Helpers;
 using ArcadeBridge.ArcadeIdleEngine.Items;
 using ArcadeBridge.ArcadeIdleEngine.Storage;
 using ArcadeIdleEngine.ExternalAssets.NaughtyAttributes_2._1._4.Core.MetaAttributes;
 using DG.Tweening;
+using System;
+using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
@@ -13,7 +14,7 @@ using UnityEngine.UI;
 
 namespace ArcadeBridge.ArcadeIdleEngine.Interactables
 {
-	public class Unlocker : MonoBehaviour
+    public class Unlocker : MonoBehaviour
 	{
 		[Serializable]
 		enum CompletionBehaviour
@@ -70,12 +71,44 @@ namespace ArcadeBridge.ArcadeIdleEngine.Interactables
 		public event Action<Unlocker> Stopped;
 		public event Action<Unlocker> Completed;
 
+		private Spawner _spawner;
+
+		public void OnUnlockedInvoke()
+        {
+			_onUnlocked?.Invoke();
+		}
 		void Awake() 
 		{
 			_waitForSeconds = new WaitForSeconds(0.1f);
 		}
-		
-		void OnTriggerEnter(Collider other)
+        private void Start()
+        {
+			if (TryGetComponent<CarSpawner>(out CarSpawner carSpawner))
+			{
+				_spawner = carSpawner;
+				if (SaveLoadService.instance.PlayerProgress.needCoinsForUnloakedCar > 0)
+                {
+					SetRequiredResource(SaveLoadService.instance.PlayerProgress.needCoinsForUnloakedCar);
+				}
+			}
+			else if(TryGetComponent<WorkBenchSpawner>(out WorkBenchSpawner workBenchSpawner))
+			{
+				_spawner = workBenchSpawner;
+				if (SaveLoadService.instance.PlayerProgress.needCoinsForWorkBench > 0)
+				{
+					SetRequiredResource(SaveLoadService.instance.PlayerProgress.needCoinsForWorkBench);
+				}
+			}
+			else if(TryGetComponent<PumpSpawner>(out PumpSpawner pumpSpawner))
+			{
+				_spawner = pumpSpawner;
+				if (SaveLoadService.instance.PlayerProgress.needCoinsForUnloakedPump > 0)
+				{
+					SetRequiredResource(SaveLoadService.instance.PlayerProgress.needCoinsForUnloakedPump);
+				}
+			}
+		}
+        void OnTriggerEnter(Collider other)
 		{
 			if (other.TryGetComponent(out Inventory inventory))
 			{
@@ -98,8 +131,11 @@ namespace ArcadeBridge.ArcadeIdleEngine.Interactables
 		{
 			_resourceCountText.text = _requiredResourceAmount.ToString();
 		}
-		
-		public void SetRequiredResource(int requiredResource)
+        private void OnEnable()
+        {
+			SetRequiredResource(_requiredResourceAmount);
+        }
+        public void SetRequiredResource(int requiredResource)
 		{
 			_collectedResource = 0;
 			_previousResourceSpentAmount = 0;
@@ -129,24 +165,27 @@ namespace ArcadeBridge.ArcadeIdleEngine.Interactables
 			int decreasingAmountDelta = x - _previousResourceSpentAmount;
 			if (decreasingAmountDelta == 0)
 			{
+				//Debug.Log(_previousResourceSpentAmount + " " + x);
 				return;
 			}
 			
 			// First search the inventory, if we can't find, use variable and pools
 			if (_inventory.TryRemove(_requiredResource, out Item item))
-			{
-				int amount = 0;
-				TweenHelper.KillAllTweens(item.transform);
-				TweenHelper.Jump(item.transform, _jumpPoint.position, _jumpHeight, 1, _jumpDuration, item.ReleaseToPool);
-				amount++;
-				while (amount < decreasingAmountDelta)
-				{
-					if (_inventory.TryRemove(_requiredResource, out Item it))
-					{
-						TweenHelper.KillAllTweens(it.transform);
-						TweenHelper.Jump(it.transform, _jumpPoint.position, _jumpHeight, 1, _jumpDuration, it.ReleaseToPool);
-						amount++;	
-					}
+            {
+                SaveLoadService.instance.RemoveFromData(item);
+
+                int amount = 0;
+                TweenHelper.KillAllTweens(item.transform);
+                TweenHelper.Jump(item.transform, _jumpPoint.position, _jumpHeight, 1, _jumpDuration, item.ReleaseToPool);
+                amount++;
+                while (amount < decreasingAmountDelta)
+                {
+                    if (_inventory.TryRemove(_requiredResource, out Item it))
+                    {
+                        TweenHelper.KillAllTweens(it.transform);
+                        TweenHelper.Jump(it.transform, _jumpPoint.position, _jumpHeight, 1, _jumpDuration, it.ReleaseToPool);
+                        amount++;
+                    }
 				}
 			}
 			else
@@ -156,6 +195,9 @@ namespace ArcadeBridge.ArcadeIdleEngine.Interactables
 				if (_spawnCount >= VISUAL_FEEDBACK_SPAWN_RATE_MAX + 1 - _visualFeedbackSpawnRate)
 				{
 					Item poolInstance = _requiredResource.Pool.Get();
+
+					SaveLoadService.instance.RemoveFromData(poolInstance);
+
 					Transform trans = poolInstance.transform;
 					trans.position = _inventory.transform.position;
 					TweenHelper.Jump(trans, _jumpPoint.position, _jumpHeight, 1, _jumpDuration, poolInstance.ReleaseToPool);
@@ -167,9 +209,60 @@ namespace ArcadeBridge.ArcadeIdleEngine.Interactables
 			_previousResourceSpentAmount = x;
 			_progressBar.fillAmount = (float)_collectedResource / _requiredResourceAmount;
 			
+			if(_spawner is CarSpawner)
+            {
+				if (SaveLoadService.instance != null)
+				{
+					SaveLoadService.instance.PlayerProgress.needCoinsForUnloakedCar = _requiredResourceAmount - _collectedResource;
+					SaveLoadService.instance.DelayedSaveProgress();
+				}
+			}
+			else if (_spawner is WorkBenchSpawner)
+            {
+				if (SaveLoadService.instance != null)
+				{
+					SaveLoadService.instance.PlayerProgress.needCoinsForWorkBench = _requiredResourceAmount - _collectedResource;
+					SaveLoadService.instance.DelayedSaveProgress();
+				}
+			}
+			else if (_spawner is PumpSpawner)
+            {
+				if (SaveLoadService.instance != null)
+				{
+					SaveLoadService.instance.PlayerProgress.needCoinsForUnloakedPump = _requiredResourceAmount - _collectedResource;
+					SaveLoadService.instance.DelayedSaveProgress();
+				}
+			}
+
 			if (_collectedResource == _requiredResourceAmount)
 			{
 				_onUnlocked?.Invoke();
+
+				if (_spawner is CarSpawner)
+				{
+					if (SaveLoadService.instance != null)
+					{
+						SaveLoadService.instance.PlayerProgress.isCarForPartsCreated = true;
+						SaveLoadService.instance.DelayedSaveProgress();
+					}
+                }
+				else if (_spawner is WorkBenchSpawner)
+				{
+					if (SaveLoadService.instance != null)
+					{
+						SaveLoadService.instance.PlayerProgress.isWorkBenchCreated = true;
+						SaveLoadService.instance.DelayedSaveProgress();
+					}
+				}
+				else if(_spawner is PumpSpawner)
+                {
+					if(SaveLoadService.instance != null)
+                    {
+						SaveLoadService.instance.PlayerProgress.isPumpCreated = true;
+						SaveLoadService.instance.DelayedSaveProgress();
+					}
+				}
+
 				Completed?.Invoke(this);
 				StopSpending();
 
@@ -191,8 +284,8 @@ namespace ArcadeBridge.ArcadeIdleEngine.Interactables
 				}
 			}
 		}
-		
-		void StopSpending()
+
+        void StopSpending()
 		{
 			_spendingTween?.Kill();
 			if (_cor != null)

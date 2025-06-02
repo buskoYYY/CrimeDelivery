@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class VehicleCarDriftController : Vehicle
 {
     private CarDriftController car;
-    private CarComponentsController carComponents;
+    private TURBO_Suspension suspension;
 
     public DriftControllerSettings carSettingsAtStart;
 
@@ -20,54 +20,38 @@ public class VehicleCarDriftController : Vehicle
     private bool stun;
 
 
-    private void Start()
+    public override void SetupComponent(CarComponentsController carComponentsController)
     {
+        base.SetupComponent(carComponentsController);
         car = GetComponent<CarDriftController>();
-        carComponents = GetComponent<CarComponentsController>();
-        //car.isGroundedSelf = false;
+        suspension = GetComponent<TURBO_Suspension>();
+        car.isGroundedSelf = false;
         UpdateCarStats(car.carSettings);
+        initialized = true;
     }
 
     [SerializeField] private int wheelsIsGrounded;
     private bool onTwoWeels = false;
     private void FixedUpdate()
     {
-        /*
-        wheelsIsGrounded = 0;
+        if (initialized)
+        {
+            isGrounded = suspension.IsGroundedForAllCar(2);
+            car.isGrounded = isGrounded;
+        }
+    }
 
-        if (!stun && carComponents.carDamageHandler.carAlive)
-        {
-        }
-
-        if (wheelsIsGrounded == 2)
-        {
-            isGrounded = true;
-            onTwoWeels = true;
-        }
-        else if (wheelsIsGrounded > 2)
-        {
-            isGrounded = true;
-            onTwoWeels = false;
-        }
-        else
-        {
-            isGrounded = false;
-            onTwoWeels = false;
-        }
-
-        car.isGrounded = isGrounded;
-        */
+    public override void CarDestroy()
+    {
+        base.CarDestroy();
+        car.isGroundedSelf = false;
+        car.isGrounded = false;
     }
 
     public void UpdateCarStats(DriftControllerSettings newSettings)
     {
         carSettingsAtStart = newSettings.Clone();
 
-    }
-
-    public override void SetupComponent()
-    {
- 
     }
 
     public override void StartRace()

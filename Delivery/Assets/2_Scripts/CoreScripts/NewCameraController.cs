@@ -38,30 +38,27 @@ public class NewCameraController : MonoBehaviour
     [SerializeField] private CarComponentsController playerCar;
 
         
-        [SerializeField] private bool initializeAtStart;
-        private void Start()
-        {
-        if (initializeAtStart)
-            Initialize(playerCar);
-        }
-    private bool initialized;
-    public void Initialize(CarComponentsController car)
+    [SerializeField] private bool initializeAtStart;
+    private void Start()
     {
-        playerCar = car;
-        cameraPointTransform = playerCar.transform;
-        playerRigidbodyComponent = playerCar.GetComponent<Rigidbody>();
         StartCoroutine(LateFixedUpdate());
         cameraComponent = GetComponent<Camera>();
         defaultCameraFieldOfView = cameraComponent.fieldOfView;
 
         cameraHorizontalSpeedAtStart = cameraHorizontalSpeed;
-
-        initialized = true;
+        if (initializeAtStart)
+            Initialize(playerCar);
+    }
+    public void Initialize(CarComponentsController car)
+    {
+        playerCar = car;
+        cameraPointTransform = playerCar.transform;
+        playerRigidbodyComponent = playerCar.GetComponent<Rigidbody>();
     }
 
     private void FixedUpdate()
     {
-        if (playerCar != null && initialized == true)
+        if (playerCar != null)
         {
             if (playerCar.vehicle.isGrounded)
                 cameraHorizontalSpeed = cameraHorizontalSpeedAtStart;

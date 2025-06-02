@@ -1,4 +1,5 @@
 using System;
+using ArcadeBridge.ArcadeIdleEngine.Actors;
 using ArcadeBridge.ArcadeIdleEngine.Interactables;
 using ArcadeBridge.ArcadeIdleEngine.Items;
 using UnityEngine;
@@ -59,7 +60,6 @@ namespace ArcadeBridge.ArcadeIdleEngine.Storage
 				AddInvisible(item);
 			}
 		}
-
 		public void AddVisible(Item item)
 		{
 			_inventoryVisible.Add(item);

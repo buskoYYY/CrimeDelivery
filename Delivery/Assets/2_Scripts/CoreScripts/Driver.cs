@@ -16,13 +16,27 @@ public class Driver : CarComponent
     [SerializeField] private LayerMask layerMask;
     public bool testPC;
 
-    private void Start()
+    [SerializeField] private bool startRace;
+
+    private void Awake()
     {
         vehicle = gameObject.GetComponent<CarComponentsController>();
         thisObjectTransform = transform;
 
         if (TargetObjectTransform == null)
             TargetObjectTransform = transform;
+    }
+
+    public override void StartRace()
+    {
+        base.StartRace();
+        startRace = true;
+    }
+
+    public override void FinishRace()
+    {
+        base.FinishRace();
+        startRace = false;
     }
 
     private void FixedUpdate()
@@ -32,7 +46,7 @@ public class Driver : CarComponent
             inTurn = 0;
             throttle = 0;
         }
-        else
+        else if (startRace)
         {
             if (isAI)
             {
@@ -40,7 +54,16 @@ public class Driver : CarComponent
                 ActivateBoostDriver();
             }
             else if (testPC)
+            {
+#if UNITY_EDITOR
                 InputPlayer();
+#endif
+            }
+        }
+        else
+        {
+            inTurn = 0;
+            throttle = 0;
         }
 
 
@@ -73,7 +96,7 @@ public class Driver : CarComponent
     {
 
         inTurn = Input.GetAxisRaw("Horizontal");
-        throttle = Input.GetAxisRaw("Vertical");
+        throttle = 1;// Input.GetAxisRaw("Vertical");
         /*
         inTurn = ControlFreak2.CF2Input.GetAxis("Horizontal");
         if (testPC)
@@ -90,6 +113,7 @@ public class Driver : CarComponent
 
     private void InputAI()
     {
+
         // Turn by facing player
         // Get the angle between the points (absolute goal) = right (target) - left
         float angle = AngleOffset(Angle2Points(thisObjectTransform.position, TargetObjectTransform.position), 0f);

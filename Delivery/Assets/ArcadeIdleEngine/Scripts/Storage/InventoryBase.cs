@@ -15,6 +15,23 @@ namespace ArcadeBridge.ArcadeIdleEngine.Storage
         protected List<Item> Items = new List<Item>();
 
         public int Count => Items.Count;
+        public int CountWithoutSames
+        {
+            get
+            {
+                List<string> names = new List<string>();
+
+                for(int i =0; i < Items.Count; i++)
+                {
+                    if (!names.Contains(Items[i].name))
+                    {
+                        names.Add(Items[i].name);
+                    }
+                }
+
+                return names.Count;
+            }
+        }
 
         public bool IsEmpty()
         {
