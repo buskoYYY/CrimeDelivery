@@ -1,4 +1,5 @@
 //using SickscoreGames.HUDNavigationSystem;
+using ArcadeBridge;
 using System.Collections;
 using UnityEngine;
 using static DerbyDirector;
@@ -40,7 +41,7 @@ public class CarDamageHandler : MonoBehaviour
         lives = new_lives;
         unlimitedLives = new_unlimitedLives;
         ChangeMaxHealth(new_maxHealth);
-        ChangeHealth(0);//Нужно для инициализации UI
+        ChangeHealth(0);//пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ UI
     }
 
     public void ChangeMaxHealth(float maxHealth)
