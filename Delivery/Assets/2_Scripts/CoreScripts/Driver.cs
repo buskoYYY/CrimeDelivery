@@ -59,6 +59,10 @@ public class Driver : CarComponent
                 InputPlayer();
 #endif
             }
+            else
+            {
+                throttle = 1;
+            }
         }
         else
         {

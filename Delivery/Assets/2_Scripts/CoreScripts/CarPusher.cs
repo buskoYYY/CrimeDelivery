@@ -31,9 +31,8 @@ public class HitInfo
         return this;
     }
 }
-public class CarPusher : MonoBehaviour
+public class CarPusher : CarComponent
 {
-    private CarComponentsController carComponents;
     private float maxHitSpeed = 50;
     [SerializeField] private HitInfo hitInfo;
 
@@ -42,10 +41,7 @@ public class CarPusher : MonoBehaviour
 
     public delegate void OnOtherCarDestroyed();
     public event OnOtherCarDestroyed OnOtherCarDestroyedEvent;
-    private void Start()
-    {
-        carComponents = GetComponent<CarComponentsController>();
-    }
+
     private float pushDelay = 0.1f;
     public float pushDelayCurrent = 0;
     private void FixedUpdate()

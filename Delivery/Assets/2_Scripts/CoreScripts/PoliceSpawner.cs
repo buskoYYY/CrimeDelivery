@@ -2,12 +2,40 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using UnityEngine;
+
+[System.Serializable]
+public class DifficultyConfig
+{
+    public CarAIConfig carAIDifficulty;
+    public float maxPoliceHealth;
+    
+    public float damage;
+    
+    public int maxPoliceCount = 10;
+    public int policeToSpawnCount = 5;
+    public int spawnDelay = 3;
+
+}
+
+[System.Serializable]
+public class CarAIConfig
+{
+    public float accelChangerMin = 5;
+    public float accelChangerMax = 10;
+    public float rotVelChanger = 0.5f;
+    public float targetOffcetMin = 5;
+    public float targetOffcetMax = 15;
+    public float targetOffcetFarFromPlayer = 1;
+}
+     
+
 public class PoliceSpawner : MonoBehaviour
 {
     public Transform[] spawnPoints;
+    public DifficultyConfig difficultyConfig;
     public float maxSpawnDistance = 70;
     public float minSpawnDistance = 10;
-    public float policeHealth = 50;
+    //public float policeHealth = 50;
 
     public Transform player;
     public PoliceSpawnPointsObject spawnPointsOnPlayer;
@@ -15,15 +43,15 @@ public class PoliceSpawner : MonoBehaviour
 
     public List<CarComponentsController> policeList = new List<CarComponentsController>();
     public CarComponentsController[] policePrefabs;
-    public int policeToSpawnCount = 5;
+    //public int policeToSpawnCount = 5;
     public float spawnSpeed = 20;
-    public int maxPoliceCount = 20;
-    public int spawnDelay = 3;
+    //public int maxPoliceCount = 20;
+    //public int spawnDelay = 3;
     public float destroyDistance = 70;
 
-    public float maxPoliceHealth = 100;
+    //public float maxPoliceHealth = 100;
 
-    public Camera playerCamera;
+    //public Camera playerCamera;
 
 
 
@@ -38,11 +66,13 @@ public class PoliceSpawner : MonoBehaviour
     private void Start()
     {
         if (initAtStart)
-            Initialize(raceLogic);
+            Initialize(raceLogic, difficultyConfig);
     }
 
-    public void Initialize(RaceLogic raceLogic)
+    public void Initialize(RaceLogic raceLogic, DifficultyConfig difficultyConfig)
     {
+        this.difficultyConfig = difficultyConfig;
+
         //StartCoroutine(SpawnPoliceCoorutine());
         this.raceLogic = raceLogic;
         this.raceLogic.OnRaceCompletedEvent += OnEndOFRace;
@@ -132,11 +162,11 @@ public void SpawnPolice()
     {
         while (spawnActive)
         {
-            yield return new WaitForSeconds(spawnDelay);
+            yield return new WaitForSeconds(difficultyConfig.spawnDelay);
 
-            if (policeList.Count < maxPoliceCount)
+            if (policeList.Count < difficultyConfig.maxPoliceCount)
             {
-                int spawnCount = Mathf.Min(spawnPointsOnPlayer.spawnPositions.Length, policeToSpawnCount);
+                int spawnCount = Mathf.Min(spawnPointsOnPlayer.spawnPositions.Length, difficultyConfig.policeToSpawnCount);
                 for (int i = 0; i < spawnCount; i++)
                 {
                     TrySpawn(spawnPointsOnPlayer.startPositions[i], spawnPointsOnPlayer.spawnPositions[i]);
@@ -183,13 +213,6 @@ public void SpawnPolice()
             Debug.Log("Ќе удалось заспавнить: путь к точке зан€т.");
         }
     }
-
-    public float accelChangerMin = 5;
-    public float accelChangerMax = 10;
-    public float rotVelChanger = 0.5f;
-    public float targetOffcetMin = 5;
-    public float targetOffcetMax = 15;
-    public float targetOffcetFarFromPlayer = 1;
     private void SetupPolice(CarComponentsController policeInstanse)
     {
         Driver driverPolice;
@@ -203,14 +226,20 @@ public void SpawnPolice()
             }
 
 
-            policeInstanse.carDamageHandler.Initialize(false, 1, maxPoliceHealth);
+            policeInstanse.carDamageHandler.Initialize(false, 1, difficultyConfig.maxPoliceHealth);
 
             AIDriftController ai = driver as AIDriftController;
             if (ai != null)
             {
                 ai.distanceToDestroy = destroyDistance;
                 ai.autoDestroy = true;
-                ai.SetupCarAIConfig(accelChangerMin, accelChangerMax, rotVelChanger, targetOffcetMin, targetOffcetMax, targetOffcetFarFromPlayer);
+                ai.SetupCarAIConfig(difficultyConfig.carAIDifficulty);
+            }
+
+            CarPusher carPusher = driver as CarPusher;
+            if (carPusher != null)
+            {
+                
             }
 
             policeInstanse.StartRace();
@@ -295,7 +324,7 @@ public void SpawnPolice()
     [SerializeField] private RaceData raceData;
     public void OnEndOFRace(RaceData raceData)
     {
-        maxPoliceCount = 0;
+        difficultyConfig.maxPoliceCount = 0;
         this.raceData = raceData;
         spawnActive = false;
     }

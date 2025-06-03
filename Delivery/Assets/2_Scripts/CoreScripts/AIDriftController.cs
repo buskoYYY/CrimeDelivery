@@ -19,6 +19,8 @@ public class AIDriftController : CarComponent
 
     [SerializeField] private float playerShowRadius = 5;
 
+    [SerializeField] private CarAIConfig spawnerConfig;
+
     public bool autoDestroy = false;
 
 
@@ -42,7 +44,7 @@ public class AIDriftController : CarComponent
         carDriftController = GetComponent<CarDriftController>();
         driver = GetComponent<Driver>();
         if (setupAtSetupComponent)
-            SetupCarAIConfig(accelChangerMin, accelChangerMax, rotVelChanger, targetOffcetMin, targetOffcetMax, targetOffcetFarFromPlayer);
+            SetupCarAIConfig(spawnerConfig);
     }
 
     private void FixedUpdate()
@@ -68,18 +70,17 @@ public class AIDriftController : CarComponent
         }
     }
 
-    public void SetupCarAIConfig(float newAccelChagerMin, float newAccelChangerMax, float newRotVelChanger, float newTargetOffcetMin, 
-        float newTargetOffcetMax, float newTargetOffcetFarFromPlayer)
+    public void SetupCarAIConfig(CarAIConfig spawnerConfig)
     {
-        accelChangerMin = newAccelChagerMin;
-        accelChangerMax = newAccelChangerMax;
+        accelChangerMin = spawnerConfig.accelChangerMax;
+        accelChangerMax = spawnerConfig.accelChangerMax;
         accelChanger = Random.Range(accelChangerMin, accelChangerMax);
 
-        rotVelChanger = newRotVelChanger;
+        rotVelChanger = spawnerConfig.rotVelChanger;
 
-        targetOffcetFarFromPlayer = newTargetOffcetFarFromPlayer;
-        targetOffcetMin = newTargetOffcetMin;
-        targetOffcetMax = newTargetOffcetMax;
+        targetOffcetFarFromPlayer = spawnerConfig.targetOffcetFarFromPlayer;
+        targetOffcetMin = spawnerConfig.targetOffcetMin;
+        targetOffcetMax = spawnerConfig.targetOffcetMax;
         targetOffcet = Random.Range(targetOffcetMin, targetOffcetMax);
     }
 

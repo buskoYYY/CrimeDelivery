@@ -15,6 +15,11 @@ public class DeliveryTarget : MonoBehaviour
     public bool load;
     private bool unLoaded;
 
+    private void Start()
+    {
+        deliveryController = FindFirstObjectByType<DeliveryController>();
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         CarComponentsController car = other.GetComponentInParent<CarComponentsController>();
