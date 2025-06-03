@@ -19,7 +19,7 @@ public class AIDriftController : CarComponent
 
     [SerializeField] private float playerShowRadius = 5;
 
-    [SerializeField] private SpawnerConfig spawnerConfig;
+    [SerializeField] private CarAIConfig spawnerConfig;
 
     public bool autoDestroy = false;
 
@@ -70,7 +70,7 @@ public class AIDriftController : CarComponent
         }
     }
 
-    public void SetupCarAIConfig(SpawnerConfig spawnerConfig)
+    public void SetupCarAIConfig(CarAIConfig spawnerConfig)
     {
         accelChangerMin = spawnerConfig.accelChangerMax;
         accelChangerMax = spawnerConfig.accelChangerMax;

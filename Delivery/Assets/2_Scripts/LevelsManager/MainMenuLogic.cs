@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using UnityEngine;
 public class MainMenuLogic : MonoBehaviour
 {
+    public GameData gameData;
+
     public CarComponentsController playerCarPrefab;
     private CarComponentsController playerCar;
     public NewCameraController playerCamera;
@@ -32,6 +34,7 @@ public class MainMenuLogic : MonoBehaviour
 
     public void Initialize()
     {
+        gameData = FindFirstObjectByType<GameData>();
         currentSpawnPoint = spawnPointsList[Random.Range(0, spawnPointsList.Count)];
         SpawnPlayer(playerCarPrefab, currentSpawnPoint);
 
@@ -39,12 +42,14 @@ public class MainMenuLogic : MonoBehaviour
 
     public void StartRace()
     {
+        raceLogic.Initialize(gameData);
         raceLogic.StartRace(playerCar);
-        carUIInfo.Initialize(playerCar);
-        playerUIController.Initialize(playerCar);
 
         mainMenuUI.Hide();
+        
         raceUI.Show();
+        carUIInfo.Initialize(playerCar);
+        playerUIController.Initialize(playerCar);
         playerCar.StartRace();
     }
 
