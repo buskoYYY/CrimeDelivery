@@ -42,7 +42,8 @@ namespace ArcadeBridge
                 _hoseNozzle = hoseNozzle;
 
                 _hoseNozzle.transform.parent = null;
-                _hoseNozzle.transform.forward = -transform.right;
+                _hoseNozzle.transform.forward = -transform.parent.up;
+                //_hoseNozzle.transform.forward = - transform.right;
                 _hoseNozzle.transform.position = transform.position - _hoseNozzle.transform.forward * .2f;
 
                 _sequence.Kill();

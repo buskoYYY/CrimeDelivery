@@ -9,7 +9,15 @@ namespace ArcadeBridge
         public WorkBenchSpawner WorkBenchSpawner { get; private set; }
         public PumpSpawner PumpSpawner { get; private set; }
 
+        [field:SerializeField] public GameObject IndicatorPrefab { get; private set; }
+        public GameObject Indicator { get; private set; }
 
+        public GameObject CreateIndicator(Vector3 at)
+        {
+            Indicator = Instantiate(IndicatorPrefab, at, Quaternion.identity);
+
+            return Indicator;
+        }
         public CarConstruction CreateConstructingCar()
         {
             int stage = SaveLoadService.instance.StageForNewCar;

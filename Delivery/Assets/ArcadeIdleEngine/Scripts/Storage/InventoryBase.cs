@@ -12,7 +12,7 @@ namespace ArcadeBridge.ArcadeIdleEngine.Storage
         [SerializeField] protected Transform StackingPoint;
         [SerializeField] protected float PickUpDuration = 0.3f;
 
-        protected List<Item> Items = new List<Item>();
+        public List<Item> Items = new List<Item>();
 
         public int Count => Items.Count;
         public int CountWithoutSames

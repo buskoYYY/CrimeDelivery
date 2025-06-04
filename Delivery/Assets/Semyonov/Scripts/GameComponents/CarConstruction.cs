@@ -10,6 +10,7 @@ namespace ArcadeBridge
 {
     public class CarConstruction : MonoBehaviour
     {
+        public event Action DetailConstructed;
         public event Action WheelsPlaced;
         public int CarIndex => _carIndex;
         public int NeedCountForComplete => _needCountForComplete;
@@ -23,7 +24,7 @@ namespace ArcadeBridge
 
         private int _needCountForComplete;
         private int _constructedDetailsCount;
-        private void Start()
+        public void Init()
         {
             _objectGetters[_objectGetters.Count - 1].gameObject.SetActive(false);
 
@@ -41,6 +42,8 @@ namespace ArcadeBridge
         {
             //_inventoryCollectorTriggerArea.ItemPlaced();
             //SequenceOfActivities.Instance.GameFactory.WorkBenchSpawner.ObjectForInteraction.GetComponent<Transformer>().InputArea.ItemPlaced();
+
+            DetailConstructed?.Invoke();
 
             _constructedDetailsCount++;
 
@@ -85,12 +88,12 @@ namespace ArcadeBridge
                         {
                             carData.isCompleted = true;
 
+                            //SaveLoadService.instance.PlayerProgress.isPumpCreated = false;
+                            //SaveLoadService.instance.PlayerProgress.isWorkBenchCreated = false;
+                            //SaveLoadService.instance.PlayerProgress.isWorkBenchSpawnerCreated = false;
+                            //SaveLoadService.instance.PlayerProgress.isCarForPartsCreated = false;
                             SaveLoadService.instance.PlayerProgress.isCarForPartsBrokenAbsolutly = false;
-                            SaveLoadService.instance.PlayerProgress.isCarForPartsCreated = false;
-                            SaveLoadService.instance.PlayerProgress.isPumpCreated = false;
                             SaveLoadService.instance.PlayerProgress.isWheelsPumped = false;
-                            SaveLoadService.instance.PlayerProgress.isWorkBenchCreated = false;
-                            SaveLoadService.instance.PlayerProgress.isWorkBenchSpawnerCreated = false;
                             SaveLoadService.instance.PlayerProgress.needCoinsForUnloakedCar = -1;
                             SaveLoadService.instance.PlayerProgress.needCoinsForUnloakedPump = -1;
                             SaveLoadService.instance.PlayerProgress.needCoinsForWorkBench = -1;
@@ -117,7 +120,7 @@ namespace ArcadeBridge
                 objectGetter.RemovingObjectFromInventoryWithSave -= ConstructNewDetail;
             }
 
-            if(SequenceOfActivities.Instance.GameFactory.PumpSpawner)
+            if(SequenceOfActivities.Instance != null && SequenceOfActivities.Instance.GameFactory.PumpSpawner)
                 SequenceOfActivities.Instance.GameFactory.PumpSpawner.OnWheelsPumped -= ContinueConstructionCar;
         }
     }

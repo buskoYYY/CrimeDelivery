@@ -1,5 +1,4 @@
 ﻿using ArcadeBridge.ArcadeIdleEngine.Gathering;
-using System;
 using System.Collections;
 using UnityEngine;
 
@@ -12,6 +11,7 @@ namespace ArcadeBridge
         private SaveLoadService _saveLoadService;
         private GatherableSource _gatherableSource;
 
+        private IndicatorPlacement _indicatorPlacement;
         public static SequenceOfActivities Instance { get; private set; }
         private void Awake()
         {
@@ -25,7 +25,7 @@ namespace ArcadeBridge
 
             _gameFactory = GetComponent<GameFactory>();
             _saveLoadService = GetComponent<SaveLoadService>();
-
+            _indicatorPlacement = GetComponent<IndicatorPlacement>();
         }
         private void Start()
         {
@@ -33,6 +33,8 @@ namespace ArcadeBridge
         }
         public void ClearGame()
         {
+            _indicatorPlacement.ClearSubscribes();
+
             OnDestroy();
 
             if (_gatherableSource)
@@ -70,39 +72,53 @@ namespace ArcadeBridge
             if (_saveLoadService.StageForNewCar >= 3) 
                 return;
 
+            _gameFactory.CreatePumpSpawner();
+            _gameFactory.PumpSpawner.GetComponent<CheckProgressPump>().Init();
+
             _gameFactory.CreateConstructingCar();
+
+            if (!_saveLoadService.PlayerProgress.isPumpCreated)
+            {
+                _gameFactory.PumpSpawner.gameObject.SetActive(false);
+                _gameFactory.ConstructedCar.WheelsPlaced += ShowPumpSpawner;
+            }
+
+            _gameFactory.ConstructedCar.Init();
 
             _gameFactory.CreateCarForPartsSpawner();
 
-            _gameFactory.CarForPartsSpawner.CarSpawned += AfterFistCarSpawned;
+            _gameFactory.CarForPartsSpawner.ObjectSpawned += AfterFistCarSpawned;
 
-            if (_saveLoadService.PlayerProgress.isWorkBenchSpawnerCreated)
+            _gameFactory.CarForPartsSpawner.GetComponent<CheckProgressCarForParts>().Init();
+
+            _gameFactory.CreateWorkBenchSpawner();
+            _gameFactory.WorkBenchSpawner.GetComponent<CheckProgressForWorkBench>().Init();
+
+            if (!_saveLoadService.PlayerProgress.isWorkBenchSpawnerCreated)
             {
-                _gameFactory.CreateWorkBenchSpawner();
+                _gameFactory.WorkBenchSpawner.gameObject.SetActive(false);
             }
 
-            if(!_saveLoadService.PlayerProgress.isWheelsPumped
-                && _saveLoadService.PlayerProgress.isPumpCreated)
-            {
-                _gameFactory.CreatePumpSpawner();
-            }
-            else
-            {
-                _gameFactory.ConstructedCar.WheelsPlaced += SpawnPumpSpawner;
-            }
+            _indicatorPlacement.Init();
 
+            _indicatorPlacement.UpdatePlacement();
         }
 
-        private void SpawnPumpSpawner()
+        private void ShowPumpSpawner()
         {
-            _gameFactory.ConstructedCar.WheelsPlaced -= SpawnPumpSpawner;
+            _gameFactory.ConstructedCar.WheelsPlaced -= ShowPumpSpawner;
 
-            _gameFactory.CreatePumpSpawner();
+            _gameFactory.PumpSpawner.gameObject.SetActive(true);
         }
 
-        private void AfterFistCarSpawned(GatherableSource obj)
+        private void AfterFistCarSpawned(ObjectForInteraction gatherableSource)
         {
-            _gameFactory.CarForPartsSpawner.CarSpawned -= AfterFistCarSpawned;//ObjectForInteraction.GetComponent<GatherableSource>().OnSetActiveFalse += CreateWorkBanchSpawner;
+            if(_gatherableSource)
+                _gatherableSource.OnSetActiveFalse -= OnSatActiveFalseCarForParts;
+
+            GatherableSource obj = gatherableSource.GetComponent<GatherableSource>();
+
+            _gameFactory.CarForPartsSpawner.ObjectSpawned -= AfterFistCarSpawned;
 
             _gatherableSource = obj;
 
@@ -110,22 +126,28 @@ namespace ArcadeBridge
 
             if (!_saveLoadService.PlayerProgress.isWorkBenchSpawnerCreated)
             {
-                _gatherableSource.OnSetActiveFalse += CreateWorkBenchSpawner;
+                _gatherableSource.OnSetActiveFalse += ActivateWorkBenchSpawner;
             }
         }
 
         private void OnSatActiveFalseCarForParts(GatherableSource obj)
         {
-            //_gatherableSource.OnSetActiveFalse -= OnSatActiveFalseCarForParts;
+            obj.OnSetActiveFalse -= OnSatActiveFalseCarForParts;
 
             _saveLoadService.PlayerProgress.isCarForPartsCreated = false;
 
+            _saveLoadService.DelayedSaveProgress();
         }
 
-        private void CreateWorkBenchSpawner(GatherableSource obj)
+        private void ActivateWorkBenchSpawner(GatherableSource obj)
         {
-            _gameFactory.CreateWorkBenchSpawner();
+            _gameFactory.WorkBenchSpawner.gameObject.SetActive(true);
+
+            //_gameFactory.WorkBenchSpawner.GetComponent<CheckProgressForWorkBench>().Init();
+
             _saveLoadService.PlayerProgress.isWorkBenchSpawnerCreated = true;
+
+            _saveLoadService.DelayedSaveProgress();
         }
         private void OnDestroy()
         {
@@ -133,14 +155,17 @@ namespace ArcadeBridge
             {
                 _gatherableSource.OnSetActiveFalse -= OnSatActiveFalseCarForParts;
 
-                _gatherableSource.OnSetActiveFalse -= CreateWorkBenchSpawner;
+                _gatherableSource.OnSetActiveFalse -= ActivateWorkBenchSpawner;
             }
 
             if (_gameFactory.CarForPartsSpawner)
-                _gameFactory.CarForPartsSpawner.CarSpawned -= AfterFistCarSpawned;
+            {
+                if(_gameFactory.CarForPartsSpawner.ObjectForInteraction)
+                    _gameFactory.CarForPartsSpawner.ObjectSpawned -= AfterFistCarSpawned;
+            }
             
             if(_gameFactory.ConstructedCar)
-                 _gameFactory.ConstructedCar.WheelsPlaced -= SpawnPumpSpawner;
+                 _gameFactory.ConstructedCar.WheelsPlaced -= ShowPumpSpawner;
 
         }
     }

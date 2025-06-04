@@ -6,17 +6,22 @@ namespace ArcadeBridge
 {
     public class CarSpawner : Spawner
     {
-        public event Action<GatherableSource> CarSpawned;
-
         public override void CreateObject()
         {
+            if (_objectForInteractionCurrent)
+            {
+                _objectForInteractionCurrent.GetComponent<GatherableSource>().OnSetActiveFalse -= SetActiveTrue;
+                Destroy(_objectForInteractionCurrent.gameObject);
+                _objectForInteractionCurrent = null;
+            }
             base.CreateObject();
             SubscrabeForReturn();
-            CarSpawned?.Invoke(ObjectForInteraction.GetComponent<GatherableSource>());
+            
         }
         private void SubscrabeForReturn()
         {
-            ObjectForInteraction.GetComponent<GatherableSource>().OnSetActiveFalse += SetActiveTrue;
+            _objectForInteractionCurrent.GetComponent<GatherableSource>().OnSetActiveFalse -= SetActiveTrue;
+            _objectForInteractionCurrent.GetComponent<GatherableSource>().OnSetActiveFalse += SetActiveTrue;
         }
 
         private void SetActiveTrue(GatherableSource obj)

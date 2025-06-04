@@ -5,7 +5,7 @@ namespace ArcadeBridge
 {
     public class CheckProgressCarForParts : MonoBehaviour
     {
-        private void Start()
+        public void Init()
         {
             /*if (SaveLoadService.instance.PlayerProgress.isCarForPartsBrokenAbsolutly)
             {

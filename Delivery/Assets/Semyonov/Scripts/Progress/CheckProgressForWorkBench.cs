@@ -5,13 +5,17 @@ namespace ArcadeBridge
 {
     public class CheckProgressForWorkBench: MonoBehaviour
     {
-        private void Start()
+        public void Init()
         {
+            GetComponent<Unlocker>().OnUnlockedInvoke();
+
             if (SaveLoadService.instance.PlayerProgress.isWorkBenchCreated)
             {
-                GetComponent<Unlocker>().OnUnlockedInvoke();
                 gameObject.SetActive(false);
-                //Destroy(gameObject);
+            }
+            else
+            {
+                GetComponent<WorkBenchSpawner>().ObjectForInteraction.gameObject.SetActive(false);
             }
         }
     }

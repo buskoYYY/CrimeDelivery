@@ -180,6 +180,7 @@ namespace ArcadeBridge.ArcadeIdleEngine.Gathering
                 if (withSave)
 				{
 					SaveLoadService.instance.AddItemToData(item);
+					SaveLoadService.instance.DelayedSaveProgress();
 				}
 			}
 

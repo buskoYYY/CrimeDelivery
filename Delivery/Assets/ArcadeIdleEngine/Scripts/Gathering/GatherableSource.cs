@@ -29,6 +29,8 @@ namespace ArcadeBridge.ArcadeIdleEngine.Gathering
 
 		void OnDestroy() // перед начал очищаем наш лист из айтемов
 		{
+			OnSetActiveFalse = null;
+
 			foreach (Item instantiatedItems in _instantiatedItems)
 			{
 				Destroy(instantiatedItems);

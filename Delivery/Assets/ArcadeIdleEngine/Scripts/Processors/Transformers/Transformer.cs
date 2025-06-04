@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using ArcadeBridge.ArcadeIdleEngine.Helpers;
 using ArcadeBridge.ArcadeIdleEngine.Interactables;
@@ -12,6 +13,9 @@ namespace ArcadeBridge.ArcadeIdleEngine.Processors.Transformers
     [SelectionBase]
     public class Transformer : MonoBehaviour
     {
+        public Inventory InputInventory => _inputInventory;
+        public Inventory OutputInventory => _outputInventory;
+
         [SerializeField] TransformerDefinition _definition;
         
         [Header("Inventories")]
@@ -89,7 +93,6 @@ namespace ArcadeBridge.ArcadeIdleEngine.Processors.Transformers
                     _transformationTimer.SetZero();
                     _transforming = false;
                 }
-                //_inputArea.SetAlreadySpawnedCount(_alreadySpawnedOutputValue + 1);
             }
 
             if (_inputInventory.IsEmpty)
@@ -203,6 +206,7 @@ namespace ArcadeBridge.ArcadeIdleEngine.Processors.Transformers
                     if (SaveLoadService.instance != null)
                     {
                         SaveLoadService.instance.AddItemToData(p);
+                        SaveLoadService.instance.DelayedSaveProgress();
                     }
                 }    
             }

@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 3720311982581390544}
   - component: {fileID: 4663816507929075724}
   - component: {fileID: 8088361849369156141}
-  - component: {fileID: 5861629912202622183}
   - component: {fileID: 3818567907885579886}
   m_Layer: 0
   m_Name: SM_Veh_Exotic_01_Rear_Bumper_01
@@ -90,28 +89,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &5861629912202622183
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 730263365733080376}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 43524845275957854, guid: 2eee0ae52bc3c43468b4646ca51b002c, type: 2}
 --- !u!114 &3818567907885579886
 MonoBehaviour:
   m_ObjectHideFlags: 0

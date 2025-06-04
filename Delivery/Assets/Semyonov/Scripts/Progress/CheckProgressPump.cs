@@ -5,18 +5,25 @@ namespace ArcadeBridge
 {
     public class CheckProgressPump : MonoBehaviour
     {
-        private void Start()
+        public void Init()
         {
-            if (SaveLoadService.instance.PlayerProgress.isWheelsPumped)
+            /*if (SaveLoadService.instance.PlayerProgress.isWheelsPumped)
             {
                 gameObject.SetActive(false);
                 //Destroy(gameObject);
             }
-            else if (SaveLoadService.instance.PlayerProgress.isPumpCreated)
+            else */
+
+            GetComponent<Unlocker>().OnUnlockedInvoke();
+
+            if (SaveLoadService.instance.PlayerProgress.isPumpCreated)
             {
-                GetComponent<Unlocker>().OnUnlockedInvoke();
                 gameObject.SetActive(false);
                 //Destroy(gameObject);
+            }
+            else
+            {
+                GetComponent<PumpSpawner>().ObjectForInteraction.gameObject.SetActive(false);
             }
         }
 

@@ -9,6 +9,8 @@ namespace ArcadeBridge.ArcadeIdleEngine.Storage
 {
 	public class Inventory : MonoBehaviour
 	{
+		public InventoryVisible InventoryVisible => _inventoryVisible;
+
 		[SerializeField] InventoryInvisible _inventoryInvisible;
 		[SerializeField] InventoryVisible _inventoryVisible;
 		

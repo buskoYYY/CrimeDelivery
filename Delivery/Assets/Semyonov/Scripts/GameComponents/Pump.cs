@@ -7,6 +7,9 @@ namespace ArcadeBridge
     public class Pump: ObjectForInteraction
     {
         public event Action OnWheelsPumped;
+        public event Action OnPumpTaken;
+        public bool PumpTaken { get; private set; }
+
         [SerializeField] private HoseNozzle _hoseNozzle;
         [SerializeField] private Collider _collider;
 
@@ -26,10 +29,17 @@ namespace ArcadeBridge
         {
             if(other.TryGetComponent<ArcadeIdleMover>(out ArcadeIdleMover mover))
             {
+                if (SaveLoadService.instance.PlayerProgress.isWheelsPumped) return;
+
+                if (SequenceOfActivities.Instance.GameFactory.ConstructedCar.ConstructedDetailsCount < 4) return;
+
                 _hoseNozzle.transform.parent = mover.transform;
                 _hoseNozzle.transform.localPosition = localPosHoseOnPlayer;
                 _hoseNozzle.transform.forward = mover.transform.forward;
                 _collider.enabled = false;
+
+                PumpTaken = true;
+                OnPumpTaken?.Invoke();
             }
         }
 
@@ -48,6 +58,7 @@ namespace ArcadeBridge
                 _hoseNozzle.transform.localPosition = _localPosHozeNozzleBase;
 
                 OnWheelsPumped?.Invoke();
+                PumpTaken = false;
                 //Destroy(gameObject);
             }
         }
