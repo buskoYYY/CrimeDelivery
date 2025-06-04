@@ -45,8 +45,8 @@ namespace ArcadeBridge
         {
             switch (stepIndex)
             {
-                case 0: OpenLeftButton(); break;
-                case 1: OpenRightButton(); break;
+                case 0: OpenRightButton(); break;
+                case 1: OpenLeftButton(); break; 
             }    
         }
 
@@ -72,9 +72,9 @@ namespace ArcadeBridge
 
         private void OpenLeftButton()
         {
-            if (currentTutorialTrigger < 0)
+            if (currentTutorialTrigger < 1)
             {
-                currentTutorialTrigger = 0;
+                currentTutorialTrigger = 1;
                 TimeManager.Pause();
                 playerUIController.turnLeft.gameObject.SetActive(false);
                 playerUIController.turnRight.gameObject.SetActive(false);
@@ -86,9 +86,9 @@ namespace ArcadeBridge
 
         private void OpenRightButton()
         {
-            if (currentTutorialTrigger < 1)
+            if (currentTutorialTrigger < 0)
             {
-                currentTutorialTrigger = 1;
+                currentTutorialTrigger = 0;
                 TimeManager.Pause();
                 playerUIController.turnLeft.gameObject.SetActive(false);
                 playerUIController.turnRight.gameObject.SetActive(false);
