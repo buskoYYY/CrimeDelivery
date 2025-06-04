@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using ArcadeBridge.ArcadeIdleEngine.Helpers;
 using ArcadeBridge.ArcadeIdleEngine.Interactables;
@@ -12,6 +13,9 @@ namespace ArcadeBridge.ArcadeIdleEngine.Processors.Transformers
     [SelectionBase]
     public class Transformer : MonoBehaviour
     {
+        public Inventory InputInventory => _inputInventory;
+        public Inventory OutputInventory => _outputInventory;
+
         [SerializeField] TransformerDefinition _definition;
         
         [Header("Inventories")]
@@ -42,6 +46,13 @@ namespace ArcadeBridge.ArcadeIdleEngine.Processors.Transformers
 
         public TransformerRuleset Ruleset => _definition.Ruleset;
 
+        //public InventoryCollectorTriggerArea InputArea => _inputArea;
+
+        //private InventoryCollectorTriggerArea _inputArea;
+        private int _alreadySpawnedOutputValue;
+
+        private CarData _carData = null;
+
         void Awake()
         {
             foreach (ItemDefinitionCountPair rulesetTypeCountPair in _definition.Ruleset.Inputs)
@@ -53,8 +64,24 @@ namespace ArcadeBridge.ArcadeIdleEngine.Processors.Transformers
             {
                 _itemsOnTransformationQueue = new List<Item>(6);
             }
+            //_inputArea = _inputInventory.GetComponent<InventoryCollectorTriggerArea>();
         }
 
+        public void SetDefinition(TransformerDefinition definition)
+        {
+            _definition = definition;
+        }
+        private void Start()
+        {
+            if (SaveLoadService.instance != null)
+            {
+                _carData = SaveLoadService.instance.CheckCarDataOrInstantiate(_definition.carIndex);
+
+                _alreadySpawnedOutputValue = _carData.workBenchAlreadySpawnedCount;
+
+                //_inputArea.SetAlreadySpawnedCount(_alreadySpawnedOutputValue);
+            }
+        }
         void Update()
         {
             if (_transforming)
@@ -67,15 +94,24 @@ namespace ArcadeBridge.ArcadeIdleEngine.Processors.Transformers
                     _transforming = false;
                 }
             }
-            
+
             if (_inputInventory.IsEmpty)
             {
                 return;
             }
 
+            if (_alreadySpawnedOutputValue >= _definition.Ruleset.Outputs.Length)
+                return;
+
+            /*if(SequenceOfActivities.Instance != null 
+                && SequenceOfActivities.Instance.GameFactory.ConstructedCar.ConstructedDetailsCount < _alreadySpawnedOutputValue)
+            {
+                return;
+            }*/
+
             // If we still need to pick something and we can pick something, start the timer.
             foreach (ItemDefinitionCountPair itemDefinitionCountPair in _definition.Ruleset.Inputs)
-            {
+            {                
                 if (_neededResources[itemDefinitionCountPair.ItemDefinition] <= 0)
                 {
                     continue;
@@ -85,6 +121,9 @@ namespace ArcadeBridge.ArcadeIdleEngine.Processors.Transformers
                 {
                     if (_collectingForTransformationTimer.IsCompleted)
                     {
+                        if(SaveLoadService.instance != null)
+                            SaveLoadService.instance.RemoveFromData(item);
+
                         _inputInventory.Remove(item);
                         AddToTransformationQueue(item);
                         _collectingForTransformationTimer.SetZero();
@@ -150,15 +189,35 @@ namespace ArcadeBridge.ArcadeIdleEngine.Processors.Transformers
                 }
             }
 
+            int j = 0;
             foreach (ItemDefinitionCountPair output in _definition.Ruleset.Outputs)
             {
+                if (j++ != _alreadySpawnedOutputValue)
+                {
+                    continue;
+                }
+
                 for (int i = 0; i < output.Count; i++)
                 {
                     Item p = output.ItemDefinition.Pool.Get();
                     p.transform.position = transform.position;
                     _outputInventory.AddVisible(p);
+
+                    if (SaveLoadService.instance != null)
+                    {
+                        SaveLoadService.instance.AddItemToData(p);
+                        SaveLoadService.instance.DelayedSaveProgress();
+                    }
                 }    
             }
+
+            if (_carData != null)
+            {
+                _carData.workBenchAlreadySpawnedCount = ++_alreadySpawnedOutputValue;
+                //_inputArea.SetAlreadySpawnedOutputValue(_alreadySpawnedOutputValue);
+            }
+
+            //if (_countOutputValue >= _definition.Ruleset.Outputs.Length) _countOutputValue = 0;
 
             foreach (ItemDefinitionCountPair rulesetTypeCountPair in _definition.Ruleset.Inputs)
             {

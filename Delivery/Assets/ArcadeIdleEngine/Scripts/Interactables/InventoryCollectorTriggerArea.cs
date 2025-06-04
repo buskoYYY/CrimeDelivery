@@ -16,6 +16,8 @@ namespace ArcadeBridge.ArcadeIdleEngine.Interactables
 		Dictionary<Inventory, Coroutine> _coroutineDictionary = new Dictionary<Inventory, Coroutine>();
 		ItemDefinitionCountPair[] _currentItemsToCollect;
 
+		private int _alreadySpawnedCount;
+		//[SerializeField] private bool _ignoreLimitOnInputItem;
 		void Awake()
 		{
 			_currentItemsToCollect = new ItemDefinitionCountPair[_itemsToCollect.Length];
@@ -25,9 +27,17 @@ namespace ArcadeBridge.ArcadeIdleEngine.Interactables
 				_currentItemsToCollect[i].Count = _itemsToCollect[i].Count;
 			}
 		}
-
+		public void SetAlreadySpawnedCount(int count)
+        {
+			_alreadySpawnedCount = count;
+		}
 		void OnTriggerEnter(Collider other)
 		{
+			/*if (SequenceOfActivities.Instance != null
+				&& SequenceOfActivities.Instance.GameFactory.ConstructedCar.ConstructedDetailsCount < _alreadySpawnedCount)
+			{
+				return;
+			}*/
 			if (other.TryGetComponent(out Inventory inventory))
 			{
 				_coroutineDictionary.Add(inventory, StartCoroutine(Co_Collect(inventory)));
@@ -38,12 +48,20 @@ namespace ArcadeBridge.ArcadeIdleEngine.Interactables
 		{
 			if (other.TryGetComponent(out Inventory inventory))
 			{
-				StopCoroutine(_coroutineDictionary[inventory]);
-				_coroutineDictionary.Remove(inventory);
-				_collectingIntervalTimer.SetZero();
+				if(_coroutineDictionary.TryGetValue(inventory, out Coroutine coroutine))
+                {
+					StopCoroutine(coroutine);
+					_coroutineDictionary.Remove(inventory);
+					_collectingIntervalTimer.SetZero();
+				}
+				//StopCoroutine(_coroutineDictionary[inventory]);
 			}
 		}
-
+		/*int _getItemCount;
+		public void ItemPlaced()
+        {
+			_getItemCount = 0;
+        }*/
 		IEnumerator Co_Collect(Inventory inventory)
 		{
 			while (true)
@@ -56,6 +74,12 @@ namespace ArcadeBridge.ArcadeIdleEngine.Interactables
 
 				if (_collectingIntervalTimer.IsCompleted)
 				{
+					/*if (!_ignoreLimitOnInputItem && _getItemCount > 0)
+					{
+						yield break;
+					}
+*/
+					//_getItemCount++;
 					for (int i = 0; i < _currentItemsToCollect.Length; i++)
 					{
 						if ((_itemsToCollect[i].Count > 0 && _currentItemsToCollect[i].Count <= 0) || !inventory.Contains(_currentItemsToCollect[i].ItemDefinition, out Item item))

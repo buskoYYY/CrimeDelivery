@@ -17,7 +17,8 @@ namespace ArcadeBridge.ArcadeIdleEngine.Interactables
 				MaxValue = maxValue;
 			}
 		}
-		
+
+		public float Duration => _duration;
 		[SerializeField] float _duration = 0.4f;
 		
 		float _value;

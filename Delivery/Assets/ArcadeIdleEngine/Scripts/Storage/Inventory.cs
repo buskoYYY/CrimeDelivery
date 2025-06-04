@@ -1,4 +1,5 @@
 using System;
+using ArcadeBridge.ArcadeIdleEngine.Actors;
 using ArcadeBridge.ArcadeIdleEngine.Interactables;
 using ArcadeBridge.ArcadeIdleEngine.Items;
 using UnityEngine;
@@ -8,6 +9,8 @@ namespace ArcadeBridge.ArcadeIdleEngine.Storage
 {
 	public class Inventory : MonoBehaviour
 	{
+		public InventoryVisible InventoryVisible => _inventoryVisible;
+
 		[SerializeField] InventoryInvisible _inventoryInvisible;
 		[SerializeField] InventoryVisible _inventoryVisible;
 		
@@ -59,7 +62,6 @@ namespace ArcadeBridge.ArcadeIdleEngine.Storage
 				AddInvisible(item);
 			}
 		}
-
 		public void AddVisible(Item item)
 		{
 			_inventoryVisible.Add(item);

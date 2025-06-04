@@ -6,9 +6,13 @@ using UnityEngine;
 public abstract class CarComponent: MonoBehaviour
 {
     public bool isActiveComponent = true;
+    public bool initialized;
+    public CarComponentsController carComponents;
 
-    public virtual void SetupComponent()
-    { }
+    public virtual void SetupComponent(CarComponentsController carComponentsController)
+    {
+        carComponents = carComponentsController;
+    }
 
     public virtual void StartRace()
     { }
