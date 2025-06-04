@@ -272,7 +272,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1578790013300168394}
   serializedVersion: 4
-  m_Mass: 150
+  m_Mass: 100
   m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -876,6 +876,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 352b7f423b8d0f9488b3e9d4b1137e50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isActiveComponent: 1
+  initialized: 0
+  carComponents: {fileID: 0}
   hitInfo:
     pushCollider: {fileID: 0}
     pushCarComponents: {fileID: 0}
@@ -1239,6 +1242,7 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   delayBetweenThrows: 0.05
+  loadedCount: 0
   loadedObjects: []
 --- !u!1 &2248499435650303072
 GameObject:
@@ -1367,7 +1371,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2443320566363380168}
   serializedVersion: 4
-  m_Mass: 150
+  m_Mass: 100
   m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
