@@ -16,6 +16,9 @@ public class RaceData
 
 public class RaceLogic : MonoBehaviour
 {
+    public GameData gameData;
+    public int difficultyIndex;
+
     public RaceData raceData;
 
     public DeliveryController deliveryController;
@@ -23,13 +26,31 @@ public class RaceLogic : MonoBehaviour
     public delegate void OnRaceCompleted(RaceData raceData);
     public event OnRaceCompleted OnRaceCompletedEvent;
 
+    public delegate void OnRaceStarted(RaceData raceData);
+    public event OnRaceStarted OnRaceStartedEvent;
+
     public GameoverController gameoverController;
 
     public PoliceSpawner policeSpawner;
     private CarComponentsController playerCar;
 
-    public void Initialize(CarComponentsController playerCar)
+    [SerializeField] private bool initAtStart;
+
+    private void Start()
     {
+        if (initAtStart)
+            Initialize(gameData);
+    }
+
+    public void Initialize(GameData gameData)
+    {
+        this.gameData = gameData;
+    }
+
+    public void StartRace(CarComponentsController playerCar)
+    {
+        OnRaceStartedEvent?.Invoke(raceData);
+
         this.playerCar = playerCar;
         deliveryController.Initialize(playerCar);
         deliveryController.OnDeliveredEvent += AddReward;
@@ -40,7 +61,16 @@ public class RaceLogic : MonoBehaviour
 
         policeSpawner.player = playerCar.carTrasform;
         policeSpawner.spawnPointsOnPlayer = playerCar.GetComponent<PoliceSpawnPointsObject>();
-        policeSpawner.Initialize(this);
+        
+        int difficultyCheck = difficultyIndex;
+        if (difficultyCheck >= gameData.difficultyDatabase.difficultyConfigs.Length || difficultyCheck < 0)
+        {
+            Debug.LogError($"Нет сложности {difficultyCheck}");
+            difficultyCheck = gameData.difficultyDatabase.difficultyConfigs.Length - 1;
+        }
+        policeSpawner.Initialize(this, gameData.difficultyDatabase.difficultyConfigs[difficultyCheck]);
+
+        
     }
 
     private void OnDisable()
