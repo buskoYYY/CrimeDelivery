@@ -46,7 +46,7 @@ namespace ArcadeBridge
 
             if (instance != null)
             {
-                Debug.LogWarning("SaveLoadService already has");
+                Debug.LogWarning("StaticDataService already has");
                 Destroy(gameObject);
                 return;
             }

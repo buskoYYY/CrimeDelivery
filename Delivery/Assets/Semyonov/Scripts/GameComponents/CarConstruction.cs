@@ -62,7 +62,7 @@ namespace ArcadeBridge
             Vector3 localPosition = StaticDataService.instance.GetLocalDetailPositionForCar(_carIndex, obj);
             Vector3 localRotation = StaticDataService.instance.GetLocalDetailRotationForFirstCar(_carIndex, obj);
 
-            Item detail = Instantiate<Item>(obj, transform);
+            Item detail = Instantiate<Item>(StaticDataService.instance.GetItem(obj.name), transform);
 
             detail.transform.localPosition = localPosition;
             detail.transform.localEulerAngles = localRotation;

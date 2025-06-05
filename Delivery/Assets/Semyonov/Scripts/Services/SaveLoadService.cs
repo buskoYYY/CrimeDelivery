@@ -37,6 +37,7 @@ namespace ArcadeBridge
                 return;
             }
             instance = this;
+            DontDestroyOnLoad(gameObject);
 
             if (!File.Exists(PlayerProgressPathFile))
             {
@@ -98,7 +99,7 @@ namespace ArcadeBridge
             }
         }
 
-        private int GetLastOpenedIndexCar()
+        public int GetLastOpenedIndexCar()
         {
             int index = 0; 
             foreach (CarData carData in PlayerProgress.cunstructedCars)
