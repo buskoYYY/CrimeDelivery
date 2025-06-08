@@ -24,6 +24,8 @@ public class GameoverController : MonoBehaviour
     {
         gameoverData.raceData = raceData;
 
+        SetupReward(raceData);
+    
         gameoverUI.GameoverUIStart(gameoverData);
     }
 
