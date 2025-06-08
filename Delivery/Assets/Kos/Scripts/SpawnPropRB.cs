@@ -14,6 +14,8 @@ namespace ArcadeBridge
         private Rigidbody _rb;
         private bool _isDestroying = false;
 
+        private bool scaleWithMainObject = true;
+
         private void Start()
         {
             _rb = GetComponent<Rigidbody>();
@@ -57,11 +59,14 @@ namespace ArcadeBridge
                 return;
             }
 
-            Instantiate(
+            GameObject propInstance =  Instantiate(
                 _rbProp, 
                 transform.position, 
                 spawnWithRotation ? transform.rotation : Quaternion.identity
             );
+
+            if (scaleWithMainObject)
+                propInstance.transform.localScale = transform.localScale;
 
             Destroy(gameObject);
         }
