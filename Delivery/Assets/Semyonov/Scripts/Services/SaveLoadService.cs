@@ -95,7 +95,6 @@ namespace ArcadeBridge
                 }
 
                 return index == -1 ? 0 : index + 1;
-                //return GetLastOpenedIndexCar() == 0 ? 0 : GetLastOpenedIndexCar() + 1;
             }
         }
 
