@@ -483,8 +483,13 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 336490982044645667, guid: f4a71e48b49e38449b48206c10841668,
         type: 3}
+      propertyPath: m_LocalScale.y
+      value: 2.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 336490982044645667, guid: f4a71e48b49e38449b48206c10841668,
+        type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.437
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 498797098814924023, guid: f4a71e48b49e38449b48206c10841668,
         type: 3}
@@ -694,7 +699,7 @@ PrefabInstance:
     - target: {fileID: 4425878787899652839, guid: f4a71e48b49e38449b48206c10841668,
         type: 3}
       propertyPath: m_TagString
-      value: Untagged
+      value: Car
       objectReference: {fileID: 0}
     - target: {fileID: 4607209711745889112, guid: f4a71e48b49e38449b48206c10841668,
         type: 3}
@@ -755,6 +760,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Enabled
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7711593212943176706, guid: f4a71e48b49e38449b48206c10841668,
+        type: 3}
+      propertyPath: m_CollisionDetection
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8252525079007514678, guid: f4a71e48b49e38449b48206c10841668,
         type: 3}
