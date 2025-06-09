@@ -1,58 +1,72 @@
-using AppodealStack.Monetization.Api;
 using AppodealStack.Monetization.Common;
-using Io.AppMetrica;
-using TMPro;
 using UnityEngine;
 
 namespace ArcadeBridge
 {
-    public class AppodealTest : MonoBehaviour, IRewardedVideoAdListener
+    public class Appodeal : MonoBehaviour, IRewardedVideoAdListener
     {
         private const string _appkey = "17bd909f221c8a33d00d1933661d5ddc70059d24f6f0faac";
 
-        [SerializeField] private int _score;
-        [SerializeField] private TextMeshProUGUI _scoreText;
-        
+        public static Appodeal Instance;
+
+        [SerializeField] private int _timeDelay = 30;
+        [SerializeField] private int _repeatRate = 30;
+
+        private int _score;
         private int _adTypes;
 
+        private void Awake()
+        {
+            if (Instance == null)
+            {
+                Instance = this;
+                DontDestroyOnLoad(gameObject); 
+            }
+            else
+            {
+                Destroy(gameObject); 
+            }
+        }
 
         private void Start()
         {
             _adTypes = AppodealAdType.Interstitial | AppodealAdType.Banner | AppodealAdType.RewardedVideo | AppodealAdType.Mrec;
             AppodealCallbacks.Sdk.OnInitialized += OnInitializationFinished;
             Initialized();
-        }
-
-        public void ShowInterstitialAds()
-        {
-            if(Appodeal.CanShow(AppodealAdType.Interstitial))
-            {
-                Appodeal.Show(AppodealAdType.Interstitial);
-            }
+            InvokeRepeating("ShowInterstitialAds", 30f, 30f);
         }
 
         public void ShowRewardAds() 
         {
-            if (Appodeal.IsLoaded(AppodealAdType.RewardedVideo))
+            if (AppodealStack.Monetization.Api.Appodeal.IsLoaded(AppodealAdType.RewardedVideo))
             {
-                Appodeal.Show(AppodealShowStyle.RewardedVideo);
+                AppodealStack.Monetization.Api.Appodeal.Show(AppodealShowStyle.RewardedVideo);
             }
         }
 
-        private void UpdateScore()
+        public int AddScore(int points)
         {
-            _scoreText.text = _score.ToString();
+            _score += points;
+            return _score;
         }
 
         public void OnInitializationFinished(object sender, SdkInitializedEventArgs e) {}
 
         private void Initialized()
         {
-            Appodeal.Initialize(_appkey, _adTypes);
+            AppodealStack.Monetization.Api.Appodeal.Initialize(_appkey, _adTypes);
 
-            Appodeal.MuteVideosIfCallsMuted(true);
+            AppodealStack.Monetization.Api.Appodeal.MuteVideosIfCallsMuted(true);
 
-            Appodeal.SetRewardedVideoCallbacks(this);
+           AppodealStack.Monetization.Api.Appodeal.SetRewardedVideoCallbacks(this);
+        }
+
+        private void ShowInterstitialAds()
+        {
+            if (AppodealStack.Monetization.Api.Appodeal.CanShow(AppodealAdType.Interstitial))
+            {
+                AppodealStack.Monetization.Api.Appodeal.Show(AppodealAdType.Interstitial);
+            }
         }
 
         #region RewardedVideoCallback
@@ -76,12 +90,10 @@ namespace ArcadeBridge
             print("Video shown");
         }
 
-        public void OnRewardedVideoClicked() 
+        public void OnRewardedVideoClicked()
         {
             print("Video is clicked");
         }
-
-
 
         public void OnRewardedVideoClosed(bool finished)
         {
@@ -95,11 +107,8 @@ namespace ArcadeBridge
 
         public void OnRewardedVideoFinished(double amount, string currency)
         {
-            _score++;
-            UpdateScore();
+            AddScore((int)amount);
         }
-
         #endregion
     }
-
 }
