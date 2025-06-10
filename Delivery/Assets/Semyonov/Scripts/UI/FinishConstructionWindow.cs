@@ -7,11 +7,6 @@ namespace ArcadeBridge
     {
         public event Action OnDestroyInvoked;
 
-        private void Start()
-        {
-            GetComponent<ViewCunstructedCar>().PreviewCar();
-            GetComponent<ViewCunstructedCar>().ShowCarPreview(SaveLoadService.instance.GetLastOpenedIndexCar());
-        }
         private void OnDestroy()
         {
             OnDestroyInvoked?.Invoke();

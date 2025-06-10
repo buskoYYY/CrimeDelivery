@@ -9,7 +9,9 @@ namespace ArcadeBridge
         public List<ItemData> itemDatasInInventory = new List<ItemData>();
         public List<CarData> cunstructedCars = new List<CarData>();
 
-        public int money = 500;
+        public int deliveriesCount;
+
+        public int money = 50000;
 
         public bool isWheelsPumped;
 

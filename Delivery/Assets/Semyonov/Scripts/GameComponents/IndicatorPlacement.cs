@@ -22,12 +22,15 @@ namespace ArcadeBridge
         private void Awake()
         {
             _gameFactory = GetComponent<GameFactory>();
-            _gameFactory.CreateIndicator(Vector3.zero);
-            _saveLoad = SaveLoadService.instance;
+            _saveLoad = GetComponent<SaveLoadService>();
+            _gameFactory.CreateIndicator(Vector3.zero); 
         }
-
-        private void Start()
+        private void Update()
         {
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                UpdatePlacement();
+            }
         }
         public void ClearSubscribes()
         {

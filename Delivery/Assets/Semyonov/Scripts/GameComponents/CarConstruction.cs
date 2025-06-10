@@ -42,7 +42,6 @@ namespace ArcadeBridge
         {
             //_inventoryCollectorTriggerArea.ItemPlaced();
             //SequenceOfActivities.Instance.GameFactory.WorkBenchSpawner.ObjectForInteraction.GetComponent<Transformer>().InputArea.ItemPlaced();
-            ClearCloneFromName.Clear(obj);
 
             DetailConstructed?.Invoke();
 
@@ -61,10 +60,9 @@ namespace ArcadeBridge
             }
 
             Vector3 localPosition = StaticDataService.instance.GetLocalDetailPositionForCar(_carIndex, obj);
-
             Vector3 localRotation = StaticDataService.instance.GetLocalDetailRotationForFirstCar(_carIndex, obj);
 
-            Item detail = Instantiate<Item>(StaticDataService.instance.GetItem(obj.name), transform);
+            Item detail = Instantiate<Item>(obj, transform);
 
             detail.transform.localPosition = localPosition;
             detail.transform.localEulerAngles = localRotation;

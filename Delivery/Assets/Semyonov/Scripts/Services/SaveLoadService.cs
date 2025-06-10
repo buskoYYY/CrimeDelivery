@@ -37,7 +37,6 @@ namespace ArcadeBridge
                 return;
             }
             instance = this;
-            DontDestroyOnLoad(gameObject);
 
             if (!File.Exists(PlayerProgressPathFile))
             {
@@ -55,6 +54,8 @@ namespace ArcadeBridge
                     return;
                 }
             }
+
+            DontDestroyOnLoad(gameObject);
 
             PlayerProgress = LoadProgress() ?? new PlayerProgress();
 
@@ -95,10 +96,11 @@ namespace ArcadeBridge
                 }
 
                 return index == -1 ? 0 : index + 1;
+                //return GetLastOpenedIndexCar() == 0 ? 0 : GetLastOpenedIndexCar() + 1;
             }
         }
 
-        public int GetLastOpenedIndexCar()
+        private int GetLastOpenedIndexCar()
         {
             int index = 0; 
             foreach (CarData carData in PlayerProgress.cunstructedCars)

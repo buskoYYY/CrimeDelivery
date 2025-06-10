@@ -48,7 +48,7 @@ public class MainMenuLogic : MonoBehaviour
         mainMenuUI.Hide();
         
         raceUI.Show();
-        carUIInfo.Initialize(playerCar, raceLogic);
+        carUIInfo.Initialize(playerCar);
         playerUIController.Initialize(playerCar);
         playerCar.StartRace();
     }
