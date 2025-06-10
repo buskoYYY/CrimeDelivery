@@ -1004,6 +1004,7 @@ GameObject:
   - component: {fileID: 23583219111342774}
   - component: {fileID: 64814764728080572}
   - component: {fileID: 64837277492678366}
+  - component: {fileID: 2605182680439411465}
   m_Layer: 0
   m_Name: SM_Veh_Ute_Preset_04 1
   m_TagString: Untagged
@@ -1160,6 +1161,30 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 43297589513721432, guid: 273949637f8c02945ad4ea766fb05e00, type: 2}
+--- !u!114 &2605182680439411465
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1174357115774214}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c60256c5f012f2240ab9966b2227744d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  id: 
+  carSettings:
+    driftControllerSettings:
+      Accel: 0
+      TopSpeed: 0
+      GripX: 0
+      GripZ: 0
+      RotateAtStart: 0
+      RotVel: 0
+    carNarrativeName: 
+    isDefault: 0
+    carPrice: 100
 --- !u!1 &1180921012650334
 GameObject:
   m_ObjectHideFlags: 0
