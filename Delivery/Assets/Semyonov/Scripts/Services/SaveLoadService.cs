@@ -37,7 +37,6 @@ namespace ArcadeBridge
                 return;
             }
             instance = this;
-            DontDestroyOnLoad(gameObject);
 
             if (!File.Exists(PlayerProgressPathFile))
             {
@@ -55,6 +54,8 @@ namespace ArcadeBridge
                     return;
                 }
             }
+
+            DontDestroyOnLoad(gameObject);
 
             PlayerProgress = LoadProgress() ?? new PlayerProgress();
 
