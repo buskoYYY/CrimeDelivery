@@ -205,12 +205,12 @@ MonoBehaviour:
     TagDependency: 0
     UnparentOnDestroy: 1
     StopEmittingOnDestroy: 0
-  velocityReduction: 0.5
+  velocityReduction: 0
   limitDamage: 1
-  minDamage: 75
-  maxDamage: 75
+  minDamage: 20
+  maxDamage: 30
   minDamageTime: 0
-  ignoreCollisionsUnder: 20
+  ignoreCollisionsUnder: 2
   unparentOnDestroy: []
   disableKinematicOnUparentedChildren: 1
   replaceMaterials: []

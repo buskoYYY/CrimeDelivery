@@ -33,7 +33,7 @@ namespace ArcadeBridge
             _adTypes = AppodealAdType.Interstitial | AppodealAdType.Banner | AppodealAdType.RewardedVideo | AppodealAdType.Mrec;
             AppodealCallbacks.Sdk.OnInitialized += OnInitializationFinished;
             Initialized();
-            InvokeRepeating("ShowInterstitialAds", 30f, 30f);
+            //InvokeRepeating("ShowInterstitialAds", 30f, 30f);
         }
 
         public void ShowRewardAds() 
@@ -61,7 +61,7 @@ namespace ArcadeBridge
            AppodealStack.Monetization.Api.Appodeal.SetRewardedVideoCallbacks(this);
         }
 
-        private void ShowInterstitialAds()
+        public void ShowInterstitialAds()
         {
             if (AppodealStack.Monetization.Api.Appodeal.CanShow(AppodealAdType.Interstitial))
             {

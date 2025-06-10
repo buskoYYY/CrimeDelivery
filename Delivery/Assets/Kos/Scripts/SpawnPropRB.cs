@@ -7,12 +7,14 @@ namespace ArcadeBridge
     public class SpawnPropRB : MonoBehaviour
     {
         [SerializeField] private GameObject _rbProp;
-        [SerializeField] private string carTag = "Player";
+        [SerializeField] private string carTag = "Car";
         [SerializeField] private bool spawnWithRotation = true;
         [SerializeField] private float delayBeforeSpawn = 5f; // Задержка перед спавном
 
         private Rigidbody _rb;
         private bool _isDestroying = false;
+
+        private bool scaleWithMainObject = true;
 
         private void Start()
         {
@@ -57,11 +59,14 @@ namespace ArcadeBridge
                 return;
             }
 
-            Instantiate(
-                _rbProp, 
-                transform.position, 
+            GameObject propInstance = Instantiate(
+                _rbProp,
+                transform.position,
                 spawnWithRotation ? transform.rotation : Quaternion.identity
             );
+
+            if (scaleWithMainObject)
+                propInstance.transform.localScale = transform.localScale;
 
             Destroy(gameObject);
         }

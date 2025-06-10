@@ -45,12 +45,13 @@ public class MainMenuLogic : MonoBehaviour
         raceLogic.Initialize(gameData);
         raceLogic.StartRace(playerCar);
 
-        mainMenuUI.Hide();
         
-        raceUI.Show();
-        carUIInfo.Initialize(playerCar);
         playerUIController.Initialize(playerCar);
         playerCar.StartRace();
+
+        mainMenuUI.Hide();
+        raceUI.Show();
+        carUIInfo.Initialize(playerCar);
     }
 
     public void SpawnPlayer(CarComponentsController playerCarPrefab, Transform spawnPoint)
