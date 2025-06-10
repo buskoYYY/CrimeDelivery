@@ -120,7 +120,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 6, y: 4.5593896, z: 8}
+  m_Size: {x: 7, y: 4.5593896, z: 9}
   m_Center: {x: 0, y: 2.63928, z: 0.0026710033}
 --- !u!114 &8748950277361302970
 MonoBehaviour:
@@ -134,30 +134,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1bbb502083c41048a8fedc6a9693be7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _totalHitPoints: 100
-  _currentHitPoints: 100
+  _totalHitPoints: 5
+  _currentHitPoints: 5
   damageLevels:
-  - maxHitPoints: 100
-    minHitPoints: 80.1
+  - maxHitPoints: 5
+    minHitPoints: 4.1
     healthPercent: 100
     hasError: 0
     visibleDamageLevel: 0
-  - maxHitPoints: 80
-    minHitPoints: 60.1
+  - maxHitPoints: 4
+    minHitPoints: 3.1
     healthPercent: 80
     hasError: 0
     visibleDamageLevel: 2
-  - maxHitPoints: 60
-    minHitPoints: 40.1
+  - maxHitPoints: 3
+    minHitPoints: 2.1
     healthPercent: 60
     hasError: 0
     visibleDamageLevel: 4
-  - maxHitPoints: 40
-    minHitPoints: 20.1
+  - maxHitPoints: 2
+    minHitPoints: 1.1
     healthPercent: 40
     hasError: 0
     visibleDamageLevel: 6
-  - maxHitPoints: 20
+  - maxHitPoints: 1
     minHitPoints: 0
     healthPercent: 20
     hasError: 0
@@ -178,8 +178,8 @@ MonoBehaviour:
     TagDependency: 0
     UnparentOnDestroy: 1
     StopEmittingOnDestroy: 0
-  velocityReduction: 0.5
-  limitDamage: 1
+  velocityReduction: 0.01
+  limitDamage: 0
   minDamage: 75
   maxDamage: 75
   minDamageTime: 0
@@ -266,7 +266,7 @@ MeshRenderer:
   m_DynamicOccludee: 1
   m_StaticShadowCaster: 0
   m_MotionVectors: 1
-  m_LightProbeUsage: 1
+  m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
   m_RayTraceProcedural: 0
@@ -343,30 +343,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1bbb502083c41048a8fedc6a9693be7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _totalHitPoints: 100
-  _currentHitPoints: 100
+  _totalHitPoints: 5
+  _currentHitPoints: 5
   damageLevels:
-  - maxHitPoints: 100
-    minHitPoints: 80.1
+  - maxHitPoints: 5
+    minHitPoints: 4.1
     healthPercent: 100
     hasError: 0
     visibleDamageLevel: 0
-  - maxHitPoints: 80
-    minHitPoints: 60.1
+  - maxHitPoints: 4
+    minHitPoints: 3.1
     healthPercent: 80
     hasError: 0
     visibleDamageLevel: 2
-  - maxHitPoints: 60
-    minHitPoints: 40.1
+  - maxHitPoints: 3
+    minHitPoints: 2.1
     healthPercent: 60
     hasError: 0
     visibleDamageLevel: 4
-  - maxHitPoints: 40
-    minHitPoints: 20.1
+  - maxHitPoints: 2
+    minHitPoints: 1.1
     healthPercent: 40
     hasError: 0
     visibleDamageLevel: 6
-  - maxHitPoints: 20
+  - maxHitPoints: 1
     minHitPoints: 0
     healthPercent: 20
     hasError: 0
@@ -387,12 +387,12 @@ MonoBehaviour:
     TagDependency: 0
     UnparentOnDestroy: 1
     StopEmittingOnDestroy: 0
-  velocityReduction: 0.5
-  limitDamage: 1
+  velocityReduction: 0.1
+  limitDamage: 0
   minDamage: 75
   maxDamage: 75
   minDamageTime: 0
-  ignoreCollisionsUnder: 15
+  ignoreCollisionsUnder: 10
   unparentOnDestroy: []
   disableKinematicOnUparentedChildren: 1
   replaceMaterials: []

@@ -7,7 +7,7 @@ namespace ArcadeBridge
     public class SpawnPropRB : MonoBehaviour
     {
         [SerializeField] private GameObject _rbProp;
-        [SerializeField] private string carTag = "Car";
+        [SerializeField] private string carTag = "Player";
         [SerializeField] private bool spawnWithRotation = true;
         [SerializeField] private float delayBeforeSpawn = 5f; // Задержка перед спавном
 
