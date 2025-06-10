@@ -1,3 +1,4 @@
+using ArcadeBridge;
 using UnityEngine;
 
 [System.Serializable]
@@ -23,6 +24,19 @@ public class GameoverController : MonoBehaviour
     public void Gameover(RaceData raceData)
     {
         gameoverData.raceData = raceData;
+
+        SetupReward(raceData);
+
+        if (SaveLoadService.instance != null)
+        {
+            SaveLoadService.instance.PlayerProgress.money += gameoverData.rewardSumm;
+            SaveLoadService.instance.PlayerProgress.deliveriesCount++;
+            SaveLoadService.instance.DelayedSaveProgress();
+        }
+        else
+        {
+            Debug.LogError("SaveLoadService is null");
+        }
 
         gameoverUI.GameoverUIStart(gameoverData);
     }

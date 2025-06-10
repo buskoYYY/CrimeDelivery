@@ -15,7 +15,7 @@ namespace ArcadeBridge
                 _objectForInteractionCurrent = null;
             }
             base.CreateObject();
-            SubscrabeForReturn();
+            //SubscrabeForReturn();
             
         }
         private void SubscrabeForReturn()

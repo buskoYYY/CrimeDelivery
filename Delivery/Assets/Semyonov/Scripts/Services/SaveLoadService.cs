@@ -55,6 +55,8 @@ namespace ArcadeBridge
                 }
             }
 
+            DontDestroyOnLoad(gameObject);
+
             PlayerProgress = LoadProgress() ?? new PlayerProgress();
 
             //if (database != null)
