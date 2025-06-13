@@ -201,10 +201,6 @@ namespace ArcadeBridge.ArcadeIdleEngine.Processors.Transformers
                 {
                     Item p = output.ItemDefinition.Pool.Get();
                     p.transform.position = transform.position;
-
-                    if(_alreadySpawnedOutputValue >= 4)
-                        p.transform.localScale = p.transform.localScale * 0.33f;
-
                     _outputInventory.AddVisible(p);
 
                     if (SaveLoadService.instance != null)

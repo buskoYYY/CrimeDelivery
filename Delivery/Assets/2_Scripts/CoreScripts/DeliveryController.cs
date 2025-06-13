@@ -7,7 +7,7 @@ public class DeliveryController : MonoBehaviour
     public List<DeliveryTarget> deliveryTargets = new List<DeliveryTarget>();
     
     public int summReward = 0;
-    public int activeTarget { get; private set; }  = -1;
+    private int activeTarget = -1;
 
     public delegate void OnDelivered(int reward);
     public event OnDelivered OnDeliveredEvent;

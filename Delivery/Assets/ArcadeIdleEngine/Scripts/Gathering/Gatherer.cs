@@ -34,14 +34,7 @@ namespace ArcadeBridge.ArcadeIdleEngine.Gathering
 
 				ClearCloneFromName.Clear(item);
 
-				Item item1 = Instantiate<Item>(item);
-
-				if(item1.ItemType == ItemType.Detail)
-                {
-					item1.transform.localScale = item1.transform.localScale * .33f;
-				}
-
-				items.Add(item1);
+				items.Add(Instantiate<Item>(item));
             }
 
 			StartCoroutine(DelayedAddItem(items, false));

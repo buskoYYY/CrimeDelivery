@@ -1,4 +1,5 @@
 ﻿using ArcadeBridge.ArcadeIdleEngine.Gathering;
+using System;
 using System.Collections;
 using UnityEngine;
 
@@ -24,12 +25,11 @@ namespace ArcadeBridge
             Instance = this;
 
             _gameFactory = GetComponent<GameFactory>();
+            _saveLoadService = GetComponent<SaveLoadService>();
             _indicatorPlacement = GetComponent<IndicatorPlacement>();
         }
         private void Start()
         {
-            _saveLoadService = SaveLoadService.instance;
-
             StartGame();
         }
         public void ClearGame()
@@ -88,7 +88,7 @@ namespace ArcadeBridge
 
             _gameFactory.CreateCarForPartsSpawner();
 
-            _gameFactory.CarForPartsSpawner.ObjectSpawned += AfterFistCarSpawned;
+            _gameFactory.CarForPartsSpawner.ObjectSpawned += AfterCarSpawned;
 
             _gameFactory.CarForPartsSpawner.GetComponent<CheckProgressCarForParts>().Init();
 
@@ -100,9 +100,20 @@ namespace ArcadeBridge
                 _gameFactory.WorkBenchSpawner.gameObject.SetActive(false);
             }
 
+            _gameFactory.ConstructedCar.DetailConstructed += OnDetailConstructed;
+
             _indicatorPlacement.Init();
 
             _indicatorPlacement.UpdatePlacement();
+        }
+
+        private void OnDetailConstructed()
+        {
+            if(!_gameFactory.CarForPartsSpawner.ObjectForInteraction
+                || !_gameFactory.CarForPartsSpawner.ObjectForInteraction.gameObject.activeSelf)
+            {
+                _gameFactory.CarForPartsSpawner.gameObject.SetActive(true);
+            }
         }
 
         private void ShowPumpSpawner()
@@ -112,14 +123,12 @@ namespace ArcadeBridge
             _gameFactory.PumpSpawner.gameObject.SetActive(true);
         }
 
-        private void AfterFistCarSpawned(ObjectForInteraction gatherableSource)
+        private void AfterCarSpawned(ObjectForInteraction gatherableSource)
         {
             if(_gatherableSource)
                 _gatherableSource.OnSetActiveFalse -= OnSatActiveFalseCarForParts;
 
             GatherableSource obj = gatherableSource.GetComponent<GatherableSource>();
-
-            _gameFactory.CarForPartsSpawner.ObjectSpawned -= AfterFistCarSpawned;
 
             _gatherableSource = obj;
 
@@ -162,11 +171,15 @@ namespace ArcadeBridge
             if (_gameFactory.CarForPartsSpawner)
             {
                 if(_gameFactory.CarForPartsSpawner.ObjectForInteraction)
-                    _gameFactory.CarForPartsSpawner.ObjectSpawned -= AfterFistCarSpawned;
+                    _gameFactory.CarForPartsSpawner.ObjectSpawned -= AfterCarSpawned;
             }
-            
-            if(_gameFactory.ConstructedCar)
-                 _gameFactory.ConstructedCar.WheelsPlaced -= ShowPumpSpawner;
+
+            if (_gameFactory.ConstructedCar)
+            {
+                _gameFactory.ConstructedCar.DetailConstructed -= OnDetailConstructed;
+
+                _gameFactory.ConstructedCar.WheelsPlaced -= ShowPumpSpawner;
+            }
 
         }
     }

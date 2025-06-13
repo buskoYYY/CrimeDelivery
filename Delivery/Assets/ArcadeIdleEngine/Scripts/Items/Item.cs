@@ -6,7 +6,6 @@ namespace ArcadeBridge.ArcadeIdleEngine.Items
     public class Item : MonoBehaviour
     {
         [SerializeField] ItemDefinition _definition;
-        [field:SerializeField] public ItemType ItemType { get; private set; }
         
         Vector3 _defaultLocalScale;
 
@@ -30,12 +29,5 @@ namespace ArcadeBridge.ArcadeIdleEngine.Items
                 _definition.Pool.Release(this);
 
         }
-    }
-    public enum ItemType
-    {
-        None = 0,
-        Wheel = 1,
-        Detail = 2,
-        SalableDetail = 3,
     }
 }
