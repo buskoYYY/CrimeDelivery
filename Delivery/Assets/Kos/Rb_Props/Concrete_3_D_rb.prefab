@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 8409386669488451225}
   - component: {fileID: 2227478708976402333}
   - component: {fileID: 6633216205989228672}
-  - component: {fileID: 7935692386269249568}
   - component: {fileID: -1822248526218234917}
   - component: {fileID: 1451010094882168086}
   - component: {fileID: 2241507808583435865}
@@ -125,22 +124,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 3.2626019, y: 1.108057, z: 0.7901855}
   m_Center: {x: 0, y: 0.563015, z: 0}
---- !u!114 &7935692386269249568
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7536278265735824727}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1c07d91f52de29b489d80d0f1fdbb171, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _rbProp: {fileID: 0}
-  carTag: Player
-  spawnWithRotation: 1
-  delayBeforeSpawn: 5
 --- !u!54 &-1822248526218234917
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -183,27 +166,27 @@ MonoBehaviour:
   _totalHitPoints: 100
   _currentHitPoints: 100
   damageLevels:
-  - maxHitPoints: 1
-    minHitPoints: 0.9
+  - maxHitPoints: 100
+    minHitPoints: 80.1
     healthPercent: 100
     hasError: 0
     visibleDamageLevel: 0
-  - maxHitPoints: 0.79999995
-    minHitPoints: 0.7
+  - maxHitPoints: 80
+    minHitPoints: 60.1
     healthPercent: 80
     hasError: 0
     visibleDamageLevel: 2
-  - maxHitPoints: 0.59999996
-    minHitPoints: 0.5
+  - maxHitPoints: 60
+    minHitPoints: 40.1
     healthPercent: 60
     hasError: 0
     visibleDamageLevel: 4
-  - maxHitPoints: 0.39999998
-    minHitPoints: 0.3
+  - maxHitPoints: 40
+    minHitPoints: 20.1
     healthPercent: 40
     hasError: 0
     visibleDamageLevel: 6
-  - maxHitPoints: 0.19999999
+  - maxHitPoints: 20
     minHitPoints: 0
     healthPercent: 20
     hasError: 0
