@@ -117,10 +117,18 @@ public class CarDamageHandler : MonoBehaviour
             ChangeHealth(-damage);
     }
 
+    public void ApplyHealth(float value)
+    {
+        if (carAlive)
+        {
+            ChangeHealth(value);
+        }
+    }
+
     public bool carAlive = true;
     private void ChangeHealth(float currentHealth)
     {
-        this.CurrentHealth += currentHealth;
+        Mathf.Clamp(this.CurrentHealth += currentHealth, 0, MaxHealth);
         OnUpdateHealthEvent?.Invoke(this.CurrentHealth, MaxHealth);
         if (this.CurrentHealth <= 0)
         {
