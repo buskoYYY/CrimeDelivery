@@ -71,7 +71,7 @@ namespace ArcadeBridge
                 && _saveLoadService.StageForNewCar >= _saveLoadService.database.carsConfigs.Count)
                 return;
 
-            if (_saveLoadService.StageForNewCar >= 4) 
+            if (_saveLoadService.StageForNewCar >= 5) 
                 return;
 
             _gameFactory.CreatePumpSpawner();
