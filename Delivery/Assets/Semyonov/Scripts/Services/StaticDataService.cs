@@ -46,7 +46,7 @@ namespace ArcadeBridge
 
             if (instance != null)
             {
-                Debug.LogWarning("SaveLoadService already has");
+                Debug.LogWarning("StaticDataService already has");
                 Destroy(gameObject);
                 return;
             }
@@ -117,7 +117,7 @@ namespace ArcadeBridge
             PositionsAndRotationsDetailForCar[] positionsAndRotationsForCar = _assetProvider.LoadAll<PositionsAndRotationsDetailForCar>(PositionsAndRotationsForCarPath);
             List<PositionsAndRotationsDetailForCar> positionsAndRotationsForCarList = new List<PositionsAndRotationsDetailForCar>(positionsAndRotationsForCar);
 
-            positionsAndRotationsForCarList.OrderBy(x => x.index).ToList();
+            positionsAndRotationsForCarList = positionsAndRotationsForCarList.OrderBy(x => x.index).ToList();
 
 
             for (int i = 0; i < positionsAndRotationsForCarList.Count; i++)
@@ -130,6 +130,7 @@ namespace ArcadeBridge
                     itemsPositions.Add(positionsAndRotationsForCarList[i].items[j].name, positionsAndRotationsForCarList[i].localPositions[j]);
                     itemsRotations.Add(positionsAndRotationsForCarList[i].items[j].name, positionsAndRotationsForCarList[i].localRotations[j]);
 
+                    //Debug.Log(positionsAndRotationsForCarList[i].items[j].name + " " + i);
                 }
 
                 _itemsPositionsForIndex.Add(itemsPositions);
