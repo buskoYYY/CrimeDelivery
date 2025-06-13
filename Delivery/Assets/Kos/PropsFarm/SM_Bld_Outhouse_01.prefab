@@ -150,7 +150,6 @@ GameObject:
   - component: {fileID: 4004459882257342}
   - component: {fileID: 33158544639057908}
   - component: {fileID: 23740204180069422}
-  - component: {fileID: 65939224131220968}
   - component: {fileID: 4328885944953450883}
   m_Layer: 0
   m_Name: SM_Bld_Outhouse_Door_01
@@ -227,27 +226,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65939224131220968
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1907879469744838}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1.120388, y: 2.1335006, z: 0.14881545}
-  m_Center: {x: -0.5326072, y: 1.0667503, z: 0.006228391}
 --- !u!114 &4328885944953450883
 MonoBehaviour:
   m_ObjectHideFlags: 0

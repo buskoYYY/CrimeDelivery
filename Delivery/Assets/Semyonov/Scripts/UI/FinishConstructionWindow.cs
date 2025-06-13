@@ -9,8 +9,8 @@ namespace ArcadeBridge
 
         private void Start()
         {
-            GetComponent<ViewCunstructedCar>().PreviewCar();
-            GetComponent<ViewCunstructedCar>().ShowCarPreview(SaveLoadService.instance.GetLastOpenedIndexCar());
+            //GetComponent<ViewCunstructedCar>().PreviewCar();
+           // GetComponent<ViewCunstructedCar>().ShowCarPreview(SaveLoadService.instance.GetLastOpenedIndexCar());
         }
         private void OnDestroy()
         {

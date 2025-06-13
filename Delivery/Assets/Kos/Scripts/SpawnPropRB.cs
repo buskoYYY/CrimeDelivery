@@ -65,8 +65,8 @@ namespace ArcadeBridge
                 spawnWithRotation ? transform.rotation : Quaternion.identity
             );
 
-            if (scaleWithMainObject)
-                propInstance.transform.localScale = transform.localScale;
+            //if (scaleWithMainObject)
+                //propInstance.transform.localScale = transform.localScale;
 
             Destroy(gameObject);
         }
