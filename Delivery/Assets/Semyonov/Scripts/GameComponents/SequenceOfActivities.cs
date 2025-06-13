@@ -25,11 +25,12 @@ namespace ArcadeBridge
             Instance = this;
 
             _gameFactory = GetComponent<GameFactory>();
-            _saveLoadService = GetComponent<SaveLoadService>();
             _indicatorPlacement = GetComponent<IndicatorPlacement>();
         }
         private void Start()
         {
+            _saveLoadService = SaveLoadService.instance;
+
             StartGame();
         }
         public void ClearGame()
