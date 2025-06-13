@@ -138,6 +138,7 @@ MonoBehaviour:
   carTag: Car
   spawnWithRotation: 1
   delayBeforeSpawn: 5
+  scaleWithMainObject: 0
 --- !u!1 &790878445934777258
 GameObject:
   m_ObjectHideFlags: 0
@@ -375,6 +376,7 @@ MonoBehaviour:
   carTag: Car
   spawnWithRotation: 1
   delayBeforeSpawn: 5
+  scaleWithMainObject: 0
 --- !u!1 &4152912808467716639
 GameObject:
   m_ObjectHideFlags: 0
@@ -675,13 +677,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5537823674262333646}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 5.830994, y: 0, z: 0.9492192}
+  m_LocalRotation: {x: -0, y: -0.503367, z: -0, w: 0.8640727}
+  m_LocalPosition: {x: 6.5339365, y: 0, z: 1.2718515}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6567637530072529807}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -60.446, z: 0}
 --- !u!33 &5497523277001381337
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -784,6 +786,7 @@ MonoBehaviour:
   carTag: Car
   spawnWithRotation: 1
   delayBeforeSpawn: 5
+  scaleWithMainObject: 0
 --- !u!1 &7006545595498820909
 GameObject:
   m_ObjectHideFlags: 0
@@ -813,13 +816,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7006545595498820909}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -5.730042, y: 0, z: -0.9300542}
+  m_LocalRotation: {x: -0, y: -0.54550695, z: -0, w: 0.83810633}
+  m_LocalPosition: {x: -6.590028, y: 0, z: -1.4400644}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6567637530072529807}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -66.119, z: 0}
 --- !u!33 &7038331379548194874
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -922,3 +925,4 @@ MonoBehaviour:
   carTag: Car
   spawnWithRotation: 1
   delayBeforeSpawn: 5
+  scaleWithMainObject: 0

@@ -126,6 +126,7 @@ MonoBehaviour:
   carTag: Car
   spawnWithRotation: 1
   delayBeforeSpawn: 5
+  scaleWithMainObject: 0
 --- !u!114 &7003299717118735681
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -264,6 +265,7 @@ MonoBehaviour:
   carTag: Car
   spawnWithRotation: 1
   delayBeforeSpawn: 5
+  scaleWithMainObject: 0
 --- !u!114 &2027680688219976012
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -426,13 +428,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6087807702594702876}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -5.8264923, y: 0, z: 0.94921875}
+  m_LocalRotation: {x: -0, y: 0.3965745, z: -0, w: 0.91800255}
+  m_LocalPosition: {x: -6.348999, y: 0, z: 0.98101807}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5092871820333453249}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 46.728, z: 0}
 --- !u!33 &7033088296409191691
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -523,6 +525,7 @@ MonoBehaviour:
   carTag: Car
   spawnWithRotation: 1
   delayBeforeSpawn: 5
+  scaleWithMainObject: 0
 --- !u!114 &6085442972626981623
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -564,13 +567,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7411650226806267969}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -5.8264923, y: 0, z: -0.9449768}
+  m_LocalRotation: {x: -0, y: -0.55381215, z: -0, w: 0.83264166}
+  m_LocalPosition: {x: -6.623993, y: 0, z: -1.4140015}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5092871820333453249}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -67.258, z: 0}
 --- !u!33 &8381987812394324578
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -661,6 +664,7 @@ MonoBehaviour:
   carTag: Car
   spawnWithRotation: 1
   delayBeforeSpawn: 5
+  scaleWithMainObject: 0
 --- !u!114 &6395056315618731325
 MonoBehaviour:
   m_ObjectHideFlags: 0
