@@ -5,8 +5,11 @@
 
         private void Start()
         {
-            GetComponent<ViewCunstructedCar>().PreviewCar();
-            GetComponent<ViewCunstructedCar>().ShowCarPreview(SaveLoadService.instance.GetLastOpenedIndexCar());
+            ViewCunstructedCar view = GetComponent<ViewCunstructedCar>();
+
+            view.PreviewCar();
+            view.ShowCarPreview(SaveLoadService.instance.GetLastOpenedIndexCar());
+            view.UpdateCarStatsUI();
         }
 
     }
