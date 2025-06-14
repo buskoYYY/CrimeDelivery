@@ -1,7 +1,6 @@
 using Doozy.Engine.UI;
 using UnityEngine;
 using TMPro;
-using UnityEngine.SceneManagement;
 
 public class GameoverUI : MonoBehaviour
 {
@@ -10,6 +9,8 @@ public class GameoverUI : MonoBehaviour
     [SerializeField] private TMP_Text rewardX;
     [SerializeField] private GameoverInfoPanelUI gameoverInfoPanelUI;
     [SerializeField] private Transform gameoverInfoLayout;
+    [SerializeField] private int score; // наше текущее количество очков
+    [SerializeField] private int points; // количество очков которое мы добавляем за просмотр рекламы
 
     [SerializeField] private UIButton takeMoney;
     [SerializeField] private UIButton takeXMoney;
@@ -33,11 +34,18 @@ public class GameoverUI : MonoBehaviour
 
     public void TakeMoney()
     {
-        SceneManager.LoadScene(0);
+        Appodeal.Instance.ShowInterstitialAds();
     }
 
     public void TakeXMoney()
     {
-        SceneManager.LoadScene(0);
+        Appodeal.Instance.ShowRewardAds();
+        UpdateScore();
+    }
+
+    private void UpdateScore()
+    {
+        score = Appodeal.Instance.AddScore(points);
+        // здесь нужно выводить и сохранять количество очков
     }
 }
