@@ -67,11 +67,13 @@ namespace ArcadeBridge.ArcadeIdleEngine.Actors
         {
             _animator.SetFloat(_interactionSpeedId, 1f / gatheringTool.GatheringToolDefinition.UseInterval);
             _animator.SetInteger(_interactionId, gatheringTool.GatheringToolDefinition.InteractionAnimationId);
+            _animator.SetLayerWeight(1, 1);
         }
         
         void Gatherer_Stopping()
         {
             _animator.SetInteger(_interactionId, -1);
+            _animator.SetLayerWeight(1, 0);
         }
     }
 }
