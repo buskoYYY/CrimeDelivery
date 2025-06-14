@@ -6,10 +6,12 @@ namespace ArcadeBridge
 {
     public class ConstructionCanvas : MonoBehaviour
     {
+        [SerializeField] private MenuWindow _menuPrefab;
         [SerializeField] private FinishConstructionWindow _finishConstructionWindowPrefab;
         [SerializeField] private UIJoystick _uIJoystick;
 
         private FinishConstructionWindow _finishConstructionWindow;
+        private MenuWindow _menu;
 
         public static ConstructionCanvas Instance { get; private set; }
         private void Awake()
@@ -21,37 +23,48 @@ namespace ArcadeBridge
             }
             Instance = this;
         }
+        public void ShowMenu()
+        {
+            if (_menu)
+            {
+                Destroy(_menu.gameObject);
+                return;
+            }
+
+            _uIJoystick.gameObject.SetActive(false);
+
+            _menu = Instantiate(_menuPrefab, transform);
+
+            _menu.OnDestroyInvoked += OnWindowDestroy;
+        }
         public void ShowFinishWindow()
         {
             _uIJoystick.gameObject.SetActive(false);
 
             _finishConstructionWindow = Instantiate(_finishConstructionWindowPrefab, transform);
 
-            _finishConstructionWindow.OnDestroyInvoked += OnFinishWindowDestroy;
+            _finishConstructionWindow.OnDestroyInvoked += OnWindowDestroy;
         }
 
-        private void OnFinishWindowDestroy()
+        private void OnWindowDestroy()
         {
+            if(_menu)
+                _menu.OnDestroyInvoked -= OnWindowDestroy;
+
+            if(_finishConstructionWindow)
+                 _finishConstructionWindow.OnDestroyInvoked -= OnWindowDestroy;
+
             _uIJoystick.gameObject.SetActive(true);
         }
 
-        /*bool isF;
-        private void Update()
+        private void OnDestroy()
         {
-            if (Input.GetKeyDown(KeyCode.Space))
-            {
-                if (!isF)
-                {
-                    isF = true;
-                    ShowFinishWindow();
-                }
-                else
-                {
-                    isF = false;
-                    _uIJoystick.gameObject.SetActive(true);
-                    Destroy(_finishConstructionWindow);
-                }
-            }
-        }*/
+            if (_menu)
+                _menu.OnDestroyInvoked -= OnWindowDestroy;
+
+            if (_finishConstructionWindow)
+                _finishConstructionWindow.OnDestroyInvoked -= OnWindowDestroy;
+
+        }
     }
 }
