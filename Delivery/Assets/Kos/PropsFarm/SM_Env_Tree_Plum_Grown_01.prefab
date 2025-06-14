@@ -13,8 +13,7 @@ GameObject:
   - component: {fileID: 23981213583727532}
   - component: {fileID: -6204750230432553686}
   - component: {fileID: 4150576430820914152}
-  - component: {fileID: 1796293164636963600}
-  - component: {fileID: 7968151854506881124}
+  - component: {fileID: 4326222081374366123}
   m_Layer: 0
   m_Name: SM_Env_Tree_Plum_Grown_01
   m_TagString: Untagged
@@ -117,26 +116,13 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
   m_Size: {x: 1, y: 3.740878, z: 1}
   m_Center: {x: 0, y: 1.7371376, z: 0}
---- !u!114 &1796293164636963600
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1940795324081892}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9ae5a7a1942384f45a292ce82d781740, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  effects: []
---- !u!114 &7968151854506881124
+--- !u!114 &4326222081374366123
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -145,91 +131,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1940795324081892}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b1bbb502083c41048a8fedc6a9693be7, type: 3}
+  m_Script: {fileID: 11500000, guid: 1c07d91f52de29b489d80d0f1fdbb171, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _totalHitPoints: 100
-  _currentHitPoints: 100
-  damageLevels:
-  - maxHitPoints: 100
-    minHitPoints: 80.1
-    healthPercent: 100
-    hasError: 0
-    visibleDamageLevel: 0
-  - maxHitPoints: 80
-    minHitPoints: 60.1
-    healthPercent: 80
-    hasError: 0
-    visibleDamageLevel: 2
-  - maxHitPoints: 60
-    minHitPoints: 40.1
-    healthPercent: 60
-    hasError: 0
-    visibleDamageLevel: 4
-  - maxHitPoints: 40
-    minHitPoints: 20.1
-    healthPercent: 40
-    hasError: 0
-    visibleDamageLevel: 6
-  - maxHitPoints: 20
-    minHitPoints: 0
-    healthPercent: 20
-    hasError: 0
-    visibleDamageLevel: 8
-  destroyedPrefab: {fileID: 0}
-  destroyedPrefabParent: {fileID: 0}
-  fallbackParticle: {fileID: 19800004, guid: 6b46cad447c64dd48b8b715df6e3d2ad, type: 3}
-  fallbackParticleMatOption: 0
-  damageEffects:
-  - TriggeredAt: 5
-    Offset: {x: 0, y: 3, z: 0}
-    Rotation: {x: 0, y: 0, z: 0}
-    Scale: {x: 1, y: 1, z: 1}
-    Prefab: {fileID: 1195355222857084, guid: e1f07a01efae1064dba8ddfe26fa2d11, type: 3}
-    GameObject: {fileID: 0}
-    HasStarted: 0
-    HasTagDependency: 0
-    TagDependency: 0
-    UnparentOnDestroy: 1
-    StopEmittingOnDestroy: 0
-  - TriggeredAt: 5
-    Offset: {x: 0, y: 1, z: 0}
-    Rotation: {x: 0, y: 0, z: 0}
-    Scale: {x: 1, y: 1, z: 1}
-    Prefab: {fileID: 100002, guid: cbd6d1780d52264478a508c3f63cd802, type: 3}
-    GameObject: {fileID: 0}
-    HasStarted: 0
-    HasTagDependency: 0
-    TagDependency: 0
-    UnparentOnDestroy: 1
-    StopEmittingOnDestroy: 0
-  velocityReduction: 0.5
-  limitDamage: 1
-  minDamage: 75
-  maxDamage: 75
-  minDamageTime: 0
-  ignoreCollisionsUnder: 20
-  unparentOnDestroy: []
-  disableKinematicOnUparentedChildren: 1
-  replaceMaterials: []
-  replaceParticleMats: []
-  canBeDestroyed: 1
-  canBeRepaired: 0
-  debrisToReParentByName: []
-  debrisToReParentIsKinematic: 0
-  childrenToReParentByName: []
-  isDebrisChipAway: 0
-  chipAwayDebrisMass: 1
-  chipAwayDebrisDrag: 0
-  chipAwayDebrisAngularDrag: 0.05
-  autoPoolDestroyedPrefab: 1
-  useFallbackParticle: 0
-  centerPointOverride: {x: 0, y: 0, z: 0}
-  fallbackParticleScale: {x: 1, y: 1, z: 1}
-  fallbackParticleParent: {fileID: 0}
-  sinkWhenDestroyed: 0
-  shouldDeactivate: 0
-  isTerrainTree: 0
-  destroyedSound: {fileID: 0}
-  damagedSound: {fileID: 0}
-  repairedSound: {fileID: 0}
+  _rbProp: {fileID: 5684956132604683984, guid: 1e9846ea8554eae41bb95d363bc282ba, type: 3}
+  carTag: Car
+  spawnWithRotation: 1
+  delayBeforeSpawn: 5

@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 31019182357689107}
   - component: {fileID: 3714116603708336044}
   - component: {fileID: 282577074107743903}
-  - component: {fileID: 2063880732851625242}
   - component: {fileID: 1820941201987012603}
   - component: {fileID: 6247350789069016042}
   m_Layer: 0
@@ -111,19 +110,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 6.2598214, y: 0.23383889, z: 0.14851806}
   m_Center: {x: -2.9329674, y: -0.0013502128, z: 0.07425903}
---- !u!114 &2063880732851625242
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2669481268604405806}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d3dbf5a679affaa4f8cdc6a7adcd4e4b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  tags: 11000000
 --- !u!114 &1820941201987012603
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -164,8 +150,8 @@ GameObject:
   - component: {fileID: 7395859592107053865}
   - component: {fileID: 2698107219793820819}
   - component: {fileID: 6745763382615533839}
-  - component: {fileID: 7398036059843853435}
   - component: {fileID: 2869704658297692326}
+  - component: {fileID: 8491382699562250820}
   m_Layer: 0
   m_Name: Gate_1
   m_TagString: Untagged
@@ -257,88 +243,13 @@ MeshCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 5
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 43124544146015446, guid: b0c12f2db9d26ee46859c8b2c4c1799c, type: 2}
---- !u!114 &7398036059843853435
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6239242877447728549}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b1bbb502083c41048a8fedc6a9693be7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _totalHitPoints: 100
-  _currentHitPoints: 100
-  damageLevels:
-  - maxHitPoints: 100
-    minHitPoints: 80.1
-    healthPercent: 100
-    hasError: 0
-    visibleDamageLevel: 0
-  - maxHitPoints: 80
-    minHitPoints: 60.1
-    healthPercent: 80
-    hasError: 0
-    visibleDamageLevel: 2
-  - maxHitPoints: 60
-    minHitPoints: 40.1
-    healthPercent: 60
-    hasError: 0
-    visibleDamageLevel: 4
-  - maxHitPoints: 40
-    minHitPoints: 20.1
-    healthPercent: 40
-    hasError: 0
-    visibleDamageLevel: 6
-  - maxHitPoints: 20
-    minHitPoints: 0
-    healthPercent: 20
-    hasError: 0
-    visibleDamageLevel: 8
-  destroyedPrefab: {fileID: 0}
-  destroyedPrefabParent: {fileID: 0}
-  fallbackParticle: {fileID: 19800002, guid: 57c55d09e6ab296408c349462a6cf5c1, type: 3}
-  fallbackParticleMatOption: 0
-  damageEffects: []
-  velocityReduction: 0.8
-  limitDamage: 1
-  minDamage: 75
-  maxDamage: 75
-  minDamageTime: 0
-  ignoreCollisionsUnder: 20
-  unparentOnDestroy: []
-  disableKinematicOnUparentedChildren: 1
-  replaceMaterials: []
-  replaceParticleMats: []
-  canBeDestroyed: 1
-  canBeRepaired: 0
-  debrisToReParentByName: []
-  debrisToReParentIsKinematic: 0
-  childrenToReParentByName: []
-  isDebrisChipAway: 0
-  chipAwayDebrisMass: 1
-  chipAwayDebrisDrag: 0
-  chipAwayDebrisAngularDrag: 0.05
-  autoPoolDestroyedPrefab: 1
-  useFallbackParticle: 1
-  centerPointOverride: {x: 2.9, y: 0.75, z: 0.1}
-  fallbackParticleScale: {x: 1, y: 1, z: 1}
-  fallbackParticleParent: {fileID: 0}
-  sinkWhenDestroyed: 0
-  shouldDeactivate: 0
-  isTerrainTree: 0
-  destroyedSound: {fileID: 0}
-  damagedSound: {fileID: 0}
-  repairedSound: {fileID: 0}
 --- !u!114 &2869704658297692326
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -351,3 +262,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5912a704ec4dfaf43b0af99b458a1611, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &8491382699562250820
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6239242877447728549}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c07d91f52de29b489d80d0f1fdbb171, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _rbProp: {fileID: 4813635679773716190, guid: b4c4b6543b307ba4790a9cf0a5873455, type: 3}
+  carTag: Car
+  spawnWithRotation: 1
+  delayBeforeSpawn: 5

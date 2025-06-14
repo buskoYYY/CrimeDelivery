@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 2291080464245884554}
   - component: {fileID: 2171298307613821126}
   - component: {fileID: 5034719062065624744}
+  - component: {fileID: 7047277523584142699}
   m_Layer: 0
   m_Name: nuclear-power
   m_TagString: Untagged
@@ -52,12 +53,12 @@ MeshRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9071969722186122735}
   m_Enabled: 1
-  m_CastShadows: 1
+  m_CastShadows: 0
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
   m_StaticShadowCaster: 0
   m_MotionVectors: 1
-  m_LightProbeUsage: 1
+  m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
   m_RayTraceProcedural: 0
@@ -152,3 +153,15 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 6, y: 12, z: 8.8}
   m_Center: {x: -9.5, y: 6, z: 9.1}
+--- !u!114 &7047277523584142699
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9071969722186122735}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5912a704ec4dfaf43b0af99b458a1611, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

@@ -1,20 +1,13 @@
-﻿using System;
-using UnityEngine;
-
-namespace ArcadeBridge
+﻿namespace ArcadeBridge
 {
-    public class FinishConstructionWindow: MonoBehaviour
+    public class FinishConstructionWindow: Window
     {
-        public event Action OnDestroyInvoked;
 
         private void Start()
         {
             GetComponent<ViewCunstructedCar>().PreviewCar();
             GetComponent<ViewCunstructedCar>().ShowCarPreview(SaveLoadService.instance.GetLastOpenedIndexCar());
         }
-        private void OnDestroy()
-        {
-            OnDestroyInvoked?.Invoke();
-        }
+
     }
 }

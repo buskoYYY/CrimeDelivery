@@ -14,7 +14,7 @@ namespace ArcadeBridge
         private Rigidbody _rb;
         private bool _isDestroying = false;
 
-        private bool scaleWithMainObject = true;
+        [SerializeField] private bool scaleWithMainObject = true;
 
         private void Start()
         {

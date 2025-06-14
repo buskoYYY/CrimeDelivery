@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 2169771634786662435}
   - component: {fileID: 7362319433041671473}
   - component: {fileID: 1954307360958154512}
-  - component: {fileID: 4091553763861211821}
-  - component: {fileID: 135495351955982437}
+  - component: {fileID: -2476796854711476319}
+  - component: {fileID: -7014863145995265217}
   m_Layer: 0
   m_Name: Crate_02
   m_TagString: Untagged
@@ -89,8 +89,8 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &4091553763861211821
-MeshCollider:
+--- !u!65 &-2476796854711476319
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -104,14 +104,13 @@ MeshCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 43997685153764880, guid: e513f8181b6d2d74c874426396b40eae, type: 2}
---- !u!114 &135495351955982437
+  serializedVersion: 3
+  m_Size: {x: 1.4893506, y: 1.8698612, z: 3.927988}
+  m_Center: {x: -0.0000024437904, y: 0.9349306, z: 0.000017106533}
+--- !u!114 &-7014863145995265217
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -120,72 +119,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 402376919281273827}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b1bbb502083c41048a8fedc6a9693be7, type: 3}
+  m_Script: {fileID: 11500000, guid: 1c07d91f52de29b489d80d0f1fdbb171, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _totalHitPoints: 100
-  _currentHitPoints: 100
-  damageLevels:
-  - maxHitPoints: 100
-    minHitPoints: 80.1
-    healthPercent: 100
-    hasError: 0
-    visibleDamageLevel: 0
-  - maxHitPoints: 80
-    minHitPoints: 60.1
-    healthPercent: 80
-    hasError: 0
-    visibleDamageLevel: 2
-  - maxHitPoints: 60
-    minHitPoints: 40.1
-    healthPercent: 60
-    hasError: 0
-    visibleDamageLevel: 4
-  - maxHitPoints: 40
-    minHitPoints: 20.1
-    healthPercent: 40
-    hasError: 0
-    visibleDamageLevel: 6
-  - maxHitPoints: 20
-    minHitPoints: 0
-    healthPercent: 20
-    hasError: 0
-    visibleDamageLevel: 8
-  destroyedPrefab: {fileID: 0}
-  destroyedPrefabParent: {fileID: 0}
-  fallbackParticle: {fileID: 19800004, guid: 6b46cad447c64dd48b8b715df6e3d2ad, type: 3}
-  fallbackParticleMatOption: 0
-  damageEffects: []
-  velocityReduction: 0.5
-  limitDamage: 1
-  minDamage: 75
-  maxDamage: 75
-  minDamageTime: 0
-  ignoreCollisionsUnder: 25
-  unparentOnDestroy: []
-  disableKinematicOnUparentedChildren: 1
-  replaceMaterials: []
-  replaceParticleMats: []
-  canBeDestroyed: 1
-  canBeRepaired: 0
-  debrisToReParentByName: []
-  debrisToReParentIsKinematic: 0
-  childrenToReParentByName: []
-  isDebrisChipAway: 0
-  chipAwayDebrisMass: 1
-  chipAwayDebrisDrag: 0
-  chipAwayDebrisAngularDrag: 0.05
-  autoPoolDestroyedPrefab: 1
-  useFallbackParticle: 1
-  centerPointOverride: {x: 0, y: 0, z: 0}
-  fallbackParticleScale: {x: 1, y: 1, z: 1}
-  fallbackParticleParent: {fileID: 0}
-  sinkWhenDestroyed: 0
-  shouldDeactivate: 0
-  isTerrainTree: 0
-  destroyedSound: {fileID: 0}
-  damagedSound: {fileID: 0}
-  repairedSound: {fileID: 0}
+  _rbProp: {fileID: 8154503887934774543, guid: d9eea86a88230be40bc25a236b5dbe01, type: 3}
+  carTag: Car
+  spawnWithRotation: 1
+  delayBeforeSpawn: 5
 --- !u!1 &8813101930114197796
 GameObject:
   m_ObjectHideFlags: 0
