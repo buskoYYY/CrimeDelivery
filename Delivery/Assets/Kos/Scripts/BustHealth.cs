@@ -1,5 +1,5 @@
+using System.Collections.Generic;
 using UnityEngine;
-using DestroyIt;
 
 namespace ArcadeBridge
 {
@@ -10,7 +10,7 @@ namespace ArcadeBridge
         [SerializeField] private bool destroyAfterEffect = true;
         [SerializeField] private ParticleSystem healEffect;
         [SerializeField] private float healAmount = 100f; // Количество восстанавливаемого HP
-        
+
         private bool _isProcessing;
 
         private void OnTriggerEnter(Collider other)
@@ -33,7 +33,12 @@ namespace ArcadeBridge
 
         private void AddHealth(CarDamageHandler carDamageHandler)
         {
-            healAmount = carDamageHandler.MaxHealth - carDamageHandler.CurrentHealth;
+            float _hp = carDamageHandler.MaxHealth - carDamageHandler.CurrentHealth;
+            if (healAmount > _hp)
+            {
+                carDamageHandler.ApplyHealth(_hp);
+            }
+            else
             carDamageHandler.ApplyHealth(healAmount);
 
             // Визуальный эффект

@@ -5,7 +5,7 @@ namespace ArcadeBridge
     public class CarRotate : MonoBehaviour
     {
         [Header("Rotation Settings")]
-        [SerializeField] private float rotationSpeed = 90f; // Скорость вращения в градусах/секунду
+        [SerializeField] private float rotationSpeed = 270f; // Скорость вращения в градусах/секунду
         [SerializeField] private bool clockwise = true; // Направление вращения
         
         void Update()
