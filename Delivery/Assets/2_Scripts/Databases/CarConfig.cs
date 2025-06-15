@@ -3,6 +3,7 @@ using UnityEngine;
 public class CarConfig : MonoBehaviour
 {
     public string id;
+    public int constructionID = -1;
     public CarSettings carSettings;
 }
 

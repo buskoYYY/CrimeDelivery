@@ -25,7 +25,7 @@ namespace ArcadeBridge
         [SerializeField] private TMP_Text rotVelText;
 
 
-        [SerializeField] private List<GameObject> cars = new List<GameObject>();
+        [SerializeField] private CarsDatabase _carsDatabase;
         private GameObject currentCarInstance;
         private RenderTexture renderTexture;
         private int currentCarIndex = -1;
@@ -48,7 +48,7 @@ namespace ArcadeBridge
             previewImage.texture = renderTexture;
         }
 
-        public void ShowCarPreview(int carIndex)
+        public void ShowCarPreview(int carConstructingIndex)
         {
             // Удаляем предыдущую машину
             if (currentCarInstance != null)
@@ -56,52 +56,58 @@ namespace ArcadeBridge
                 Destroy(currentCarInstance);
             }
 
+            CarConfig carConfig = _carsDatabase.carsConfigs.Find(car => car.constructionID == carConstructingIndex);
+            GameObject car = carConfig.gameObject;
+
             // Проверяем валидность индекса
-            if (carIndex < 0 || carIndex >= cars.Count)
+            if (carConstructingIndex < 0 
+                || carConstructingIndex >= _carsDatabase.carsConfigs.Count
+                || car == null)
             {
                 Debug.LogError("Invalid car index!");
                 return;
             }
 
+
             // Создаем новую машину
-            currentCarInstance = Instantiate(cars[carIndex], spawnParent);
+            currentCarInstance = Instantiate(car, spawnParent);
             currentCarInstance.transform.localPosition = spawnPosition;
             currentCarInstance.transform.localRotation = Quaternion.Euler(spawnRotation);
 
             // Устанавливаем слой для рендеринга
             SetLayerRecursively(currentCarInstance.transform, renderLayer);
-            currentCarIndex = carIndex;
+            currentCarIndex = _carsDatabase.carsConfigs.IndexOf(carConfig);
 
             // Активируем камеру
             renderCamera.gameObject.SetActive(true);
         }
         public void UpdateCarStatsUI()
         {
-            if (currentCarIndex < 0 || currentCarIndex >= cars.Count)
+            if (currentCarIndex < 0 || currentCarIndex >= _carsDatabase.carsConfigs.Count)
             {
                 Debug.LogWarning("Invalid car index");
                 return;
             }
 
             // Получаем компонент CarConfig
-            var carConfig = cars[currentCarIndex].GetComponent<CarConfig>();
+            var carConfig = _carsDatabase.carsConfigs[currentCarIndex].GetComponent<CarConfig>();
             if (carConfig == null)
             {
-                Debug.LogWarning($"CarConfig not found on {cars[currentCarIndex].name}");
+                Debug.LogWarning($"CarConfig not found on {_carsDatabase.carsConfigs[currentCarIndex].name}");
                 return;
             }
 
             // Проверяем CarSettings
             if (carConfig.carSettings == null)
             {
-                Debug.LogWarning($"CarSettings not assigned in CarConfig on {cars[currentCarIndex].name}");
+                Debug.LogWarning($"CarSettings not assigned in CarConfig on {_carsDatabase.carsConfigs[currentCarIndex].name}");
                 return;
             }
 
             // Проверяем DriftControllerSettings
             if (carConfig.carSettings.driftControllerSettings == null)
             {
-                Debug.LogWarning($"DriftControllerSettings not assigned in CarSettings on {cars[currentCarIndex].name}");
+                Debug.LogWarning($"DriftControllerSettings not assigned in CarSettings on {_carsDatabase.carsConfigs[currentCarIndex].name}");
                 return;
             }
 

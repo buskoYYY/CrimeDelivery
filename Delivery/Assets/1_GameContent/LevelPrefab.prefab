@@ -8394,8 +8394,9 @@ GameObject:
   - component: {fileID: 2736921636662817044}
   - component: {fileID: 1987659669395446067}
   - component: {fileID: 5681069051728328812}
+  - component: {fileID: 6315762802184801069}
   m_Layer: 0
-  m_Name: Button
+  m_Name: ButtonGarage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10779,6 +10780,22 @@ MonoBehaviour:
     PresetName: 
   TargetLabel: 2
   TextLabel: {fileID: 0}
+--- !u!114 &6315762802184801069
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2973662508931551488}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41a9e56799cb195448acae454b0c0cdc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SceneName: Garage
+  _canvas: {fileID: 2026114223693862448}
+  _loadingWindowPrefab: {fileID: 2895974186196610722, guid: 4e953bda1effa8348b6a0e34b33ea3e3,
+    type: 3}
 --- !u!1 &3220579566547829087
 GameObject:
   m_ObjectHideFlags: 0
