@@ -203,6 +203,9 @@ namespace ArcadeBridge.ArcadeIdleEngine.Processors.Transformers
                     p.transform.position = transform.position;
                     _outputInventory.AddVisible(p);
 
+                    if (_alreadySpawnedOutputValue >= 4)
+                        p.transform.localScale = p.transform.localScale * 0.33f;
+
                     if (SaveLoadService.instance != null)
                     {
                         SaveLoadService.instance.AddItemToData(p);

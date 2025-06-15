@@ -32,9 +32,16 @@ namespace ArcadeBridge.ArcadeIdleEngine.Gathering
             {
 				Item item = StaticDataService.instance.GetItem(itemData.name);
 
-				ClearCloneFromName.Clear(item);
+				Item item1 = Instantiate<Item>(item);
 
-				items.Add(Instantiate<Item>(item));
+				ClearCloneFromName.Clear(item1);
+
+				if (item1.ItemType == ItemType.Detail)
+				{
+					item1.transform.localScale = item1.transform.localScale * .33f;
+				}
+
+				items.Add(item1);
             }
 
 			StartCoroutine(DelayedAddItem(items, false));
