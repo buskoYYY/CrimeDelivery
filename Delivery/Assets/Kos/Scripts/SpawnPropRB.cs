@@ -3,6 +3,7 @@ using System.Collections;
 
 namespace ArcadeBridge
 {
+
     [RequireComponent(typeof(Collider))]
     public class SpawnPropRB : MonoBehaviour
     {
@@ -15,6 +16,10 @@ namespace ArcadeBridge
         private bool _isDestroying = false;
 
         [SerializeField] private bool scaleWithMainObject = true;
+
+        private bool isRbMassOvveride = true;
+        private int ovverideMassIndex = 0; //(1)мелкие объекты 150 // (2)столбы, деревья 800 // (3)отбойники 1500
+        private int[] masses = new int[] { 150, 800, 1500 };
 
         private void Start()
         {
@@ -67,6 +72,14 @@ namespace ArcadeBridge
 
             if (scaleWithMainObject)
                 propInstance.transform.localScale = transform.localScale;
+
+            if (isRbMassOvveride && propInstance.TryGetComponent<Rigidbody>(out Rigidbody propRigidbody))
+            {
+                if (ovverideMassIndex > masses.Length - 1)
+                    ovverideMassIndex = 0;
+
+                propRigidbody.mass = masses[ovverideMassIndex];
+            }
 
             Destroy(gameObject);
         }
