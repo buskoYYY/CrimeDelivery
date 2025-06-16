@@ -17,8 +17,8 @@ namespace ArcadeBridge
 
         [SerializeField] private bool scaleWithMainObject = true;
 
-        private bool isRbMassOvveride = true;
-        private int ovverideMassIndex = 0; //(1)мелкие объекты 150 // (2)столбы, деревья 800 // (3)отбойники 1500
+        [SerializeField] private bool isRbMassOvveride = true;
+        [SerializeField] private int ovverideMassIndex = 0; //(1)мелкие объекты 150 // (2)столбы, деревья 800 // (3)отбойники 1500
         private int[] masses = new int[] { 150, 800, 1500 };
 
         private void Start()
