@@ -14,8 +14,8 @@ GameObject:
   - component: {fileID: 123930699051281823}
   - component: {fileID: 4390206482146567352}
   - component: {fileID: -4890812329476298504}
-  - component: {fileID: 1000413169749580757}
   - component: {fileID: -6517358109272076095}
+  - component: {fileID: 5295313497370063461}
   m_Layer: 0
   m_Name: SM_Env_Tree_Lemon_01_rb
   m_TagString: Untagged
@@ -151,7 +151,23 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &1000413169749580757
+--- !u!114 &-6517358109272076095
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1863833258779825631}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2173075f949abe34cbac509d346178e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  seconds: 5
+  reenableChildren: 0
+  removeWhenPooled: 0
+  resetToPrefab: 0
+--- !u!114 &5295313497370063461
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -197,7 +213,7 @@ MonoBehaviour:
   fallbackParticleMatOption: 0
   damageEffects:
   - TriggeredAt: 0
-    Offset: {x: 0, y: 2, z: 0}
+    Offset: {x: 0, y: 3, z: 0}
     Rotation: {x: 0, y: 0, z: 0}
     Scale: {x: 1, y: 1, z: 1}
     Prefab: {fileID: 1195355222857084, guid: e1f07a01efae1064dba8ddfe26fa2d11, type: 3}
@@ -207,7 +223,7 @@ MonoBehaviour:
     TagDependency: 0
     UnparentOnDestroy: 1
     StopEmittingOnDestroy: 0
-  velocityReduction: 0
+  velocityReduction: 0.5
   limitDamage: 0
   minDamage: 10
   maxDamage: 100
@@ -217,7 +233,7 @@ MonoBehaviour:
   disableKinematicOnUparentedChildren: 1
   replaceMaterials: []
   replaceParticleMats: []
-  canBeDestroyed: 1
+  canBeDestroyed: 0
   canBeRepaired: 0
   debrisToReParentByName: []
   debrisToReParentIsKinematic: 0
@@ -237,19 +253,3 @@ MonoBehaviour:
   destroyedSound: {fileID: 0}
   damagedSound: {fileID: 0}
   repairedSound: {fileID: 0}
---- !u!114 &-6517358109272076095
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1863833258779825631}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2173075f949abe34cbac509d346178e1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  seconds: 5
-  reenableChildren: 0
-  removeWhenPooled: 0
-  resetToPrefab: 0

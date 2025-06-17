@@ -143,7 +143,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2173075f949abe34cbac509d346178e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  seconds: 10
+  seconds: 1
   reenableChildren: 0
   removeWhenPooled: 0
   resetToPrefab: 0
@@ -228,7 +228,18 @@ MonoBehaviour:
   destroyedPrefabParent: {fileID: 0}
   fallbackParticle: {fileID: 19800002, guid: bcc2a2037850f8849a6838035216d989, type: 3}
   fallbackParticleMatOption: 0
-  damageEffects: []
+  damageEffects:
+  - TriggeredAt: 0
+    Offset: {x: 0, y: 0, z: 0}
+    Rotation: {x: 0, y: 0, z: 0}
+    Scale: {x: 1, y: 1, z: 1}
+    Prefab: {fileID: 100002, guid: bcc2a2037850f8849a6838035216d989, type: 3}
+    GameObject: {fileID: 0}
+    HasStarted: 0
+    HasTagDependency: 0
+    TagDependency: 0
+    UnparentOnDestroy: 1
+    StopEmittingOnDestroy: 0
   velocityReduction: 0.5
   limitDamage: 1
   minDamage: 10
@@ -239,8 +250,8 @@ MonoBehaviour:
   disableKinematicOnUparentedChildren: 1
   replaceMaterials: []
   replaceParticleMats: []
-  canBeDestroyed: 1
-  canBeRepaired: 1
+  canBeDestroyed: 0
+  canBeRepaired: 0
   debrisToReParentByName: []
   debrisToReParentIsKinematic: 0
   childrenToReParentByName: []
@@ -249,7 +260,7 @@ MonoBehaviour:
   chipAwayDebrisDrag: 0
   chipAwayDebrisAngularDrag: 0.05
   autoPoolDestroyedPrefab: 1
-  useFallbackParticle: 1
+  useFallbackParticle: 0
   centerPointOverride: {x: 0, y: 0, z: 0}
   fallbackParticleScale: {x: 1, y: 1, z: 1}
   fallbackParticleParent: {fileID: 0}

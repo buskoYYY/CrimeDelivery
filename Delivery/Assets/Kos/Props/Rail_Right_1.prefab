@@ -121,8 +121,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 5.033019, y: 1.0974128, z: 0.42091322}
-  m_Center: {x: -2.493887, y: 0.5528228, z: -0.21045661}
+  m_Size: {x: 5.033019, y: 1.5, z: 0.42091322}
+  m_Center: {x: -2.493887, y: 0.75, z: -0.21045661}
 --- !u!114 &4602572807750958935
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -139,6 +139,9 @@ MonoBehaviour:
   carTag: Car
   spawnWithRotation: 1
   delayBeforeSpawn: 5
+  scaleWithMainObject: 1
+  isRbMassOvveride: 1
+  ovverideMassIndex: 3
 --- !u!1 &8031799468985301150
 GameObject:
   m_ObjectHideFlags: 0

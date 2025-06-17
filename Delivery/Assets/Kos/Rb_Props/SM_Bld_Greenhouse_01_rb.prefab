@@ -207,7 +207,7 @@ MonoBehaviour:
     TagDependency: 0
     UnparentOnDestroy: 1
     StopEmittingOnDestroy: 0
-  - TriggeredAt: 5
+  - TriggeredAt: 0
     Offset: {x: 0, y: 2, z: 0}
     Rotation: {x: 0, y: 0, z: 0}
     Scale: {x: 3, y: 3, z: 3}
@@ -228,7 +228,7 @@ MonoBehaviour:
   disableKinematicOnUparentedChildren: 1
   replaceMaterials: []
   replaceParticleMats: []
-  canBeDestroyed: 1
+  canBeDestroyed: 0
   canBeRepaired: 0
   debrisToReParentByName: []
   debrisToReParentIsKinematic: 0
@@ -260,7 +260,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2173075f949abe34cbac509d346178e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  seconds: 5
+  seconds: 2
   reenableChildren: 0
   removeWhenPooled: 0
   resetToPrefab: 0
