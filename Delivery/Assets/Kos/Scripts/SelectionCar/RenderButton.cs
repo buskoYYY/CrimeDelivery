@@ -1,3 +1,4 @@
+using Doozy.Engine.UI;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -32,6 +33,7 @@ namespace ArcadeBridge
         public List<GameObject> prefabCar = new List<GameObject>();
         //private GameObject currentSelectedCarInstance;
 
+        [SerializeField] private UIView panelSelectionCars;
         private void Start()
         {
             InitializeCarList();
@@ -66,7 +68,7 @@ namespace ArcadeBridge
 
                 // 2. Спавним машину
                 GameObject carInstance = Instantiate(carPrefab, renderRoot);
-                carInstance.transform.localPosition = Vector3.zero;
+                carInstance.transform.localPosition = StaticDataService.instance.offsetsForUICarButtons[i];
                 carInstance.transform.localRotation = Quaternion.Euler(0, 15, 0);
                 carInstance.transform.localScale = Vector3.one;
                 SetLayerRecursively(carInstance.transform, renderLayer);
@@ -107,7 +109,7 @@ namespace ArcadeBridge
                 RenderButtonItem item = buttonGO.GetComponent<RenderButtonItem>();
                 if (item != null)
                 {
-                    item.Initialize(carPrefab, i, selectionManager);
+                    item.Initialize(carPrefab, i, selectionManager, this);
                 }
                 else
                 {
@@ -130,11 +132,14 @@ namespace ArcadeBridge
             }
         }
 
-
-
         public void OnCarButtonSelected(GameObject selectedCarPrefab)
         {
             Debug.Log("Выбрана машина: " + selectedCarPrefab.name);
+
+            int index = prefabCar.IndexOf(selectedCarPrefab);
+
+            SaveLoadService.instance.PlayerProgress.selectedCarIdInDatabase = index;
+            SaveLoadService.instance.DelayedSaveProgress();
 
             // Можешь также передать выбранную машину в другой менеджер
         }

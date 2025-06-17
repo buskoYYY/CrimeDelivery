@@ -27,6 +27,10 @@ namespace ArcadeBridge
 
         private const string PumpSpawnerPath = "Spawners/PumpUnlocker";
 
+        private const string OffsetsForUICarButtonsPath = "StaticData/OffsetsForUICarButtons";
+
+        public List<Vector3> offsetsForUICarButtons = new List<Vector3>();
+
         private Dictionary<string, Item> _namesItems = new Dictionary<string, Item>();
 
         //private Dictionary<string, Vector3> _itemsPositions = new Dictionary<string, Vector3>();
@@ -51,6 +55,8 @@ namespace ArcadeBridge
                 return;
             }
             instance = this;
+
+            offsetsForUICarButtons = _assetProvider.Load<OffsetsForUICarButtons>(OffsetsForUICarButtonsPath).offsets;
 
             _namesItems = _assetProvider.Load<ItemsStaticData>(ItemsPath).items.ToDictionary(x => x.name, x => x);
 

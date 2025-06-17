@@ -12,13 +12,14 @@ namespace ArcadeBridge
         private GameObject carPrefab;
         private RenderButtonSelectionManager selectionManager;
         private int carIndex;
+        private RenderButton renderButton;
 
-        public void Initialize(GameObject prefab, int index, RenderButtonSelectionManager manager)
+        public void Initialize(GameObject prefab, int index, RenderButtonSelectionManager manager, RenderButton renderButton)
         {
             carPrefab = prefab;
             selectionManager = manager;
             carIndex = index;
-
+            this.renderButton = renderButton;
             GetComponent<Button>().onClick.AddListener(OnClick);
 
             SetSelected(false); // начальное состояние
@@ -35,7 +36,7 @@ namespace ArcadeBridge
             {
                 selectedIcon.SetActive(isSelected);
             }
-            FindObjectOfType<RenderButton>()?.OnCarButtonSelected(carPrefab);
+            renderButton.OnCarButtonSelected(carPrefab);
         }
     }
 }

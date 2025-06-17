@@ -31,13 +31,22 @@ namespace ArcadeBridge
             var constructed = saveLoadService.PlayerProgress.cunstructedCars;
             Debug.Log("2");
 
+            for(int i =0; i < saveLoadService.database.carsConfigs.Count; i++)
+            {
+                if(saveLoadService.database.carsConfigs[i].carSettings.isDefault)
+                    carIndexes.Add(i);
+            }
+
             // Собираем индексы всех завершённых машин
             foreach (var car in constructed)
             {
                 Debug.Log("Индексы");
                 if (car.isCompleted)
                 {
-                    carIndexes.Add(car.index);
+                    CarConfig config = saveLoadService.database.carsConfigs.Find(x => x.constructionID == car.index);
+                    int index = saveLoadService.database.carsConfigs.IndexOf(config);
+
+                    carIndexes.Add(index);// car.index);
                     Debug.Log($"Invalid car index {car.index} in SaveLoadService.");
                 }
                 Debug.Log("3");
