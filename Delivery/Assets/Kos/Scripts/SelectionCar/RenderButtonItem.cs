@@ -22,7 +22,15 @@ namespace ArcadeBridge
             this.renderButton = renderButton;
             GetComponent<Button>().onClick.AddListener(OnClick);
 
-            SetSelected(false); // начальное состояние
+            if(index == SaveLoadService.instance.PlayerProgress.selectedCarIdInDatabase)
+            {
+                SetSelected(true); // начальное состояние
+                OnClick();
+            }
+            else
+            {
+                SetSelected(false);
+            }
         }
 
         private void OnClick()
@@ -36,7 +44,10 @@ namespace ArcadeBridge
             {
                 selectedIcon.SetActive(isSelected);
             }
-            renderButton.OnCarButtonSelected(carPrefab);
+            if (isSelected)
+            {
+                renderButton.OnCarButtonSelected(carPrefab);
+            }
         }
     }
 }

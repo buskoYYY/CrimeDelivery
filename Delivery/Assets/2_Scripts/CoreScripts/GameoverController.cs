@@ -1,4 +1,5 @@
 using ArcadeBridge;
+using System;
 using UnityEngine;
 
 [System.Serializable]
@@ -29,7 +30,6 @@ public class GameoverController : MonoBehaviour
 
         if (SaveLoadService.instance != null)
         {
-            SaveLoadService.instance.PlayerProgress.money += gameoverData.rewardSumm;
             SaveLoadService.instance.PlayerProgress.deliveriesCount++;
             SaveLoadService.instance.DelayedSaveProgress();
         }
@@ -39,6 +39,18 @@ public class GameoverController : MonoBehaviour
         }
 
         gameoverUI.GameoverUIStart(gameoverData);
+
+        gameoverUI.OnPlayerGetSimpleReward = OnPlayerGetSimpleReward;
+        gameoverUI.OnPlayerXReward = OnPlayerXReward;
+    }
+
+    private void OnPlayerGetSimpleReward()
+    {
+        SaveLoadService.instance.PlayerProgress.money += gameoverData.rewardSumm;
+    }
+    private void OnPlayerXReward()
+    {
+        SaveLoadService.instance.PlayerProgress.money += gameoverData.xSummReward;
     }
 
     public void SetupReward(RaceData raceData)

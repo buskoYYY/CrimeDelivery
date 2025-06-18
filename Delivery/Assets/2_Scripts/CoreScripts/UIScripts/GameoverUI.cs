@@ -1,6 +1,8 @@
 using Doozy.Engine.UI;
 using UnityEngine;
 using TMPro;
+using System;
+using UnityEngine.UI;
 
 public class GameoverUI : MonoBehaviour
 {
@@ -14,12 +16,17 @@ public class GameoverUI : MonoBehaviour
 
     [SerializeField] private UIButton takeMoney;
     [SerializeField] private UIButton takeXMoney;
+    public Action OnPlayerGetSimpleReward;
+    public Action OnPlayerXReward;
 
     public void GameoverUIStart(GameoverData gameoverData)
     {
         takeMoney.OnClick.OnTrigger.Event.AddListener(TakeMoney);
         takeXMoney.OnClick.OnTrigger.Event.AddListener(TakeXMoney);
 
+        gameoverUIView.GetComponent<Canvas>().enabled = true;
+        gameoverUIView.GetComponent<GraphicRaycaster>().enabled = true;
+        gameoverUIView.gameObject.SetActive(true);
         gameoverUIView.Show();
 
         string rewardType = "Deliveried";
@@ -34,12 +41,13 @@ public class GameoverUI : MonoBehaviour
 
     public void TakeMoney()
     {
-        Appodeal.Instance.ShowInterstitialAds();
+        OnPlayerGetSimpleReward?.Invoke();
+        Ads.Instance.PlayInterstitialAd();
     }
 
     public void TakeXMoney()
     {
-        Appodeal.Instance.ShowRewardAds();
+        Ads.Instance.PlayRewardAd(OnPlayerXReward);
         UpdateScore();
     }
 

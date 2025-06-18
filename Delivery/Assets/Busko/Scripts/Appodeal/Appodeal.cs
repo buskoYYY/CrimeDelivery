@@ -1,4 +1,5 @@
 using AppodealStack.Monetization.Common;
+using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -10,6 +11,7 @@ public class Appodeal : MonoBehaviour, IInterstitialAdListener, IRewardedVideoAd
 
     private int _score;
     private int _adTypes;
+    private Action OnReward;
 
     private void Awake()
     {
@@ -31,8 +33,9 @@ public class Appodeal : MonoBehaviour, IInterstitialAdListener, IRewardedVideoAd
         Initialized();
     }
 
-    public void ShowRewardAds()
+    public void ShowRewardAds(Action onReward)
     {
+        OnReward = onReward;
         if (AppodealStack.Monetization.Api.Appodeal.IsLoaded(AppodealAdType.RewardedVideo) 
             || AppodealStack.Monetization.Api.Appodeal.CanShow(AppodealAdType.RewardedVideo))
         {
@@ -86,6 +89,7 @@ public class Appodeal : MonoBehaviour, IInterstitialAdListener, IRewardedVideoAd
 
     public void OnRewardedVideoShown()
     {
+        OnReward?.Invoke();
         SceneManager.LoadScene(1);
     }
 
