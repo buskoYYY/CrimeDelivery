@@ -234,7 +234,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2173075f949abe34cbac509d346178e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  seconds: 5
+  seconds: 2
   reenableChildren: 0
   removeWhenPooled: 0
   resetToPrefab: 0
@@ -250,30 +250,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1bbb502083c41048a8fedc6a9693be7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _totalHitPoints: 2
-  _currentHitPoints: 2
+  _totalHitPoints: 1
+  _currentHitPoints: 1
   damageLevels:
-  - maxHitPoints: 2
-    minHitPoints: 1.6999999
+  - maxHitPoints: 1
+    minHitPoints: 0.9
     healthPercent: 100
     hasError: 0
     visibleDamageLevel: 0
-  - maxHitPoints: 1.5999999
-    minHitPoints: 1.3
+  - maxHitPoints: 0.79999995
+    minHitPoints: 0.7
     healthPercent: 80
     hasError: 0
     visibleDamageLevel: 2
-  - maxHitPoints: 1.1999999
-    minHitPoints: 0.9
+  - maxHitPoints: 0.59999996
+    minHitPoints: 0.5
     healthPercent: 60
     hasError: 0
     visibleDamageLevel: 4
-  - maxHitPoints: 0.79999995
-    minHitPoints: 0.5
+  - maxHitPoints: 0.39999998
+    minHitPoints: 0.3
     healthPercent: 40
     hasError: 0
     visibleDamageLevel: 6
-  - maxHitPoints: 0.39999998
+  - maxHitPoints: 0.19999999
     minHitPoints: 0
     healthPercent: 20
     hasError: 0
@@ -294,7 +294,7 @@ MonoBehaviour:
     TagDependency: 0
     UnparentOnDestroy: 1
     StopEmittingOnDestroy: 0
-  - TriggeredAt: 5
+  - TriggeredAt: 4
     Offset: {x: 0, y: 0, z: 0}
     Rotation: {x: 0, y: 0, z: 0}
     Scale: {x: 3, y: 3, z: 3}
@@ -315,7 +315,7 @@ MonoBehaviour:
   disableKinematicOnUparentedChildren: 1
   replaceMaterials: []
   replaceParticleMats: []
-  canBeDestroyed: 1
+  canBeDestroyed: 0
   canBeRepaired: 0
   debrisToReParentByName: []
   debrisToReParentIsKinematic: 0

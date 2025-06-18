@@ -14,8 +14,8 @@ GameObject:
   - component: {fileID: 8518058811874408886}
   - component: {fileID: 4751662968761675950}
   - component: {fileID: 5933937024402458194}
-  - component: {fileID: 6501908740792427243}
   - component: {fileID: -567618667395762894}
+  - component: {fileID: 1787893451001941998}
   m_Layer: 0
   m_Name: SM_Env_Tree_Peach_Grown_01_rb
   m_TagString: Untagged
@@ -151,7 +151,23 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &6501908740792427243
+--- !u!114 &-567618667395762894
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1397676135303969864}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2173075f949abe34cbac509d346178e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  seconds: 5
+  reenableChildren: 0
+  removeWhenPooled: 0
+  resetToPrefab: 0
+--- !u!114 &1787893451001941998
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -193,7 +209,7 @@ MonoBehaviour:
     visibleDamageLevel: 8
   destroyedPrefab: {fileID: 0}
   destroyedPrefabParent: {fileID: 0}
-  fallbackParticle: {fileID: 0}
+  fallbackParticle: {fileID: 19800004, guid: 6b46cad447c64dd48b8b715df6e3d2ad, type: 3}
   fallbackParticleMatOption: 0
   damageEffects:
   - TriggeredAt: 0
@@ -217,7 +233,7 @@ MonoBehaviour:
   disableKinematicOnUparentedChildren: 1
   replaceMaterials: []
   replaceParticleMats: []
-  canBeDestroyed: 1
+  canBeDestroyed: 0
   canBeRepaired: 0
   debrisToReParentByName: []
   debrisToReParentIsKinematic: 0
@@ -237,19 +253,3 @@ MonoBehaviour:
   destroyedSound: {fileID: 0}
   damagedSound: {fileID: 0}
   repairedSound: {fileID: 0}
---- !u!114 &-567618667395762894
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1397676135303969864}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2173075f949abe34cbac509d346178e1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  seconds: 5
-  reenableChildren: 0
-  removeWhenPooled: 0
-  resetToPrefab: 0

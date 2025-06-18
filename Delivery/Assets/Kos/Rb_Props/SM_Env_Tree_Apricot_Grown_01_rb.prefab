@@ -14,8 +14,8 @@ GameObject:
   - component: {fileID: 9122428709951610532}
   - component: {fileID: 3105187067392376992}
   - component: {fileID: 9190756485759454114}
-  - component: {fileID: -3958853876540968569}
   - component: {fileID: 2850533292778990097}
+  - component: {fileID: -3842920815631872926}
   m_Layer: 0
   m_Name: SM_Env_Tree_Apricot_Grown_01_rb
   m_TagString: Untagged
@@ -151,7 +151,23 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &-3958853876540968569
+--- !u!114 &2850533292778990097
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5822510386918540088}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2173075f949abe34cbac509d346178e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  seconds: 5
+  reenableChildren: 0
+  removeWhenPooled: 0
+  resetToPrefab: 0
+--- !u!114 &-3842920815631872926
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -217,7 +233,7 @@ MonoBehaviour:
   disableKinematicOnUparentedChildren: 1
   replaceMaterials: []
   replaceParticleMats: []
-  canBeDestroyed: 1
+  canBeDestroyed: 0
   canBeRepaired: 0
   debrisToReParentByName: []
   debrisToReParentIsKinematic: 0
@@ -237,19 +253,3 @@ MonoBehaviour:
   destroyedSound: {fileID: 0}
   damagedSound: {fileID: 0}
   repairedSound: {fileID: 0}
---- !u!114 &2850533292778990097
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5822510386918540088}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2173075f949abe34cbac509d346178e1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  seconds: 5
-  reenableChildren: 0
-  removeWhenPooled: 0
-  resetToPrefab: 0
