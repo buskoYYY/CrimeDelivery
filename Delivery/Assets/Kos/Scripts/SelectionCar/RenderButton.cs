@@ -68,14 +68,20 @@ namespace ArcadeBridge
 
                 // 2. Спавним машину
                 GameObject carInstance = Instantiate(carPrefab, renderRoot);
-                carInstance.transform.localPosition = StaticDataService.instance.offsetsForUICarButtons[i];
+
+                if (!carInstance.GetComponent<Rigidbody>())
+                    carInstance.AddComponent<Rigidbody>();
+
+                carInstance.GetComponent<Rigidbody>().isKinematic = true;
+
+                carInstance.transform.localPosition = Vector3.zero;
                 carInstance.transform.localRotation = Quaternion.Euler(0, 15, 0);
                 carInstance.transform.localScale = Vector3.one;
                 SetLayerRecursively(carInstance.transform, renderLayer);
 
                 // 3. Подождать кадр
                 yield return null;
-                yield return new WaitForEndOfFrame();
+                //yield return new WaitForEndOfFrame();
 
                 // 4. Настройка прозрачности
                 renderCamera.clearFlags = CameraClearFlags.SolidColor;
@@ -116,7 +122,7 @@ namespace ArcadeBridge
                     Debug.LogWarning("RenderButtonItem component not found on button prefab.");
                 }
 
-                yield return null;
+                //yield return null;
             }
             
             renderCamera.gameObject.SetActive(false);

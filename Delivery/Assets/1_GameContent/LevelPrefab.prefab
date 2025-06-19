@@ -6354,6 +6354,7 @@ GameObject:
   - component: {fileID: 4263741396146667079}
   - component: {fileID: 6107416233029584395}
   - component: {fileID: 8985065440456394174}
+  - component: {fileID: 4517159797327973433}
   m_Layer: 0
   m_Name: ClameButtonGray
   m_TagString: Untagged
@@ -8827,6 +8828,21 @@ MonoBehaviour:
     PresetName: 
   TargetLabel: 2
   TextLabel: {fileID: 0}
+--- !u!114 &4517159797327973433
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1416276431072845842}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d241cb36c16cb864f9d878ccb3aacfcf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _xReward: 0
+  _text: {fileID: 1176850874457430578}
+  _gameoverController: {fileID: 8061445758766614248}
 --- !u!1 &1614183550479349993
 GameObject:
   m_ObjectHideFlags: 0
@@ -13555,8 +13571,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0.000022888184, y: 22.520996}
-  m_SizeDelta: {x: -65.0419, y: -65.0419}
+  m_AnchoredPosition: {x: -2.8000019, y: 13.124997}
+  m_SizeDelta: {x: -18.400003, y: -26.249994}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5096707496345794203
 CanvasRenderer:
@@ -13586,7 +13602,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: c05ecf8f9a61abc4fafe09d4a67fd6c6, type: 3}
+  m_Sprite: {fileID: 21300000, guid: f093741cb3d57694795279d4d24dbc9a, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -16004,6 +16020,7 @@ GameObject:
   - component: {fileID: 7094256815930053552}
   - component: {fileID: 7010437617329091085}
   - component: {fileID: 1511268423946748224}
+  - component: {fileID: 7125381157909675527}
   m_Layer: 0
   m_Name: ClameButtonGreen
   m_TagString: Untagged
@@ -18491,6 +18508,21 @@ CanvasGroup:
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
+--- !u!114 &7125381157909675527
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4722161521750041539}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d241cb36c16cb864f9d878ccb3aacfcf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _xReward: 1
+  _text: {fileID: 2208024716755819236}
+  _gameoverController: {fileID: 8061445758766614248}
 --- !u!1 &4977621334130101311
 GameObject:
   m_ObjectHideFlags: 0
@@ -20419,7 +20451,7 @@ MonoBehaviour:
       targetOffcetMin: 5
       targetOffcetMax: 15
       targetOffcetFarFromPlayer: 1
-    maxPoliceHealth: 0
+    maxPoliceHealth: 100
     damage: 0
     maxPoliceCount: 10
     policeToSpawnCount: 5

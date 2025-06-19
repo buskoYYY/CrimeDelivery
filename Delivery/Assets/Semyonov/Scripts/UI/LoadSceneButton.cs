@@ -19,8 +19,19 @@ namespace ArcadeBridge
         protected Sequence _sequence;
 
         //[SerializeField] private MenuWindow _menu;
+        public void Init(Canvas canvas)
+        {
+            _canvas = canvas;
+        }
         public void OnPointerClick(PointerEventData eventData)
         {
+            if (!_canvas)
+            {
+                _canvas = ConstructionCanvas.Instance.GetComponent<Canvas>();
+
+                if (!_canvas) Debug.LogError("Needs init canvas");
+            }
+
             if (SceneManager.GetActiveScene().name.Equals(SceneName))
             {
                 //if (_menu)
