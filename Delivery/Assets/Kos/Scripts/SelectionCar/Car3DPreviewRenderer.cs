@@ -72,11 +72,7 @@ namespace ArcadeBridge
 
             currentCarInstance.GetComponent<Rigidbody>().isKinematic = true;
 
-            Vector3 offset = carIndex >= StaticDataService.instance.offsetsForUICarButtons.Count 
-                ? Vector3.zero 
-                : StaticDataService.instance.offsetsForUICarButtons[carIndex];
-
-            currentCarInstance.transform.localPosition = spawnPosition + offset;
+            currentCarInstance.transform.localPosition = spawnPosition;
             currentCarInstance.transform.localRotation = Quaternion.Euler(spawnRotation);
 
             // Устанавливаем слой для рендеринга

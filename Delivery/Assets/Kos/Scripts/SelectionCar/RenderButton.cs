@@ -73,10 +73,8 @@ namespace ArcadeBridge
                     carInstance.AddComponent<Rigidbody>();
 
                 carInstance.GetComponent<Rigidbody>().isKinematic = true;
-               
-                if(i < StaticDataService.instance.offsetsForUICarButtons.Count)
-                    carInstance.transform.localPosition = StaticDataService.instance.offsetsForUICarButtons[i];
 
+                carInstance.transform.localPosition = Vector3.zero;
                 carInstance.transform.localRotation = Quaternion.Euler(0, 15, 0);
                 carInstance.transform.localScale = Vector3.one;
                 SetLayerRecursively(carInstance.transform, renderLayer);

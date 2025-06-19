@@ -2811,7 +2811,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 800, y: 800}
+  m_SizeDelta: {x: 900, y: 900}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2677941516583217433
 CanvasRenderer:
@@ -2875,7 +2875,7 @@ Transform:
   m_GameObject: {fileID: 394685744527648176}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: 0, y: 1, z: 16.150002}
+  m_LocalPosition: {x: 0, y: 0, z: 16.150002}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -13000,7 +13000,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 3
+    m_Mode: 0
     m_WrapAround: 0
     m_SelectOnUp: {fileID: 0}
     m_SelectOnDown: {fileID: 0}
@@ -15336,7 +15336,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SceneName: Garage
-  _canvas: {fileID: 0}
+  _canvas: {fileID: 5740403025646705643}
   _loadingWindowPrefab: {fileID: 2895974186196610722, guid: 4e953bda1effa8348b6a0e34b33ea3e3,
     type: 3}
 --- !u!1 &3294689023413206239
@@ -15400,7 +15400,7 @@ Transform:
   m_GameObject: {fileID: 3550079114477827741}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.1, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -18638,7 +18638,7 @@ Transform:
   m_GameObject: {fileID: 4615641945074944504}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: 0, y: 2, z: 16}
+  m_LocalPosition: {x: 0, y: 1, z: 16}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -18679,7 +18679,7 @@ Camera:
   far clip plane: 25
   field of view: 60
   orthographic: 1
-  orthographic size: 2.6
+  orthographic size: 3
   m_Depth: -2
   m_CullingMask:
     serializedVersion: 2

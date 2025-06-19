@@ -71,6 +71,12 @@ namespace ArcadeBridge
 
             // Создаем новую машину
             currentCarInstance = Instantiate(car, spawnParent);
+
+            if (!currentCarInstance.GetComponent<Rigidbody>())
+                currentCarInstance.AddComponent<Rigidbody>();
+
+            currentCarInstance.GetComponent<Rigidbody>().isKinematic = true;
+
             currentCarInstance.transform.localPosition = spawnPosition;
             currentCarInstance.transform.localRotation = Quaternion.Euler(spawnRotation);
 
