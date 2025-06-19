@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class TruckLoader : MonoBehaviour
@@ -36,10 +37,10 @@ public class TruckLoader : MonoBehaviour
     {
         if (hasUnloaded && loadedObjects.Count > 0) return;
         hasUnloaded = true;
-        //List<GameObject> objectsToUnload = loadedObjects / unloadAmount;
-
-        //loadedCount = 0;
-        StartCoroutine(LoadSequence(loadedObjects, targetUnLoad, false));
+        int count = loadedObjects.Count;
+        int takeCount = Mathf.Min(unloadAmount, count);
+        List<GameObject> objectsToUnload = loadedObjects.GetRange(count - takeCount, takeCount);
+        StartCoroutine(LoadSequence(objectsToUnload, targetUnLoad, false));
     }
 
     private IEnumerator LoadSequence(List<GameObject> objectsToLoad, Transform targetLoad, bool isLoad)
@@ -104,6 +105,8 @@ public class TruckLoader : MonoBehaviour
         obj.transform.SetParent(targetTrasform);
         if (isLoad)
             loadedObjects.Add(obj);
+        else
+            loadedObjects.Remove(obj);
         //if (col) col.enabled = true;
         //if (rb) rb.isKinematic = false;
     }

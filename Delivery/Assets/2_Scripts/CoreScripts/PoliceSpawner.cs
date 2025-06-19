@@ -176,11 +176,14 @@ public void SpawnPolice()
 
             if (policeList.Count < difficultyConfigLocal.maxPoliceCount)
             {
-                int spawnCount = Mathf.Min(spawnPointsOnPlayer.spawnRays.Count, difficultyConfigLocal.policeToSpawnCount);
+                int spawnCount = 0;
                 Shuffle(spawnPointsOnPlayer.spawnRays);
-                for (int i = 0; i < spawnCount; i++)
+                for (int i = 0; i < spawnPointsOnPlayer.spawnRays.Count; i++)
                 {
-                    TrySpawn(spawnPointsOnPlayer.spawnRays[i]);
+                    if (TrySpawn(spawnPointsOnPlayer.spawnRays[i]) == true && spawnCount < difficultyConfigLocal.policeToSpawnCount)
+                    {
+                        spawnCount++;
+                    }
                 }
             }
 
@@ -197,13 +200,13 @@ public void SpawnPolice()
         }
     }
 
-    public void TrySpawn(PoliceSpawnPointsRay policeRay)
+    public bool TrySpawn(PoliceSpawnPointsRay policeRay)
     {
         // 1. ѕроверка наличи€ поверхности под точкой спавна
         if (!Physics.Raycast(policeRay.spawnPosition.position, Vector3.down, out RaycastHit groundHit, 10f, collisionMask))
         {
             Debug.Log("Ќе удалось заспавнить: нет поверхности под точкой.");
-            return;
+            return false;
         }
 
         Vector3 finalSpawnPosition = groundHit.point;
@@ -218,10 +221,11 @@ public void SpawnPolice()
             Quaternion rotation = Quaternion.Euler(0, policeRay.spawnPosition.eulerAngles.y, 0);
             CarComponentsController policeInstanse = Instantiate(policePrefabs[0], new Vector3(finalSpawnPosition.x, finalSpawnPosition.y + 2, finalSpawnPosition.z), rotation);
             SetupPolice(policeInstanse);
+            return true;
         }
         else
         {
-            Debug.Log("Ќе удалось заспавнить: путь к точке зан€т.");
+            return false;
         }
     }
     private void SetupPolice(CarComponentsController policeInstanse)

@@ -16,9 +16,25 @@ public class DeliveryController : MonoBehaviour
     public event OnDeliveredAll OnDeliveredAllEvent;
 
     private CarComponentsController playerCar;
+
+    [SerializeField] private DeliveryTarget startLoader;
     public void Initialize(CarComponentsController playerCar)
     {
         this.playerCar = playerCar;
+        if (startLoader != null)
+        {
+            startLoader.LoadUnload(this.playerCar);
+            int itemsToEachTarget = startLoader.objectsToLoad.Count / deliveryTargets.Count;
+            int remainder = startLoader.objectsToLoad.Count % deliveryTargets.Count;
+
+            for (int i = 0; i < deliveryTargets.Count; i++)
+            {
+                if (i == deliveryTargets.Count - 1)
+                    deliveryTargets[i].unloadCount = itemsToEachTarget + remainder;
+                else
+                    deliveryTargets[i].unloadCount = itemsToEachTarget;
+            }
+        }
     }
 
     private void Start()
