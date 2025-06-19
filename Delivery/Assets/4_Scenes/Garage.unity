@@ -886,6 +886,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 66c0b4b395e08ae44b8b93dd7c40d40b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  offsetsForUICarButtons: []
 --- !u!4 &254055633
 Transform:
   m_ObjectHideFlags: 0
@@ -3296,9 +3297,9 @@ RectTransform:
   - {fileID: 711953623}
   m_Father: {fileID: 1320003948}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 491.31, y: 600}
+  m_AnchorMin: {x: 1, y: 1}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: -126.20001, y: -360}
   m_SizeDelta: {x: 220, y: 220}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &822126558
@@ -4643,7 +4644,7 @@ MonoBehaviour:
   m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 1080, y: 2160}
+  m_ReferenceResolution: {x: 1080, y: 1920}
   m_ScreenMatchMode: 1
   m_MatchWidthOrHeight: 0.5
   m_PhysicalUnit: 3
@@ -7132,7 +7133,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 624475716, guid: defd886b612915c4abfc0b9a162ed486,
+      objectReference: {fileID: 21300000, guid: e8b010d808081f046a14ed3c48a29a57,
         type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

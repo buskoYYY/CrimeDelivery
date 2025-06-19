@@ -66,7 +66,17 @@ namespace ArcadeBridge
 
             // Создаем новую машину
             currentCarInstance = Instantiate(manager.prefabCar[carIndex], spawnParent);
-            currentCarInstance.transform.localPosition = spawnPosition;
+
+            if (!currentCarInstance.GetComponent<Rigidbody>())
+                currentCarInstance.AddComponent<Rigidbody>();
+
+            currentCarInstance.GetComponent<Rigidbody>().isKinematic = true;
+
+            Vector3 offset = carIndex >= StaticDataService.instance.offsetsForUICarButtons.Count 
+                ? Vector3.zero 
+                : StaticDataService.instance.offsetsForUICarButtons[carIndex];
+
+            currentCarInstance.transform.localPosition = spawnPosition + offset;
             currentCarInstance.transform.localRotation = Quaternion.Euler(spawnRotation);
 
             // Устанавливаем слой для рендеринга

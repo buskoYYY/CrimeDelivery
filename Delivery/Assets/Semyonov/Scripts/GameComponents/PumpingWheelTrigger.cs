@@ -7,6 +7,7 @@ namespace ArcadeBridge
 {
     public class PumpingWheelTrigger: MonoBehaviour
     {
+        private const float DurationPumping = 2f;
         private ArcadeIdleMover _player;
         private HoseNozzle _hoseNozzle;
 
@@ -49,7 +50,7 @@ namespace ArcadeBridge
                 _sequence.Kill();
                 _sequence = DOTween.Sequence().SetUpdate(true);
 
-                _sequence.Append(transform.DOScale(_targetScale, 3f));
+                _sequence.Append(transform.DOScale(_targetScale, DurationPumping));
 
                 _sequence.onComplete += OnFinishPumping;
 
