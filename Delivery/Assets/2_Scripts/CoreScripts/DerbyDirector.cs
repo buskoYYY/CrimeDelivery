@@ -9,8 +9,8 @@ public class DerbyDirectorConfig
     public float minHit = 5;
 
 
-    public float pushCoefFront = 600;
-    public float pushCoefUP = 5000;
+    public float pushCoefFront = 0;//600;
+    public float pushCoefUP = 1000;//5000;
     public float stunSpeed = 25;
 
     public float frontDamage = 20;

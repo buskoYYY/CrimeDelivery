@@ -341,6 +341,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 352b7f423b8d0f9488b3e9d4b1137e50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isActiveComponent: 1
+  initialized: 0
+  carComponents: {fileID: 0}
   hitInfo:
     pushCollider: {fileID: 0}
     pushCarComponents: {fileID: 0}
@@ -531,8 +534,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   carSettings:
-    Accel: 30
-    TopSpeed: 50
+    Accel: 25
+    TopSpeed: 40
     GripX: 35
     GripZ: 3
     RotateAtStart: 100
@@ -711,10 +714,17 @@ MonoBehaviour:
   targetOffcetMax: 10
   targetOffcet: 0
   playerShowRadius: 5
+  spawnerConfig:
+    accelChangerMin: 5
+    accelChangerMax: 10
+    rotVelChanger: 0.5
+    targetOffcetMin: 5
+    targetOffcetMax: 15
+    targetOffcetFarFromPlayer: 1
   autoDestroy: 0
   setupAtSetupComponent: 0
-  distanceToDestroy: 80
-  stuckDestroyTime: 3
+  distanceToDestroy: 70
+  stuckDestroyTime: 2
 --- !u!114 &6032833423586964769
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -750,6 +760,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   id: Police
+  constructionID: -1
   carSettings:
     driftControllerSettings:
       Accel: 0

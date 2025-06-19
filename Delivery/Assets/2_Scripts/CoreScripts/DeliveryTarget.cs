@@ -40,7 +40,7 @@ public class DeliveryTarget : MonoBehaviour
                         if (!unLoaded)
                         {
                             unLoaded = true;
-                            loader.UnloadObjects(unLoadPosition);
+                            //loader.UnloadObjects(unLoadPosition);
                         }
 
                     }
