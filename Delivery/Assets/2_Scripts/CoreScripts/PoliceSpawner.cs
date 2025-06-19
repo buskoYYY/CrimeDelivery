@@ -15,6 +15,16 @@ public class DifficultyConfig
     public int policeToSpawnCount = 5;
     public int spawnDelay = 3;
 
+    public void CopySettingTo(DifficultyConfig config)
+    {
+        config.carAIDifficulty = carAIDifficulty;
+        config.maxPoliceHealth = maxPoliceHealth;
+        config.damage = damage;
+        config.maxPoliceCount = maxPoliceCount;
+        config.policeToSpawnCount = policeToSpawnCount;
+        config.spawnDelay = spawnDelay;
+    }
+
 }
 
 [System.Serializable]
@@ -32,7 +42,7 @@ public class CarAIConfig
 public class PoliceSpawner : MonoBehaviour
 {
     public Transform[] spawnPoints;
-    public DifficultyConfig difficultyConfig;
+    public DifficultyConfig difficultyConfigLocal;
     public float maxSpawnDistance = 70;
     public float minSpawnDistance = 10;
     //public float policeHealth = 50;
@@ -66,12 +76,12 @@ public class PoliceSpawner : MonoBehaviour
     private void Start()
     {
         if (initAtStart)
-            Initialize(raceLogic, difficultyConfig);
+            Initialize(raceLogic, difficultyConfigLocal);
     }
 
     public void Initialize(RaceLogic raceLogic, DifficultyConfig difficultyConfig)
     {
-        this.difficultyConfig = difficultyConfig;
+        difficultyConfig.CopySettingTo(difficultyConfigLocal);
 
         //StartCoroutine(SpawnPoliceCoorutine());
         this.raceLogic = raceLogic;
@@ -162,14 +172,15 @@ public void SpawnPolice()
     {
         while (spawnActive)
         {
-            yield return new WaitForSeconds(difficultyConfig.spawnDelay);
+            yield return new WaitForSeconds(difficultyConfigLocal.spawnDelay);
 
-            if (policeList.Count < difficultyConfig.maxPoliceCount)
+            if (policeList.Count < difficultyConfigLocal.maxPoliceCount)
             {
-                int spawnCount = Mathf.Min(spawnPointsOnPlayer.spawnPositions.Length, difficultyConfig.policeToSpawnCount);
+                int spawnCount = Mathf.Min(spawnPointsOnPlayer.spawnRays.Count, difficultyConfigLocal.policeToSpawnCount);
+                Shuffle(spawnPointsOnPlayer.spawnRays);
                 for (int i = 0; i < spawnCount; i++)
                 {
-                    TrySpawn(spawnPointsOnPlayer.startPositions[i], spawnPointsOnPlayer.spawnPositions[i]);
+                    TrySpawn(spawnPointsOnPlayer.spawnRays[i]);
                 }
             }
 
@@ -186,10 +197,10 @@ public void SpawnPolice()
         }
     }
 
-    public void TrySpawn(Transform startPosition, Transform spawnPosition)
+    public void TrySpawn(PoliceSpawnPointsRay policeRay)
     {
         // 1. ѕроверка наличи€ поверхности под точкой спавна
-        if (!Physics.Raycast(spawnPosition.position, Vector3.down, out RaycastHit groundHit, 10f, collisionMask))
+        if (!Physics.Raycast(policeRay.spawnPosition.position, Vector3.down, out RaycastHit groundHit, 10f, collisionMask))
         {
             Debug.Log("Ќе удалось заспавнить: нет поверхности под точкой.");
             return;
@@ -198,13 +209,13 @@ public void SpawnPolice()
         Vector3 finalSpawnPosition = groundHit.point;
 
         // 2. ѕроверка преп€тствий по пути BoxCast
-        Vector3 direction = (spawnPosition.position - startPosition.position).normalized;
-        float distance = Vector3.Distance(startPosition.position, finalSpawnPosition);
-        bool hit = Physics.BoxCast(startPosition.position, spawnSize * 0.5f, direction, out RaycastHit hitInfo, spawnPosition.rotation, distance, collisionMask);
+        Vector3 direction = (policeRay.spawnPosition.position - policeRay.startPosition.position).normalized;
+        float distance = Vector3.Distance(policeRay.startPosition.position, finalSpawnPosition);
+        bool hit = Physics.BoxCast(policeRay.startPosition.position, spawnSize * 0.5f, direction, out RaycastHit hitInfo, policeRay.spawnPosition.rotation, distance, collisionMask);
 
         if (!hit)
         {
-            Quaternion rotation = Quaternion.Euler(0, spawnPosition.eulerAngles.y, 0);
+            Quaternion rotation = Quaternion.Euler(0, policeRay.spawnPosition.eulerAngles.y, 0);
             CarComponentsController policeInstanse = Instantiate(policePrefabs[0], new Vector3(finalSpawnPosition.x, finalSpawnPosition.y + 2, finalSpawnPosition.z), rotation);
             SetupPolice(policeInstanse);
         }
@@ -226,14 +237,14 @@ public void SpawnPolice()
             }
 
 
-            policeInstanse.carDamageHandler.Initialize(false, 1, difficultyConfig.maxPoliceHealth);
+            policeInstanse.carDamageHandler.Initialize(false, 1, difficultyConfigLocal.maxPoliceHealth);
 
             AIDriftController ai = driver as AIDriftController;
             if (ai != null)
             {
                 ai.distanceToDestroy = destroyDistance;
                 ai.autoDestroy = true;
-                ai.SetupCarAIConfig(difficultyConfig.carAIDifficulty);
+                ai.SetupCarAIConfig(difficultyConfigLocal.carAIDifficulty);
             }
 
             CarPusher carPusher = driver as CarPusher;
@@ -324,7 +335,7 @@ public void SpawnPolice()
     [SerializeField] private RaceData raceData;
     public void OnEndOFRace(RaceData raceData)
     {
-        difficultyConfig.maxPoliceCount = 0;
+        difficultyConfigLocal.maxPoliceCount = 0;
         this.raceData = raceData;
         spawnActive = false;
     }

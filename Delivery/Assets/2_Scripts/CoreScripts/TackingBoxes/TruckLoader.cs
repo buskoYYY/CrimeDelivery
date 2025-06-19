@@ -23,6 +23,8 @@ public class TruckLoader : MonoBehaviour
 
     public List<GameObject> loadedObjects = new List<GameObject>();
 
+
+    private bool inWork;
     public void LoadObjects(List<GameObject> objectsToLoad)
     {
         if (hasLoaded) return;
@@ -30,11 +32,13 @@ public class TruckLoader : MonoBehaviour
         StartCoroutine(LoadSequence(objectsToLoad, trunkOrigin, true));
     }
 
-    public void UnloadObjects(Transform targetUnLoad)
+    public void UnloadObjects(Transform targetUnLoad, int unloadAmount)
     {
         if (hasUnloaded && loadedObjects.Count > 0) return;
         hasUnloaded = true;
-        loadedCount = 0;
+        //List<GameObject> objectsToUnload = loadedObjects / unloadAmount;
+
+        //loadedCount = 0;
         StartCoroutine(LoadSequence(loadedObjects, targetUnLoad, false));
     }
 
@@ -47,11 +51,15 @@ public class TruckLoader : MonoBehaviour
 
             Vector3 localOffset = GetStackLocalOffset(loadedCount);
             StartCoroutine(ThrowObject(obj, localOffset, targetLoad, isLoad));
-            loadedCount++;
+
+            if (isLoad)
+                loadedCount++;
+            else
+                loadedCount--;
 
             yield return new WaitForSeconds(delayBetweenThrows);
         }
-        loadedCount = 0;
+        //loadedCount = 0;
         hasLoaded = false;
         hasUnloaded = false;
     }
