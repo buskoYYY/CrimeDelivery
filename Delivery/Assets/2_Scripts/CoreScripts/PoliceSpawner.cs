@@ -177,12 +177,13 @@ public void SpawnPolice()
             if (policeList.Count < difficultyConfigLocal.maxPoliceCount)
             {
                 int spawnCount = 0;
-                Shuffle(spawnPointsOnPlayer.spawnRays);
+                GardikUtilities.Shuffle(spawnPointsOnPlayer.spawnRays);
                 for (int i = 0; i < spawnPointsOnPlayer.spawnRays.Count; i++)
                 {
                     if (TrySpawn(spawnPointsOnPlayer.spawnRays[i]) == true && spawnCount < difficultyConfigLocal.policeToSpawnCount)
                     {
                         spawnCount++;
+                        yield return new WaitForSeconds(0.2f);
                     }
                 }
             }
@@ -291,17 +292,6 @@ public void SpawnPolice()
         car.carDamageHandler.OnDestroyCarEvent -= OnEndOfLivesCar;
     }
 
-    public void Shuffle<T>(List<T> list)
-    {
-        for (int i = list.Count - 1; i > 0; i--)
-        {
-            int k = Random.Range(0, i + 1);
-            T temp = list[i];
-            list[i] = list[k];
-            list[k] = temp;
-        }
-    }
-
     // Метод, чтобы найти нижнюю точку по коллайдерам
     public Vector3 GetLowestPoint(GameObject obj)
     {
@@ -342,5 +332,20 @@ public void SpawnPolice()
         difficultyConfigLocal.maxPoliceCount = 0;
         this.raceData = raceData;
         spawnActive = false;
+    }
+}
+
+
+public static class GardikUtilities
+{
+    public static void Shuffle<T>(List<T> list)
+    {
+        for (int i = list.Count - 1; i > 0; i--)
+        {
+            int k = Random.Range(0, i + 1);
+            T temp = list[i];
+            list[i] = list[k];
+            list[k] = temp;
+        }
     }
 }
