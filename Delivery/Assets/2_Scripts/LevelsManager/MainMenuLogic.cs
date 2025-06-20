@@ -27,6 +27,7 @@ public class MainMenuLogic : MonoBehaviour
     public PlayerUIController playerUIController;
     private void Awake()
     {
+        
         if (Instance != null)
         {
             Debug.LogWarning("MainMenuLogic object already has");
@@ -34,7 +35,7 @@ public class MainMenuLogic : MonoBehaviour
             return;
         }
         Instance = this;
-
+        
         startRaceButton.OnClick.OnTrigger.Event.AddListener(StartRace);
     }
 
@@ -65,7 +66,7 @@ public class MainMenuLogic : MonoBehaviour
 
         
         playerUIController.Initialize(playerCar);
-        playerCar.StartRace();
+
 
         mainMenuUI.Hide();
         raceUI.Show();
