@@ -154,10 +154,10 @@ namespace SickscoreGames.HUDNavigationSystem
 		void Awake ()
 		{
 			// destroy duplicate instances
-			if (_Instance != null) {
-				Destroy (this.gameObject);
-				return;
-			}
+			//if (_Instance != null) {
+			//	Destroy (this.gameObject);
+			//	return;
+			//}
 
 			// dont destroy on load
 			if (KeepAliveOnLoad)

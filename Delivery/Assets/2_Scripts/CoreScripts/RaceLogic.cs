@@ -35,6 +35,8 @@ public class RaceLogic : MonoBehaviour
     private CarComponentsController playerCar;
 
     [SerializeField] private bool initAtStart;
+    [HideInInspector] public bool raceStarted;
+    [HideInInspector] public bool raceComleated;
 
     private void Start()
     {
@@ -52,11 +54,13 @@ public class RaceLogic : MonoBehaviour
         OnRaceStartedEvent?.Invoke(raceData);
 
         this.playerCar = playerCar;
+        playerCar.StartRace();
         deliveryController.Initialize(playerCar);
         deliveryController.OnDeliveredEvent += AddReward;
         raceData.maxDeliveries = deliveryController.deliveryTargets.Count / 2;
         
         deliveryController.OnDeliveredAllEvent += EndLevel;
+        deliveryController.OnDeliveredEvent += IncreaseDifficulty;
         playerCar.carDamageHandler.OnEndLivesEvent += EndLevel;
 
         policeSpawner.player = playerCar.carTrasform;
@@ -70,7 +74,22 @@ public class RaceLogic : MonoBehaviour
         }
         policeSpawner.Initialize(this, gameData.difficultyDatabase.difficultyConfigs[difficultyCheck]);
 
-        
+        raceStarted = true;
+
+
+
+    }
+
+    private void IncreaseDifficulty(int reward)
+    {
+        difficultyIndex++;
+        int difficultyCheck = difficultyIndex;
+        if (difficultyCheck >= gameData.difficultyDatabase.difficultyConfigs.Length || difficultyCheck < 0)
+        {
+            Debug.LogError($"Нет сложности {difficultyCheck}");
+            difficultyCheck = gameData.difficultyDatabase.difficultyConfigs.Length - 1;
+        }
+        policeSpawner.UpdateDifficultyConfig(gameData.difficultyDatabase.difficultyConfigs[difficultyCheck]);
     }
 
     private void OnDisable()
@@ -92,6 +111,7 @@ public class RaceLogic : MonoBehaviour
 
     public void EndLevel(CarComponentsController car, RaceData.CompleteType completeType)
     {
+        raceComleated = true;
         car.carDamageHandler.damageble = false;
 
         foreach (CarComponent carComponent in car.carComponents)
@@ -106,5 +126,43 @@ public class RaceLogic : MonoBehaviour
 
         OnRaceCompletedEvent?.Invoke(raceData);
         gameoverController.Gameover(raceData);
+    }
+
+    public float minSpeed = 10;
+    public float startCatchTimer = 2;
+    public float catchTimer = 8;
+    public float currentCathTime;
+
+    public bool catchStarted;
+    public bool cought;
+
+    private void FixedUpdate()
+    {
+        if (raceStarted)
+            CheckPlayerStunned();
+    }
+
+    private void CheckPlayerStunned()
+    {
+        if (playerCar.carRigidbody.linearVelocity.magnitude <= minSpeed)
+        {
+            currentCathTime += Time.deltaTime;
+
+            if (currentCathTime >= startCatchTimer)
+                catchStarted = true;
+
+            if (currentCathTime >= catchTimer)
+            {
+                cought = true;
+                playerCar.carDamageHandler.ApplyDamage(999999);
+            }
+        }
+        else
+        {
+            currentCathTime = 0;
+            catchStarted = false;
+            cought = false;
+
+        }
     }
 }

@@ -46,14 +46,54 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   difficultyConfigs:
   - carAIDifficulty:
-      accelChangerMin: 2
+      accelChangerMin: 0
+      accelChangerMax: 2
+      rotVelChanger: 0.5
+      targetOffcetMin: 30
+      targetOffcetMax: 40
+      targetOffcetFarFromPlayer: 1
+    maxPoliceHealth: 15
+    damage: 0
+    maxPoliceCount: 3
+    policeToSpawnCount: 6
+    spawnDelay: 3
+    spawnSpeed: 5
+  - carAIDifficulty:
+      accelChangerMin: 0
+      accelChangerMax: 2
+      rotVelChanger: 0.5
+      targetOffcetMin: 20
+      targetOffcetMax: 40
+      targetOffcetFarFromPlayer: 1
+    maxPoliceHealth: 20
+    damage: 0
+    maxPoliceCount: 5
+    policeToSpawnCount: 6
+    spawnDelay: 3
+    spawnSpeed: 5
+  - carAIDifficulty:
+      accelChangerMin: 0
       accelChangerMax: 5
       rotVelChanger: 0.5
-      targetOffcetMin: 10
-      targetOffcetMax: 25
+      targetOffcetMin: 15
+      targetOffcetMax: 40
       targetOffcetFarFromPlayer: 1
-    maxPoliceHealth: 25
+    maxPoliceHealth: 20
     damage: 0
-    maxPoliceCount: 6
-    policeToSpawnCount: 5
+    maxPoliceCount: 7
+    policeToSpawnCount: 6
     spawnDelay: 3
+    spawnSpeed: 5
+  - carAIDifficulty:
+      accelChangerMin: 1
+      accelChangerMax: 10
+      rotVelChanger: 0.5
+      targetOffcetMin: 30
+      targetOffcetMax: 40
+      targetOffcetFarFromPlayer: 1
+    maxPoliceHealth: 20
+    damage: 0
+    maxPoliceCount: 7
+    policeToSpawnCount: 6
+    spawnDelay: 3
+    spawnSpeed: 5

@@ -14,6 +14,7 @@ public class DifficultyConfig
     public int maxPoliceCount = 10;
     public int policeToSpawnCount = 5;
     public int spawnDelay = 3;
+    public float spawnSpeed = 10;
 
     public void CopySettingTo(DifficultyConfig config)
     {
@@ -23,6 +24,7 @@ public class DifficultyConfig
         config.maxPoliceCount = maxPoliceCount;
         config.policeToSpawnCount = policeToSpawnCount;
         config.spawnDelay = spawnDelay;
+        config.spawnSpeed = spawnSpeed;
     }
 
 }
@@ -54,7 +56,7 @@ public class PoliceSpawner : MonoBehaviour
     public List<CarComponentsController> policeList = new List<CarComponentsController>();
     public CarComponentsController[] policePrefabs;
     //public int policeToSpawnCount = 5;
-    public float spawnSpeed = 20;
+    
     //public int maxPoliceCount = 20;
     //public int spawnDelay = 3;
     public float destroyDistance = 70;
@@ -81,13 +83,18 @@ public class PoliceSpawner : MonoBehaviour
 
     public void Initialize(RaceLogic raceLogic, DifficultyConfig difficultyConfig)
     {
-        difficultyConfig.CopySettingTo(difficultyConfigLocal);
+        UpdateDifficultyConfig(difficultyConfig);
 
         //StartCoroutine(SpawnPoliceCoorutine());
         this.raceLogic = raceLogic;
         this.raceLogic.OnRaceCompletedEvent += OnEndOFRace;
         spawnActive = true;
         StartCoroutine(SpawnCoorutine());
+    }
+
+    public void UpdateDifficultyConfig(DifficultyConfig difficultyConfig)
+    {
+        difficultyConfig.CopySettingTo(difficultyConfigLocal);
     }
 
     //СПАВН ПО СПАВН ПОИНТАМ НА УРОВНЕ
@@ -176,11 +183,15 @@ public void SpawnPolice()
 
             if (policeList.Count < difficultyConfigLocal.maxPoliceCount)
             {
-                int spawnCount = Mathf.Min(spawnPointsOnPlayer.spawnRays.Count, difficultyConfigLocal.policeToSpawnCount);
-                Shuffle(spawnPointsOnPlayer.spawnRays);
-                for (int i = 0; i < spawnCount; i++)
+                int spawnCount = 0;
+                GardikUtilities.Shuffle(spawnPointsOnPlayer.spawnRays);
+                for (int i = 0; i < Mathf.Min(spawnPointsOnPlayer.spawnRays.Count, difficultyConfigLocal.maxPoliceCount); i++)
                 {
-                    TrySpawn(spawnPointsOnPlayer.spawnRays[i]);
+                    if (TrySpawn(spawnPointsOnPlayer.spawnRays[i]) == true && spawnCount < difficultyConfigLocal.policeToSpawnCount)
+                    {
+                        spawnCount++;
+                        yield return new WaitForSeconds(0.2f);
+                    }
                 }
             }
 
@@ -197,13 +208,13 @@ public void SpawnPolice()
         }
     }
 
-    public void TrySpawn(PoliceSpawnPointsRay policeRay)
+    public bool TrySpawn(PoliceSpawnPointsRay policeRay)
     {
         // 1. Проверка наличия поверхности под точкой спавна
         if (!Physics.Raycast(policeRay.spawnPosition.position, Vector3.down, out RaycastHit groundHit, 10f, collisionMask))
         {
             Debug.Log("Не удалось заспавнить: нет поверхности под точкой.");
-            return;
+            return false;
         }
 
         Vector3 finalSpawnPosition = groundHit.point;
@@ -218,10 +229,11 @@ public void SpawnPolice()
             Quaternion rotation = Quaternion.Euler(0, policeRay.spawnPosition.eulerAngles.y, 0);
             CarComponentsController policeInstanse = Instantiate(policePrefabs[0], new Vector3(finalSpawnPosition.x, finalSpawnPosition.y + 2, finalSpawnPosition.z), rotation);
             SetupPolice(policeInstanse);
+            return true;
         }
         else
         {
-            Debug.Log("Не удалось заспавнить: путь к точке занят.");
+            return false;
         }
     }
     private void SetupPolice(CarComponentsController policeInstanse)
@@ -270,7 +282,7 @@ public void SpawnPolice()
         {
             yield return new WaitForSeconds(0.01f);
             time += Time.deltaTime;
-            policeInstanse.carRigidbody.AddForce(policeInstanse.carTrasform.forward * spawnSpeed, ForceMode.Acceleration);
+            policeInstanse.carRigidbody.AddForce(policeInstanse.carTrasform.forward * difficultyConfigLocal.spawnSpeed, ForceMode.Acceleration);
         }
     }
 
@@ -285,17 +297,6 @@ public void SpawnPolice()
     {
         policeList.Remove(car);
         car.carDamageHandler.OnDestroyCarEvent -= OnEndOfLivesCar;
-    }
-
-    public void Shuffle<T>(List<T> list)
-    {
-        for (int i = list.Count - 1; i > 0; i--)
-        {
-            int k = Random.Range(0, i + 1);
-            T temp = list[i];
-            list[i] = list[k];
-            list[k] = temp;
-        }
     }
 
     // Метод, чтобы найти нижнюю точку по коллайдерам
@@ -338,5 +339,20 @@ public void SpawnPolice()
         difficultyConfigLocal.maxPoliceCount = 0;
         this.raceData = raceData;
         spawnActive = false;
+    }
+}
+
+
+public static class GardikUtilities
+{
+    public static void Shuffle<T>(List<T> list)
+    {
+        for (int i = list.Count - 1; i > 0; i--)
+        {
+            int k = Random.Range(0, i + 1);
+            T temp = list[i];
+            list[i] = list[k];
+            list[k] = temp;
+        }
     }
 }

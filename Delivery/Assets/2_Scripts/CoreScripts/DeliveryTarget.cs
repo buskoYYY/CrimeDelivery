@@ -5,6 +5,7 @@ public class DeliveryTarget : MonoBehaviour
 {
     public DeliveryController deliveryController;
     public int deliveryTargetIndex = 0;
+    public int unloadCount = 0;
     public int deliveryReward = 100;
     public GameObject deliveryTargetVisual;
 
@@ -20,32 +21,37 @@ public class DeliveryTarget : MonoBehaviour
         deliveryController = FindFirstObjectByType<DeliveryController>();
     }
 
-    private void OnTriggerEnter(Collider other)
+    public void LoadUnload(CarComponentsController target)
+    {
+        deliveryTargetVisual.SetActive(false);
+
+        TruckLoader loader = target.GetComponentInParent<TruckLoader>();
+        if (loader != null)
+        {
+            if (load)
+                loader.LoadObjects(objectsToLoad);
+            else
+            {
+                if (!unLoaded)
+                {
+                    unLoaded = true;
+                    loader.UnloadObjects(unLoadPosition, unloadCount);
+                }
+
+            }
+        }
+    }
+
+    public void Deliver(Collider other)
     {
         CarComponentsController car = other.GetComponentInParent<CarComponentsController>();
         if (car != null)
         {
             if (car.isPlayer && deliveryController.CanDeliver(deliveryTargetIndex))
             {
+                LoadUnload(car);
                 deliveryController.Delivered(deliveryTargetIndex, deliveryReward);
-                deliveryTargetVisual.SetActive(false);
-
-                TruckLoader loader = other.GetComponentInParent<TruckLoader>();
-                if (loader != null)
-                {
-                    if (load)
-                        loader.LoadObjects(objectsToLoad);
-                    else
-                    {
-                        if (!unLoaded)
-                        {
-                            unLoaded = true;
-                            //loader.UnloadObjects(unLoadPosition);
-                        }
-
-                    }
-                }
             }
-        }    
+        }
     }
 }
