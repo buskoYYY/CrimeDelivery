@@ -8,6 +8,10 @@ namespace ArcadeBridge
 {
     public class LoadSceneButton : MonoBehaviour, IPointerClickHandler
     {
+        [SerializeField] private bool _loadWithIndex = false;
+
+        [SerializeField] private int _sceneIndex = 1;
+
         [SerializeField] private string SceneName = "Garage";
 
         [SerializeField] private Canvas _canvas;
@@ -53,7 +57,14 @@ namespace ArcadeBridge
 
         protected void StartLoadScene()
         {
-            SceneManager.LoadSceneAsync(SceneName);
+            if (_loadWithIndex)
+            {
+                SceneManager.LoadSceneAsync(_sceneIndex);
+            }
+            else
+            {
+                SceneManager.LoadSceneAsync(SceneName);
+            }
         }
     }
 }
