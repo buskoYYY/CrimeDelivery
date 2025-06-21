@@ -13,7 +13,7 @@ namespace ArcadeBridge
 
         public int deliveriesCount;
 
-        public int money = 50000;
+        public int money;
 
         public bool isWheelsPumped;
 
@@ -25,7 +25,7 @@ namespace ArcadeBridge
 
         public int needCoinsForUnloakedCar;
 
-        public bool isCarForPartsBrokenAbsolutly;
+        public int carForPartsWasBrokenCount;
 
         public int needCoinsForWorkBench;
 
