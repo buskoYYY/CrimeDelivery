@@ -21,7 +21,7 @@ namespace ArcadeBridge
 
             StartCoroutine(DelayedDestroyUICarSelectionManager());
 
-            MainMenuLogic.Instance.Initialize();
+            MainMenuLogic.Instance.ChangePlayerCar();
         }
 
         private IEnumerator DelayedDestroyUICarSelectionManager()
