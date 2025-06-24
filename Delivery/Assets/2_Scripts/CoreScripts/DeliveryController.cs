@@ -7,7 +7,7 @@ public class DeliveryController : MonoBehaviour
     public List<DeliveryTarget> deliveryTargets = new List<DeliveryTarget>();
     
     public int summReward = 0;
-    private int activeTarget = -1;
+    public int activeTarget { get; private set; } = -1;
 
     public delegate void OnDelivered(int reward);
     public event OnDelivered OnDeliveredEvent;
@@ -27,8 +27,47 @@ public class DeliveryController : MonoBehaviour
             int itemsToEachTarget = startLoader.objectsToLoad.Count / deliveryCount;
             int remainder = startLoader.objectsToLoad.Count % deliveryCount;
 
+
+
             for (int i = 0; i < deliveryCount; i++)
             {
+                /*
+                if (i == 0)
+                {
+                    deliveryTargets[i].deliveryReward = 50;
+                }
+                else if (i == 1)
+                {
+                    deliveryTargets[i].deliveryReward = 70;
+                }
+                else if (i == 2)
+                {
+                    deliveryTargets[i].deliveryReward = 120;
+                }
+                else if (i == 3)
+                {
+                    deliveryTargets[i].deliveryReward = 150;
+                }
+                else if (i == 4)
+                {
+                    deliveryTargets[i].deliveryReward = 200;
+                }
+                else
+                {
+                    deliveryTargets[i].deliveryReward = 250;
+                }
+                */
+
+                deliveryTargets[i].deliveryReward = i switch
+                {
+                    0 => 50,
+                    1 => 70,
+                    2 => 120,
+                    3 => 150,
+                    4 => 200,
+                    _ => 250,
+                };
+
                 if (i == deliveryCount - 1)
                     deliveryTargets[i].unloadCount = itemsToEachTarget + remainder;
                 else
@@ -68,6 +107,7 @@ public class DeliveryController : MonoBehaviour
         if (CanDeliver(deliviriedIndex))
         {
             activeTarget = deliviriedIndex;
+            summReward += reward;
 
             OnDeliveredEvent?.Invoke(reward);
 
@@ -76,7 +116,7 @@ public class DeliveryController : MonoBehaviour
                 if (i == deliviriedIndex + 1)
                 {
                     deliveryTargets[i].deliveryTargetVisual.SetActive(true);
-                    summReward += reward;
+
                 }
                 else
                 {
