@@ -37,7 +37,7 @@ public class DeliveryController : MonoBehaviour
         }
     }
 
-    [SerializeField] private int deliveryCount = 6;
+    public int deliveryCount = 6;
 
     private void Awake()
     {

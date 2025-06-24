@@ -57,7 +57,7 @@ public class RaceLogic : MonoBehaviour
         playerCar.StartRace();
         deliveryController.Initialize(playerCar);
         deliveryController.OnDeliveredEvent += AddReward;
-        raceData.maxDeliveries = deliveryController.deliveryTargets.Count / 2;
+        raceData.maxDeliveries = deliveryController.deliveryCount;
         
         deliveryController.OnDeliveredAllEvent += EndLevel;
         deliveryController.OnDeliveredEvent += IncreaseDifficulty;
