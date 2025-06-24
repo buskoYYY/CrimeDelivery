@@ -28,6 +28,8 @@ public class CarDamageHandler : MonoBehaviour
 
     private DerbyDirectorConfig derbyDirectorConfig;
 
+    private PoliceSounds policeSounds;
+
     private void Start()
     {
         derbyDirectorConfig = new DerbyDirectorConfig();
@@ -145,7 +147,16 @@ public class CarDamageHandler : MonoBehaviour
             if (lives > 0 || unlimitedLives)
                 Invoke(nameof(RetunToLive), 2);
             else
+            {
+                policeSounds = GetComponent<PoliceSounds>();
+
+                if (policeSounds != null)
+                {
+                    policeSounds.PlayExplosianSound();
+                }
+
                 EndOfLives();
+            }
             OnDestroyCarEvent?.Invoke(carComponents, RaceData.CompleteType.DESTROYED);
 
             if (lastHittedCar!= null)

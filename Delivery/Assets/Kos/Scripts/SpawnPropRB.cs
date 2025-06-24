@@ -44,7 +44,7 @@ namespace ArcadeBridge
         private void OnTriggerEnter(Collider other)
         {
             if (!other.CompareTag(carTag)) return;
-            
+           
             // Если есть Rigidbody, прерываем корутину и сразу выполняем
             if (_rb != null)
             {
