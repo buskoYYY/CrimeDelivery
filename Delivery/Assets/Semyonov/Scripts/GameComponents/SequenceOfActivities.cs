@@ -147,6 +147,8 @@ namespace ArcadeBridge
 
             _saveLoadService.PlayerProgress.isCarForPartsCreated = false;
 
+            _saveLoadService.PlayerProgress.carForPartsWasBrokenCount ++;
+
             _saveLoadService.DelayedSaveProgress();
         }
 

@@ -7916,7 +7916,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41a9e56799cb195448acae454b0c0cdc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _menu: {fileID: 3444596429774025627}
+  SceneName: Garage
+  _canvas: {fileID: 0}
+  _loadingWindowPrefab: {fileID: 0}
 --- !u!1 &5359030269333254600
 GameObject:
   m_ObjectHideFlags: 0
@@ -10353,10 +10355,10 @@ RectTransform:
   - {fileID: 7646197533395747103}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0.07866666}
-  m_AnchorMax: {x: 1, y: 0.18720834}
-  m_AnchoredPosition: {x: 1, y: 4.27124}
-  m_SizeDelta: {x: 0, y: -3.4575806}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 0}
+  m_AnchoredPosition: {x: 1, y: 259.27124}
+  m_SizeDelta: {x: 0, y: 204.54242}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8250227381235987491
 CanvasRenderer:
@@ -10409,8 +10411,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Padding:
-    m_Left: 150
-    m_Right: 150
+    m_Left: 0
+    m_Right: 0
     m_Top: 0
     m_Bottom: 0
   m_ChildAlignment: 4
