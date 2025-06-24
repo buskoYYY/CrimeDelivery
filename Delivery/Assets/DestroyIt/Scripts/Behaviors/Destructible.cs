@@ -446,6 +446,12 @@ namespace DestroyIt
         // NOTE: OnCollisionEnter will only fire if a rigidbody is attached to this object!
         public void OnCollisionEnter(Collision collision)
         {
+            
+            if (collision.gameObject.TryGetComponent(out PlayerSounds soud))
+            {
+                soud.PlayHitCarSound();
+            }
+
             if (DestructionManager.Instance == null) return;
             if (!isActiveAndEnabled) return;
 
