@@ -664,7 +664,7 @@ GameObject:
   - component: {fileID: 3308699400502894565}
   - component: {fileID: 6761338250138628559}
   m_Layer: 0
-  m_Name: ButtonDelivery
+  m_Name: Button (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5974,8 +5974,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41a9e56799cb195448acae454b0c0cdc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _loadWithIndex: 0
-  _sceneIndex: 1
   SceneName: Garage
   _canvas: {fileID: 2026114223693862448}
   _loadingWindowPrefab: {fileID: 2895974186196610722, guid: 4e953bda1effa8348b6a0e34b33ea3e3,
@@ -11397,7 +11395,7 @@ MonoBehaviour:
         AudioClip: {fileID: 0}
         OutputAudioMixerGroup: {fileID: 0}
     PresetCategory: Scale
-    PresetName: ClickOutFast
+    PresetName: ClickInFast
     PunchAnimation:
       AnimationType: 4
       Move:
@@ -11450,7 +11448,7 @@ MonoBehaviour:
         Enabled: 1
         From: {x: 0, y: 0, z: 0}
         To: {x: 0, y: 0, z: 0}
-        By: {x: 0.2, y: 0.2, z: 0}
+        By: {x: -0.2, y: -0.2, z: 0}
         UseCustomFromAndTo: 0
         Vibrato: 8
         Elasticity: 0.5

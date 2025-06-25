@@ -11055,7 +11055,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 0.08627451, g: 0, b: 0.31764707, a: 1}
-  m_RaycastTarget: 0
+  m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -11155,7 +11155,7 @@ MonoBehaviour:
       AnimationType: 2
       Move:
         AnimationType: 2
-        Enabled: 0
+        Enabled: 1
         From: {x: 0, y: 0, z: 0}
         To: {x: 0, y: 0, z: 0}
         By: {x: 0, y: 0, z: 0}
@@ -11234,7 +11234,7 @@ MonoBehaviour:
         AnimationType: 2
         Enabled: 0
         From: {x: 0, y: 0, z: 0}
-        To: {x: 0, y: 0, z: 30}
+        To: {x: 0, y: 0, z: -90}
         By: {x: 0, y: 0, z: 0}
         UseCustomFromAndTo: 0
         Vibrato: 10
@@ -11243,60 +11243,60 @@ MonoBehaviour:
         LoopType: 1
         RotateMode: 0
         EaseType: 0
-        Ease: 7
+        Ease: 23
         AnimationCurve:
           serializedVersion: 2
           m_Curve:
           - serializedVersion: 3
             time: 0
             value: 0
-            inSlope: 0
-            outSlope: 0
+            inSlope: 7.0383096
+            outSlope: 7.0383096
             tangentMode: 0
             weightedMode: 0
             inWeight: 0.33333334
             outWeight: 0.33333334
           - serializedVersion: 3
-            time: 0.11010569
-            value: -0.52979636
-            inSlope: -0.09897425
-            outSlope: -0.09897425
+            time: 0.017583081
+            value: 0.18718478
+            inSlope: 0.08300995
+            outSlope: 0.08300995
             tangentMode: 0
             weightedMode: 0
             inWeight: 0.33333334
             outWeight: 0.33333334
           - serializedVersion: 3
-            time: 0.30155796
-            value: 0.36527365
-            inSlope: 3.563434
-            outSlope: 3.563434
+            time: 0.057600502
+            value: 0.12739694
+            inSlope: 4.0301647
+            outSlope: 4.0301647
             tangentMode: 0
             weightedMode: 0
             inWeight: 0.33333334
             outWeight: 0.33333334
           - serializedVersion: 3
-            time: 0.57162184
-            value: 0.38124081
-            inSlope: -0.6628676
-            outSlope: -0.6628676
+            time: 0.09568673
+            value: 0.25189704
+            inSlope: -3.516668
+            outSlope: -3.516668
             tangentMode: 0
             weightedMode: 0
             inWeight: 0.33333334
             outWeight: 0.33333334
           - serializedVersion: 3
-            time: 0.7800347
-            value: 0.8052885
-            inSlope: -1.4501308
-            outSlope: -1.4501308
+            time: 0.15432346
+            value: 0.2683969
+            inSlope: -4.011477
+            outSlope: -4.011477
             tangentMode: 0
             weightedMode: 0
             inWeight: 0.33333334
             outWeight: 0.33333334
           - serializedVersion: 3
-            time: 0.88723725
-            value: 0.90770274
-            inSlope: -1.0686089
-            outSlope: -1.0686089
+            time: 0.6206393
+            value: 0.37496966
+            inSlope: -1.7194864
+            outSlope: -1.7194864
             tangentMode: 0
             weightedMode: 0
             inWeight: 0.33333334
@@ -11304,8 +11304,8 @@ MonoBehaviour:
           - serializedVersion: 3
             time: 1
             value: 1
-            inSlope: 0.27951962
-            outSlope: 0.27951962
+            inSlope: 4.481586
+            outSlope: 4.481586
             tangentMode: 0
             weightedMode: 0
             inWeight: 0.33333334
@@ -11314,12 +11314,12 @@ MonoBehaviour:
           m_PostInfinity: 2
           m_RotationOrder: 4
         StartDelay: 0
-        Duration: 0.45
+        Duration: 0.4
       Scale:
         AnimationType: 2
         Enabled: 1
         From: {x: 0, y: 0, z: 0}
-        To: {x: 0, y: 0, z: 1}
+        To: {x: 1.5, y: 1.5, z: 1}
         By: {x: 0, y: 0, z: 0}
         UseCustomFromAndTo: 0
         Vibrato: 10
@@ -11327,7 +11327,7 @@ MonoBehaviour:
         NumberOfLoops: -1
         LoopType: 1
         EaseType: 0
-        Ease: 26
+        Ease: 19
         AnimationCurve:
           serializedVersion: 2
           m_Curve:
@@ -11380,10 +11380,10 @@ MonoBehaviour:
           m_PostInfinity: 2
           m_RotationOrder: 4
         StartDelay: 0
-        Duration: 0.3
+        Duration: 0.4
       Fade:
         AnimationType: 2
-        Enabled: 0
+        Enabled: 1
         From: 0
         To: 0
         By: 0.5
@@ -11398,7 +11398,7 @@ MonoBehaviour:
           m_PreInfinity: 2
           m_PostInfinity: 2
           m_RotationOrder: 4
-        StartDelay: 0.4
+        StartDelay: 0.1
         Duration: 0.2
     AutoStartLoopAnimation: 1
     LoadSelectedPresetAtRuntime: 0
@@ -11444,7 +11444,7 @@ MonoBehaviour:
         AudioClip: {fileID: 0}
         OutputAudioMixerGroup: {fileID: 0}
     PresetCategory: Scale
-    PresetName: SimpleFast
+    PresetName: DropAndHit
   HideProgressor: {fileID: 0}
   LoopBehavior:
     Animation:
@@ -15335,8 +15335,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41a9e56799cb195448acae454b0c0cdc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _loadWithIndex: 0
-  _sceneIndex: 1
   SceneName: Garage
   _canvas: {fileID: 5740403025646705643}
   _loadingWindowPrefab: {fileID: 2895974186196610722, guid: 4e953bda1effa8348b6a0e34b33ea3e3,
@@ -15467,7 +15465,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 0.115566045, g: 0, b: 0.46226418, a: 1}
-  m_RaycastTarget: 0
+  m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -18937,8 +18935,7 @@ GameObject:
   - component: {fileID: 2359320638334481778}
   - component: {fileID: 7702806315653308235}
   - component: {fileID: 2718149544789768316}
-  - component: {fileID: 7087089808553652231}
-  - component: {fileID: 7841431273402241769}
+  - component: {fileID: 8271881686373560804}
   m_Layer: 0
   m_Name: ChangeCarButton
   m_TagString: Untagged
@@ -21325,27 +21322,7 @@ CanvasGroup:
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
---- !u!114 &7087089808553652231
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4744981572361446338}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 62537e6d148c7984aa13a7c7dff7677e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _UIButtonThis: {fileID: 7702806315653308235}
-  _buttons:
-  - {fileID: 2359320638334481778}
-  - {fileID: 8248015789146621860}
-  _canvasGroups:
-  - {fileID: 2718149544789768316}
-  - {fileID: 7156433967567075519}
-  _animationOnStart: 1
---- !u!114 &7841431273402241769
+--- !u!114 &8271881686373560804
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -29260,7 +29237,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 0}
-  m_RaycastTarget: 0
+  m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -29723,6 +29700,7 @@ GameObject:
   - component: {fileID: 5740403025646705643}
   - component: {fileID: 7499594120702254931}
   - component: {fileID: 6608037296071581430}
+  - component: {fileID: 7162114262934762595}
   m_Layer: 0
   m_Name: SelectionCarConvas
   m_TagString: Untagged
@@ -29814,6 +29792,26 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &7162114262934762595
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6614314635096662396}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26fc1288f608ee54da6568942b278960, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DebugMode: 0
+  StartPosition: {x: 0, y: 0, z: 0}
+  StartRotation: {x: 0, y: 0, z: 0}
+  StartScale: {x: 1, y: 1, z: 1}
+  StartAlpha: 1
+  CanvasName: Unnamed
+  CustomCanvasName: 1
+  DontDestroyCanvasOnLoad: 0
 --- !u!1 &6801324845635316249
 GameObject:
   m_ObjectHideFlags: 0
@@ -30018,7 +30016,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 0.30588236, g: 0.16078432, b: 0.7176471, a: 1}
-  m_RaycastTarget: 0
+  m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -30099,7 +30097,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 0, g: 0, b: 0, a: 0}
-  m_RaycastTarget: 0
+  m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -30362,8 +30360,6 @@ GameObject:
   - component: {fileID: 8248015789146621860}
   - component: {fileID: 1959757663127418115}
   - component: {fileID: 2171942651628403077}
-  - component: {fileID: 1146243727465915546}
-  - component: {fileID: 7156433967567075519}
   m_Layer: 0
   m_Name: DeliveryButton
   m_TagString: Untagged
@@ -32752,38 +32748,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _UiCarSelectionManager: {fileID: 992607152652472747}
   _uIView: {fileID: 7664190047783399865}
---- !u!114 &1146243727465915546
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7108804404398304770}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 62537e6d148c7984aa13a7c7dff7677e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _UIButtonThis: {fileID: 1959757663127418115}
-  _buttons:
-  - {fileID: 2359320638334481778}
-  - {fileID: 8248015789146621860}
-  _canvasGroups:
-  - {fileID: 2718149544789768316}
-  - {fileID: 7156433967567075519}
-  _animationOnStart: 0
---- !u!225 &7156433967567075519
-CanvasGroup:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7108804404398304770}
-  m_Enabled: 1
-  m_Alpha: 1
-  m_Interactable: 1
-  m_BlocksRaycasts: 1
-  m_IgnoreParentGroups: 0
 --- !u!1 &7384513209587343802
 GameObject:
   m_ObjectHideFlags: 0
@@ -33754,7 +33718,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0.000069618225}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1458927643169897419

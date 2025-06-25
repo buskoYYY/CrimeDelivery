@@ -516,6 +516,11 @@ PrefabInstance:
       propertyPath: m_LocalPosition.x
       value: -1.24
       objectReference: {fileID: 0}
+    - target: {fileID: 774154058515810774, guid: f4a71e48b49e38449b48206c10841668,
+        type: 3}
+      propertyPath: startRace
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 854800813754267528, guid: f4a71e48b49e38449b48206c10841668,
         type: 3}
       propertyPath: m_LocalPosition.y
@@ -867,18 +872,47 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 6583643601366932961}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 2137761545840530748, guid: f4a71e48b49e38449b48206c10841668,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 660759305734961140}
+    - targetCorrespondingSourceObject: {fileID: 2137761545840530748, guid: f4a71e48b49e38449b48206c10841668,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 486677420611399810}
   m_SourcePrefab: {fileID: 100100000, guid: f4a71e48b49e38449b48206c10841668, type: 3}
---- !u!114 &660759305734961140 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1462543857655287246, guid: f4a71e48b49e38449b48206c10841668,
+--- !u!1 &56954949177978630 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2137761545840530748, guid: f4a71e48b49e38449b48206c10841668,
     type: 3}
   m_PrefabInstance: {fileID: 2116835817059301946}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+--- !u!114 &660759305734961140
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 56954949177978630}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 66a1bb9be1a9fc441b6968a4d096c8df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _hitCarSound: {fileID: 8300000, guid: 6f060a561ca9aca45bfded92ff75a0f2, type: 3}
+  _destroyCarSound: {fileID: 0}
+  _hitObjectSound: {fileID: 8300000, guid: f4fd3a8a6be54b74d843a7029ed4a757, type: 3}
+--- !u!114 &486677420611399810
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 56954949177978630}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4da137b5e724ea447a1b2ba4f8b3af48, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!4 &2490660088007838050 stripped
