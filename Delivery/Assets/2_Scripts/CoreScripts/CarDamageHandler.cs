@@ -6,7 +6,7 @@ using static DerbyDirector;
 
 public class CarDamageHandler : MonoBehaviour
 {
-    public bool initAtStart = false; 
+    public bool initAtStart = false;
     public CarComponentsController carComponents;
 
     public delegate void OnUpdateHealth(float health, float maxHealth);
@@ -64,6 +64,7 @@ public class CarDamageHandler : MonoBehaviour
     {
         if (currentHitDelay >= hitDelay)
         {
+
             if (!carComponents.isPlayer)
             {
                 CarColliderType hittedCarCollider = collision.GetContact(0).otherCollider.GetComponent<CarColliderType>();
@@ -79,7 +80,7 @@ public class CarDamageHandler : MonoBehaviour
     {
         if (hitInfo.pushCarComponents.carDamageHandler.carAlive && hitInfo.carToHitcarComponents.carDamageHandler.carAlive)
         {
-            hitInfo.derbyDirectorConfig = this.derbyDirectorConfig;   
+            hitInfo.derbyDirectorConfig = this.derbyDirectorConfig;
             CalculatedHitInfo calculatedHitInfo = DerbyDirector.CalculatePushForce(hitInfo);
             carComponents.carRigidbody.AddForceAtPosition(calculatedHitInfo.pushForce, hitInfo.collision.GetContact(0).point, ForceMode.Impulse);
 
@@ -159,7 +160,7 @@ public class CarDamageHandler : MonoBehaviour
             }
             OnDestroyCarEvent?.Invoke(carComponents, RaceData.CompleteType.DESTROYED);
 
-            if (lastHittedCar!= null)
+            if (lastHittedCar != null)
                 lastHittedCar.carPusher.OtherCarDestroyed();
 
             /*
@@ -184,7 +185,7 @@ public class CarDamageHandler : MonoBehaviour
 
     private void EndOfLives()
     {
-        
+
         OnEndLivesEvent?.Invoke(carComponents, RaceData.CompleteType.DESTROYED);
         if (!carComponents.isPlayer)
             Destroy(gameObject, 5);

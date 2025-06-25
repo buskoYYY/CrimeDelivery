@@ -57,7 +57,16 @@ public class CarPusher : CarComponent
 
     private void OnCollisionEnter(Collision collision)
     {
-        
+        if (collision.gameObject.TryGetComponent(out Player player))
+        {
+            Debug.Log("Player");
+        }
+
+        if(collision.gameObject.TryGetComponent(out PoliceSounds policeSounds))
+        {
+            Debug.Log("Police");
+        }
+
         if (pushDelayCurrent >= pushDelay)
         {
             
