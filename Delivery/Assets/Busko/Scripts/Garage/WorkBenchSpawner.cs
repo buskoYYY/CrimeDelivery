@@ -1,5 +1,6 @@
 ﻿using ArcadeBridge.ArcadeIdleEngine.Interactables;
 using ArcadeBridge.ArcadeIdleEngine.Processors.Transformers;
+using UnityEngine;
 
 namespace ArcadeBridge
 {

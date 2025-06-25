@@ -142,7 +142,9 @@ namespace ArcadeBridge
         {
             Debug.Log("Выбрана машина: " + selectedCarPrefab.name);
 
-            int index = prefabCar.IndexOf(selectedCarPrefab);
+            CarConfig carConfig = selectedCarPrefab.GetComponent<CarConfig>();
+
+            int index = SaveLoadService.instance.database.carsConfigs.IndexOf(carConfig);
 
             SaveLoadService.instance.PlayerProgress.selectedCarIdInDatabase = index;
             SaveLoadService.instance.DelayedSaveProgress();

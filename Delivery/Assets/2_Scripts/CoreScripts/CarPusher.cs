@@ -1,3 +1,4 @@
+using ArcadeBridge;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -44,6 +45,7 @@ public class CarPusher : CarComponent
 
     private float pushDelay = 0.1f;
     public float pushDelayCurrent = 0;
+
     private void FixedUpdate()
     {
         if (pushDelayCurrent <= pushDelay)
@@ -55,7 +57,16 @@ public class CarPusher : CarComponent
 
     private void OnCollisionEnter(Collision collision)
     {
-        
+        if (collision.gameObject.TryGetComponent(out Player player))
+        {
+            Debug.Log("Player");
+        }
+
+        if(collision.gameObject.TryGetComponent(out PoliceSounds policeSounds))
+        {
+            Debug.Log("Police");
+        }
+
         if (pushDelayCurrent >= pushDelay)
         {
             
@@ -70,8 +81,12 @@ public class CarPusher : CarComponent
                 hitInfo = hitInfo.SetHitInfo(collision, pushCollider, carComponents,
                                             colliderToHit, colliderToHit.carComponentsController);
                 colliderToHit.HitCarCollider(hitInfo);
+                
+                if(collision.gameObject.TryGetComponent(out PlayerSounds soud))
+                {
+                    soud.PlayHitCarSound();
+                }
             }
-
         } 
     }
 

@@ -51,12 +51,7 @@ public class MainMenuLogic : MonoBehaviour
 
         currentSpawnPoint = spawnPointsList[Random.Range(0, spawnPointsList.Count)];
 
-        int selectedCarIndex = SaveLoadService.instance.PlayerProgress.selectedCarIdInDatabase;
-
-        playerCarPrefab = SaveLoadService.instance.database.carsConfigs[selectedCarIndex].GetComponent<CarComponentsController>();
-
-        SpawnPlayer(playerCarPrefab, currentSpawnPoint);
-
+        SpawnPlayer(GetCarPrefab(), currentSpawnPoint);
     }
 
     public void StartRace()
@@ -75,9 +70,6 @@ public class MainMenuLogic : MonoBehaviour
 
     public void SpawnPlayer(CarComponentsController playerCarPrefab, Transform spawnPoint)
     {
-        if (playerCar)
-            Destroy(playerCar.gameObject);
-
         Quaternion rotation = Quaternion.Euler(0, spawnPoint.eulerAngles.y, 0);
         playerCar = Instantiate(playerCarPrefab, new Vector3(spawnPoint.position.x, spawnPoint.position.y + 2, spawnPoint.position.z), rotation);
         playerCar.carGameobject.AddComponent<HNSPlayerController>();
@@ -87,6 +79,15 @@ public class MainMenuLogic : MonoBehaviour
     public void ChangePlayerCar()
     {
         Destroy(playerCar.gameObject);
-        SpawnPlayer(playerCarPrefab, currentSpawnPoint);
+
+        SpawnPlayer(GetCarPrefab(), currentSpawnPoint);
+    }
+    private CarComponentsController GetCarPrefab()
+    {
+        int selectedCarIndex = SaveLoadService.instance.PlayerProgress.selectedCarIdInDatabase;
+
+        playerCarPrefab = SaveLoadService.instance.database.carsConfigs[selectedCarIndex].GetComponent<CarComponentsController>();
+
+        return playerCarPrefab;
     }
 }

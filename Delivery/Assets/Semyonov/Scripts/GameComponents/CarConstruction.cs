@@ -94,7 +94,6 @@ namespace ArcadeBridge
                             //SaveLoadService.instance.PlayerProgress.isWorkBenchCreated = false;
                             //SaveLoadService.instance.PlayerProgress.isWorkBenchSpawnerCreated = false;
                             //SaveLoadService.instance.PlayerProgress.isCarForPartsCreated = false;
-                            SaveLoadService.instance.PlayerProgress.isCarForPartsBrokenAbsolutly = false;
                             SaveLoadService.instance.PlayerProgress.isWheelsPumped = false;
                             SaveLoadService.instance.PlayerProgress.needCoinsForUnloakedCar = -1;
                             SaveLoadService.instance.PlayerProgress.needCoinsForUnloakedPump = -1;

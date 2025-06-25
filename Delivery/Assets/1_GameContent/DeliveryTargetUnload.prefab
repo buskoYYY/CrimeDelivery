@@ -30055,6 +30055,7 @@ Transform:
   m_Children:
   - {fileID: 8408108596065371552}
   - {fileID: 5791245553944251973}
+  - {fileID: 3527770385885498531}
   - {fileID: 4520538379733292608}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -30094,3 +30095,54 @@ MonoBehaviour:
   - {fileID: 0}
   unLoadPosition: {fileID: 5791245553944251973}
   load: 0
+--- !u!1 &9078237876382008143
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3527770385885498531}
+  - component: {fileID: 374230849189365355}
+  m_Layer: 0
+  m_Name: BoostPosition
+  m_TagString: Untagged
+  m_Icon: {fileID: -964228994112308473, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3527770385885498531
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9078237876382008143}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 6.18, y: 0, z: -0.12}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7014890899667784476}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &374230849189365355
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9078237876382008143}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37d194371df9e7d40a01559f761a0a18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  boostPrefabs:
+  - {fileID: 6198311742822856567, guid: fadc9b5e9ef0e7e49b9979d930f84c91, type: 3}
+  - {fileID: 6198311742822856567, guid: dd014613842dc8d4484f4157cdabd754, type: 3}
+  - {fileID: 6198311742822856567, guid: b43bed82dc362004f9b19a3771d877e6, type: 3}
+  - {fileID: 6198311742822856567, guid: d51b039c28e86e94db5020d0d5d0fcd1, type: 3}
+  - {fileID: 6198311742822856567, guid: 4187743a64fefe44cb11ca47a705985b, type: 3}
+  spawnPosition: {fileID: 3527770385885498531}

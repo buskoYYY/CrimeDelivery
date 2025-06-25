@@ -57,9 +57,10 @@ public class RaceLogic : MonoBehaviour
         playerCar.StartRace();
         deliveryController.Initialize(playerCar);
         deliveryController.OnDeliveredEvent += AddReward;
-        raceData.maxDeliveries = deliveryController.deliveryTargets.Count / 2;
+        raceData.maxDeliveries = deliveryController.deliveryCount;
         
         deliveryController.OnDeliveredAllEvent += EndLevel;
+        deliveryController.OnDeliveredEvent += IncreaseDifficulty;
         playerCar.carDamageHandler.OnEndLivesEvent += EndLevel;
 
         policeSpawner.player = playerCar.carTrasform;
@@ -77,6 +78,18 @@ public class RaceLogic : MonoBehaviour
 
 
 
+    }
+
+    private void IncreaseDifficulty(int reward)
+    {
+        difficultyIndex++;
+        int difficultyCheck = difficultyIndex;
+        if (difficultyCheck >= gameData.difficultyDatabase.difficultyConfigs.Length || difficultyCheck < 0)
+        {
+            Debug.LogError($"Нет сложности {difficultyCheck}");
+            difficultyCheck = gameData.difficultyDatabase.difficultyConfigs.Length - 1;
+        }
+        policeSpawner.UpdateDifficultyConfig(gameData.difficultyDatabase.difficultyConfigs[difficultyCheck]);
     }
 
     private void OnDisable()
