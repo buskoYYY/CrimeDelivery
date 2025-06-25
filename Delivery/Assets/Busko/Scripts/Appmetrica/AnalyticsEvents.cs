@@ -1,12 +1,11 @@
-using System.Collections.Generic;
 using Io.AppMetrica;
-using UnityEngine;
+using System.Collections.Generic;
 
 public static class AnalyticsEvents
 {
     public static void SendEvent(string eventName)
     {
-        AppMetrica.ReportEvent(eventName);
+        AppMetricaLogger.Instance.ReportEvent(eventName);
         AppMetrica.SendEventsBuffer();
     }
 
@@ -17,8 +16,7 @@ public static class AnalyticsEvents
             {"level_number", levelIndex }
         };
 
-            string json = JsonUtility.ToJson(levelCompleteData);
-            AppMetrica.ReportEvent(eventName, json);
+            AppMetricaLogger.Instance.ReportEvent(eventName, levelCompleteData);
             AppMetrica.SendEventsBuffer();
     }
 }
