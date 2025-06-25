@@ -7,7 +7,6 @@ public class RaceData
     public int maxDeliveries;
     public int compleatedDeliveries;
     public CompleteType completeType;
-    public float raceTime;
 
     public enum CompleteType
     {
@@ -113,7 +112,6 @@ public class RaceLogic : MonoBehaviour
     public void EndLevel(CarComponentsController car, RaceData.CompleteType completeType)
     {
         raceComleated = true;
-        raceStarted = false;
         car.carDamageHandler.damageble = false;
 
         foreach (CarComponent carComponent in car.carComponents)
@@ -141,10 +139,7 @@ public class RaceLogic : MonoBehaviour
     private void FixedUpdate()
     {
         if (raceStarted)
-        {
             CheckPlayerStunned();
-            raceData.raceTime += Time.deltaTime;
-        }
     }
 
     private void CheckPlayerStunned()

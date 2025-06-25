@@ -863,8 +863,6 @@ GameObject:
   - component: {fileID: 3915944198700915742}
   - component: {fileID: 6308270341780620941}
   - component: {fileID: 2687754944242006093}
-  - component: {fileID: 1462543857655287246}
-  - component: {fileID: 1991018182077991608}
   m_Layer: 0
   m_Name: BaseCar
   m_TagString: Player
@@ -1098,7 +1096,7 @@ MonoBehaviour:
   layerMask:
     serializedVersion: 2
     m_Bits: 0
-  testPC: 0
+  testPC: 1
   startRace: 0
   boost: 0
 --- !u!114 &6606545063894259
@@ -1444,32 +1442,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponType: 2
   minHitVelocity: 10
---- !u!114 &1462543857655287246
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2137761545840530748}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 66a1bb9be1a9fc441b6968a4d096c8df, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _hitCarSound: {fileID: 8300000, guid: 6f060a561ca9aca45bfded92ff75a0f2, type: 3}
-  _hitObjectSound: {fileID: 8300000, guid: f4fd3a8a6be54b74d843a7029ed4a757, type: 3}
---- !u!114 &1991018182077991608
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2137761545840530748}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4da137b5e724ea447a1b2ba4f8b3af48, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &2248499435650303072
 GameObject:
   m_ObjectHideFlags: 0

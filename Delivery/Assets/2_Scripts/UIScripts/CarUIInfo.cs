@@ -82,7 +82,7 @@ public class CarUIInfo : MonoBehaviour
 
         if (raceLogic.catchStarted)
         {
-            catchSlider.fillAmount = (raceLogic.currentCathTime - raceLogic.startCatchTimer) / (raceLogic.catchTimer - raceLogic.startCatchTimer);
+            catchSlider.fillAmount = raceLogic.currentCathTime / raceLogic.catchTimer;
         }
 
     }

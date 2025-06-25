@@ -12,7 +12,7 @@ public static class AnalyticsEvents
 
     public static void RaceCompleteEvent(int raceCount, string completeType, int completedDeliviries, int maxDeliviries, float raceTime)
     {
-            Dictionary<string, object> levelCompleteData = new Dictionary<string, object>
+        Dictionary<string, object> levelCompleteData = new Dictionary<string, object>
          {
             {"race_count", raceCount },
             {"complete_type", completeType },
@@ -21,9 +21,9 @@ public static class AnalyticsEvents
             {"race_time", maxDeliviries }
         };
 
-            string json = JsonUtility.ToJson(levelCompleteData);
-            AppMetrica.ReportEvent("level_complete", json);
-            AppMetrica.SendEventsBuffer();
+        string json = JsonUtility.ToJson(levelCompleteData);
+        AppMetrica.ReportEvent("level_complete", json);
+        AppMetrica.SendEventsBuffer();
     }
 
     public static void CarToBreakBought(int raceCount, int openedCarsCount, int playerMoney)
@@ -54,7 +54,7 @@ public static class AnalyticsEvents
         AppMetrica.SendEventsBuffer();
     }
 
-    public static void BoughtConstructionPart(int raceCount, string carName, string constructionPart , int playerMoney)
+    public static void BoughtConstructionPart(int raceCount, string carName, string constructionPart, int playerMoney)
     {
         Dictionary<string, object> levelCompleteData = new Dictionary<string, object>
          {
@@ -69,4 +69,3 @@ public static class AnalyticsEvents
         AppMetrica.SendEventsBuffer();
     }
 }
-
