@@ -156,9 +156,11 @@ namespace ArcadeBridge
                 carData = new CarData(carIndex);
                 if (database != null)
                 {
-                    carData.carNarrativeName = database.carsConfigs[carIndex].carSettings.carNarrativeName;
+                    CarConfig config = database.carsConfigs.Find(x => x.constructionID == carIndex);
 
-                    carData.isDefault = database.carsConfigs[carIndex].carSettings.isDefault;
+                    carData.carNarrativeName = config.carSettings.carNarrativeName;
+
+                    carData.isDefault = config.carSettings.isDefault;
                 }
                 else
                     Debug.LogWarning("Cardatabase is null");

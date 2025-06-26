@@ -90,6 +90,27 @@ namespace ArcadeBridge.ArcadeIdleEngine.Interactables
                 {
 					SetRequiredResource(SaveLoadService.instance.PlayerProgress.needCoinsForUnloakedCar);
 				}
+                else
+                {
+                    switch (SaveLoadService.instance.PlayerProgress.carForPartsWasBrokenCount)
+                    {
+						case 0:
+							SetRequiredResource(300);
+							break;
+						case 1:
+							SetRequiredResource(400);
+							break;
+						case 2:
+							SetRequiredResource(500);
+							break;
+						case 3:
+							SetRequiredResource(700);
+							break;
+						default:
+							SetRequiredResource(1000);
+							break;
+					}
+                }
 			}
 			else if(TryGetComponent<WorkBenchSpawner>(out WorkBenchSpawner workBenchSpawner))
 			{
@@ -133,8 +154,27 @@ namespace ArcadeBridge.ArcadeIdleEngine.Interactables
 		}
         private void OnEnable()
         {
-			SetRequiredResource(_requiredResourceAmount);
-        }
+			//SetRequiredResource(_requiredResourceAmount);
+
+			switch (SaveLoadService.instance.PlayerProgress.carForPartsWasBrokenCount)
+			{
+				case 0:
+					SetRequiredResource(300);
+					break;
+				case 1:
+					SetRequiredResource(400);
+					break;
+				case 2:
+					SetRequiredResource(500);
+					break;
+				case 3:
+					SetRequiredResource(700);
+					break;
+				default:
+					SetRequiredResource(1000);
+					break;
+			}
+		}
         public void SetRequiredResource(int requiredResource)
 		{
 			_collectedResource = 0;

@@ -14,6 +14,7 @@ public class DifficultyConfig
     public int maxPoliceCount = 10;
     public int policeToSpawnCount = 5;
     public int spawnDelay = 3;
+    public float spawnSpeed = 10;
 
     public void CopySettingTo(DifficultyConfig config)
     {
@@ -23,6 +24,7 @@ public class DifficultyConfig
         config.maxPoliceCount = maxPoliceCount;
         config.policeToSpawnCount = policeToSpawnCount;
         config.spawnDelay = spawnDelay;
+        config.spawnSpeed = spawnSpeed;
     }
 
 }
@@ -54,7 +56,7 @@ public class PoliceSpawner : MonoBehaviour
     public List<CarComponentsController> policeList = new List<CarComponentsController>();
     public CarComponentsController[] policePrefabs;
     //public int policeToSpawnCount = 5;
-    public float spawnSpeed = 20;
+    
     //public int maxPoliceCount = 20;
     //public int spawnDelay = 3;
     public float destroyDistance = 70;
@@ -81,13 +83,18 @@ public class PoliceSpawner : MonoBehaviour
 
     public void Initialize(RaceLogic raceLogic, DifficultyConfig difficultyConfig)
     {
-        difficultyConfig.CopySettingTo(difficultyConfigLocal);
+        UpdateDifficultyConfig(difficultyConfig);
 
         //StartCoroutine(SpawnPoliceCoorutine());
         this.raceLogic = raceLogic;
         this.raceLogic.OnRaceCompletedEvent += OnEndOFRace;
         spawnActive = true;
         StartCoroutine(SpawnCoorutine());
+    }
+
+    public void UpdateDifficultyConfig(DifficultyConfig difficultyConfig)
+    {
+        difficultyConfig.CopySettingTo(difficultyConfigLocal);
     }
 
     //—œ¿¬Õ œŒ —œ¿¬Õ œŒ»Õ“¿Ã Õ¿ ”–Œ¬Õ≈
@@ -178,7 +185,7 @@ public void SpawnPolice()
             {
                 int spawnCount = 0;
                 GardikUtilities.Shuffle(spawnPointsOnPlayer.spawnRays);
-                for (int i = 0; i < spawnPointsOnPlayer.spawnRays.Count; i++)
+                for (int i = 0; i < Mathf.Min(spawnPointsOnPlayer.spawnRays.Count, difficultyConfigLocal.maxPoliceCount); i++)
                 {
                     if (TrySpawn(spawnPointsOnPlayer.spawnRays[i]) == true && spawnCount < difficultyConfigLocal.policeToSpawnCount)
                     {
@@ -275,7 +282,7 @@ public void SpawnPolice()
         {
             yield return new WaitForSeconds(0.01f);
             time += Time.deltaTime;
-            policeInstanse.carRigidbody.AddForce(policeInstanse.carTrasform.forward * spawnSpeed, ForceMode.Acceleration);
+            policeInstanse.carRigidbody.AddForce(policeInstanse.carTrasform.forward * difficultyConfigLocal.spawnSpeed, ForceMode.Acceleration);
         }
     }
 
