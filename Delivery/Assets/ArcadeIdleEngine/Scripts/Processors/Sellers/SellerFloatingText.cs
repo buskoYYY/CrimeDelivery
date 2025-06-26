@@ -12,7 +12,7 @@ namespace ArcadeBridge.ArcadeIdleEngine.Processors.Sellers
 	[SelectionBase]
     public class SellerFloatingText : MonoBehaviour
 	{
-		public event Action<Item, bool> RemovingObjectFromInventoryWithSave;
+		public event Action<Item, string, bool> RemovingObjectFromInventoryWithSave;
 		public SellerFloatingTextDefinition Definition => _definition;
 
 		private int _carIndex;
@@ -23,6 +23,10 @@ namespace ArcadeBridge.ArcadeIdleEngine.Processors.Sellers
 		[SerializeField] Inventory _inventory;
 		[SerializeField] Transform _sellingPoint;
 		[SerializeField] Timer _timer;
+		[SerializeField] private string _nameDetail;
+
+		public bool CompleteWith1Detail => _completeWith1Detail;
+		[SerializeField] private bool _completeWith1Detail;
 
 		Camera _camera;
 		
@@ -55,8 +59,11 @@ namespace ArcadeBridge.ArcadeIdleEngine.Processors.Sellers
 				{
 					if (item.name.Equals(detail.name))
                     {
-						RemovingObjectFromInventoryWithSave?.Invoke(item, false);
+						RemovingObjectFromInventoryWithSave?.Invoke(item, _nameDetail, false);
 						StartCoroutine(DestroyItemDelay());
+
+						if (_completeWith1Detail)
+							return;
 					}
                 }
 			}
@@ -83,7 +90,7 @@ namespace ArcadeBridge.ArcadeIdleEngine.Processors.Sellers
 					if(SaveLoadService.instance != null)
 						SaveLoadService.instance.RemoveFromData(result);
 
-					RemovingObjectFromInventoryWithSave?.Invoke(result, true);
+					RemovingObjectFromInventoryWithSave?.Invoke(result, _nameDetail, true);
 
 					TweenHelper.KillAllTweens(result.transform);
 					TweenHelper.Jump(result.transform, _sellingPoint.position, _definition.JumpHeight, 1, _definition.JumpDuration, () => Sell(result));

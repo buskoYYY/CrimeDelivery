@@ -30,7 +30,7 @@ namespace ArcadeBridge
 
             foreach (SellerFloatingText objectGetter in _objectGetters)
             {
-                _needCountForComplete += objectGetter.Definition.SellableItemDefinitions.Length;
+                _needCountForComplete += objectGetter.CompleteWith1Detail ? 1 : objectGetter.Definition.SellableItemDefinitions.Length;
 
                 objectGetter.RemovingObjectFromInventoryWithSave += ConstructNewDetail;
 
@@ -38,7 +38,7 @@ namespace ArcadeBridge
             }
         }
         
-        private void ConstructNewDetail(Item obj, bool withSave = true)
+        private void ConstructNewDetail(Item obj, string nameOverride, bool withSave = true)
         {
             //_inventoryCollectorTriggerArea.ItemPlaced();
             //SequenceOfActivities.Instance.GameFactory.WorkBenchSpawner.ObjectForInteraction.GetComponent<Transformer>().InputArea.ItemPlaced();
@@ -60,11 +60,13 @@ namespace ArcadeBridge
                     ContinueConstructionCar();
             }
 
-            Vector3 localPosition = StaticDataService.instance.GetLocalDetailPositionForCar(_carIndex, obj);
+            Vector3 localPosition = StaticDataService.instance.GetLocalDetailPositionForCar(_carIndex, obj, nameOverride);
 
-            Vector3 localRotation = StaticDataService.instance.GetLocalDetailRotationForFirstCar(_carIndex, obj);
+            Vector3 localRotation = StaticDataService.instance.GetLocalDetailRotationForFirstCar(_carIndex, obj, nameOverride);
 
-            Item detail = Instantiate<Item>(StaticDataService.instance.GetItem(obj.name), transform);
+            string name = string.IsNullOrEmpty(nameOverride) ? obj.name : nameOverride;
+
+            Item detail = Instantiate<Item>(StaticDataService.instance.GetItem(name), transform);
 
             detail.transform.localPosition = localPosition;
             detail.transform.localEulerAngles = localRotation;

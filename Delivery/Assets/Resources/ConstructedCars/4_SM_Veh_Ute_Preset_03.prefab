@@ -47,10 +47,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemCountForDeactivate: 1
-  _definition: {fileID: 11400000, guid: 03cddb0f9f59c9a4c9059ea09fcfa49d, type: 2}
+  _definition: {fileID: 11400000, guid: 1ab6c7c26e08a7541919ca6bea90f08f, type: 2}
   _inventory: {fileID: 6659090086881330925}
   _sellingPoint: {fileID: 2654776936977552669}
   _timer: {fileID: 1665925644047416264}
+  _nameDetail: 4_WFR
+  _completeWith1Detail: 1
 --- !u!114 &1665925644047416264
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -407,10 +409,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemCountForDeactivate: 1
-  _definition: {fileID: 11400000, guid: 0d325a4c1c4327e478e324d09ffc48da, type: 2}
+  _definition: {fileID: 11400000, guid: 1ab6c7c26e08a7541919ca6bea90f08f, type: 2}
   _inventory: {fileID: 4795186185981507880}
   _sellingPoint: {fileID: 6404155981360252920}
   _timer: {fileID: 6666943984842876500}
+  _nameDetail: 4_WFL
+  _completeWith1Detail: 1
 --- !u!114 &6666943984842876500
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -583,6 +587,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _itemsToCollect:
   - ItemDefinition: {fileID: 11400000, guid: 4844ec268cd726c4390a28e8f530a1df, type: 2}
+    Count: 0
+  - ItemDefinition: {fileID: 11400000, guid: 97c2b45dd4e8be04dafcdd4a9803ffff, type: 2}
+    Count: 0
+  - ItemDefinition: {fileID: 11400000, guid: c2e7456dddc0cf04182682d7301ec215, type: 2}
+    Count: 0
+  - ItemDefinition: {fileID: 11400000, guid: 41cae9aa25341974ab8d4099d73aa739, type: 2}
     Count: 0
   _collectingIntervalTimer: {fileID: 3719783688030881374}
   _outputInventory: {fileID: 6659090086881330925}
@@ -974,6 +984,12 @@ MonoBehaviour:
   _itemsToCollect:
   - ItemDefinition: {fileID: 11400000, guid: 97c2b45dd4e8be04dafcdd4a9803ffff, type: 2}
     Count: 0
+  - ItemDefinition: {fileID: 11400000, guid: 41cae9aa25341974ab8d4099d73aa739, type: 2}
+    Count: 0
+  - ItemDefinition: {fileID: 11400000, guid: 4844ec268cd726c4390a28e8f530a1df, type: 2}
+    Count: 0
+  - ItemDefinition: {fileID: 11400000, guid: c2e7456dddc0cf04182682d7301ec215, type: 2}
+    Count: 0
   _collectingIntervalTimer: {fileID: 4474918368011011849}
   _outputInventory: {fileID: 3622015846174265445}
 --- !u!114 &3622015846174265445
@@ -1078,10 +1094,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemCountForDeactivate: 1
-  _definition: {fileID: 11400000, guid: 7cdc89eae85745e4b94a2b7577252ece, type: 2}
+  _definition: {fileID: 11400000, guid: 1ab6c7c26e08a7541919ca6bea90f08f, type: 2}
   _inventory: {fileID: 3706959100721899368}
   _sellingPoint: {fileID: 2908676259002267622}
   _timer: {fileID: 5382372990768240384}
+  _nameDetail: 4_WRL
+  _completeWith1Detail: 1
 --- !u!114 &5382372990768240384
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1257,6 +1275,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _itemsToCollect:
+  - ItemDefinition: {fileID: 11400000, guid: 97c2b45dd4e8be04dafcdd4a9803ffff, type: 2}
+    Count: 0
+  - ItemDefinition: {fileID: 11400000, guid: 41cae9aa25341974ab8d4099d73aa739, type: 2}
+    Count: 0
+  - ItemDefinition: {fileID: 11400000, guid: 4844ec268cd726c4390a28e8f530a1df, type: 2}
+    Count: 0
   - ItemDefinition: {fileID: 11400000, guid: c2e7456dddc0cf04182682d7301ec215, type: 2}
     Count: 0
   _collectingIntervalTimer: {fileID: 3993190397306540144}
@@ -1367,6 +1391,8 @@ MonoBehaviour:
   _inventory: {fileID: 735710921178991893}
   _sellingPoint: {fileID: 5223340026530832553}
   _timer: {fileID: 2139052167135653352}
+  _nameDetail: 
+  _completeWith1Detail: 0
 --- !u!114 &2139052167135653352
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1427,10 +1453,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemCountForDeactivate: 1
-  _definition: {fileID: 11400000, guid: c7f4314026da1ad41b4fa23dc17ebe78, type: 2}
+  _definition: {fileID: 11400000, guid: 1ab6c7c26e08a7541919ca6bea90f08f, type: 2}
   _inventory: {fileID: 3622015846174265445}
   _sellingPoint: {fileID: 376616701638887970}
   _timer: {fileID: 7347580481163191362}
+  _nameDetail: 4_WRR
+  _completeWith1Detail: 1
 --- !u!114 &7347580481163191362
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1515,7 +1543,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _itemsToCollect:
+  - ItemDefinition: {fileID: 11400000, guid: 97c2b45dd4e8be04dafcdd4a9803ffff, type: 2}
+    Count: 0
   - ItemDefinition: {fileID: 11400000, guid: 41cae9aa25341974ab8d4099d73aa739, type: 2}
+    Count: 0
+  - ItemDefinition: {fileID: 11400000, guid: 4844ec268cd726c4390a28e8f530a1df, type: 2}
+    Count: 0
+  - ItemDefinition: {fileID: 11400000, guid: c2e7456dddc0cf04182682d7301ec215, type: 2}
     Count: 0
   _collectingIntervalTimer: {fileID: 6453335451042242165}
   _outputInventory: {fileID: 4795186185981507880}
