@@ -42,6 +42,8 @@ public class GameoverController : MonoBehaviour
 
         gameoverUI.OnPlayerGetSimpleReward = OnPlayerGetSimpleReward;
         gameoverUI.OnPlayerXReward = OnPlayerXReward;
+
+        AnalyticsEvents.RaceCompleteEvent(SaveLoadService.instance.PlayerProgress.deliveriesCount, raceData.completeType.ToString(), raceData.compleatedDeliveries, raceData.maxDeliveries, raceData.raceTime);
     }
 
     private void OnPlayerGetSimpleReward()
