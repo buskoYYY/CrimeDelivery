@@ -12,4 +12,6 @@ public class PoliceSpawnPointsRay
 public class PoliceSpawnPointsObject : MonoBehaviour
 {
     public List<PoliceSpawnPointsRay> spawnRays = new List<PoliceSpawnPointsRay>();
+
+    public List<Transform> policeTargets = new List<Transform>();
 }

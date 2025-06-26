@@ -244,7 +244,7 @@ public void SpawnPolice()
             driverPolice = driver as Driver;
             if (driverPolice != null)
             {
-                driverPolice.ChangeTarget(player);
+                driverPolice.ChangeTarget(spawnPointsOnPlayer.policeTargets[Random.Range(0, spawnPointsOnPlayer.policeTargets.Count)]);
                 driverPolice.Throttle(1);
             }
 
