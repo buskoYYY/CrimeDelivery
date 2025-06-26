@@ -1,3 +1,4 @@
+using ArcadeBridge;
 using UnityEngine;
 
 [System.Serializable]
@@ -65,6 +66,7 @@ public class RaceLogic : MonoBehaviour
         playerCar.carDamageHandler.OnEndLivesEvent += EndLevel;
 
         policeSpawner.player = playerCar.carTrasform;
+        policeSpawner.GetComponent<SirenControl>().player = playerCar.transform;
         policeSpawner.spawnPointsOnPlayer = playerCar.GetComponent<PoliceSpawnPointsObject>();
         
         int difficultyCheck = difficultyIndex;

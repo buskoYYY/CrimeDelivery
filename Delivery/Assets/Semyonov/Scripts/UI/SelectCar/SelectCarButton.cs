@@ -16,6 +16,8 @@ namespace ArcadeBridge
         [SerializeField] private UIView _uIView;
 
         private bool _invoked;
+
+        private Coroutine _destroyCoroutine;
         public void Init(GameObject UiCarSelectionManager, UIView uIView)
         {
             _UiCarSelectionManager = UiCarSelectionManager;
@@ -31,13 +33,22 @@ namespace ArcadeBridge
 
             _uIView.Hide();
 
-            StartCoroutine(DelayedDestroyUICarSelectionManager());
+            _destroyCoroutine = StartCoroutine(DelayedDestroyUICarSelectionManager());
 
             MainMenuLogic.Instance.ChangePlayerCar();
 
             _invoked = true;
         }
+        public void StopDestroying()
+        {
+            StopCoroutine(_destroyCoroutine);
 
+            _backgroundChangeCar.color = _selected;
+
+            _backgroundThis.color = _base;
+
+            _invoked = false;
+        }
         private IEnumerator DelayedDestroyUICarSelectionManager()
         {
             yield return new WaitForSeconds(.4f);

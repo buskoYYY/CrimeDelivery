@@ -21,6 +21,7 @@ namespace ArcadeBridge
         private string PlayerProgressPathFile = "Assets/Resources/playerProgress.json";
 
         public PlayerProgress PlayerProgress { get; private set; }
+        public SettingsData SettingsData { get; private set; }
 
         private Coroutine _saveCoroutine;
 
@@ -226,6 +227,9 @@ namespace ArcadeBridge
         }
         public PlayerProgress LoadProgress() =>
             JsonUtility.FromJson<PlayerProgress>(File.ReadAllText(PlayerProgressPathFile));
+        public SettingsData LoadSettings() =>
+            JsonUtility.FromJson<SettingsData>(PlayerPrefs.GetString(SettingsKey));
+
         //JsonUtility.FromJson<PlayerProgress>(PlayerPrefs.GetString(ProgressKey));
         public void DelayedSaveProgress()
         {

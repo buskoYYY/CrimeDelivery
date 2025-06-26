@@ -18941,6 +18941,7 @@ GameObject:
   - component: {fileID: 2359320638334481778}
   - component: {fileID: 7702806315653308235}
   - component: {fileID: 2718149544789768316}
+  - component: {fileID: 35550102190374624}
   m_Layer: 0
   m_Name: ChangeCarButton
   m_TagString: Untagged
@@ -21327,6 +21328,22 @@ CanvasGroup:
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
+--- !u!114 &35550102190374624
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4744981572361446338}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b469d804e5debdf44a0bd8f45943489c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _selectCarButton: {fileID: 2171942651628403077}
+  _UIView: {fileID: 7664190047783399865}
+  _UIButton: {fileID: 7702806315653308235}
+  _button: {fileID: 2359320638334481778}
 --- !u!1 &4799577359315714149
 GameObject:
   m_ObjectHideFlags: 0
@@ -32718,7 +32735,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _backgroundThis: {fileID: 2261269370893508237}
   _backgroundChangeCar: {fileID: 1020006884474406483}
-  _selected: {r: 0.47843137, g: 0.31764707, b: 0.9529412, a: 1}
+  _selected: {r: 0.6, g: 0.46666667, b: 1, a: 1}
   _base: {r: 0.34509805, g: 0.20784314, b: 0.7490196, a: 1}
   _UiCarSelectionManager: {fileID: 992607152652472747}
   _uIView: {fileID: 7664190047783399865}
@@ -34084,7 +34101,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.4798347, g: 0.31910825, b: 0.9528302, a: 1}
+  m_Color: {r: 0.6, g: 0.46666667, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
