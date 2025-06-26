@@ -34,6 +34,8 @@ public class Ads : MonoBehaviour
     private void UpdateScore()
     {
         _score = Appodeal.Instance.AddScore(1);
-        _scoreText.text = _score.ToString();
+
+        if(_scoreText)
+            _scoreText.text = _score.ToString();
     }
 }
