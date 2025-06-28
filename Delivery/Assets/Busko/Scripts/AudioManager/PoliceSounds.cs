@@ -19,11 +19,6 @@ namespace ArcadeBridge
             _player = FindFirstObjectByType<Player>();
         }
 
-        private void Update()
-        {
-            PlayFlashLightSound();
-        }
-
         public void PlayExplosianSound()
         {
             float distance = Vector3.Distance(transform.position, _player.transform.position);
@@ -34,7 +29,7 @@ namespace ArcadeBridge
             }
         }
 
-        private void PlayFlashLightSound()
+        public void PlayFlashLightSound()
         {
             float distance = Vector3.Distance(transform.position, _player.transform.position);
 
@@ -42,16 +37,20 @@ namespace ArcadeBridge
             {
                 if (!_source.isPlaying)
                 {
-                    _source.PlayOneShot(_flashingLightsSound);
+                    _source.Play();
                 }
             }
             else
             {
                 if (_source.isPlaying)
                 {
-                    _source.Stop(); 
+                    _source.Pause(); 
                 }
             }
+        }
+        public void PausePlayingFlashLightSound()
+        {
+            _source.Pause();
         }
     }
 }

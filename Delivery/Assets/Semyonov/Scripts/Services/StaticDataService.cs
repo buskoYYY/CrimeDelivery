@@ -148,24 +148,28 @@ namespace ArcadeBridge
             _namesItems.TryGetValue(name, out Item item)
             ? item
             : null;
-        public Vector3 GetLocalDetailPositionForCar(int index, Item item)
+        public Vector3 GetLocalDetailPositionForCar(int index, Item item, string nameOverride = "")
         {
             ClearCloneFromName.Clear(item);
 
             Dictionary<string, Vector3> itemsPositions = _itemsPositionsForIndex[index];
 
-            return itemsPositions.TryGetValue(item.name, out Vector3 position)
+            string name = string.IsNullOrEmpty(nameOverride) ? item.name : nameOverride;
+
+            return itemsPositions.TryGetValue(name, out Vector3 position)
                 ? position
                 : Vector3.zero;
         }
 
-        public Vector3 GetLocalDetailRotationForFirstCar(int index, Item item)
+        public Vector3 GetLocalDetailRotationForFirstCar(int index, Item item, string nameOverride = "")
         {
             ClearCloneFromName.Clear(item);
 
             Dictionary<string, Vector3> itemsRotations = _itemsRotationsForIndex[index];
 
-            return itemsRotations.TryGetValue(item.name, out Vector3 rotation)
+            string name = string.IsNullOrEmpty(nameOverride) ? item.name : nameOverride;
+
+            return itemsRotations.TryGetValue(name, out Vector3 rotation)
                 ? rotation
                 : Vector3.zero;
         }
