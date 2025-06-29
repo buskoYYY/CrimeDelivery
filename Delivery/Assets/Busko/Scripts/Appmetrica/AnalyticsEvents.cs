@@ -12,7 +12,7 @@ public static class AnalyticsEvents
 
     public static void RaceCompleteEvent(int raceCount, string completeType, int completedDeliviries, int maxDeliviries, float raceTime)
     {
-            Dictionary<string, object> levelCompleteData = new Dictionary<string, object>
+        Dictionary<string, object> levelCompleteData = new Dictionary<string, object>
          {
             {"race_count", raceCount },
             {"complete_type", completeType },
@@ -21,42 +21,39 @@ public static class AnalyticsEvents
             {"race_time", maxDeliviries }
         };
 
-            string json = JsonUtility.ToJson(levelCompleteData);
-            AppMetrica.ReportEvent("level_complete", json);
-            AppMetrica.SendEventsBuffer();
+        AppMetricaLogger.Instance.ReportEvent("level_complete", levelCompleteData);
+        AppMetrica.SendEventsBuffer();
     }
 
     public static void CarToBreakBought(int raceCount, int openedCarsCount, int playerMoney)
     {
-        Dictionary<string, object> levelCompleteData = new Dictionary<string, object>
+        Dictionary<string, object> carsToBreakData = new Dictionary<string, object>
          {
             {"race_count", raceCount },
             {"opened_cars_count", openedCarsCount },
             {"player_money", playerMoney }
         };
 
-        string json = JsonUtility.ToJson(levelCompleteData);
-        AppMetrica.ReportEvent("car_to_break_bought", json);
+        AppMetricaLogger.Instance.ReportEvent("cars_to_break", carsToBreakData);
         AppMetrica.SendEventsBuffer();
     }
 
     public static void OpenTool(int raceCount, string toolType, int playerMoney)
     {
-        Dictionary<string, object> levelCompleteData = new Dictionary<string, object>
+        Dictionary<string, object> openedToolsData = new Dictionary<string, object>
          {
             {"race_count", raceCount },
             {"toolType", toolType },
             {"player_money", playerMoney }
         };
 
-        string json = JsonUtility.ToJson(levelCompleteData);
-        AppMetrica.ReportEvent("open_tool", json);
+        AppMetricaLogger.Instance.ReportEvent("opened_tools", openedToolsData);
         AppMetrica.SendEventsBuffer();
     }
 
-    public static void BoughtConstructionPart(int raceCount, string carName, string constructionPart , int playerMoney)
+    public static void BoughtConstructionPart(int raceCount, string carName, string constructionPart, int playerMoney)
     {
-        Dictionary<string, object> levelCompleteData = new Dictionary<string, object>
+        Dictionary<string, object> contructionPartsData = new Dictionary<string, object>
          {
             {"race_count", raceCount },
             {"car_name", carName },
@@ -64,8 +61,7 @@ public static class AnalyticsEvents
             {"player_money", playerMoney }
         };
 
-        string json = JsonUtility.ToJson(levelCompleteData);
-        AppMetrica.ReportEvent("bought_construction_part", json);
+        AppMetricaLogger.Instance.ReportEvent("construction_parts", contructionPartsData);
         AppMetrica.SendEventsBuffer();
     }
 }

@@ -12,8 +12,9 @@ namespace ArcadeBridge
         public void OnPointerClick(PointerEventData eventData)
         {
             if (_UiCarSelectionManager)
+            {
                 Destroy(_UiCarSelectionManager.gameObject);
-
+            }
             _UiCarSelectionManager = Instantiate(_UiCarSelectionManagerPrefab);
         }
     }

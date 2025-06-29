@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
@@ -43,6 +44,9 @@ public class CarAIConfig
 
 public class PoliceSpawner : MonoBehaviour
 {
+    public event Action<GameObject> Spawned;
+    public event Action<GameObject> Destroyed;
+
     public Transform[] spawnPoints;
     public DifficultyConfig difficultyConfigLocal;
     public float maxSpawnDistance = 70;
@@ -229,6 +233,7 @@ public void SpawnPolice()
             Quaternion rotation = Quaternion.Euler(0, policeRay.spawnPosition.eulerAngles.y, 0);
             CarComponentsController policeInstanse = Instantiate(policePrefabs[0], new Vector3(finalSpawnPosition.x, finalSpawnPosition.y + 2, finalSpawnPosition.z), rotation);
             SetupPolice(policeInstanse);
+            Spawned?.Invoke(policeInstanse.gameObject);
             return true;
         }
         else
@@ -297,6 +302,7 @@ public void SpawnPolice()
     {
         policeList.Remove(car);
         car.carDamageHandler.OnDestroyCarEvent -= OnEndOfLivesCar;
+        Destroyed?.Invoke(car.gameObject);
     }
 
     // Метод, чтобы найти нижнюю точку по коллайдерам
@@ -349,7 +355,7 @@ public static class GardikUtilities
     {
         for (int i = list.Count - 1; i > 0; i--)
         {
-            int k = Random.Range(0, i + 1);
+            int k = UnityEngine.Random.Range(0, i + 1);
             T temp = list[i];
             list[i] = list[k];
             list[k] = temp;
