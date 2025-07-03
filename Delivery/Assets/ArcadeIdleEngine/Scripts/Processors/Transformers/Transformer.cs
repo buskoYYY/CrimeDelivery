@@ -209,7 +209,6 @@ namespace ArcadeBridge.ArcadeIdleEngine.Processors.Transformers
                     if (SaveLoadService.instance != null)
                     {
                         SaveLoadService.instance.AddItemToData(p);
-                        SaveLoadService.instance.DelayedSaveProgress();
                     }
                 }    
             }
@@ -217,6 +216,7 @@ namespace ArcadeBridge.ArcadeIdleEngine.Processors.Transformers
             if (_carData != null)
             {
                 _carData.workBenchAlreadySpawnedCount = ++_alreadySpawnedOutputValue;
+                SaveLoadService.instance.DelayedSaveProgress();
                 //_inputArea.SetAlreadySpawnedOutputValue(_alreadySpawnedOutputValue);
             }
 

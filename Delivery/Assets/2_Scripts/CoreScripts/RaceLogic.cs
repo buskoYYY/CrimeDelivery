@@ -67,6 +67,7 @@ public class RaceLogic : MonoBehaviour
 
         policeSpawner.player = playerCar.carTrasform;
         policeSpawner.GetComponent<SirenControl>().player = playerCar.transform;
+        policeSpawner.GetComponent<SimpleCarSpawner>().SetPlayer(playerCar.transform);
         policeSpawner.spawnPointsOnPlayer = playerCar.GetComponent<PoliceSpawnPointsObject>();
         
         int difficultyCheck = difficultyIndex;
