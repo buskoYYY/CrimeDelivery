@@ -13,11 +13,13 @@ namespace ArcadeBridge
         [SerializeField] private float3 _offset = new Vector3(0f, .8f ,0f);
         [SerializeField] private float rotationSmoothness = 5f;
 
+        private Rigidbody _rigidbody;
         private void Start()
         {
             progress = GetProgressFromWorldPosition(transform.position);
+            _rigidbody = GetComponent<Rigidbody>();
         }
-        void Update()
+        private void FixedUpdate()
         {
             progress += speed * Time.deltaTime;
             if (progress > 1f)
@@ -29,19 +31,24 @@ namespace ArcadeBridge
                 progress = 0f; // Или другой способ обработки конца сплайна
             }
             Vector3 position = splineContainer.EvaluatePosition(progress) + _offset;
-            transform.position = position;
+
+            //transform.position = position;
 
             Vector3 tangent = splineContainer.EvaluateTangent(progress);
+
+            Quaternion lefpRotation = transform.rotation;
+
             if (tangent != Vector3.zero)
             {
                 Quaternion targetRotation = Quaternion.LookRotation(tangent);
-                transform.rotation = Quaternion.Slerp(
+                lefpRotation = Quaternion.Slerp(
                     transform.rotation,
                     targetRotation,
                     rotationSmoothness * Time.deltaTime
                 );
                 //transform.forward = tangent.normalized;
             }
+            _rigidbody.Move(position, lefpRotation);
         }
 
         private float GetProgressFromWorldPosition(Vector3 worldPosition)

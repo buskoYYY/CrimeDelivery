@@ -14,6 +14,8 @@ namespace ArcadeBridge
 
         public void InstantiateCar(SplineWalker[] carPrefabs)
         {
+            if (Physics.Raycast(transform.position, Vector3.up, 1f)) return;
+
             if (IsVisible) return;
 
             int randomIndex = UnityEngine.Random.Range(0, carPrefabs.Length);
