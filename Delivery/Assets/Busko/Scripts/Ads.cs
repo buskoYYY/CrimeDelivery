@@ -20,9 +20,9 @@ public class Ads : MonoBehaviour
         }
         Instance = this;
     }
-    public void PlayInterstitialAd()
+    public bool PlayInterstitialAd()
     {
-        Appodeal.Instance.ShowInterstitialAds();
+        return Appodeal.Instance.ShowInterstitialAds();
     }
 
     public void PlayRewardAd(Action onReward)

@@ -51,13 +51,15 @@ public class Appodeal : MonoBehaviour, IInterstitialAdListener, IRewardedVideoAd
 
     public void OnInitializationFinished(object sender, SdkInitializedEventArgs e) { }
 
-    public void ShowInterstitialAds()
+    public bool ShowInterstitialAds()
     {
-        if (AppodealStack.Monetization.Api.Appodeal.IsLoaded(AppodealAdType.Interstitial) 
-            || AppodealStack.Monetization.Api.Appodeal.CanShow(AppodealAdType.Interstitial))
+        if (AppodealStack.Monetization.Api.Appodeal.IsLoaded(AppodealAdType.Interstitial)
+            && AppodealStack.Monetization.Api.Appodeal.CanShow(AppodealAdType.Interstitial))
         {
             AppodealStack.Monetization.Api.Appodeal.Show(AppodealAdType.Interstitial);
+            return true;
         }
+        return false;
     }
 
     private void Initialized()
@@ -79,7 +81,7 @@ public class Appodeal : MonoBehaviour, IInterstitialAdListener, IRewardedVideoAd
 
     public void OnRewardedVideoFailedToLoad()
     {
-        SceneManager.LoadScene(1);
+        //SceneManager.LoadScene(1);
     }
 
     public void OnRewardedVideoShowFailed()
@@ -116,6 +118,8 @@ public class Appodeal : MonoBehaviour, IInterstitialAdListener, IRewardedVideoAd
     #endregion
 
     #region InterstitialVideoCallback
+
+
     public void OnInterstitialLoaded(bool isPrecache)
     {
         print("Video loaded");
@@ -123,7 +127,7 @@ public class Appodeal : MonoBehaviour, IInterstitialAdListener, IRewardedVideoAd
 
     public void OnInterstitialFailedToLoad()
     {
-        SceneManager.LoadScene(1);
+        //SceneManager.LoadScene(1);
     }
 
     public void OnInterstitialShowFailed()

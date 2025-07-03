@@ -3,6 +3,7 @@ using UnityEngine;
 using TMPro;
 using System;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GameoverUI : MonoBehaviour
 {
@@ -42,7 +43,10 @@ public class GameoverUI : MonoBehaviour
     public void TakeMoney()
     {
         OnPlayerGetSimpleReward?.Invoke();
-        Ads.Instance.PlayInterstitialAd();
+        if (!Ads.Instance.PlayInterstitialAd())
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        }
     }
 
     public void TakeXMoney()
