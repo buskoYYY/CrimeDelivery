@@ -183,6 +183,7 @@ GameObject:
   - component: {fileID: 8144456190973528565}
   - component: {fileID: 1742638439604694061}
   - component: {fileID: 7745920210533430505}
+  - component: {fileID: 4192883581623140787}
   m_Layer: 0
   m_Name: Body
   m_TagString: Untagged
@@ -259,6 +260,28 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &4192883581623140787
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4612292099648366503}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 2959467708922500008, guid: f357d97cfc61b794bb5d2e0ebe4fce54, type: 3}
 --- !u!1 &4905165261342506654
 GameObject:
   m_ObjectHideFlags: 0
@@ -867,15 +890,53 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 6583643601366932961}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 2137761545840530748, guid: f4a71e48b49e38449b48206c10841668,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5992536111915881864}
   m_SourcePrefab: {fileID: 100100000, guid: f4a71e48b49e38449b48206c10841668, type: 3}
+--- !u!1 &56954949177978630 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2137761545840530748, guid: f4a71e48b49e38449b48206c10841668,
+    type: 3}
+  m_PrefabInstance: {fileID: 2116835817059301946}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &5992536111915881864
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 56954949177978630}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 75f13b1c13eee214b9aa53839453e9c0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObjectMeshFilters:
+  - {fileID: 1742638439604694061}
+  ObjectMeshColliders:
+  - {fileID: 4192883581623140787}
+  updateColliders: 0
+  deformationIntensity: 2.5
+  deformationSmoothness: 0.5
+  deformationRadius: 0.6
+  maxDeformationsPerVertex: 3
+  collisionImpulseThreshold: 7000
+  onDeformationApplied:
+    m_PersistentCalls:
+      m_Calls: []
+  onDeformationReset:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &660759305734961140 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1462543857655287246, guid: f4a71e48b49e38449b48206c10841668,
     type: 3}
   m_PrefabInstance: {fileID: 2116835817059301946}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 56954949177978630}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 66a1bb9be1a9fc441b6968a4d096c8df, type: 3}
